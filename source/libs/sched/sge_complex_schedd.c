@@ -884,6 +884,7 @@ static int resource_cmp(u_long32 relop, double req, double src_dl) {
  the type is given by the first complex
  return 1 if matched anything else 0 if not
  *********************************************************************/
+/* fixme: availability_text shoulkd be dstring */
 int compare_complexes(int slots, lListElem *req_cplx, lListElem *src_cplx, char *availability_text,
                       int is_threshold, int force_existence)
 {
@@ -894,7 +895,6 @@ int compare_complexes(int slots, lListElem *req_cplx, lListElem *src_cplx, char 
    const char *name;
    const char *offer;
    char dom_str[5];
-#define STR_LEN_AVAIL_TEXT 2048   
    char availability_text1[STR_LEN_AVAIL_TEXT];
    char availability_text2[STR_LEN_AVAIL_TEXT]; 
    dstring resource_string = DSTRING_INIT;
@@ -945,7 +945,9 @@ int compare_complexes(int slots, lListElem *req_cplx, lListElem *src_cplx, char 
             request, offer)); 
 #endif
       match = string_cmp(type, used_relop, request, offer);
-      snprintf(availability_text, STR_LEN_AVAIL_TEXT, "%s:%s=%s", dom_str, name, offer);
+      if (availability_text)
+        snprintf(availability_text, STR_LEN_AVAIL_TEXT, "%s:%s=%s",
+                 dom_str, name, offer);
 #if DEBUGPRINT
       DPRINTF(("-l %s=%s, Q: %s:%s%s%s, Comparison: %s\n",
             name, request, dom_str, name, map_op2str(relop),
@@ -1104,18 +1106,20 @@ int compare_complexes(int slots, lListElem *req_cplx, lListElem *src_cplx, char 
          match = m1 || m2;
       } else {
          match = m1 && m2;
-         if (!m1) {
-            sge_strlcpy(availability_text, availability_text1, STR_LEN_AVAIL_TEXT);
-         } else if (!m2) {
-            sge_strlcpy(availability_text, availability_text2, STR_LEN_AVAIL_TEXT);
-         } else {
-            sge_strlcpy(availability_text, "", STR_LEN_AVAIL_TEXT);
+         if (availability_text) {
+            if (!m1) {
+               sge_strlcpy(availability_text, availability_text1, STR_LEN_AVAIL_TEXT);
+            } else if (!m2) {
+               sge_strlcpy(availability_text, availability_text2, STR_LEN_AVAIL_TEXT);
+            } else {
+               sge_strlcpy(availability_text, "", STR_LEN_AVAIL_TEXT);
+            }
          }
       }
       DRETURN(match);
 
    default:  /* should never reach this -> undefined type */
-      *availability_text = '\0';
+      if (availability_text) *availability_text = '\0';
       break;
    }
    DRETURN(0);

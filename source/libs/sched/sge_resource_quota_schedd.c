@@ -1205,10 +1205,8 @@ parallel_rqs_slots_by_time(sge_assignment_t *a, int *slots, int *slots_qend, lLi
                         break;
                      }
                   } else if (job_centry != NULL) {
-                     char availability_text[2048];
-
                      lSetString(raw_centry, CE_stringval, lGetString(limit, RQRL_value));
-                     if (compare_complexes(1, raw_centry, job_centry, availability_text, false, false) != 1) {
+                     if (compare_complexes(1, raw_centry, job_centry, NULL, false, false) != 1) {
                         result = DISPATCH_NEVER_CAT;
                         break;
                      }

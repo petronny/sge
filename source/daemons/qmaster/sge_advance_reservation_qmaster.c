@@ -2287,7 +2287,6 @@ ar_list_has_reservation_due_to_qinstance_complex_attr(lList *ar_master_list,
             bool is_consumable = (lGetUlong(ce, CE_consumable) > 0) ? true : false;
 
             if (!is_consumable) {
-               char text[2048];
                u_long32 slots = lGetUlong(gs, JG_slots);
                lListElem *current = lGetSubStr(qinstance, CE_name, 
                                                ce_name, QU_consumable_config_list);
@@ -2297,7 +2296,7 @@ ar_list_has_reservation_due_to_qinstance_complex_attr(lList *ar_master_list,
                   lSetDouble(current, CE_pj_doubleval, lGetDouble(current, CE_doubleval));
                   lSetString(current, CE_pj_stringval, lGetString(current, CE_stringval));
 
-                  if (compare_complexes(slots, request, current, text, false, true) == 0) {
+                  if (compare_complexes(slots, request, current, NULL, false, true) == 0) {
                      ERROR((SGE_EVENT, MSG_QUEUE_MODCMPLXDENYDUETOAR_SS, ce_name,
                             SGE_ATTR_COMPLEX_VALUES));
                      answer_list_add(answer_list, SGE_EVENT, 
@@ -2410,7 +2409,6 @@ ar_list_has_reservation_due_to_host_complex_attr(lList *ar_master_list, lList **
                bool is_consumable = (lGetUlong(ce, CE_consumable) > 0) ? true : false;
   
                if (!is_consumable) {
-                  char text[2048];
                   u_long32 slots = lGetUlong(gs, JG_slots);
                   lListElem *current = lGetSubStr(host, CE_name, 
                                                   ce_name, EH_consumable_config_list);
@@ -2420,7 +2418,7 @@ ar_list_has_reservation_due_to_host_complex_attr(lList *ar_master_list, lList **
                      lSetDouble(current, CE_pj_doubleval, lGetDouble(current, CE_doubleval));
                      lSetString(current, CE_pj_stringval, lGetString(current, CE_stringval));
                   
-                     if (compare_complexes(slots, request, current, text, false, true) == 0) {
+                     if (compare_complexes(slots, request, current, NULL, false, true) == 0) {
                         ERROR((SGE_EVENT, MSG_QUEUE_MODCMPLXDENYDUETOAR_SS, ce_name,
                                SGE_ATTR_COMPLEX_VALUES));
                         answer_list_add(answer_list, SGE_EVENT, 

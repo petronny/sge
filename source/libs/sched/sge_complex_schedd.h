@@ -32,6 +32,7 @@
  ************************************************************************/
 /*___INFO__MARK_END__*/
 
+#define STR_LEN_AVAIL_TEXT 2048
 
 void monitor_dominance(char *str, u_long32 mask);
 

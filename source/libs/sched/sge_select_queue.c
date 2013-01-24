@@ -1455,7 +1455,7 @@ match_static_resource(int slots, lListElem *req_cplx, lListElem *src_cplx, dstri
 {
    int match;
    dispatch_t ret = DISPATCH_OK;
-   char availability_text[2048];
+   char availability_text[STR_LEN_AVAIL_TEXT];
 
    DENTER(TOP_LAYER, "match_static_resource");
 
