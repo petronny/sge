@@ -624,30 +624,9 @@ MakeCAcert()
       if [ $? = 0 ]; then
          done=true
  
-         TMPFILE=/tmp/sge_ca$$.tmp
-         TMPFILE1=/tmp/sge_ca1$$.tmp
-         ExecRm $TMPFILE $TMPFILE1
-         if [ $? -ne 0 ]; then
-            PrintError "Could not delete file %s" $TMPFILE
-            return 1
-         fi
-         
-         ExecRm $TMPFILE1
-         if [ $? -ne 0 ]; then
-            PrintError "Could not delete file %s" $TMPFILE1
-            return 1
-         fi
-         
-         $TOUCH $TMPFILE
-         if [ $? -ne 0 ]; then
-            PrintError "Could not touch file %s" $TMPFILE
-            return 1
-         fi
-         $TOUCH $TMPFILE1
-         if [ $? -ne 0 ]; then
-            PrintError "Could not touch file %s" $TMPFILE1
-            return 1
-         fi
+         TMPFILE=`ExecuteAsAdmin mktemp` &&
+         TMPFILE1=`ExecuteAsAdmin mktemp` ||
+         { PrintError "Can't create temporary file"; return 1; }
          
          echo C="$CA_C" >> $TMPFILE
          echo ST="$CA_ST" >> $TMPFILE
@@ -875,8 +854,8 @@ MakeUserKeystore()
 
    remove_kspwfile=false
    if [ "$kspwfile" = "" ]; then
-      touch /tmp/tmp.$$
-      kspwfile=/tmp/tmp.$$
+      kspwfile=`mktemp` ||
+        { PrintErrorAndExit 1 "Can't create temporary file"; }
       remove_kspwfile=true
    fi   
    certfile=$CALOCALTOP/userkeys/$user/cert.pem
@@ -903,8 +882,8 @@ MakeSysKeystore()
    ret=0
    remove_kspwfile=false
    if [ "$kspwfile" = "" ]; then
-      touch /tmp/tmp.$$
-      kspwfile=/tmp/tmp.$$
+      kspwfile=`mktemp` ||
+        { PrintErrorAndExit 1 "Can't create temporary file"; }
       remove_kspwfile=true
    fi   
    certfile=$CATOP/certs/cert.pem
@@ -1037,7 +1016,7 @@ MakePKCS12()
 
    $INFOTEXT "Generating %s/%s.p12." "$myoutdir" "$keyowner"
    # create rand.seed file
-   RSFILE=/tmp/rand.seed.$$
+   RSFILE=`mktemp` || { PrintErrorAndExit 1 "Can't create temporary file"; }
    MakeRandFile $RSFILE $unixuser
    if [ $? -ne 0 ]; then
       return 1
@@ -1086,7 +1065,8 @@ MakePKCS12ForUsers()
 DumpUsers()
 {
    CERTDIR=$CALOCALTOP/userkeys
-   RSFILE=/tmp/rand.$$
+   RSFILE=`mktemp` ||
+     { PrintErrorAndExit 1 "Can't create temporary file"; }
 
    # create rand.seed file
    MakeRandFile $RSFILE $USER
@@ -1116,9 +1096,9 @@ MakeCert()
 {
    $INFOTEXT -u "\nCreating '%s' certificate and key for %s" "$1" "$3"
 
-   TMPFILE=/tmp/sge_ca$$.tmp
-   TMPFILE1=/tmp/sge_ca1$$.tmp
-   $RM -f $TMPFILE $TMPFILE1
+   TMPFILE=`ExecuteAsAdmin mktemp` &&
+   TMPFILE1=`ExecuteAsAdmin mktemp` ||
+     { PrintErrorAndExit 1 "Can't create temporary file"; }
    Execute cp $CATOP/dn.info $TMPFILE
    if [ $? -ne 0 ]; then
       PrintError "Could not copy file (%s -> %s)" $CATOP/dn.info $TMPFILE
@@ -1324,9 +1304,9 @@ RenewCert()
       $INFOTEXT -u "\nRenewing  '%s' '%s' certificate" "$2" "$1"
    fi
 
-   TMPFILE=/tmp/sge_ca$$.tmp
-   TMPFILE1=/tmp/sge_ca1$$.tmp
-   $RM -f $TMPFILE $TMPFILE1
+   TMPFILE=`mktemp` &&
+   TMPFILE1=`mktemp` ||
+     { PrintError "Can't create temporary file"; return 1; }
    Execute cp $CATOP/dn.info $TMPFILE
    if [ $? != 0 ]; then
       PrintError "Could not copy file (%s -> %s)" $CATOP/dn.info $TMPFILE

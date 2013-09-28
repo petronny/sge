@@ -129,8 +129,12 @@ BasicSettings()
   MORE_CMD="more"
   CHMOD="chmod"
 
-}
+  type mktemp 2>/dev/null >/dev/null ||
+    mktemp() {
+      $SGE_UTILBIN/mktemp "$@"
+    }
 
+}
 
 #-------------------------------------------------------------------------
 #Setting up INFOTEXT
@@ -2075,7 +2079,7 @@ SafelyCreateFile()
    ExecuteAsAdmin $TOUCH $1
    if [ -n "$3" ]; then
       ExecuteAsAdmin $CHMOD 666 $1
-      tmp_file="/tmp/tmp_safe_create_file_$$"
+      tmp_file=`ExecuteAsAdmin mktemp`
       $ECHO "$3" > $tmp_file
       ExecuteAsAdmin cp $tmp_file $1
       Execute rm -f $tmp_file
@@ -2594,14 +2598,15 @@ PLIST
 
          savedfile=`basename $RC_FILE`
 
+         tmp=`mktemp`
          sed -e "s%.*$STARTUP_FILE_NAME.*%$SGE_STARTUP_FILE%" \
-                 $RC_FILE > /tmp/$savedfile.1
+                 $RC_FILE > $tmp
 
-         Execute cp /tmp/$savedfile.1 $RC_FILE
+         Execute cp $tmp $RC_FILE
          Execute chown $uid $RC_FILE
          Execute chgrp $gid $RC_FILE
          Execute chmod $perm $RC_FILE
-         Execute rm -f /tmp/$savedfile.1
+         Execute rm -f $tmp
       fi
    fi
 }
@@ -3893,8 +3898,8 @@ CopyCaFromQmaster()
       fi
    fi
 
-   tmp_dir=/tmp/sgeCA.$$
-   mkdir -p $tmp_dir ; chmod 600 $tmp_dir
+   tmp_dir=`mktemp -d`
+   chmod 600 $tmp_dir
    connect_user=`id |awk '{print $1}' 2>/dev/null`
    $INFOTEXT "Connecting as %s to host %s ..." "${connect_user:-root}" "$QMASTER_HOST"
    $REM_SH $QMASTER_HOST "cd $CA_TOP ; tar cpf - ./$PORT_DIR | gzip -" > "$tmp_dir".tar.gz
@@ -3924,8 +3929,7 @@ MakeUserKs()
       OLD_ADMINUSER="$ADMINUSER"
       ADMINUSER=$1
       $CLEAR
-      tmp_file=/tmp/inst_sge_ks.$$
-      ExecuteAsAdmin touch $tmp_file
+      tmp_file=`ExecuteAsAdmin mktemp`
       ExecuteAsAdmin chmod 600 $tmp_file
       if [ "$AUTO" != "true" ]; then
          EnterSecurePassword "Choosing password for the administrative user of SGE daemons" \
@@ -4361,8 +4365,7 @@ RemoteExecSpoolDirDelete()
 DeleteQueueNumberAttribute()
 {
    spooldir="$1"
-   tmpfile="/tmp/clusterqueue_delete$$"
-   Execute rm -f $tmpfile
+   tmpfile=`mktemp`
 
    # get all queue instance files
    queuesdir=`ls $spooldir/qinstances/`

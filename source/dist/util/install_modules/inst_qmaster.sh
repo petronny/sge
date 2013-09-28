@@ -744,10 +744,8 @@ AddConfiguration()
       #TruncCreateAndMakeWriteable $COMMONDIR/configuration
       #PrintConf >> $COMMONDIR/configuration
       #SetPerm $COMMONDIR/configuration
-      TMPC=/tmp/configuration_`date '+%Y-%m-%d_%H:%M:%S'`.$$
-      TOUCH=touch
-      rm -f $TMPC
-      ExecuteAsAdmin $TOUCH $TMPC
+      TMPD=`date +%Y-%m-%d_%H:%M:%S`
+      TMPC=`ExecuteAsAdmin mktemp`
       PrintConf >> $TMPC
       SetPerm $TMPC
       ExecuteAsAdmin $SPOOLDEFAULTS configuration $TMPC
@@ -854,13 +852,11 @@ AddLocalConfiguration()
    $CLEAR
    $INFOTEXT -u "\nCreating local configuration"
 
-      ExecuteAsAdmin mkdir /tmp/$$
-      TMPH=/tmp/$$/$HOST
-      ExecuteAsAdmin rm -f $TMPH
-      ExecuteAsAdmin touch $TMPH
+      TDIR=`ExecuteAsAdmin mktemp -d`
+      TMPH=$TDIR/$HOST
       PrintLocalConf 1 >> $TMPH
       ExecuteAsAdmin $SPOOLDEFAULTS local_conf $TMPH $HOST
-      ExecuteAsAdmin rm -rf /tmp/$$
+      ExecuteAsAdmin rm -rf $TDIR
 }
 
 

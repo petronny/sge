@@ -410,29 +410,23 @@ AddLocalConfiguration_With_Qconf()
    $CLEAR
    $INFOTEXT -u "\nCreating local configuration"
 
-   ExecuteAsAdmin mkdir /tmp/$$
-   TMPL=/tmp/$$/${HOST}
-   rm -f $TMPL
-   if [ -f $TMPL ]; then
-      $INFOTEXT "\nCan't create local configuration. Can't delete file >%s<" "$TEMPT"
-      $INFOTEXT -log "\nCan't create local configuration. Can't delete file >%s<" "$TEMPS"
+   TMPL_DIR=`ExecuteAsAdmin mktemp -d`
+   TMPL="$TMPL_DIR/${HOST}"
+   $INFOTEXT -log "\nCreating local configuration for host >%s<" $HOST
+   $SGE_BIN/qconf -sconf $HOST > $TMPL 2>/dev/null
+   if [ $? -eq 0 ]; then
+      # We should always keep entries that do not appear in the new configuration, but are in the old one
+      PrintLocalConf 0 "$1" > $TMPL.1
+      cp $TMPL $TMPL.old
+      UpdateConfiguration $TMPL $TMPL.1
+      ExecuteAsAdmin $SGE_BIN/qconf -Mconf $TMPL
    else
-      $INFOTEXT -log "\nCreating local configuration for host >%s<" $HOST
-      $SGE_BIN/qconf -sconf $HOST > $TMPL 2>/dev/null
-      if [ $? -eq 0 ]; then
-         # We should always keep entries that do not appear in the new configuration, but are in the old one
-         PrintLocalConf 0 "$1" > $TMPL.1
-         cp $TMPL $TMPL.old
-         UpdateConfiguration $TMPL $TMPL.1
-         ExecuteAsAdmin $SGE_BIN/qconf -Mconf $TMPL
-      else
-         PrintLocalConf 0 "$1" > $TMPL
-         ExecuteAsAdmin $SGE_BIN/qconf -Aconf $TMPL
-      fi
-      rm -rf /tmp/$$
-      $INFOTEXT "Local configuration for host >%s< created." $HOST
-      $INFOTEXT -log "Local configuration for host >%s< created." $HOST
+      PrintLocalConf 0 "$1" > $TMPL
+      ExecuteAsAdmin $SGE_BIN/qconf -Aconf $TMPL
    fi
+   rm -rf "$TMPL_DIR"
+   $INFOTEXT "Local configuration for host >%s< created." $HOST
+   $INFOTEXT -log "Local configuration for host >%s< created." $HOST
    $INFOTEXT -wait -auto $AUTO -n "\nHit <RETURN> to continue >> "
 }
 

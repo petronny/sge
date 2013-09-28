@@ -497,8 +497,7 @@ if [ $ONLY_ENABLE_JMX = "true" ]; then
    CopyCA execd
    CopyCA submit
    #Update the default config
-   dir=/tmp/conf.$$
-   ExecuteAsAdmin mkdir -p $dir
+   dir=`ExecuteAsAdmin mktemp -d`
    #Update global libjvm entry
    "$SGE_ROOT/bin/$SGE_ARCH/qconf" -sconf > $dir/global
    ReplaceOrAddLine "$dir/global" 666 'libjvm_path.*' "libjvm_path $SGE_JVM_LIB_PATH"
