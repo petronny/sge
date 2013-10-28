@@ -77,7 +77,6 @@ enum {
    CQ_shell,
    CQ_calendar,
    CQ_priority,
-   CQ_processors,
    CQ_prolog,
    CQ_epilog,
    CQ_shell_start_mode,
@@ -146,7 +145,6 @@ LISTDEF(CQ_Type)
    SGE_MAP_D(CQ_shell, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "/bin/sh", "hostname", "shell")
    SGE_MAP_D(CQ_calendar, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "NONE", "hostname", "calendar")
    SGE_MAP_D(CQ_priority, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "0", "hostname", "priority")
-   SGE_MAP_D(CQ_processors, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "UNDEFINED", "hostname", "processors")   
    SGE_MAP_D(CQ_prolog, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "NONE", "hostname", "prolog")  
    SGE_MAP_D(CQ_epilog, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "NONE", "hostname", "epilog") 
    SGE_MAP_D(CQ_shell_start_mode, ASTR_Type, CULL_SPOOL | CULL_JGDI_CONF, "@/", "posix_compliant", "hostname", "shellStartMode")
@@ -213,7 +211,6 @@ NAMEDEF(CQN)
    NAME("CQ_shell")
    NAME("CQ_calendar")
    NAME("CQ_priority")
-   NAME("CQ_processors")
    NAME("CQ_prolog")
    NAME("CQ_epilog")
    NAME("CQ_shell_start_mode")

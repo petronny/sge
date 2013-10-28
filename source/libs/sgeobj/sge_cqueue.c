@@ -89,7 +89,6 @@ list_attribute_struct cqueue_attribute_array[] = {
    { CQ_shell,                   QU_shell,                  ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_SHELL,             false,  true, cqueue_verify_shell},
    { CQ_calendar,                QU_calendar,               ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_CALENDAR,          false,  false, cqueue_verify_calendar},
    { CQ_priority,                QU_priority,               ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_PRIORITY,          false,  true,  cqueue_verify_priority},
-   { CQ_processors,              QU_processors,             ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_PROCESSORS,        false,  true,  cqueue_verify_processors},
    { CQ_prolog,                  QU_prolog,                 ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_PROLOG,            false,  false, NULL},
    { CQ_epilog,                  QU_epilog,                 ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_EPILOG,            false,  false, NULL},
    { CQ_shell_start_mode,        QU_shell_start_mode,       ASTR_href,     ASTR_value,       NoName,     SGE_ATTR_SHELL_START_MODE,  false,  true,  cqueue_verify_shell_start_mode},
@@ -724,7 +723,7 @@ cqueue_set_template_attributes(lListElem *this_elem, lList **answer_list)
          }; 
          const int attr[] = {
             CQ_tmpdir, CQ_shell, CQ_calendar,
-            CQ_priority, CQ_processors, CQ_prolog,
+            CQ_priority, CQ_prolog,
             CQ_epilog, CQ_shell_start_mode, CQ_starter_method,
             CQ_suspend_method, CQ_resume_method, CQ_terminate_method,
             CQ_initial_state,

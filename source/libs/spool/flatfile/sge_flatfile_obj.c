@@ -442,7 +442,6 @@ spooling_field CQ_fields[] = {
    {  CQ_suspend_interval,       21, "suspend_interval",   AINTER_sub_fields,   &qconf_sub_name_value_comma_braced_sfi, read_CQ_inter_attr_list,   write_CQ_inter_attr_list},
    {  CQ_priority,               21, "priority",           ASTR_sub_fields,     &qconf_sub_name_value_comma_braced_sfi, read_CQ_str_attr_list,     write_CQ_str_attr_list},
    {  CQ_min_cpu_interval,       21, "min_cpu_interval",   AINTER_sub_fields,   &qconf_sub_name_value_comma_braced_sfi, read_CQ_inter_attr_list,   write_CQ_inter_attr_list},
-   {  CQ_processors,             21, "processors",         ASTR_sub_fields,     &qconf_sub_name_value_comma_braced_sfi, read_CQ_str_attr_list,     write_CQ_str_attr_list},
    {  CQ_qtype,                  21, "qtype",              AQTLIST_sub_fields,  &qconf_sub_name_value_comma_braced_sfi, read_CQ_qtlist_attr_list,  write_CQ_qtlist_attr_list},
    {  CQ_ckpt_list,              21, "ckpt_list",          ASTRLIST_sub_fields, &qconf_sub_name_value_comma_braced_sfi, read_CQ_strlist_attr_list, write_CQ_strlist_attr_list},
    {  CQ_pe_list,                21, "pe_list",            ASTRLIST_sub_fields, &qconf_sub_name_value_comma_braced_sfi, read_CQ_strlist_attr_list, write_CQ_strlist_attr_list},
@@ -754,8 +753,6 @@ spooling_field *sge_build_EH_field_list(bool spool, bool to_stdout,
       create_spooling_field(&fields[count++], EH_load_list, 21, "load_values",
                              HL_sub_fields, &qconf_sub_name_value_comma_sfi,
                              NULL, NULL);
-      create_spooling_field(&fields[count++], EH_processors, 21, "processors",
-                             NULL, NULL, NULL, NULL);
    }
 
    if (spool) {
@@ -991,8 +988,6 @@ spooling_field *sge_build_QU_field_list(bool to_stdout, bool to_file)
                              NULL, NULL, NULL, NULL);
       create_spooling_field (&fields[count++], QU_min_cpu_interval, 21,
                              "min_cpu_interval", NULL, NULL, NULL, NULL);
-      create_spooling_field (&fields[count++], QU_processors, 21, "processors",
-                             NULL, NULL, NULL, NULL);
       create_spooling_field (&fields[count++], QU_qtype, 21, "qtype", NULL,
                              NULL, NULL, NULL);
       create_spooling_field (&fields[count++], QU_ckpt_list, 21, "ckpt_list",

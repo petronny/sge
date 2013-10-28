@@ -234,14 +234,6 @@ XtResource cq_resources[] = {
       sizeof(int), XtOffsetOf(tQCEntry, qtype_tw),
       XtRImmediate, NULL },
       
-   { "processors", "processors", XtRString, 
-      sizeof(char*), XtOffsetOf(tQCEntry, processors), 
-      XtRImmediate, NULL },
-      
-   { "processors_tw", "processors_tw", XtRInt,
-      sizeof(int), XtOffsetOf(tQCEntry, processors_tw),
-      XtRImmediate, NULL },
-      
    { "priority", "priority", XtRInt,
       sizeof(int), XtOffsetOf(tQCEntry, priority),
       XtRImmediate, NULL },
@@ -2280,7 +2272,6 @@ DTRACE;
          data->priority = 0;
       } 
    }
-   str_attr_list_find_value_href(lGetList(qep, CQ_processors), &alp, href, &(data->processors), &(data->processors_tw));
    str_attr_list_find_value_href(lGetList(qep, CQ_prolog), &alp, href, &(data->prolog), &(data->prolog_tw));
    str_attr_list_find_value_href(lGetList(qep, CQ_epilog), &alp, href, &(data->epilog), &(data->epilog_tw));
    {
@@ -2418,8 +2409,6 @@ const char *href
       sge_free(&priority);
    }
 
-   str_attr_list_add_set_del(lGetListRef(qep, CQ_processors), &alp, href, &(data->processors), !data->processors_tw);
-
    str_attr_list_add_set_del(lGetListRef(qep, CQ_prolog), &alp, href, &(data->prolog), !data->prolog_tw);
 
    str_attr_list_add_set_del(lGetListRef(qep, CQ_epilog), &alp, href, &(data->epilog), !data->epilog_tw);
@@ -2528,8 +2517,6 @@ const char *href
    str_attr_list_add_set_del(lGetListRef(qep, CQ_calendar), &alp, href, NULL, True);
 
    str_attr_list_add_set_del(lGetListRef(qep, CQ_priority), &alp, href, NULL, True);
-
-   str_attr_list_add_set_del(lGetListRef(qep, CQ_processors), &alp, href, NULL, True);
 
    str_attr_list_add_set_del(lGetListRef(qep, CQ_prolog), &alp, href, NULL, True);
 

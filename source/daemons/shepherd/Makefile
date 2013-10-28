@@ -42,7 +42,6 @@ SHEPHERD_SRC = shepherd.c \
            signal_queue.c \
            sge_shepconf.c \
            setjoblimit.c \
-           sge_pset.c \
            sge_fileio.c \
            sge_shepherd_ijs.c \
            shepherd_binding.c 
@@ -120,9 +119,6 @@ setrlimits.o:	$(SHEPHERD_DIR)/setrlimits.c
 
 setjoblimit.o: $(SHEPHERD_DIR)/setjoblimit.c
 		$(CC) -I$(SHEPHERD_DIR) $(CFLAGS) -c $(SHEPHERD_DIR)/setjoblimit.c
-
-sge_pset.o: $(SHEPHERD_DIR)/sge_pset.c
-		$(CC) -I$(SHEPHERD_DIR) $(CFLAGS) -c $(SHEPHERD_DIR)/sge_pset.c
 
 sge_fileio.o: $(SHEPHERD_DIR)/sge_fileio.c
 		$(CC) -I$(SHEPHERD_DIR) $(CFLAGS) -c $(SHEPHERD_DIR)/sge_fileio.c

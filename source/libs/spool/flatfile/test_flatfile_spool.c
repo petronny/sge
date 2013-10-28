@@ -1529,8 +1529,6 @@ static int CQ_test(void) {
    lSetString(ep2, ASTR_value, "8");
    lAppendElem(lp, ep2);
 
-   lSetList(ep, CQ_processors, lp);
-
    lp = lCreateList("Q-Type List", AQTLIST_Type);
    
    ep2 = lCreateElem(AQTLIST_Type);

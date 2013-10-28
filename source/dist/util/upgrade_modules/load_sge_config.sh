@@ -408,7 +408,8 @@ ResolveResult()
             ;;
          esac
       ;;
-      -Aq)  
+      -Aq)
+           # fixme: deal with old "processors"
          case "$resMsg" in
             *'already exists')
                LogIt "I" "$obj already exists, trying to modify -Mq"

@@ -726,8 +726,6 @@ lList *cql
 
       cq_add_astr(tree, cq_attributes_gen, ep, CQ_priority, "CQ_priority"); 
 
-      cq_add_astr(tree, cq_attributes_gen, ep, CQ_processors, "CQ_processors"); 
-
       cq_add_astr(tree, cq_attributes_gen, ep, CQ_initial_state, "CQ_initial_state"); 
       /*--------- hard limits --------------------------------------------*/
       cq_add_atime(tree, cq_attributes_hlim, ep, CQ_h_rt, "Wallclock Time (sec)"); 
@@ -1356,6 +1354,7 @@ lListElem *qep
    /* subordinate_list */
    sge_dstring_sprintf_append(info, "%-30.30s", "Subordinates:");
    for_each(ep, lGetList(qep, QU_subordinate_list)) {
+     /* fixme: slotwise option */
       str = lGetString(ep, SO_name);
       i = (int) lGetUlong(ep, SO_threshold);
       sge_dstring_sprintf_append(info, "%s=%d ", str?str:"", i);
@@ -2019,6 +2018,7 @@ static void qmonCQUpdateCQMatrix(void)
       XbaeMatrixSetCell(cluster_queue_settings, row, 8, buf);
       sprintf(buf, "%5d ", (int)suspend_threshold);
       XbaeMatrixSetCell(cluster_queue_settings, row, 9, buf);
+      /* fixme: slotwise */
       sprintf(buf, "%5d ", (int)suspend_on_subordinate);
       XbaeMatrixSetCell(cluster_queue_settings, row, 10, buf);
       sprintf(buf, "%5d ", (int)suspend_calendar);

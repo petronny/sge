@@ -893,11 +893,6 @@ int main(int argc, char **argv)
    script_timeout = atoi(get_conf_val("script_timeout"));
    notify = atoi(get_conf_val("notify"));
 
-   /*
-    * Create processor set
-    */
-   sge_pset_create_processor_set();
-
    /* 
     * Perform core binding (do not use processor set together with core binding) 
     */ 
@@ -1042,11 +1037,6 @@ int main(int argc, char **argv)
    if (run_epilog) {
       do_epilog(script_timeout, ckpt_type);
    }
-
-   /*
-    * Free previously created processor set
-    */
-   sge_pset_free_processor_set();
 
    /* Clean up our cpuset */
    {

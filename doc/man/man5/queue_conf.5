@@ -215,33 +215,6 @@ intervals. \fBmin_cpu_interval\fP is of type "time" and the default is
 5 minutes (which usually is suitable for test purposes only).
 The syntax is that of a \fItime_specifier\fP in
 .M sge_types 5 .
-.SS "\fBprocessors\fP"
-This parameter is considered obsolete.
-.PP
-A set of processors in case of a multiprocessor execution host can be defined
-to which the jobs executing in this queue are bound. The value type of this
-parameter is a range description like that of the \fB\-pe\fP
-option of
-.M qsub 1
-(e.g. 1-4,8,10) denoting the processor numbers for the
-processor group to be used. Obviously the interpretation of these values
-relies on operating system specifics and is thus performed inside
-.M xxqs_name_sxx_execd 8
-running on the queue host. Therefore, the parsing of the parameter has
-to be provided by the execution daemon and the parameter is only passed
-through
-.M xxqs_name_sxx_qmaster 8
-as a string.
-.PP
-Currently, support is only provided for multiprocessor machines running Solaris,
-SGI multiprocessor machines running IRIX 6.2 and 
-Digital UNIX multiprocessor machines. 
-In the case of Solaris the processor set must already exist when this processors
-parameter is configured, so the processor set has to be created manually.
-In the case of Digital UNIX only one job per processor set is allowed to 
-execute at the same time, i.e.
-.B slots
-(see below) should be set to 1 for this queue. 
 .SS "\fBqtype\fP"
 The type of queue.  Currently
 .BR BATCH ,
