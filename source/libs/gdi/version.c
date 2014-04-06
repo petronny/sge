@@ -30,11 +30,12 @@
  ************************************************************************/
 /*___INFO__MARK_END__*/
 
+#include "sge_config.h"
 #include <stdio.h>
 
 #include "gdi/version.h"
 
-const char GDI_VERSION[] = "8.1.9";
+const char GDI_VERSION[] = PACKAGE_VERSION;
 
 const gdi_ulong32 GRM_GDI_VERSION = 0x10003001;
 

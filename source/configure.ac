@@ -1,6 +1,9 @@
 # Process this file with autoconf to produce a configure script.
 
-AC_INIT
+AC_PREREQ([2.60])
+AC_INIT([sge], [8.1.8pre], [sge-bugs@liverpool.ac.uk])
+dnl Intended to be run from the build directory.  Input seems to be relative
+dnl to configure.
 dnl Using config.h would conflict with qtcsh, at least
 AC_CONFIG_HEADERS([sge_config.h:common/sge_config.h.in])
 

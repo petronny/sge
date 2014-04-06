@@ -286,7 +286,9 @@ set DEBUGGED         = 0
 set COMPILE_DC       = 0
 set CC               = cc
 set CFLAGS           = "-D$TARGET_BITS $INP_CFLAGS -DSGE_PQS_API"
-set CORE_INCLUDE     = "-I../common -I../libs -I../libs/uti -I../libs/juti -I../libs/gdi -I../libs/japi -I../libs/sgeobj -I../libs/cull -I../libs/comm -I../libs/comm/lists -I../libs/sched -I../libs/evc -I../libs/evm -I../libs/mir -I../daemons/common -I../daemons/qmaster -I../daemons/execd -I../clients/common -I."
+# Keep . first, so the autoconf sge_config.h is found before the sgeobj one.
+# Maybe the naming needs revisiting.
+set CORE_INCLUDE     = "-I. -I../common -I../libs -I../libs/uti -I../libs/juti -I../libs/gdi -I../libs/japi -I../libs/sgeobj -I../libs/cull -I../libs/comm -I../libs/comm/lists -I../libs/sched -I../libs/evc -I../libs/evm -I../libs/mir -I../daemons/common -I../daemons/qmaster -I../daemons/execd -I../clients/common"
 set DEBUG_FLAG       = ""
 set HWLOC            = 0
 set NO_HWLOC         = 0

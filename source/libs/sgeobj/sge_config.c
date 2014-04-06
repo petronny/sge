@@ -1358,6 +1358,7 @@ int subval_nm
       lSetString(tmpep, subname_nm, s);
       if (!(s=sge_strtok(NULL, ":=")))
          continue;
+      /* fixme: check strtol errors */
       lSetUlong(tmpep, subval_nm, strtol(s, &endptr, 10));
       if (*endptr) {
          SGE_ADD_MSG_ID(sprintf(SGE_EVENT, MSG_GDI_CONFIGREADFILEERRORNEAR_SS , key, endptr));
