@@ -122,3 +122,6 @@
 (^|/)build($|/)
 (^|/)source/clients/gui-installer/dist
 (^|/)source/libs/jgdi/build/gensrc/
+(^|/source/)configure
+(^|/source/)config.h
+(^|/source/)config.h.in
