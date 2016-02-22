@@ -175,7 +175,7 @@
 /*
 ** exec_job.c
 */
-#define MSG_FILE_RMDIR_SS             _MESSAGE(29098, _("can't remove directory "SFQ": "SFN))
+/* #define MSG_FILE_RMDIR_SS             _MESSAGE(29098, _("can't remove directory "SFQ": "SFN)) */
 /* #define MSG_FILE_CREATEDIRDEL_SS      _message(29099, _("can't create directory "SFN" after deletion: "SFN)) __TS Removed automatically from testsuite!! TS__*/
 #define MSG_FILE_CREATEDIR_SS         _MESSAGE(29100, _("can't create directory "SFN": "SFN))
 #define MSG_EXECD_NOSGID              _MESSAGE(29101, _("supplementary group ids could not be found in /proc"))

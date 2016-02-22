@@ -522,8 +522,7 @@ ErrUsage()
              "   -winupdate update to add GUI features to a existing Windows execd installation\n" \
              "   -winsvc    install Windows helper service\n" \
              "   -uwinsvc   uninstall Windows helper service\n" \
-             "   -csp       install system with security framework protocol\n" \
-             "              functionality\n" \
+             "   -csp       install system with certificate security protocol\n" \
              "   -munge     install system with MUNGE authentication\n" \
              "   -jmx       install qmaster with JMX server thread enabled \n" \
              "   -add-jmx   install and enable JMX server thread for existing qmaster\n" \
@@ -532,7 +531,6 @@ ErrUsage()
              "   -noremote  suppress remote installation during autoinstall\n" \
              "   -nosmf     disable SMF for Solaris 10+ machines (RC scripts are used)\n" \
              "   -nobincheck don't check that binaries are present\n" \
-             "   -munge     configure MUNGE authentication\n" \
              "   -help      show this help text\n\n" \
              "   Examples:\n" \
              "   inst_sge -m -x   or   inst_sge -m -jmx -x\n" \

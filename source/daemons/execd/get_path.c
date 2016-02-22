@@ -376,10 +376,12 @@ const char *sge_make_ja_task_active_dir(const lListElem *job, const lListElem *j
 
             if (sge_rmdir(path, &error_string)) {
                if (err_str != NULL) {
-                  SGE_ADD_MSG_ID(sge_dstring_sprintf(err_str, MSG_FILE_RMDIR_SS, path, 
+                  SGE_ADD_MSG_ID(sge_dstring_sprintf(err_str,
+                        MSG_FILE_CANTREMOVEDIRECTORY_SS, path,
                         sge_dstring_get_string(&error_string)));
                } else {
-                  ERROR((SGE_EVENT, MSG_FILE_RMDIR_SS, path, SGE_EVENT));
+                  ERROR((SGE_EVENT, MSG_FILE_CANTREMOVEDIRECTORY_SS, path,
+                         SGE_EVENT));
                   DEXIT;
                   return NULL;
                }
