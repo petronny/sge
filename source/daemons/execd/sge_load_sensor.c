@@ -668,8 +668,8 @@ void sge_ls_qidle(int qidle)
 *     enable/disable qloadsensor
 *
 *  INPUTS
-*     qidle: 1 - enable qloadsensor
-*            0 - disable qloadsensor
+*     qls: 1 - enable qloadsensor
+*          0 - disable qloadsensor
 ******************************************************************************/
 void sge_ls_qls(int qls)
 {
