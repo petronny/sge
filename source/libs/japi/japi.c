@@ -309,7 +309,7 @@ static int japi_add_job(u_long32 jobid, u_long32 start, u_long32 end, u_long32 i
       bool is_array, dstring *diag);
 static int japi_synchronize_jobids_retry(const char *jobids[], bool dispose);
 static int japi_wait_retry(lList *japi_job_list, int wait4any, u_long32 jobid,
-                           u_long32 taskid, bool is_array_task, int event_mask,
+                           u_long32 taskid, int event_mask,
                            u_long32 *wjobidp, u_long32 *wtaskidp,
                            bool *wis_task_arrayp, int *wait_status,
                            int *wevent, lList **rusagep);
@@ -2589,7 +2589,7 @@ int japi_wait(const char *job_id, dstring *waited_job, int *stat,
       JAPI_LOCK_JOB_LIST();
 
       while ((wait_result = japi_wait_retry(Master_japi_job_list, wait4any, jobid,
-                                          taskid, is_array_task, event_mask, &waited_jobid,
+                                          taskid, event_mask, &waited_jobid,
                                           &waited_taskid, &waited_is_task_array,
                                           stat, event, &rusagep)) == JAPI_WAIT_UNFINISHED) {
 
@@ -2707,7 +2707,7 @@ int japi_wait(const char *job_id, dstring *waited_job, int *stat,
 *
 *  SYNOPSIS
 *     static int japi_wait_retry(lList *japi_job_list, int wait4any, int jobid, 
-*     int taskid, bool is_array_task, u_long32 *wjobidp, u_long32 *wtaskidp, 
+*     int taskid, u_long32 *wjobidp, u_long32 *wtaskidp,
 *     bool *wis_task_arrayp, int *wait_status) 
 *
 *  FUNCTION
@@ -2737,7 +2737,7 @@ int japi_wait(const char *job_id, dstring *waited_job, int *stat,
 *     MT-NOTE: japi_wait_retry() is MT safe
 *******************************************************************************/
 static int japi_wait_retry(lList *japi_job_list, int wait4any, u_long32 jobid,
-                           u_long32 taskid, bool is_array_task, int event_mask,
+                           u_long32 taskid, int event_mask,
                            u_long32 *wjobidp, u_long32 *wtaskidp,
                            bool *wis_task_arrayp, int *wait_status, int *wevent,
                            lList **rusagep)

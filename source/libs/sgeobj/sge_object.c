@@ -2908,8 +2908,7 @@ object_verify_expression_syntax(const lListElem *elem, lList **answer_list)
 *  INPUTS
 *     const lListElem *object  - JB_Type elemente
 *     lList **alpp             - the answer list
-*     int   name               - object name  
-*     char *object_descr       - used for the text in the answer list 
+*     int   name               - object name
 *
 *  RESULT
 *     int - returns != 0 if there is a problem with the object name

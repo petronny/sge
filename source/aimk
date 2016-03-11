@@ -212,7 +212,6 @@ usage:
    echo "-only-64          -> build only 64 bit shared libraries for SOLARIS64, don't build 32 bit shared libraries"
    echo "-pam              -> build PAM modules (probably only on GNU/linux currently)"
    echo "-parallel n       -> spawn multiple make processes by passing option -j n to make"
-   echo "-perlgui          -> build the experimental perlgui (probably broken)"
    echo "-po               -> merge gridengine .pot with translations (GNU/Linux)"
    echo "-pot              -> extract message template to gridengine .pot file (GNU/Linux)"
    echo "-protected        -> create complete class file documentation"
@@ -2480,10 +2479,10 @@ if ( "$QTCSH" == 1) then
       mkdir -p $SOURCE/3rdparty/qtcsh/$COMPILE_ARCH
       cd $SOURCE/3rdparty/qtcsh/$COMPILE_ARCH
       ln -sf ../config_f.h .
-      # _GNU_SOURCE is defined by config.h, so we get wranings if we keep it
+      # _GNU_SOURCE is defined by config.h, so we get warnings if we keep it
       # in CFLAGS here.  The quoting of the arch string loses with some csh
       # (e.g. interix), so zap it.
-      env REMOTE=sge CC="$CC" CFLAGS="`echo ${CFLAGS} | sed -e's/-DSGE_ARCH_STRING=[^ ]*//'` -U_GNU_SOURCE ${NOERR_CFLAG}" SGE_ARCH=$buildarch \
+      env CC="$CC" CFLAGS="`echo ${CFLAGS} | sed -e's/-DSGE_ARCH_STRING=[^ ]*//'` -U_GNU_SOURCE ${NOERR_CFLAG}" SGE_ARCH=$buildarch \
        ../configure --with-sge=${COMPILE_ARCH} --srcdir=..
    endif
 
