@@ -308,3 +308,7 @@ authuser.obj: $(UTILBIN_DIR)/authuser.c
 
 juti.obj: $(SDIR)/libs/juti/juti.c
 	$(WINCC) $(WINCFLAGS) /c $(SDIR)/libs/juti/juti.c
+
+#---------------------------------------------------------------------
+mktemp: $(UTILBIN_DIR)/mktemp.c
+	$(CC) $(CFLAGS) -o $@.c $<
