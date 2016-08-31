@@ -1595,6 +1595,9 @@ int sge_exec_job(sge_gdi_ctx_class_t *ctx, lListElem *jep, lListElem *jatep,
    /* should the addgrp-id be used to kill processes */
    fprintf(fp, "enable_addgrp_kill=%d\n", (int)mconf_get_enable_addgrp_kill());
 
+   /* should process RLIMIT_VMEM / RLIMIT_AS be set? */
+   fprintf(fp, "rlimit_vmem=%d\n", (int)mconf_get_rlimit_vmem());
+
    bootstrap_state = ctx->get_sge_bootstrap_state(ctx);
    if (strcasecmp(bootstrap_state->get_security_mode(bootstrap_state), "csp") == 0) {
       csp_mode = true;

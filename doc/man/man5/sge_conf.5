@@ -1584,6 +1584,19 @@ default is no.  Without
 .IR smaps ,
 usage is reported as RSS+swap, instead of PSS+swap, or simply as the
 VMsize if the swap value isn't available.
+.IP \fIRLIMIT_VMEM\fP
+Use
+.MO setrlimit 2
+to limit the amount of memory address space usable by
+each process in the job. Available on systems where
+.I RLIMIT_VMEM
+or
+.I RLIMIT_AS
+exists (
+.I RLIMIT_VMEM
+used preferentially). When a requested memory limit is exhausted, will
+tend to result in job termination during memory allocation (if true)
+or memory initialisation (if false).  Default is true.
 .PP
 .IP \fIprint_malloc_info\fP
 See

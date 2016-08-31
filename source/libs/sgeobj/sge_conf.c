@@ -202,6 +202,7 @@ static char s_locks[100];
 static char h_locks[100];
 static bool use_cgroups = false;
 static bool use_smaps = false;
+static bool rlimit_vmem = true;
 static bool demand_ls = true;
 
 /* 
@@ -890,6 +891,7 @@ int merge_configuration(lList **answer_list, u_long32 progid, const char *cell_r
       log_consumables = false;
       use_cgroups = false;
       use_smaps = false;
+      rlimit_vmem = true;
       strcpy(s_descriptors, "UNDEFINED");
       strcpy(h_descriptors, "UNDEFINED");
       strcpy(s_maxproc, "UNDEFINED");
@@ -1045,6 +1047,9 @@ int merge_configuration(lList **answer_list, u_long32 progid, const char *cell_r
             continue;
          }
          if (parse_bool_param(s, "USE_SMAPS", &use_smaps)) {
+            continue;
+         }
+         if (parse_bool_param(s, "RLIMIT_VMEM", &rlimit_vmem)) {
             continue;
          }
 #if HAVE_JEMALLOC
@@ -2683,6 +2688,16 @@ bool mconf_get_use_smaps(void) {
    DENTER(BASIS_LAYER, "mconf_get_use_smaps");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
    ret = use_smaps;
+   SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
+   DRETURN(ret);
+}
+
+bool mconf_get_rlimit_vmem(void) {
+   bool ret;
+
+   DENTER(BASIS_LAYER, "mconf_get_rlimit_vmem");
+   SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
+   ret = rlimit_vmem;
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(ret);
 }

@@ -399,15 +399,18 @@ void setrlimits(int trace_rlimit) {
    }
 #  endif
 
+   if (get_conf_val("rlimit_vmem") == NULL ||
+       strncmp(get_conf_val("rlimit_vmem"), "1", 1) == 0) {
 #  if defined(RLIMIT_VMEM)
-   rlp.rlim_cur = s_vmem;
-   rlp.rlim_max = h_vmem;
-   pushlimit(RLIMIT_VMEM, &rlp, trace_rlimit);
+      rlp.rlim_cur = s_vmem;
+      rlp.rlim_max = h_vmem;
+      pushlimit(RLIMIT_VMEM, &rlp, trace_rlimit);
 #  elif defined(RLIMIT_AS)
-   rlp.rlim_cur = s_vmem;
-   rlp.rlim_max = h_vmem;
-   pushlimit(RLIMIT_AS, &rlp, trace_rlimit);
+      rlp.rlim_cur = s_vmem;
+      rlp.rlim_max = h_vmem;
+      pushlimit(RLIMIT_AS, &rlp, trace_rlimit);
 #  endif
+   }
 
 #  if defined(RLIMIT_RSS)
    rlp.rlim_cur = s_rss;
