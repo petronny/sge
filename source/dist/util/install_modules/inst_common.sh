@@ -379,7 +379,7 @@ CheckBinaries()
              sge_execd sge_qmaster  \
              sge_shadowd \
              sge_shepherd qacct qalter qconf qdel qhold \
-             qhost qlogin qmake qmod qmon qresub qrls qrsh qselect qsh \
+             qhost qlogin qmake qmod qresub qrls qrsh qselect qsh \
              qstat qsub qtcsh qping qquota sgepasswd"
 
    WINBINFILES="sge_coshepherd sge_execd sge_shepherd  \
