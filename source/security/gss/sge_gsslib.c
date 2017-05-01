@@ -101,6 +101,7 @@
 #else
 #include <gssapi.h>
 #endif
+#include <gssapi/gssapi_ext.h>
 
 #ifdef DCE
 #include <dce/sec_login.h>
@@ -147,14 +148,14 @@ u_long gsslib_unpackint(char *buf)
 
 static void gsslib_display_status_1(const char *m, OM_uint32 code, int type)
 {
-   OM_uint32 maj_stat, min_stat;
+   OM_uint32 min_stat;
    gss_buffer_desc msg;
    GSSAPI_INT msg_ctx;
 
    memset((void *)&msg, 0, sizeof(msg));
    msg_ctx = 0;
    while (1) {
-      maj_stat = gss_display_status(&min_stat, code,
+      (void) gss_display_status(&min_stat, code,
                                     type, GSS_C_NULL_OID,
                                     &msg_ctx, &msg);
       snprintf(msgptr, sizeof msgbuf - strlen(msgptr), MSG_GSS_APIERRORXY_SS,
@@ -530,8 +531,8 @@ gsslib_put_credentials(gss_cred_id_t server_creds,
              (int) client_name.length, (char *) client_name.value);
 
    if (username) {
-      gss_buffer_desc tok;
-      gss_name_t user_name;
+      gss_buffer_desc tok = GSS_C_EMPTY_BUFFER, lname = GSS_C_EMPTY_BUFFER;
+      gss_name_t user_name = GSS_C_NO_NAME, client_local_name = GSS_C_NO_NAME;
       int str_equal;
 
       tok.value = username;
@@ -546,13 +547,46 @@ gsslib_put_credentials(gss_cred_id_t server_creds,
       if (maj_stat != GSS_S_COMPLETE) {
 	 gsslib_display_status( MSG_GSS_DISPLAYSTATUS_DISPLAYINGNAME, maj_stat, min_stat);
          cc = 6;
+         (void) gss_release_name(&min_stat, &user_name);
          goto error;
       }
+      if (!str_equal) {
+         /* convert the remote client principal name to a local name for comparison */
+         maj_stat = gss_localname(&min_stat, client, GSS_C_NULL_OID, &lname);
+         if (maj_stat != GSS_S_COMPLETE) {
+	    gsslib_display_status(MSG_GSS_DISPLAYSTATUS_PARSINGNAME, maj_stat, min_stat);
+            cc = -1;
+            goto error;
+         }
+         maj_stat = gss_import_name(&min_stat, &lname, GSS_C_NULL_OID, &client_local_name);
+         if (maj_stat != GSS_S_COMPLETE) {
+	    gsslib_display_status(MSG_GSS_DISPLAYSTATUS_PARSINGNAME, maj_stat, min_stat);
+            cc = -1;
+            (void) gss_release_buffer(&min_stat, &lname);
+            goto error;
+         }
+         maj_stat = gss_compare_name(&min_stat, client_local_name, user_name, &str_equal);
+         if (maj_stat != GSS_S_COMPLETE) {
+	    gsslib_display_status( MSG_GSS_DISPLAYSTATUS_DISPLAYINGNAME, maj_stat, min_stat);
+            cc = 6;
+            (void) gss_release_buffer(&min_stat, &lname);
+            (void) gss_release_name(&min_stat, &client_local_name);
+            (void) gss_release_name(&min_stat, &user_name);
+            goto error;
+         }
+         (void) gss_release_buffer(&min_stat, &lname);
+         (void) gss_release_name(&min_stat, &client_local_name);
+      }
+      (void) gss_release_name(&min_stat, &user_name);
 
 #ifdef KRBGSS
 
       if (!str_equal) {
          krb5_context context;
+         krb5_error_code retval;
+         gss_name_t kname = GSS_C_NO_NAME;
+         gss_buffer_desc dname = GSS_C_EMPTY_BUFFER;
+         krb5_principal principal;
 
          maj_stat = krb5_init_context(&context);
          if (maj_stat != GSS_S_COMPLETE) {
@@ -561,10 +595,35 @@ gsslib_put_credentials(gss_cred_id_t server_creds,
             cc = -1;
             goto error;
          }
-
          /* see if this user is authorized by the krb5 client */
-         if (krb5_kuserok(context, (krb5_principal)client, username))
+         maj_stat = gss_canonicalize_name(&min_stat, client, (const gss_OID)gss_mech_krb5, &kname);
+         if (maj_stat != GSS_S_COMPLETE) {
+	    gsslib_display_status( MSG_GSS_DISPLAYSTATUS_PARSINGNAME, maj_stat, min_stat);
+            cc = -1;
+            goto error;
+         }
+         maj_stat = gss_display_name(&min_stat, kname, &dname, NULL);
+         if (maj_stat != GSS_S_COMPLETE) {
+	    gsslib_display_status( MSG_GSS_DISPLAYSTATUS_DISPLAYINGNAME, maj_stat, min_stat);
+            cc = -1;
+            (void) gss_release_name(&min_stat, &kname);
+            goto error;
+         }
+         retval = krb5_parse_name(context, dname.value, &principal);
+         if (retval != GSS_S_COMPLETE) {
+            gsslib_display_status( MSG_GSS_DISPLAYSTATUS_PARSINGNAME, maj_stat, min_stat);
+            cc = -1;
+            (void) gss_release_name(&min_stat, &kname);
+            (void) gss_release_buffer(&min_stat, &dname);
+            goto error;
+         }
+         (void) gss_release_name(&min_stat, &kname);
+         (void) gss_release_buffer(&min_stat, &dname);
+
+         if (krb5_kuserok(context, principal, username))
             str_equal = 1;
+
+         (void) krb5_free_principal(context, principal);
       }
 
       /* Users from Kerberos cross-authenticated realms will not match,
