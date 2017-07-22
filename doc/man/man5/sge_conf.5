@@ -173,8 +173,12 @@ may use a set of private
 .B load_sensor
 programs or scripts. Changing
 .B load_sensor
-will take effect after two load report intervals (see
-\fBload_report_time\fP). A load sensor will be restarted automatically if
+will take effect after on load report interval (see
+\fBload_report_time\fP), or two if
+.B DEMAND_LS
+is 0 in
+.BR execd_params .
+A load sensor will be restarted automatically if
 the file modification time of the load sensor executable changes.
 .PP
 The global configuration entry for this value
@@ -188,7 +192,9 @@ searches for an executable file named
 in the execution host's xxQS_NAMExx binary directory path.
 If such a file is found, it is treated like the configurable load sensors
 defined in \fBload_sensor\fP. This facility is intended for pre-installing
-a default load sensor.  See
+a default load sensor.
+.PP
+See
 .M sge_execd 8
 for information on writing load sensors.
 .\"
