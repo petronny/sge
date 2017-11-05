@@ -2202,26 +2202,7 @@ static bool cl_com_is_ip_address_string(const char* resolve_hostname, struct in_
       return false;
    }
 
-   addr->s_addr = inet_addr(resolve_hostname);
-
-   if (addr->s_addr == -1) {
-      int v1 = 0;
-      int v2 = 0;
-      int v3 = 0;
-      int v4 = 0;
-
-      /* check if it is not the host address 255.255.255.255 */
-      sscanf(resolve_hostname, "%d.%d.%d.%d", &v1, &v2, &v3, &v4);
-      if (v1 == 255 && 
-          v2 == 255 &&
-          v3 == 255 &&
-          v4 == 255) {
-         CL_LOG(CL_LOG_WARNING,"got ip address 255.255.255.255 as host name!");
-         return true;
-      }
-      return false;
-   }  
-   return true;
+   return inet_aton(resolve_hostname, addr) ? true : false;
 }
 
 #ifdef __CL_FUNCTION__
@@ -4386,7 +4367,7 @@ int cl_com_connection_complete_request(cl_raw_list_t* connection_list, cl_connec
                      cl_com_message_t* dummy_message = NULL;
                      cl_com_create_message(&dummy_message);
                      if (dummy_message != NULL) {
-                        int   crm_pos = 0;
+                        unsigned crm_pos = 0;
                         dummy_message->message_df = CL_MIH_DF_CRM;
                         dummy_message->message_mat = CL_MIH_MAT_NAK;
                         gettimeofday(&dummy_message->message_insert_time,NULL);
