@@ -79,10 +79,6 @@
 
 #include "binding_support.h"
 
-#if defined(IRIX)
-#  include "sge_processes_irix.h"
-#endif
-
 #if __INTERIX
 #include "../../../utilbin/sge_passwd.h"
 #include "wingrid/windows_gui.h"
@@ -1132,9 +1128,6 @@ static int start_child(const char *childname, /* prolog, job, epilog */
    dstring err_msg = DSTRING_INIT;
    bool is_interactive = false;
    ckpt_info_t ckpt_info = {0, 0, 0};
-#if defined(IRIX)
-   ash_t ash = 0;
-#endif
 
    ckpt_info.type = ckpt_type;
 
@@ -1171,14 +1164,6 @@ static int start_child(const char *childname, /* prolog, job, epilog */
       set_ckpt_restart_command(childname, ckpt_info.type,
                                rest_command, sizeof(rest_command) -1);
       shepherd_trace("restarting job from checkpoint arena");
-
-#if defined(IRIX)
-      /* reuse old osjobid for the migrated job and forward this one to ptf */
-      shepherd_write_osjobid_file(get_conf_val("ckpt_osjobid"));
-
-      sscanf(get_conf_val("ckpt_osjobid"), "%lld", &ash);
-      shepherd_trace("reusing old array session handle %lld", ash);
-#endif
 
       shepherd_trace("restarting job from checkpoint arena");
       pid = start_async_command("restart", rest_command);
@@ -3067,11 +3052,6 @@ static void start_clean_command(char *cmd)
  ****************************************************************/
 void 
 shepherd_signal_job(pid_t pid, int sig) {
-#if defined(IRIX)
-   static int first = 1;
-   static ash_t osjobid = 0;
-# endif
-
 
    /* 
     * Normal signaling for OSes without reliable grouping mechanisms and if
@@ -3152,18 +3132,6 @@ shepherd_signal_job(pid_t pid, int sig) {
                    shepherd_error(1, MSG_SWITCH_USER_S, strerror(errno));
             }
 #      endif
-#   elif defined(IRIX)
-            if (first == 1) {
-                shepherd_read_osjobid_file(&osjobid, false);
-                first = 0;
-            }
-            if (osjobid == 0) {
-                shepherd_trace("value in \"osjobid\" file = 0, not using kill_ash/killm");
-            } else {
-                sge_switch2start_user();
-                kill_ash(osjobid, sig, sig == 9);
-                sge_switch2admin_user();
-            }
 #   endif
         }
 # endif

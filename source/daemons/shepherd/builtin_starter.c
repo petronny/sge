@@ -953,20 +953,9 @@ int sge_set_environment(bool user_env)
    FILE *fp;
    char buf[10000], *name, *value, err_str[10000];
    int line=0;
-#if defined(IRIX)
-   char help_str[100] = "";
-   ash_t jobid;
-#endif
    const char *new_value = NULL;
 
    setup_environment();
-
-#if defined(IRIX)
-   if (shepherd_read_osjobid_file(&jobid, false)) {
-      snprintf(help_str, 100, "%lld", jobid);
-      sge_set_env_value("OSJOBID", help_str);
-   }
-#endif
 
    if (!(fp = fopen(filename, "r"))) {
       shepherd_error(1, "can't open environment file: %s", strerror(errno));

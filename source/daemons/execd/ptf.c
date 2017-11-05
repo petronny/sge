@@ -38,7 +38,7 @@
 
 #if defined(COMPILE_DC) || defined(MODULE_TEST)
 
-#if defined(IRIX) || (__linux__ || __CYGWIN__) || __sun || !defined(MODULE_TEST) || __hpux || __FreeBSD__ || __APPLE__
+#if (__linux__ || __CYGWIN__) || __sun || !defined(MODULE_TEST) || __hpux || __FreeBSD__ || __APPLE__
 #   define USE_DC
 #endif
 
@@ -51,14 +51,6 @@
 #include <unistd.h>
 #include <limits.h>
 #include <math.h>
-
-#ifdef __sgi
-#  include <sys/resource.h>
-#  include <sys/systeminfo.h>
-#  include <sys/sched.h>
-#  include <sys/sysmp.h>
-#  include <sys/schedctl.h>
-#endif
 
 #if __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
 #  include <sys/resource.h>
@@ -193,11 +185,7 @@ static lListElem *ptf_get_job(u_long job_id);
 
 static void ptf_unregister_registered_jobs(void);
 
-#if defined(__sgi)
-
-static void ptf_setpriority_ash(lListElem *job, lListElem *osjob, long pri);
-
-#elif __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
+#if __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
 
 static void ptf_setpriority_addgrpid(lListElem *job, lListElem *osjob,
                                      long pri);
@@ -207,14 +195,6 @@ static void ptf_setpriority_addgrpid(lListElem *job, lListElem *osjob,
 static lList *ptf_jobs = NULL;
 
 static int is_ptf_running = 0;
-
-#if defined(__sgi)
-
-static char irix_release[257] = "6.2";
-
-static int got_release = 0;
-
-#endif
 
 /****** execd/ptf/ptf_get_osjobid() *******************************************
 *  NAME
@@ -463,115 +443,7 @@ static void ptf_set_native_job_priority(lListElem *job, lListElem *osjob,
 #endif
 }
 
-#if defined(__sgi)
-
-/****** execd/ptf/ptf_setpriority_ash() ***************************************
-*  NAME
-*     ptf_setpriority_ash() -- Change priority of processes 
-*
-*  SYNOPSIS
-*     static void ptf_setpriority_ash(lListElem *job, lListElem *osjob, 
-*        long *pri) 
-*
-*  FUNCTION
-*     This function is only available for the architecture IRIX.
-*     All processes belonging to "job" and "osjob" will get a new priority.
-*
-*  INPUTS
-*     lListElem *job   - job  
-*     lListElem *osjob - one of the os jobs of "job" 
-*     long pri         - new priority 
-******************************************************************************/
-static void ptf_setpriority_ash(lListElem *job, lListElem *osjob, long pri)
-{
-   static int got_bg_flag = 0;
-   static int bg_flag;
-   lListElem *pid;
-
-#  if defined(IRIX)
-   int nprocs;
-   static int first = 1;
-#  endif
-
-   DENTER(TOP_LAYER, "ptf_setpriority_ash");
-
-#  if defined(IRIX)
-   if (first) {
-      nprocs = sysmp(MP_NPROCS);
-      if (nprocs <= 0)
-         nprocs = 1;
-      first = 0;
-   }
-#  endif
-
-   if (!got_bg_flag) {
-      bg_flag = (getenv("PTF_NO_BACKGROUND_PRI") == NULL);
-      got_bg_flag = 1;
-   }
-#  if defined(__sgi)
-
-   if (!got_release) {
-      if (sysinfo(SI_RELEASE, irix_release, sizeof(irix_release)) < 0) {
-         ERROR((SGE_EVENT, MSG_SYSTEM_SYSINFO_SI_RELEASE_CALL_FAILED_S,
-                strerror(errno)));
-      }
-      got_release = 1;
-   }
-#  endif
-#  if defined(__sgi)
-   for_each(pid, lGetList(osjob, JO_pid_list)) {
-#     ifdef PTF_NICE_BASED
-      /* IRIX 6.4 also has some scheduler bugs.  Namely, when you use
-       * setpriority and assign a "weightless" priority of 20, setting
-       * a new priority doesn't bring the process out of the "weightless"
-       * class.  The only way to bring the process out is to force a
-       * reset of its scheduling class using sched_setscheduler. 
-       */
-      if (bg_flag && lGetUlong(job, JL_interactive) == 0 &&
-          lGetDouble(job, JL_adjusted_current_proportion) <
-          (PTF_BACKGROUND_JOB_PROPORTION / (double) nprocs)) {
-
-         /* set the background "weightless" priority */
-
-         if (setpriority(PRIO_PROCESS, (id_t)lGetUlong(pid, JP_pid),
-                         PTF_BACKGROUND_NICE_VALUE) < 0 && errno != ESRCH) {
-
-            ERROR((SGE_EVENT, MSG_PRIO_JOBXPIDYSETPRIORITYFAILURE_UUS,
-                   sge_u32c(lGetUlong(job, JL_job_ID)),
-                   sge_u32c(lGetUlong(pid, JP_pid)), strerror(errno)));
-         }
-
-         lSetUlong(pid, JP_background, 1);
-
-      } else {
-
-         struct sched_param sp;
-
-         sp.sched_priority = pri;
-
-         if (sched_setscheduler((id_t)lGetUlong(pid, JP_pid), SCHED_TS, &sp) < 0 
-             && errno != ESRCH) {
-            ERROR((SGE_EVENT, MSG_SCHEDD_JOBXPIDYSCHEDSETSCHEDULERFAILURE_UUS,
-                   sge_u32c(lGetUlong(job, JL_job_ID)),
-                   sge_u32c(lGetUlong(pid, JP_pid)), strerror(errno)));
-         }
-
-         lSetUlong(pid, JP_background, 0);
-      }
-#     endif
-#     ifdef PTF_NDPRI_BASED
-      if (schedctl(NDPRI, lGetUlong(pid, JP_pid), pri) < 0 && errno != ESRCH) {
-         ERROR((SGE_EVENT, MSG_SCHEDD_JOBXPIDYSCHEDCTLFAILUREX_UUS,
-                sge_u32c(lGetUlong(job, JL_job_ID)), sge_u32c(lGetUlong(pid, JP_pid)),
-                strerror(errno)));
-      }
-#     endif
-   }
-#  endif
-   DEXIT;
-}
-
-#elif __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
+#if __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
 
 /****** execd/ptf/ptf_setpriority_addgrpid() **********************************
 *  NAME
@@ -1734,9 +1606,7 @@ int ptf_init(void)
       DEXIT;
       return -1;
    }
-#if defined(__sgi)
-   schedctl(RENICE, 0, 0);
-#elif __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
+#if __sun || (__linux__ || __CYGWIN__) || __FreeBSD__ || __APPLE__
    if (getuid() == 0) {
       if (setpriority(PRIO_PROCESS, getpid(), PTF_MAX_PRIORITY) < 0) {
          ERROR((SGE_EVENT, MSG_PRIO_SETPRIOFAILED_S, strerror(errno)));
@@ -1982,19 +1852,6 @@ int main(int argc, char **argv)
 
    for_each(jte, job_ticket_list) {
       pid_t pid;
-
-#if defined(IRIX)
-
-      if (newarraysess() < 0) {
-         perror("newarraysess");
-         exit(1);
-      }
-
-      os_job_id = getash();
-      printf(MSG_JOB_THEASHFORJOBXISY_DX,
-             sge_u32c(lGetUlong(jte, JB_job_number)), u64c(os_job_id));
-
-#endif
 
       pid = fork();
       if (pid == 0) {

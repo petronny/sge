@@ -64,8 +64,6 @@
 
 #if __sun || defined(__hpux) || (__linux__ || __CYGWIN__) || _AIX || __APPLE__
 #   define SETPGRP setpgrp()
-#elif defined(__sgi)
-#   define SETPGRP BSDsetpgrp(getpid(),getpid())
 #elif defined(WIN32) || __INTERIX
 #   define SETPGRP setsid()
 #else

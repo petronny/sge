@@ -45,7 +45,6 @@ DAEMONS_COMMON_SRC = admin_mail.c \
                     shutdown.c \
                     startprog.c \
                     unparse_job_cull.c \
-                    sge_processes_irix.c \
                     pdc.c \
                     procfs.c \
                     binding_support.c
@@ -132,9 +131,6 @@ startprog.o   : $(DAEMONS_COMMON_DIR)/startprog.c
 
 unparse_job_cull.o: 	$(DAEMONS_COMMON_DIR)/unparse_job_cull.c
 		$(CC) $(CFLAGS) -c $(DAEMONS_COMMON_DIR)/unparse_job_cull.c
-
-sge_processes_irix.o: 	$(DAEMONS_COMMON_DIR)/sge_processes_irix.c
-		$(CC) $(CFLAGS) -c $(DAEMONS_COMMON_DIR)/sge_processes_irix.c
 
 pdc_main.o: 	$(DAEMONS_COMMON_DIR)/pdc.c
 		$(CC) $(CFLAGS) -DMONITOR_PDC -DPDC_STANDALONE $(MEMCFLAG) $(GCCC_NOERR_FLAGS) -c $(DAEMONS_COMMON_DIR)/pdc.c -o pdc_main.o

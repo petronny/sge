@@ -1230,17 +1230,6 @@ int sge_exec_job(sge_gdi_ctx_class_t *ctx, lListElem *jep, lListElem *jatep,
          qualified_hostname))) 
       cwd = sge_dstring_copy_string(&cwd_out, cp);
    fprintf(fp, "cwd=%s\n", cwd);
-#if defined(IRIX)
-   {
-      const char *env_value = job_get_env_string(jep, VAR_PREFIX "O_HOST");
-
-      if (env_value) {
-         fprintf(fp, "spi_initiator=%s\n", env_value);
-      } else {
-         fprintf(fp, "spi_initiator=%s\n", "unknown");
-      }
-   }
-#endif
 
    /* do not start prolog/epilog in case of pe tasks */
    if(petep == NULL) {
