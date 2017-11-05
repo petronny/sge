@@ -305,15 +305,12 @@ static
 int psRetrieveSystemData(void)
 {
    time_t time_stamp = get_gmt();
-   time_t prev_time_stamp;
    static time_t next;
 
    if (time_stamp <= next) {
       return 0;
    }
    next = time_stamp + ps_config.sys_collection_interval;
-
-   prev_time_stamp = sysdata.sys_tstamp;
 
    /* Time of last snap */
    sysdata.sys_tstamp = time_stamp;

@@ -102,7 +102,6 @@ main(int argc, char **argv)
    drmaa_attr_values_t *jobids = NULL;
 
    u_long32 prog_number = 0;
-   u_long32 myuid = 0;
    const char *sge_root = NULL;
    const char *cell_root = NULL;
    const char *username = NULL;
@@ -130,7 +129,6 @@ main(int argc, char **argv)
    }
 
    prog_number = ctx->get_who(ctx);
-   myuid = ctx->get_uid(ctx);
    sge_root = ctx->get_sge_root(ctx);
    cell_root = ctx->get_cell_root(ctx);
    username = ctx->get_username(ctx);

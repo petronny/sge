@@ -4356,13 +4356,10 @@ static void sge_do_sgeee_priority(lList *job_list, double min_tix, double max_ti
                bool do_nprio, bool do_nurg) 
 {
    lListElem *job, *task;
-   u_long32 jobid;
    bool enrolled;
    double nsu = 0.5, npri = 0.5;
 
    for_each (job, job_list) {
-      jobid = lGetUlong(job, JB_job_number);
-
       if (do_nurg)
          nsu = lGetDouble(job, JB_nurg);
       if (do_nprio)

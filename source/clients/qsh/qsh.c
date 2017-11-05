@@ -1384,7 +1384,6 @@ int main(int argc, char **argv)
    int is_qlogin = 0;
    int is_rsh = 0;
    int is_rlogin = 0;
-   int is_qsh = 0;
    int just_verify = 0;
    int inherit_job  = 0;
    int existing_job = 0;
@@ -1433,7 +1432,6 @@ int main(int argc, char **argv)
       is_rsh    = 1;
       my_who = QRSH;
    } else if (!strcmp(sge_basename(argv[0], '/'), "qsh")) {
-      is_qsh = 1; 
       my_who = QSH;
    }
 

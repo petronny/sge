@@ -952,7 +952,6 @@ void sge_commit_job(sge_gdi_ctx_class_t *ctx,
    int no_unlink = 0;
    int spool_job = !(commit_flags & COMMIT_NO_SPOOLING);
    int no_events = (commit_flags & COMMIT_NO_EVENTS);
-   int unenrolled_task = (commit_flags & COMMIT_UNENROLLED_TASK);
    int handle_zombies = (mconf_get_zombie_jobs() > 0);
    u_long32 now = 0;
    const char *session;

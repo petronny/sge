@@ -92,7 +92,6 @@ void sge_c_report(sge_gdi_ctx_class_t *ctx, char *rhost, char *commproc, int id,
    lListElem *hep = NULL;
    u_long32 rep_type;
    lListElem *report;
-   int ret = 0;
    u_long32 this_seqno, last_seqno;
    u_long32 rversion;
    sge_pack_buffer pb;   
@@ -216,10 +215,14 @@ void sge_c_report(sge_gdi_ctx_class_t *ctx, char *rhost, char *commproc, int id,
          ** save number of processors
          */
 #if LICENCE_REPORT
-         MONITOR_EPROC(monitor);
-         ret = update_license_data(ctx, hep, lGetList(report, REP_list)); 
-         if (ret) {
-            ERROR((SGE_EVENT, MSG_LICENCE_ERRORXUPDATINGLICENSEDATA_I, ret));
+         {
+            int ret = 0;
+
+            MONITOR_EPROC(monitor);
+            ret = update_license_data(ctx, hep, lGetList(report, REP_list));
+            if (ret) {
+               ERROR((SGE_EVENT, MSG_LICENCE_ERRORXUPDATINGLICENSEDATA_I, ret));
+            }
          }
 #endif
          break;

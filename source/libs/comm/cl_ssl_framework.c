@@ -653,8 +653,8 @@ static int cl_com_ssl_verify_callback(int preverify_ok, X509_STORE_CTX *ctx) {
 static void cl_com_ssl_locking_callback(int mode, int type, const char *file, int line) {
 #if 0
    char tmp_buffer[1024];
-#endif
    const char* tmp_filename = "n.a.";
+#endif
 
    /* 
     * locking cl_com_ssl_global_config_mutex would cause a deadlock
@@ -667,9 +667,11 @@ static void cl_com_ssl_locking_callback(int mode, int type, const char *file, in
     * cl_com_ssl_global_config_object.
     */
 
+#if 0
    if (file != NULL) {
       tmp_filename = file;
    }
+#endif
    if (cl_com_ssl_global_config_object != NULL) {
       if (mode & CRYPTO_LOCK) {
 #if 0         
