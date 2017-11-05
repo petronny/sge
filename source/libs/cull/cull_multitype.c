@@ -47,6 +47,7 @@
 
 #include "cull/msg_cull.h"
 #include "cull/cull_multitypeP.h"
+#include "cull/cull_multitype.h"
 #include "cull/cull_listP.h"
 #include "cull/cull_whatP.h"
 #include "cull/cull_lerrnoP.h"

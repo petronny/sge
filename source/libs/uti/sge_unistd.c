@@ -43,6 +43,7 @@
 #include "uti/sge_log.h"
 #include "uti/msg_utilib.h"
 #include "uti/sge_prog.h"
+#include "uti/sge_unistd.h"
 
 #include "gdi/sge_gdi_ctx.h"
 
@@ -449,6 +450,7 @@ int sge_rmdir(const char *cp, dstring *error)
       return -1;
    }
  
+   /* Fixme: readrir_r is deprecated in glibc */
    while (SGE_READDIR_R(dir, (SGE_STRUCT_DIRENT *)dirent, &dent)==0 && dent!=NULL) {
       if (strcmp(dent->d_name, ".") && strcmp(dent->d_name, "..")) {
  
