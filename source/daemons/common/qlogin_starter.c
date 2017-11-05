@@ -211,6 +211,7 @@ int write_to_qrsh(const char *data)
  CLOSE_ERROR:
    shepherd_error(1, MSG_FILE_NOCLOSE_SS, "<socket in write_to_qrsh>",
                   strerror(errno));
+   return 6;
 }
 
 /****** shepherd/qrsh/write_exit_code_to_qrsh() *******************************
