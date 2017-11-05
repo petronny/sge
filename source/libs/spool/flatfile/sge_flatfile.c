@@ -2459,7 +2459,7 @@ int spool_get_number_of_fields(const spooling_field fields[])
 static void spool_flatfile_add_line_breaks(dstring *buffer)
 {
    int index = 0;
-   int word = 0;
+   size_t word = 0;
    const char *tmp_orig = NULL;
    char *orig = NULL;
    char *strp = NULL;
@@ -2487,7 +2487,7 @@ static void spool_flatfile_add_line_breaks(dstring *buffer)
       char *newlp = strchr(strp, '\n');
       index = (newlp - strp) / sizeof (char);
       
-      if ((newlp != NULL) && (index <= MAX_LINE_LENGTH - word)) {
+      if ((newlp != NULL) && (index <= MAX_LINE_LENGTH - (int)word)) {
          strncpy(str_buf, strp, index + 1);
          str_buf[index + 1] = '\0';
          sge_dstring_append(buffer, str_buf);
@@ -2547,7 +2547,7 @@ static void spool_flatfile_add_line_breaks(dstring *buffer)
        * both cases, we start two charcters from the "end" so that there's
        * room for a space and a backslash. */
       if (first_line) {
-         for (index = MAX_LINE_LENGTH - 2; index > word; index--) {
+         for (index = MAX_LINE_LENGTH - 2; index > (int)word; index--) {
             if (isspace(strp[index]) || 
                 ((index < MAX_LINE_LENGTH - 2) && (strp[index] == ','))) {
                break;
@@ -2561,7 +2561,7 @@ static void spool_flatfile_add_line_breaks(dstring *buffer)
       else {
          for (index = MAX_LINE_LENGTH - word - 2; index >= 1; index--) {
             if (isspace(strp[index]) ||
-                ((index < MAX_LINE_LENGTH - word - 2) &&
+                ((index < MAX_LINE_LENGTH - (int)word - 2) &&
                  (strp[index] == ','))) {
                break;
             }

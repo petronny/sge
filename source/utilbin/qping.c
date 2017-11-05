@@ -322,7 +322,7 @@ static void qping_print_line(const char* buffer, int nonewline, int dump_tag, co
    struct saved_vars_s *context = NULL;
 
    for (i=0;i<ARGUMENT_COUNT;i++) {
-      if (max_name_length < strlen(cl_names[i])) {
+      if (max_name_length < (int)strlen(cl_names[i])) {
          max_name_length = strlen(cl_names[i]);
       }
    }
@@ -390,10 +390,10 @@ static void qping_print_line(const char* buffer, int nonewline, int dump_tag, co
       }
    
       for(i=0;i<ARGUMENT_COUNT;i++) {
-         if (cl_column_width[i] < strlen(cl_values[i])) {
+         if (cl_column_width[i] < (int)strlen(cl_values[i])) {
             cl_column_width[i] = strlen(cl_values[i]);
          }
-         if (cl_column_width[i] < strlen(cl_names[i])) {
+         if (cl_column_width[i] < (int)strlen(cl_names[i])) {
             cl_column_width[i] = strlen(cl_names[i]);
          }
          if (cl_show[i]) {
@@ -440,7 +440,7 @@ static void qping_print_line(const char* buffer, int nonewline, int dump_tag, co
                printf("-");
             }
             printf("\n");
-            for (i=0;i<message_debug_data_length;i++) {
+            for (i=0;i<(int)message_debug_data_length;i++) {
                if (counter == 0) {
                   printf("   ");
                }
@@ -474,7 +474,7 @@ static void qping_print_line(const char* buffer, int nonewline, int dump_tag, co
                   printf("\n");
                }
                
-               if((i+1) == message_debug_data_length && counter != 0 ) {
+               if((i+1) == (int)message_debug_data_length && counter != 0 ) {
                   int x = i - counter + 1;
                   int hi,lo;
                   int value = 0;
@@ -821,7 +821,7 @@ static void qping_print_line(const char* buffer, int nonewline, int dump_tag, co
             }
             printf("\n");
    
-            for (i=0;i<message_debug_data_length;i++) {
+            for (i=0;i<(int)message_debug_data_length;i++) {
                if (message_debug_data[i] == '<' && message_debug_data[i+1] != '/') {
                   if (new_line != -1) {
                      printf("\n");
@@ -926,7 +926,7 @@ static void usage(int ret)
   qping_parse_environment();
 
   for (i=0;i<ARGUMENT_COUNT;i++) {
-      if (max_name_length < strlen(cl_names[i])) {
+      if (max_name_length < (int)strlen(cl_names[i])) {
          max_name_length = strlen(cl_names[i]);
       }
   }
@@ -1465,7 +1465,7 @@ int main(int argc, char *argv[]) {
             }
          } else {
             int i;
-            for (i=0; i < message->message_length; i++) {
+            for (i=0; i < (int)message->message_length; i++) {
                sge_dstring_append_char(&line_buffer, message->message[i]);
                if (message->message[i] == '\n') {
                   qping_print_line(sge_dstring_get_string(&line_buffer), option_nonewline, dump_tag, sender->comp_name);

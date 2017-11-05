@@ -206,11 +206,11 @@ bool do_core_binding(void)
       /* list with the sockets (first part of the <socket>,<core> tuples) */
       int* sockets = NULL;
       /* length of sockets list */
-      int nr_of_sockets = 0;
+      unsigned nr_of_sockets = 0;
       /* list with the cores to be bound on the sockets */
       int* cores = NULL;
       /* length of cores list */
-      int nr_of_cores = 0;
+      unsigned nr_of_cores = 0;
 
       shepherd_trace("do_core_binding: explicit");
       

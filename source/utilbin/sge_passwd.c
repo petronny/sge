@@ -423,7 +423,7 @@ buffer_decrypt(const char *buffer_in, size_t buffer_in_length,
    curr_ptr += sizeof(ekeylen);
    buffer_in_length -= sizeof(ekeylen);
    ekeylen = ntohl(ekeylen);
-   if (ekeylen != EVP_PKEY_size(privateKey)) {
+   if ((int)ekeylen != EVP_PKEY_size(privateKey)) {
       EVP_PKEY_free(privateKey);
       error_code = ERR_get_error();
       ERR_error_string(error_code, err_msg);

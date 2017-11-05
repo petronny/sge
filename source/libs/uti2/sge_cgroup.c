@@ -251,7 +251,7 @@ get_cgroup_job_dir(cgroup_t group, char *dir, size_t ldir, u_long32 job, u_long3
    dir[0] = '\0';
    cdir = cgroup_dir(group);
    if (*cdir == '\0') DRETURN(false);
-   if (snprintf(dir, ldir, "%s/"sge_u32"."sge_u32, cdir, job, task) >= ldir) {
+   if (snprintf(dir, ldir, "%s/"sge_u32"."sge_u32, cdir, job, task) >= (int)ldir) {
       WARNING((SGE_EVENT, "Can't build cgroup_job_dir value"));
       DRETURN(false);
    }

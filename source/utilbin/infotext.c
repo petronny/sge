@@ -86,7 +86,7 @@ static int   sge_infotext_all_spaces(char* text) {
    int i;
    int back = 0;
    if (text != NULL) {
-      for(i=0;i<strlen(text);i++) {
+      for(i=0;i<(int)strlen(text);i++) {
          if(text[i] != ' ') {
             back = 1;
             break;
@@ -114,7 +114,7 @@ static char* sge_infotext_make_line_break(dstring* buffer, char* text) {
    DPRINTF(("text = <%s>\n", text));
 
    line = 0;
-   for (h=0; h < strlen(text) ; h++) {
+   for (h=0; h < (int)strlen(text) ; h++) {
       
       if (h>=2) {
          if ( text [h-2] == '\\' && text[h-1] == 'n'  ) {
@@ -149,7 +149,7 @@ static char* sge_infotext_build_test_msgstr(dstring* buffer, char* text) {
    app_text[1] = 0;   
 
    sge_dstring_copy_string(buffer,"");
-   for (h=0; h < strlen(text) ; h++) {
+   for (h=0; h < (int)strlen(text) ; h++) {
       app_text[0] = text[h];
       sge_dstring_append(buffer,app_text);
       if (text[h] != '%'  &&
@@ -197,7 +197,7 @@ static char* sge_infotext_get_next_word(dstring* buf, char* text) {
    buffer = (char*)sge_dstring_get_string(buf);
    p1 = buffer;
    nr_spaces = 0;
-   for (start=0;start<strlen(buffer);start++) {
+   for (start=0;start<(int)strlen(buffer);start++) {
       if ( buffer[start] == ' ' ) {
          nr_spaces++;
          continue; 
@@ -223,10 +223,10 @@ static char* sge_infotext_get_next_word(dstring* buf, char* text) {
 
    
 
-   for (i=0;i<strlen(p1);i++) {
+   for (i=0;i<(int)strlen(p1);i++) {
       if( p1[i] == ' ') {
          not_last = 0;
-         for(b=i;b<strlen(p1);b++) {
+         for(b=i;b<(int)strlen(p1);b++) {
             if (p1[b] != ' ') {
                not_last = 1;
                break;
@@ -280,7 +280,7 @@ static void  sge_infotext_format_output(dstring* dash_buf,sge_infotext_options* 
    DPRINTF(("strcpy done"));
    sge_dstring_copy_string(&dash,"");
    DPRINTF(("copy done"));
-   for (i=0;i< sge_dstring_strlen(&line);i++) {
+   for (i=0;i< (int)sge_dstring_strlen(&line);i++) {
       sge_dstring_append(&dash," ");
    }
    nr_word = 0;
@@ -312,12 +312,12 @@ static void  sge_infotext_format_output(dstring* dash_buf,sge_infotext_options* 
       sge_dstring_append(&line,next_word);
       nr_word++;
       tp = (char*)strstr(tp,next_word);
-      for(i=0;i<strlen(next_word);i++) {
+      for(i=0;i<(int)strlen(next_word);i++) {
          tp++;
       }
       
 
-      if(sge_dstring_strlen(&line) > max_column || strstr(sge_dstring_get_string(&line),"\n") != NULL ) {
+      if((int)sge_dstring_strlen(&line) > max_column || strstr(sge_dstring_get_string(&line),"\n") != NULL ) {
 #if 0
 /*      
          uncomment this code if a word break should be done
@@ -369,7 +369,7 @@ static void  sge_infotext_format_output(dstring* dash_buf,sge_infotext_options* 
             done = true;
             break;
          }
-         if (sge_dstring_strlen(&line) + strlen(next_word) + 1 > max_column &&
+         if (sge_dstring_strlen(&line) + strlen(next_word) + 1 > (unsigned)max_column &&
             nr_word != 0) {
             sge_infotext_print_line(dash_buf,options,&line);
             nr_word = 0;
@@ -391,10 +391,10 @@ static void  sge_infotext_format_output(dstring* dash_buf,sge_infotext_options* 
 
 
 static void  sge_infotext_print_line(dstring* dash_buf, sge_infotext_options* options, dstring* line_arg) {
-   int i;
+   unsigned i;
    FILE* output;
-   int line_length;
-   int lc;
+   unsigned line_length;
+   unsigned lc;
    char* line_buf;
    dstring line = DSTRING_INIT;
    dstring dash = DSTRING_INIT;
@@ -441,7 +441,7 @@ static void  sge_infotext_print_line(dstring* dash_buf, sge_infotext_options* op
          if (options->n == 1) {
             fprintf(output,"\n");
          }
-         for(i=0;i<line_length;i++) {
+         for(i=0;i<(int)line_length;i++) {
             fprintf(output,SGE_INFOTEXT_UNDERLINE);
          }
          if (options->n != 1) {
@@ -572,7 +572,7 @@ static char *sge_infotext_string_replace(dstring* tmp_buf, const char *arg, cons
       sge_dstring_append(tmp_buf,p2);
       sge_dstring_append(tmp_buf,with);
       p2 = p1;
-      for(i=0;i<strlen(what);i++) {
+      for(i=0;i<(int)strlen(what);i++) {
          p2++;
       }
       if (only_first == 1) {

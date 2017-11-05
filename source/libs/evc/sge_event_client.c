@@ -1080,7 +1080,7 @@ static int ec2_set_edtime(sge_evc_class_t *thiz, int interval)
    if (sge_evc->ec == NULL) {
       ERROR((SGE_EVENT, SFNMAX, MSG_EVENT_UNINITIALIZED_EC));
    } else {
-      ret = (lGetUlong(sge_evc->ec, EV_d_time) != interval);
+      ret = (lGetUlong(sge_evc->ec, EV_d_time) != (unsigned )interval);
       if (ret > 0) {
          lSetUlong(sge_evc->ec, EV_d_time, MIN(interval, CL_DEFINE_CLIENT_CONNECTION_LIFETIME-5));
          ec2_config_changed(thiz);
@@ -1161,7 +1161,7 @@ static bool ec2_set_flush_delay(sge_evc_class_t *thiz, int flush_delay)
    if (sge_evc->ec == NULL) {
       ERROR((SGE_EVENT, SFNMAX, MSG_EVENT_UNINITIALIZED_EC));
    } else {
-      ret = (lGetUlong(sge_evc->ec, EV_flush_delay) != flush_delay) ? true : false;
+      ret = (lGetUlong(sge_evc->ec, EV_flush_delay) != (unsigned)flush_delay) ? true : false;
 
       if (ret) {
          lSetUlong(sge_evc->ec, EV_flush_delay, flush_delay);

@@ -197,7 +197,7 @@ test_mt_consumer_producer(void) {
    }
 
    string = sge_dstring_get_string(&global.sequence);
-   for (i = 0; i < strlen(string); i++) {
+   for (i = 0; i < (int)strlen(string); i++) {
       if (last != string[i]) {
          switches++;
       }

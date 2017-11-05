@@ -3335,7 +3335,7 @@ int cl_com_ssl_write(cl_com_connection_t* connection, cl_byte_t* message, unsign
    }
 
    *only_one_write = data_written;
-   if (data_written != size) {
+   if (data_written != (long)size) {
       gettimeofday(&now,NULL);
       if ( now.tv_sec >= connection->write_buffer_timeout_time ) {
          CL_LOG(CL_LOG_ERROR,"send timeout error");
@@ -3428,7 +3428,7 @@ int cl_com_ssl_read(cl_com_connection_t* connection, cl_byte_t* message, unsigne
    }
 
    *only_one_read = data_read;
-   if (data_read != size) {
+   if (data_read != (long)size) {
       gettimeofday(&now,NULL);
       if ( now.tv_sec >= connection->read_buffer_timeout_time ) {
          return CL_RETVAL_READ_TIMEOUT;

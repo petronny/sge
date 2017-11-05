@@ -539,7 +539,7 @@ double utilization_max(const lListElem *cr, u_long32 start_time, u_long32 durati
    }
 
    /* someone is asking for queue end utilization */
-   if (start_time == -1) {
+   if (start_time == -1u) {
       DRETURN(utilization_queue_end(cr, for_excl_request));
    }
    

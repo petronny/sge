@@ -946,12 +946,12 @@ static bool account_all_threads_after_core(char** topology, const int core_pos)
    int next_pos = core_pos + 1;
 
    /* check correctness of input values */
-   if (topology == NULL || (*topology) == NULL || core_pos < 0 || strlen(*topology) <= core_pos) {
+   if (topology == NULL || (*topology) == NULL || core_pos < 0 || (int)strlen(*topology) <= core_pos) {
       return false;
    }
 
    /* check if we are at the last core of the string without T's at the end */
-   if (next_pos >= strlen(*topology)) {
+   if (next_pos >= (int)strlen(*topology)) {
       /* there is no thread on the last core to account: thats a success anyway */
       return true;
    } else {

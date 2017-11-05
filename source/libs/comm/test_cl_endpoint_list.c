@@ -51,7 +51,7 @@ extern int
 main(int argc, char** argv)
 {
   int retval = 0;
-  int arg = 2;
+  unsigned arg = 2;
   int touches = 5;
   int service_port = 0;
   char* local_host = NULL;

@@ -1050,7 +1050,7 @@ static int _sge_set_uid_gid_addgrp(const char *user, const char *intermediate_us
        *  for being able to run prolog/epilog/pe_start/pe_stop
        *  as root
        */
-      if (pw->pw_gid < min_gid) {
+      if (pw->pw_gid < (gid_t)min_gid) {
         snprintf(err_str, lstr, MSG_SYSTEM_GIDLESSTHANMINIMUM_SUI ,
                  user, sge_u32c( pw->pw_gid), min_gid);
          return 1;
@@ -1110,7 +1110,7 @@ static int _sge_set_uid_gid_addgrp(const char *user, const char *intermediate_us
 #endif
  
    if (!intermediate_user) {
-      if (pw->pw_uid < min_uid) {
+      if (pw->pw_uid < (uid_t)min_uid) {
          snprintf(err_str, lstr, MSG_SYSTEM_UIDLESSTHANMINIMUM_SUI,
                  user, sge_u32c(pw->pw_uid), min_uid);
          return 1;
@@ -1271,7 +1271,7 @@ int sge_add_group(gid_t add_grp_id, char *err_str, size_t lstr, bool skip_silent
    }   
 #if !__INTERIX
 
-   if (groups < max_groups) {
+   if (groups < (int)max_groups) {
       list[groups] = add_grp_id;
       groups++;
       groups = setgroups(groups, list);
@@ -1948,8 +1948,8 @@ password_read_file(char **users[], char**encryped_pwds[], const char *filename)
    char   *pwd = NULL;
    char   input[MAX_LINE_LENGTH];
    bool   do_loop = true;
-   size_t size = 0;
-   int    i = 0;
+   int    size = 0;
+   int i = 0;
 
    DENTER(TOP_LAYER, "password_read_file");
    fp = fopen(filename, "r");
@@ -1971,7 +1971,7 @@ password_read_file(char **users[], char**encryped_pwds[], const char *filename)
          context = NULL;
 
          /* Check records in case file changed since reading initially.  */
-         if (i >= size) {
+         if (i >= (int)size) {
             ret = 2;
             break;
          }

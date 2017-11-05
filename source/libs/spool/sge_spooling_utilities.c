@@ -190,7 +190,7 @@ _spool_get_fields_to_spool(lList **answer_list, const lDescr *descr,
 {
    spooling_field *fields;
    int i, j, size;
-   int strip = 0;
+   unsigned strip = 0;
 
    DENTER(TOP_LAYER, "_spool_get_fields_to_spool");
 

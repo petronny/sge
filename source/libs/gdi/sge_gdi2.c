@@ -288,7 +288,7 @@ lList* sge_gdi2(sge_gdi_ctx_class_t *ctx, u_long32 target, u_long32 cmd,
 {
    lList *alp = NULL;
    lList *mal = NULL;
-   u_long32 id;
+   int id;
    bool local_ret;
    state_gdi_multi state = STATE_GDI_MULTI_INIT;
 
@@ -989,7 +989,7 @@ bool sge_gdi2_get_mapping_name(sge_gdi_ctx_class_t *ctx, const char *requestedHo
    }
   
    if (mapName != NULL) {
-      if ((strlen(mapName) + 1) <= buflen) {
+      if ((strlen(mapName) + 1) <= (unsigned)buflen) {
          strcpy(buf,mapName);
          DPRINTF(("Mapping name is: '%s'\n", buf));
    
@@ -1389,7 +1389,7 @@ int gdi2_get_configuration(sge_gdi_ctx_class_t *ctx, const char *config_name,
    lEnumeration *what;
    lList *alp = NULL;
    lList *lp = NULL;
-   int is_global_requested = 0;
+   unsigned is_global_requested = 0;
    int ret;
    lListElem *hep = NULL;
    int success;

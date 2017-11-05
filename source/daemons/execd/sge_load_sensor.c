@@ -625,7 +625,7 @@ static int ls_send_command(lListElem *this_ls, const char *command)
 
    /* send command to load sensor */
    file = lGetRef(this_ls, LS_in);
-   if (fprintf(file, "%s", command) != strlen(command)) {
+   if (fprintf(file, "%s", command) != (int)strlen(command)) {
       WARNING((SGE_EVENT, "[load_sensor %s] couldn't send command [%s]", lGetString(this_ls, LS_pid), strerror(errno)));
       DRETURN(-1);
    }

@@ -2259,7 +2259,7 @@ void sge_event_master_send_events(sge_gdi_ctx_class_t *ctx, lListElem *report, l
 static void flush_events(lListElem *event_client, int interval)
 {
    u_long32 next_send = 0;
-   int now = sge_get_gmt();
+   u_long32 now = sge_get_gmt();
 
    DENTER(TOP_LAYER, "flush_events");
 
@@ -3352,7 +3352,7 @@ static void blockEvents(lListElem *event_client, ev_event ev_type, bool isBlock)
          }
       } else {
          while (total_update_events[++i] != -1) {
-            if (total_update_events[i] == ev_type) {
+            if (total_update_events[i] == (int)ev_type) {
                int y = -1;
                while (block_events[i][++y] != -1) {
                  sub_array[block_events[i][y]].blocked = isBlock;

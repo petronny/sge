@@ -845,7 +845,7 @@ parallel_maximize_slots_pe(sge_assignment_t *best, int *available_slots)
    int old_logging = 0;
    category_use_t use_category;
    u_long32 max_slotsp = 0;
-   unsigned current = 0;
+   int current = 0;
    int match_current = 0;
    int runs = 0;
    schedd_pe_algorithm alg =  sconf_best_pe_alg();
@@ -955,7 +955,7 @@ parallel_maximize_slots_pe(sge_assignment_t *best, int *available_slots)
       runs--;
 
       if (alg == SCHEDD_PE_LOW_FIRST) {
-         for (current = 0; current < max_slotsp; current++) {
+         for (current = 0; current < (int)max_slotsp; current++) {
 
             if (is_first) { /* first run, collect information */
                is_first = false;
@@ -3853,7 +3853,7 @@ parallel_tag_queues_suitable4job(sge_assignment_t *a, category_use_t *use_catego
             eh_name = lGetHost(qep, QU_qhostname);
             if (!(hep = host_list_locate(a->host_list, eh_name)))
                continue;
-            if (lGetUlong(hep, EH_seq_no) == -1)
+            if (lGetUlong(hep, EH_seq_no) == -1u)
                lSetUlong(hep, EH_seq_no, host_seq_no++);
          }
          lPSortList(a->host_list, "%I+", EH_seq_no);

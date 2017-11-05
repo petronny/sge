@@ -1213,25 +1213,25 @@ static void calc_column_sizes(lListElem* ep, sge_qacct_columns* column_size_data
    column_size_data->granted_pe = 15;
    column_size_data->slots = 6; */
 
-   if (column_size_data->host < strlen(MSG_HISTORY_HOST)+1) {
+   if (column_size_data->host < (int)strlen(MSG_HISTORY_HOST)+1) {
       column_size_data->host = strlen(MSG_HISTORY_HOST)+1;
    } 
-   if (column_size_data->queue < strlen(MSG_HISTORY_QUEUE)+1) {
+   if (column_size_data->queue < (int)strlen(MSG_HISTORY_QUEUE)+1) {
       column_size_data->queue = strlen(MSG_HISTORY_QUEUE)+1;
    } 
-   if (column_size_data->group < strlen(MSG_HISTORY_GROUP)+1) {
+   if (column_size_data->group < (int)strlen(MSG_HISTORY_GROUP)+1) {
       column_size_data->group = strlen(MSG_HISTORY_GROUP)+1;
    } 
-   if (column_size_data->owner < strlen(MSG_HISTORY_OWNER)+1) {
+   if (column_size_data->owner < (int)strlen(MSG_HISTORY_OWNER)+1) {
       column_size_data->owner = strlen(MSG_HISTORY_OWNER)+1;
    } 
-   if (column_size_data->project < strlen(MSG_HISTORY_PROJECT)+1) {
+   if (column_size_data->project < (int)strlen(MSG_HISTORY_PROJECT)+1) {
       column_size_data->project = strlen(MSG_HISTORY_PROJECT)+1;
    } 
-   if (column_size_data->department < strlen(MSG_HISTORY_DEPARTMENT)+1) {
+   if (column_size_data->department < (int)strlen(MSG_HISTORY_DEPARTMENT)+1) {
       column_size_data->department = strlen(MSG_HISTORY_DEPARTMENT)+1;
    } 
-   if (column_size_data->granted_pe < strlen(MSG_HISTORY_PE)+1) {
+   if (column_size_data->granted_pe < (int)strlen(MSG_HISTORY_PE)+1) {
       column_size_data->granted_pe = strlen(MSG_HISTORY_PE)+1;
    } 
    if (column_size_data->slots < 5) {
@@ -1240,7 +1240,7 @@ static void calc_column_sizes(lListElem* ep, sge_qacct_columns* column_size_data
    if (column_size_data->arid < 5) {
       column_size_data->arid = 5;
    } 
-   if (column_size_data->account < strlen(MSG_HISTORY_ACCOUNT)+1) {
+   if (column_size_data->account < (int)strlen(MSG_HISTORY_ACCOUNT)+1) {
       column_size_data->account = strlen(MSG_HISTORY_ACCOUNT)+1;
    }
 

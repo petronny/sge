@@ -3220,7 +3220,7 @@ static int cl_commlib_handle_connection_read(cl_com_connection_t* connection) {
       }
 
       if (is_debug_client == true) {
-         int pos = 0;
+         unsigned pos = 0;
          gettimeofday(&now,NULL);
          connection->read_buffer_timeout_time = now.tv_sec + connection->handler->read_timeout;
          return_value = cl_com_read(connection, &(connection->data_read_buffer[connection->data_read_buffer_pos]), connection->data_buffer_size - connection->data_read_buffer_pos , &size);
