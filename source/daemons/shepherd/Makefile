@@ -70,6 +70,7 @@ SHEPHERD_LIB_DEPENDS = $(GDILIB) $(SGEOBJDLIB) $(SGEOBJLIB) $(KRBLIBS) $(CULLLIB
 ###############################################################################
 # global rules: all, clean, depend, messages
 ###############################################################################
+.PHONY: shepherd
 shepherd: $(SHEPHERD_TARGETS)
 
 shepherd_clean:
