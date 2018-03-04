@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include "uti/sge_rmon.h"
 #include "uti/sge_bootstrap.h"
