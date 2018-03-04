@@ -56,7 +56,6 @@ SHEPHERD_ADD_SRC = \
            pdc.c \
            procfs.c \
            sge_mt_init.c \
-           sge_processes_irix.c \
            sge_spool.c \
            binding_support.c
 
@@ -72,7 +71,7 @@ SHEPHERD_LIB_DEPENDS = $(GDILIB) $(SGEOBJDLIB) $(SGEOBJLIB) $(KRBLIBS) $(CULLLIB
 # global rules: all, clean, depend, messages
 ###############################################################################
 shepherd: $(SHEPHERD_TARGETS)
-	
+
 shepherd_clean:
 		$(RM) $(SHEPHERD_TARGETS) $(SHEPHERD_OBJS)
 
