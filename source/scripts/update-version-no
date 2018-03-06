@@ -24,4 +24,3 @@ sed -i -e "s/[[]$old]/[$new]/" source/configure.ac
 
 echo "Also fix debian/changelog!"
 
-echo "Also fix debian/changelog!"

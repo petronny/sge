@@ -1,8 +1,11 @@
-sge (8.1.9-1) unstable; urgency=low
+sge (8.1.10-1) unstable; urgency=low
 
   * Don't use aimk -debug
+  * Remove debian/source/format
+  * Build-depend on autoconf
+  * Modify copyright/licnce files
 
- -- Dave Love <fx@gnu.org>  Sun, 10 Apr 2016 18:41:10 +0100
+ -- Dave Love <dave.love@manchester.ac.uk>  Tue, 06 Mar 2018 10:35:05 +0000
 
 sge (8.1.9) unstable; urgency=low
 
