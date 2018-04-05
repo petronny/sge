@@ -300,7 +300,7 @@ static void uti_state_set_sge_formal_prog_name(const char *s)
 
    prog_state = prog_state_getspecific(prog_state_key);
 
-   prog_state->sge_formal_prog_name = sge_strdup(prog_state->sge_formal_prog_name, s);
+   prog_state->sge_formal_prog_name = sge_strdup(s);
 
    return;
 }
@@ -313,7 +313,7 @@ void uti_state_set_qualified_hostname(const char *s)
 
    prog_state = prog_state_getspecific(prog_state_key);
 
-   prog_state->qualified_hostname = sge_strdup(prog_state->qualified_hostname, s);
+   prog_state->qualified_hostname = sge_strdup(s);
 
    return;
 }
@@ -326,7 +326,7 @@ void uti_state_set_unqualified_hostname(const char *s)
 
    prog_state = prog_state_getspecific(prog_state_key);
 
-   prog_state->unqualified_hostname = sge_strdup(prog_state->unqualified_hostname, s);
+   prog_state->unqualified_hostname = sge_strdup(s);
 
    return;
 }
@@ -385,7 +385,7 @@ static void uti_state_set_user_name(const char *s)
 
    prog_state = prog_state_getspecific(prog_state_key);
 
-   prog_state->user_name = sge_strdup(prog_state->user_name, s);
+   prog_state->user_name = sge_strdup(s);
 
    return;
 }
@@ -396,7 +396,7 @@ static void uti_state_set_default_cell(const char *s)
 
    prog_state = prog_state_getspecific(prog_state_key);
 
-   prog_state->default_cell = sge_strdup(prog_state->default_cell, s);
+   prog_state->default_cell = sge_strdup(s);
 
    return;
 }
@@ -859,13 +859,13 @@ static bool sge_prog_state_setup(sge_prog_state_class_t *thiz, sge_env_state_cla
                eh->error(eh, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR, "sge_gethostbyaddr failed");
                ret = false;
             } else {
-               qualified_hostname = sge_strdup(NULL, hent2->h_name);
+               qualified_hostname = sge_strdup(hent2->h_name);
                sge_free(&unqualified_hostname);
                unqualified_hostname = sge_dirname(hent2->h_name, '.');
                sge_free_hostent(&hent2);
             }
          } else {
-            qualified_hostname = sge_strdup(qualified_hostname, unqualified_hostname);
+            qualified_hostname = sge_strdup(unqualified_hostname);
          }
          sge_free_hostent(&hent);
       }
@@ -994,19 +994,19 @@ static sge_exit_func_t get_exit_func(sge_prog_state_class_t *thiz)
 static void set_sge_formal_prog_name(sge_prog_state_class_t *thiz, const char *prog_name)
 {
    sge_prog_state_t *ps = (sge_prog_state_t *) thiz->sge_prog_state_handle;
-   ps->sge_formal_prog_name = sge_strdup(ps->sge_formal_prog_name, prog_name);
+   ps->sge_formal_prog_name = sge_strdup(prog_name);
 }
 
 static void set_qualified_hostname(sge_prog_state_class_t *thiz, const char *qualified_hostname)
 {
    sge_prog_state_t *ps = (sge_prog_state_t *) thiz->sge_prog_state_handle;
-   ps->qualified_hostname = sge_strdup(ps->qualified_hostname, qualified_hostname);
+   ps->qualified_hostname = sge_strdup(qualified_hostname);
 }
 
 static void set_unqualified_hostname(sge_prog_state_class_t *thiz, const char *unqualified_hostname)
 {
    sge_prog_state_t *ps = (sge_prog_state_t *) thiz->sge_prog_state_handle;
-   ps->unqualified_hostname = sge_strdup(ps->unqualified_hostname, unqualified_hostname);
+   ps->unqualified_hostname = sge_strdup(unqualified_hostname);
 }
 
 static void set_who(sge_prog_state_class_t *thiz, u_long32 who)
@@ -1036,13 +1036,13 @@ static void set_daemonized(sge_prog_state_class_t *thiz, bool daemonized)
 static void set_user_name(sge_prog_state_class_t *thiz, const char* user_name)
 {
    sge_prog_state_t *ps = (sge_prog_state_t *) thiz->sge_prog_state_handle;
-   ps->user_name = sge_strdup(ps->user_name, user_name);
+   ps->user_name = sge_strdup(user_name);
 }
 
 static void set_default_cell(sge_prog_state_class_t *thiz, const char* default_cell)
 {
    sge_prog_state_t *ps = (sge_prog_state_t *) thiz->sge_prog_state_handle;
-   ps->default_cell = sge_strdup(ps->default_cell, default_cell);
+   ps->default_cell = sge_strdup(default_cell);
 }
 
 static void set_exit_on_error(sge_prog_state_class_t *thiz, bool exit_on_error)

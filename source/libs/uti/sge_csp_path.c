@@ -568,61 +568,61 @@ static cl_ssl_verify_func_t get_verify_func(sge_csp_path_class_t *thiz)
 static void set_ca_root(sge_csp_path_class_t *thiz, const char *ca_root)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->ca_root = sge_strdup(es->ca_root, ca_root);
+   es->ca_root = sge_strdup(ca_root);
 }
 
 static void set_ca_local_root(sge_csp_path_class_t *thiz, const char *ca_local_root)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->ca_local_root = sge_strdup(es->ca_local_root, ca_local_root);
+   es->ca_local_root = sge_strdup(ca_local_root);
 }
 
 static void set_CA_cert_file(sge_csp_path_class_t *thiz, const char *CA_cert_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->CA_cert_file = sge_strdup(es->CA_cert_file, CA_cert_file);
+   es->CA_cert_file = sge_strdup(CA_cert_file);
 }
 
 static void set_CA_key_file(sge_csp_path_class_t *thiz, const char *CA_key_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->CA_key_file = sge_strdup(es->CA_key_file, CA_key_file);
+   es->CA_key_file = sge_strdup(CA_key_file);
 }
 
 static void set_cert_file(sge_csp_path_class_t *thiz, const char *cert_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->cert_file = sge_strdup(es->cert_file, cert_file);
+   es->cert_file = sge_strdup(cert_file);
 }
 
 static void set_key_file(sge_csp_path_class_t *thiz, const char *key_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->key_file = sge_strdup(es->key_file, key_file);
+   es->key_file = sge_strdup(key_file);
 }
 
 static void set_rand_file(sge_csp_path_class_t *thiz, const char *rand_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->rand_file = sge_strdup(es->rand_file, rand_file);
+   es->rand_file = sge_strdup(rand_file);
 }
 
 static void set_reconnect_file(sge_csp_path_class_t *thiz, const char *reconnect_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->reconnect_file = sge_strdup(es->reconnect_file, reconnect_file);
+   es->reconnect_file = sge_strdup(reconnect_file);
 }
 
 static void set_crl_file(sge_csp_path_class_t *thiz, const char *crl_file)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->crl_file = sge_strdup(es->crl_file, crl_file);
+   es->crl_file = sge_strdup(crl_file);
 }
 
 static void set_password(sge_csp_path_class_t *thiz, const char *password)
 {
    sge_csp_path_t *es = (sge_csp_path_t *) thiz->sge_csp_path_handle;
-   es->password = sge_strdup(es->password, password);
+   es->password = sge_strdup(password);
 }
 
 static void set_refresh_time(sge_csp_path_class_t *thiz, u_long32 refresh_time)

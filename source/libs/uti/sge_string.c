@@ -545,14 +545,13 @@ void sge_free_saved_vars(struct saved_vars_s *context)
 *     sge_strdup() -- Replacement for strdup() 
 *
 *  SYNOPSIS
-*     char* sge_strdup(char *old, const char *s) 
+*     char* sge_strdup(const char *s)
 *
 *  FUNCTION
-*     Duplicate string 's'. "Use" 'old' buffer.
+*     Duplicate string 's'
 *
 *  INPUTS
-*     char *old     - buffer (will be freed) 
-*     const char *s - string 
+*     const char *s - string
 *
 *  RESULT
 *     char* - malloced string
@@ -560,25 +559,20 @@ void sge_free_saved_vars(struct saved_vars_s *context)
 *  NOTES
 *     MT-NOTE: sge_strdup() is MT safe
 ******************************************************************************/
-char *sge_strdup(char *old, const char *s) 
+char *sge_strdup(const char *s)
 {
    char *ret = NULL;
 
-   /* 
-    * target (old) and source (s) might point to the same object!
-    * therefore free old only after the dup
-    */
-   if (s != NULL) {
-      int n = strlen(s);
-      ret = malloc(n + 1);
-      if (ret != NULL) {
-         strcpy(ret, s);
-      }
+   DENTER(TOP_LAYER, "sge_strdup");
+   if (s == NULL) {
+      CRITICAL((SGE_EVENT, SFNMAX, MSG_POINTER_NULLPARAMETER));
+      DEXIT_;
+      abort();
    }
 
-   /* free and NULL the old pointer */
-   sge_free(&old);
-
+   ret = sge_malloc(strlen(s) + 1);
+   strcpy(ret, s);
+   DEXIT;
    return ret;
 }
 

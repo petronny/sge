@@ -1660,7 +1660,7 @@ DTRACE;
             char **dest = NULL;
             char *tmp;
 
-            tmp = sge_strdup(NULL, *sp);
+            tmp = sge_strdup(*sp);
             dest = string_list(tmp, ",", NULL);
             cull_parse_string_list(dest, "user_list", ARA_Type, rule, &user_list);
             sge_free(&tmp);
@@ -2109,7 +2109,7 @@ static int var_list_parse_from_environment(lList **lpp, char **envp)
       ep = lCreateElem(VA_Type);
       lAppendElem(*lpp, ep);
 
-      env_entry = sge_strdup(NULL, *envp);
+      env_entry = sge_strdup(*envp);
       if (!env_entry) {
          CRITICAL((SGE_EVENT, SFNMAX, MSG_MEMORY_MALLOCFAILED));
          DEXIT_;

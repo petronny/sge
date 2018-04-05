@@ -594,9 +594,8 @@ lListElem *scep
    tov_data->weight_urgency = lGetDouble(scep, SC_weight_urgency);
    tov_data->weight_priority = lGetDouble(scep, SC_weight_priority);
    tov_data->weight_ticket = lGetDouble(scep, SC_weight_ticket);
-   tov_data->policy_hierarchy = sge_strdup(tov_data->policy_hierarchy,
-                                    lGetString(scep, SC_policy_hierarchy));
-   
+   tov_data->policy_hierarchy = sge_strdup(lGetString(scep, SC_policy_hierarchy));
+
    DEXIT;
    return True;
 }

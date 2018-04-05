@@ -160,7 +160,7 @@ int sge_ssl_setup_security_path(const char *progname, const char *user) {
    dstring crl_file       = DSTRING_INIT;
    bool from_services   = false;
    int  qmaster_port    = -1;
-   char *user_name = sge_strdup(NULL, user);
+   char *user_name = sge_strdup(user);
 #ifdef __INTERIX
    user_name = wl_strip_hostname(user_name);
 #endif
@@ -1363,7 +1363,7 @@ sge_gdi_packet_initialize_auth_info(sge_gdi_ctx_class_t *ctx,
 
    snprintf(buffer, sizeof(buffer), "none:"uid_t_fmt" "gid_t_fmt" %s %s",
             uid, gid, username, groupname);
-   packet_handle->auth_info = sge_strdup(NULL, buffer);
+   packet_handle->auth_info = sge_strdup(buffer);
 
 #if 0
    sge_mutex_unlock(GDI_PACKET_MUTEX, SGE_FUNC, __LINE__, &(packet_handle->mutex));

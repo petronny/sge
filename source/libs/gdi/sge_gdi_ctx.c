@@ -721,7 +721,7 @@ sge_gdi_ctx_setup(sge_gdi_ctx_class_t *thiz, int prog_number, const char* compon
       buffer = sge_malloc(size);
       if (getpwuid_r((uid_t)getuid(), &pwentry, buffer, size, &pwd) == 0 &&
           pwd) {
-         es->component_username = sge_strdup(es->component_username, pwd->pw_name);
+         es->component_username = sge_strdup(pwd->pw_name);
          sge_free(&buffer);
       } else {
          eh->error(eh, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR, "getpwuid_r failed");
@@ -1478,9 +1478,9 @@ static const char* get_master(sge_gdi_ctx_class_t *thiz, bool reread) {
          DPRINTF(("(re-)reading act_qmaster file. Got master host \"%s\"\n", master_name));
          /*
          ** TODO: thread locking needed here ?
-         */ 
-         es->master = sge_strdup(es->master,master_name);
-      }   
+         */
+         es->master = sge_strdup(master_name);
+      }
    }
    DRETURN(es->master);
 }

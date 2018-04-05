@@ -241,7 +241,7 @@ int krb_init(const char *progname)
       } else {
 
 	 if (realmlist && realmlist[0])
-	    krbrealm = sge_strdup(NULL, realmlist[0]);
+	    krbrealm = sge_strdup(realmlist[0]);
 
 	 if (realmlist)
 	    if ((rc = krb5_free_host_realm(gsd.context, realmlist)))

@@ -307,7 +307,7 @@ char* actual_opt;
    DENTER(BASIS_LAYER, "parse_flag");
 
    if((ep = lGetElemStrLike(*ppcmdline, SPA_switch, opt))) {
-      actual_opt = sge_strdup(NULL, lGetString(ep, SPA_switch));
+      actual_opt = sge_strdup(lGetString(ep, SPA_switch));
       while(ep) {
          /* remove _all_ flags of same type */
          lRemoveElem(*ppcmdline, &ep);
@@ -424,7 +424,7 @@ int parse_string(lList **ppcmdline, const char *opt, lList **ppal _UNUSED, char 
    if((ep = lGetElemStr(*ppcmdline, SPA_switch, opt))) {
       ep2 = lFirst(lGetList(ep, SPA_argval_lListT));
       if (ep2)
-         *str = sge_strdup(NULL, lGetString(ep2, ST_name));
+         *str = sge_strdup(lGetString(ep2, ST_name));
       else
          *str = NULL;   
       

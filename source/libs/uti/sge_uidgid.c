@@ -845,7 +845,7 @@ int _sge_gid2group(gid_t gid, gid_t *last_gid, char **groupnamep, int retries)
       }
       
       /* cache group name */
-      *groupnamep = sge_strdup(*groupnamep, gr->gr_name);
+      *groupnamep = sge_strdup(gr->gr_name);
       *last_gid = gid;
 
       sge_free(&buf);

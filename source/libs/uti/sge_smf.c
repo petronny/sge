@@ -544,7 +544,7 @@ static void init_fmri(void)
     char *temp = getenv("SMF_FMRI");
     /* We explicitly check the fmri for valid service names */
     if (temp && is_valid_sge_fmri(temp)) {
-        FMRI = sge_strdup(NULL, temp);
+        FMRI = sge_strdup(temp);
         DPRINTF(("init_fmri() - FMRI set to %s\n", (FMRI==NULL) ? "NULL" : FMRI));
     }
     DEXIT;

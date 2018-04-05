@@ -257,12 +257,12 @@ int main(int argc, char **argv)
                if (sscanf(argv[++ii], sge_u32, &gid) == 1) {
                   if (sge_gid2group((gid_t)gid, buffer, 
                                    MAX_STRING_SIZE, MAX_NIS_RETRIES) != 0) {
-                     options.group = sge_strdup(options.group, argv[ii]);
+                     options.group = sge_strdup(argv[ii]);
                   } else {
-                     options.group = sge_strdup(options.group, buffer);
+                     options.group = sge_strdup(buffer);
                   }
                } else {
-                  options.group = sge_strdup(options.group, argv[ii]);
+                  options.group = sge_strdup(argv[ii]);
                }
             }
          } else {
@@ -297,9 +297,9 @@ int main(int argc, char **argv)
                     * maybe the hostname is no longer active but the usage information
                     * is already available
                     */
-                  options.host = sge_strdup(options.host, argv[ii]);
+                  options.host = sge_strdup(argv[ii]);
                } else {
-                  options.host = sge_strdup(options.host, unique);
+                  options.host = sge_strdup(unique);
                }
             }
          } else {

@@ -1727,8 +1727,7 @@ const lListElem *sep
       XmtChooserSetState(st_halflife_unit, 1, False);
    }
 
-   data->halflife_decay_list = sge_strdup(data->halflife_decay_list,
-                                    lGetString(sep, SC_halflife_decay_list));
+   data->halflife_decay_list = sge_strdup(lGetString(sep, SC_halflife_decay_list));
 
    DEXIT;
 }

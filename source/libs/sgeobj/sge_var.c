@@ -839,7 +839,7 @@ int var_list_parse_from_string(lList **lpp, const char *variable_str,
       return 1;
    }
 
-   va_string = sge_strdup(NULL, variable_str);
+   va_string = sge_strdup(variable_str);
    if (!va_string) {
       *lpp = NULL;
       DEXIT;

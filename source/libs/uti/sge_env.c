@@ -226,13 +226,13 @@ static bool is_qmaster_internal(sge_env_state_class_t *thiz)
 static void set_sge_root(sge_env_state_class_t *thiz, const char *sge_root)
 {
    sge_env_state_t *es = (sge_env_state_t *) thiz->sge_env_state_handle;
-   es->sge_root = sge_strdup(es->sge_root, sge_root);
+   es->sge_root = sge_strdup(sge_root);
 }
 
 static void set_sge_cell(sge_env_state_class_t *thiz, const char *sge_cell)
 {
    sge_env_state_t *es = (sge_env_state_t *) thiz->sge_env_state_handle;
-   es->sge_cell = sge_strdup(es->sge_cell, sge_cell);
+   es->sge_cell = sge_strdup(sge_cell);
 }
 
 static void set_sge_qmaster_port(sge_env_state_class_t *thiz, u_long32 sge_qmaster_port)

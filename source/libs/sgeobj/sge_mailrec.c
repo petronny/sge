@@ -89,7 +89,7 @@ int mailrec_parse(lList **lpp, const char *mail_str)
       return 1;
    }
 
-   mail = sge_strdup(NULL, mail_str);
+   mail = sge_strdup(mail_str);
    if (!mail) {
       *lpp = NULL;
       DEXIT;

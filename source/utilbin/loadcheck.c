@@ -411,7 +411,7 @@ void fill_socket_core_topology(dstring* msocket, dstring* mcore, dstring* mthrea
    mc = get_total_number_of_cores();
    mt = get_total_number_of_threads();
    if (!get_topology(&topo, &length) || topo == NULL) {
-      topo = sge_strdup(NULL, "-");
+      topo = sge_strdup("-");
    }
    sge_dstring_sprintf(msocket, "%d", ms);
    sge_dstring_sprintf(mcore, "%d", mc);

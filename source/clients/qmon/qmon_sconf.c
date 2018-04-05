@@ -417,14 +417,11 @@ static Boolean qmonSchedSet(lListElem *sep) {
 /* printf("------> qmonSchedSet\n"); */
 /* lWriteElemTo(sep, stdout);    */
 
-   data.algorithm = sge_strdup(data.algorithm, 
-                                 (StringConst)lGetString(sep, SC_algorithm));
+   data.algorithm = sge_strdup((StringConst)lGetString(sep, SC_algorithm));
 
-   data.schedule_interval = sge_strdup(data.schedule_interval, 
-                                 (StringConst)lGetString(sep, SC_schedule_interval));
+   data.schedule_interval = sge_strdup((StringConst)lGetString(sep, SC_schedule_interval));
 
-   data.sc_params = sge_strdup(data.sc_params, 
-                                 (StringConst)lGetString(sep, SC_params));
+   data.sc_params = sge_strdup((StringConst)lGetString(sep, SC_params));
 
 
    data.maxujobs = lGetUlong(sep, SC_maxujobs);
@@ -441,17 +438,16 @@ static Boolean qmonSchedSet(lListElem *sep) {
    ** load adjustments need special treatment
    */
    data.job_load_adjustments = lCopyList("copy", lGetList(sep, SC_job_load_adjustments));
-   
-   data.load_adjustment_decay_time = sge_strdup(data.load_adjustment_decay_time, 
-               (StringConst)lGetString(sep, SC_load_adjustment_decay_time));
 
-   data.load_formula = sge_strdup(data.load_formula, 
-                              (StringConst)lGetString(sep, SC_load_formula));
+   data.load_adjustment_decay_time =
+      sge_strdup((StringConst)lGetString(sep, SC_load_adjustment_decay_time));
 
-   data.reprioritize_interval = sge_strdup(data.reprioritize_interval, 
-                              (StringConst)lGetString(sep, SC_reprioritize_interval));
-   data.default_duration = sge_strdup(data.default_duration, 
-                              (StringConst)lGetString(sep, SC_default_duration));
+   data.load_formula = sge_strdup((StringConst)lGetString(sep, SC_load_formula));
+
+   data.reprioritize_interval =
+      sge_strdup((StringConst)lGetString(sep, SC_reprioritize_interval));
+   data.default_duration =
+      sge_strdup((StringConst)lGetString(sep, SC_default_duration));
 
 /**
 printf("->data.algorithm: '%s'\n", data.algorithm ? data.algorithm : "-NA-");

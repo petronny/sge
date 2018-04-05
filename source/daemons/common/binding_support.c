@@ -470,7 +470,7 @@ bool get_topology(char** topology, int* length)
             (*length)++; /* we need `\0` at the end */
 
             /* copy element */
-            (*topology) = sge_strdup(NULL, sge_dstring_get_string(&d_topology));
+            (*topology) = sge_strdup(sge_dstring_get_string(&d_topology));
             success = true;
          }
 
@@ -523,7 +523,7 @@ bool get_execd_topology_in_use(char** topology)
 
    if (logical_used_topology_length > 0) {
       /* copy the string */
-      (*topology) = sge_strdup(NULL, logical_used_topology);
+      (*topology) = sge_strdup(logical_used_topology);
       retval = true;
    }
 

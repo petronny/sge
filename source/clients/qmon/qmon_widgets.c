@@ -1132,7 +1132,7 @@ void get_ara_list(const char *str, lList **ret_list) {
       lFreeList(ret_list);
    } else {   
       int rule[] = {ARA_name, 0};
-      char *tmp = sge_strdup(NULL, str);
+      char *tmp = sge_strdup(str);
       char **dest = string_list(tmp, ",", NULL);
       lFreeList(ret_list);
       cull_parse_string_list(dest, "user_list", ARA_Type, rule, ret_list); 

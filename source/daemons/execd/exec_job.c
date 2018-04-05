@@ -2538,8 +2538,8 @@ static bool parse_job_accounting_and_create_logical_list(const char* binding_str
       sge_dstring_append_dstring(&full, &pair);
 
       /* allocate memory for the output variable "rankfileinput" */
-      *rankfileinput = sge_strdup(NULL, sge_dstring_get_string(&full));
-     
+      *rankfileinput = sge_strdup(sge_dstring_get_string(&full));
+
       if (*rankfileinput == NULL) {
          WARNING((SGE_EVENT, "Core binding: Malloc error"));
          retval = false;
@@ -2557,7 +2557,7 @@ static bool parse_job_accounting_and_create_logical_list(const char* binding_str
    } else {
       /* no cores used */
       INFO((SGE_EVENT, "Core binding: Couldn't determine any allocated cores for the job"));
-      *rankfileinput = sge_strdup(NULL, "<NULL>");
+      *rankfileinput = sge_strdup("<NULL>");
       retval = true;
    }
    DRETURN(retval);

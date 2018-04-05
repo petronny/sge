@@ -192,8 +192,8 @@ do_gdi_packet(sge_gdi_ctx_class_t *ctx, lList **answer_list,
     * unpack the packet and set values 
     */
    local_ret = sge_gdi_packet_unpack(&packet, answer_list, pb_in);
-   packet->host = sge_strdup(NULL, aMsg->snd_host);
-   packet->commproc = sge_strdup(NULL, aMsg->snd_name);
+   packet->host = sge_strdup(aMsg->snd_host);
+   packet->commproc = sge_strdup(aMsg->snd_name);
    packet->commproc_id = aMsg->snd_id;
    packet->response_id = aMsg->request_mid;
    packet->is_intern_request = false;
@@ -330,8 +330,8 @@ do_report_request(sge_gdi_ctx_class_t *ctx, struct_msg_t *aMsg, monitoring_t *mo
     * it will be handled
     */   
    packet = sge_gdi_packet_create_base(NULL);
-   packet->host = sge_strdup(NULL, aMsg->snd_host);
-   packet->commproc = sge_strdup(NULL, aMsg->snd_name);
+   packet->host = sge_strdup(aMsg->snd_host);
+   packet->commproc = sge_strdup(aMsg->snd_name);
    packet->commproc_id = aMsg->snd_id;
    packet->response_id = aMsg->request_mid;
    packet->is_intern_request = false;

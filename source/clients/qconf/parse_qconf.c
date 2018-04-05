@@ -450,12 +450,12 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
                   lFreeElem(&hep);
                   DRETURN(1);
             }
-            
-            host = sge_strdup(host, lGetHost(hep, EH_name));
+
+            host = sge_strdup(lGetHost(hep, EH_name));
             lFreeElem(&hep);
          } else {
             /* no template name given - then use "template" as name */
-            host = sge_strdup(host, SGE_TEMPLATE_NAME);
+            host = sge_strdup(SGE_TEMPLATE_NAME);
          }
          /* get a template host entry .. */
          where = lWhere("%T( %Ih=%s )", EH_Type, EH_name, host);
@@ -509,7 +509,7 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
             DRETURN(1);
          }
 
-         host = sge_strdup(host, lGetHost(ep, EH_name));
+         host = sge_strdup(lGetHost(ep, EH_name));
          lFreeList(&arglp);
 
          lp = lCreateList("hosts to add", EH_Type);
@@ -1190,7 +1190,7 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
             int shares;
             ancestors_t ancestors;
 
-            buf = sge_strdup(buf, lGetString(argep, STN_name));
+            buf = sge_strdup(lGetString(argep, STN_name));
             nodepath = sge_strtok(buf, "=");
             sharestr = sge_strtok(NULL, "");
             if (nodepath && sharestr && sscanf(sharestr, "%d", &shares) == 1) {
@@ -3077,18 +3077,18 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
    } 
 
    /* parse command line arguments */
-   attr = sge_strdup(NULL, *spp);
+   attr = sge_strdup(*spp);
    if (attr == NULL) {
       ERROR((SGE_EVENT, SFNMAX, MSG_QCONF_NOATTRIBUTEGIVEN));
       DRETURN(1);
    }
    spp = sge_parser_get_next(ctx, spp);
 
-   object_instance = sge_strdup(NULL, *spp);
+   object_instance = sge_strdup(*spp);
 
    /* object_instance look like queue@host */
-   if ((object = sge_strdup(NULL, sge_strtok(object_instance, "@"))) != NULL) {
-       hgroup_or_hostname = sge_strdup(NULL, sge_strtok(NULL, NULL));
+   if ((object = sge_strdup(sge_strtok(object_instance, "@"))) != NULL) {
+       hgroup_or_hostname = sge_strdup(sge_strtok(NULL, NULL));
    }
    
    if (object == NULL || hgroup_or_hostname == NULL) {
@@ -3985,9 +3985,9 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
 
          if (!sge_next_is_an_opt(spp))  {
             spp = sge_parser_get_next(ctx, spp);
-            host_list = sge_strdup(NULL, *spp);
+            host_list = sge_strdup(*spp);
          } else {
-            host_list = sge_strdup(NULL, SGE_GLOBAL_NAME);
+            host_list = sge_strdup(SGE_GLOBAL_NAME);
          }
             
          /* host_list might look like host1,host2,... */
@@ -4136,7 +4136,7 @@ int sge_parse_qconf(sge_gdi_ctx_class_t *ctx, char *argv[])
          if (!sge_next_is_an_opt(spp))  {
             spp = sge_parser_get_next(ctx, spp);
 
-            host_list = sge_strdup(NULL, *spp);
+            host_list = sge_strdup(*spp);
             hep = lCreateElem(EH_Type);
 
             for ((cp = sge_strtok(host_list, ",")); cp && *cp;

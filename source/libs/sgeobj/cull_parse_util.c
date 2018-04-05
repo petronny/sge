@@ -1357,7 +1357,7 @@ int cull_parse_path_list(lList **lpp, const char *path_str)
    ret_error = (lpp == NULL) ? true : false;
 
    if(!ret_error){
-      path_string = sge_strdup(NULL, path_str);
+      path_string = sge_strdup(path_str);
       ret_error = (path_string == NULL) ? true : false;
    }
    if(!ret_error){
@@ -1439,7 +1439,7 @@ cull_parse_jid_hold_list(lList **lpp, const char *str)
       return 1;
    }
 
-   s = sge_strdup(NULL, str);
+   s = sge_strdup(str);
    if (!s) {
       *lpp = NULL;
       DEXIT;

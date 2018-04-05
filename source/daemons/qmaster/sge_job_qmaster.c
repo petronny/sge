@@ -1235,7 +1235,7 @@ int sub_command
          *del_pos = '\0';
          del_pos++;
 
-         job_mod_name = sge_strdup(NULL, job_id_str);
+         job_mod_name = sge_strdup(job_id_str);
          job_id_str = job_mod_name;
 
          if (strlen(del_pos)>0) {

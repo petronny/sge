@@ -912,7 +912,7 @@ cull_parse_destination_identifier_list(lList **lpp, const char *dest_str)
       DRETURN(1);
    }
 
-   s = sge_strdup(NULL, dest_str);
+   s = sge_strdup(dest_str);
    if (s == NULL) {
       *lpp = NULL;
       DRETURN(3);

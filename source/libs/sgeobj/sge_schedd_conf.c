@@ -908,7 +908,7 @@ char* sconf_get_load_formula(void) {
   
    sge_mutex_lock("Sched_Conf_Lock", "", __LINE__, &pos.mutex);
 
-   formula = sge_strdup(formula, get_load_formula());  
+   formula = sge_strdup(get_load_formula());  
   
    sge_mutex_unlock("Sched_Conf_Lock", "", __LINE__, &pos.mutex); 
    return formula;

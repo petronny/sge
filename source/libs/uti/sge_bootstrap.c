@@ -978,49 +978,49 @@ static int get_jvm_thread_count(sge_bootstrap_state_class_t *thiz)
 static void set_admin_user(sge_bootstrap_state_class_t *thiz, const char *admin_user)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->admin_user = sge_strdup(es->admin_user, admin_user);
+   es->admin_user = sge_strdup(admin_user);
 }
 
 static void set_default_domain(sge_bootstrap_state_class_t *thiz, const char *default_domain)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->default_domain = sge_strdup(es->default_domain, default_domain);
+   es->default_domain = sge_strdup(default_domain);
 }
 
 static void set_spooling_method(sge_bootstrap_state_class_t *thiz, const char *spooling_method)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->spooling_method = sge_strdup(es->spooling_method, spooling_method);
+   es->spooling_method = sge_strdup(spooling_method);
 }
 
 static void set_spooling_lib(sge_bootstrap_state_class_t *thiz, const char *spooling_lib)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->spooling_lib = sge_strdup(es->spooling_lib, spooling_lib);
+   es->spooling_lib = sge_strdup(spooling_lib);
 }
 
 static void set_spooling_params(sge_bootstrap_state_class_t *thiz, const char *spooling_params)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->spooling_params = sge_strdup(es->spooling_params, spooling_params);
+   es->spooling_params = sge_strdup(spooling_params);
 }
 
 static void set_binary_path(sge_bootstrap_state_class_t *thiz, const char *binary_path)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->binary_path = sge_strdup(es->binary_path, binary_path);
+   es->binary_path = sge_strdup(binary_path);
 }
 
 static void set_qmaster_spool_dir(sge_bootstrap_state_class_t *thiz, const char *qmaster_spool_dir)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->qmaster_spool_dir = sge_strdup(es->qmaster_spool_dir, qmaster_spool_dir);
+   es->qmaster_spool_dir = sge_strdup(qmaster_spool_dir);
 }
 
 static void set_security_mode(sge_bootstrap_state_class_t *thiz, const char *security_mode)
 {
    sge_bootstrap_state_t *es = (sge_bootstrap_state_t *) thiz->sge_bootstrap_state_handle;
-   es->security_mode = sge_strdup(es->security_mode, security_mode);
+   es->security_mode = sge_strdup(security_mode);
 }
 
 static void set_ignore_fqdn(sge_bootstrap_state_class_t *thiz, bool ignore_fqdn)

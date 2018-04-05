@@ -214,59 +214,59 @@ const char *path_state_get_shadow_masters_file(void)
 void path_state_set_sge_root(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_sge_root");
-   path_state->sge_root = sge_strdup(path_state->sge_root, path);
+   path_state->sge_root = sge_strdup(path);
 }
 
 void path_state_set_cell_root(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_cell_root");
-   path_state->cell_root = sge_strdup(path_state->cell_root, path);
+   path_state->cell_root = sge_strdup(path);
 }
 
 void path_state_set_bootstrap_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_conf_file");
-   path_state->bootstrap_file = sge_strdup(path_state->conf_file, path);
+   path_state->bootstrap_file = sge_strdup(path);
 }
 
 void path_state_set_conf_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_conf_file");
-   path_state->conf_file = sge_strdup(path_state->conf_file, path);
+   path_state->conf_file = sge_strdup(path);
 }
 
 void path_state_set_sched_conf_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_sched_conf_file");
-   path_state->sched_conf_file = sge_strdup(path_state->sched_conf_file, path);
+   path_state->sched_conf_file = sge_strdup(path);
 }
 
 void path_state_set_act_qmaster_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_act_qmaster_file");
-   path_state->act_qmaster_file = sge_strdup(path_state->act_qmaster_file, path);
+   path_state->act_qmaster_file = sge_strdup(path);
 }
 
 void path_state_set_acct_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_acct_file");
-   path_state->acct_file = sge_strdup(path_state->acct_file, path);
+   path_state->acct_file = sge_strdup(path);
 }
 void path_state_set_reporting_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_reporting_file");
-   path_state->reporting_file = sge_strdup(path_state->reporting_file, path);
+   path_state->reporting_file = sge_strdup(path);
 }
 void path_state_set_local_conf_dir(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_local_conf_dir");
-   path_state->local_conf_dir = sge_strdup(path_state->local_conf_dir, path);
+   path_state->local_conf_dir = sge_strdup(path);
 }
 
 void path_state_set_shadow_masters_file(const char *path)
 {
    GET_SPECIFIC( path_state_t, path_state, path_state_init, path_state_key, "path_state_set_shadow_masters_file");
-   path_state->shadow_masters_file = sge_strdup(path_state->shadow_masters_file, path);
+   path_state->shadow_masters_file = sge_strdup(path);
 }
 
 /****** uti/path/sge_setup_paths() *******************************************
@@ -782,66 +782,66 @@ static const char* get_alias_file(sge_path_state_class_t *thiz)
 static void set_sge_root(sge_path_state_class_t *thiz, const char *sge_root)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->sge_root = sge_strdup(es->sge_root, sge_root);
+   es->sge_root = sge_strdup(sge_root);
 }
 
 static void set_cell_root(sge_path_state_class_t *thiz, const char *cell_root)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->cell_root = sge_strdup(es->cell_root, cell_root);
+   es->cell_root = sge_strdup(cell_root);
 }
 
 static void set_conf_file(sge_path_state_class_t *thiz, const char *conf_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->conf_file = sge_strdup(es->conf_file, conf_file);
+   es->conf_file = sge_strdup(conf_file);
 }
 
 static void set_bootstrap_file(sge_path_state_class_t *thiz, const char *bootstrap_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->bootstrap_file = sge_strdup(es->bootstrap_file, bootstrap_file);
+   es->bootstrap_file = sge_strdup(bootstrap_file);
 }
 
 static void set_act_qmaster_file(sge_path_state_class_t *thiz, const char *act_qmaster_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->act_qmaster_file = sge_strdup(es->act_qmaster_file, act_qmaster_file);
+   es->act_qmaster_file = sge_strdup(act_qmaster_file);
 }
 
 static void set_acct_file(sge_path_state_class_t *thiz, const char *acct_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->acct_file = sge_strdup(es->acct_file, acct_file);
+   es->acct_file = sge_strdup(acct_file);
 }
 
 static void set_reporting_file(sge_path_state_class_t *thiz, const char *reporting_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->reporting_file = sge_strdup(es->reporting_file, reporting_file);
+   es->reporting_file = sge_strdup(reporting_file);
 }
 
 static void set_local_conf_dir(sge_path_state_class_t *thiz, const char *local_conf_dir)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->local_conf_dir = sge_strdup(es->local_conf_dir, local_conf_dir);
+   es->local_conf_dir = sge_strdup(local_conf_dir);
 }
 
 static void set_shadow_masters_file(sge_path_state_class_t *thiz, const char *shadow_masters_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->shadow_masters_file = sge_strdup(es->shadow_masters_file, shadow_masters_file);
+   es->shadow_masters_file = sge_strdup(shadow_masters_file);
 }
 
 static void set_sched_conf_file(sge_path_state_class_t *thiz, const char* sched_conf_file) {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->sched_conf_file = sge_strdup(es->sched_conf_file, sched_conf_file);
+   es->sched_conf_file = sge_strdup(sched_conf_file);
 }
 
 
 static void set_alias_file(sge_path_state_class_t *thiz, const char *alias_file)
 {
    sge_path_state_t *es = (sge_path_state_t *) thiz->sge_path_state_handle;
-   es->alias_file = sge_strdup(es->alias_file, alias_file);
+   es->alias_file = sge_strdup(alias_file);
 }
 

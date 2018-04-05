@@ -449,7 +449,7 @@ int type
          log_state_set_log_verbose(old_verbose);
       }
       if (cpp)
-         *cpp = sge_strdup(*cpp, s);
+         *cpp = sge_strdup(s);
       else
          parse_ulong_val(NULL, val, type, s, NULL, 0);    
    }
@@ -959,7 +959,7 @@ int merge_configuration(lList **answer_list, u_long32 progid, const char *cell_r
                if (notify_kill) {
                   sge_free(&notify_kill);
                }
-               notify_kill = sge_strdup(NULL, &(s[sizeof("NOTIFY_KILL")]));
+               notify_kill = sge_strdup(&(s[sizeof("NOTIFY_KILL")]));
             }
             continue;
          } 
@@ -973,7 +973,7 @@ int merge_configuration(lList **answer_list, u_long32 progid, const char *cell_r
                if (notify_susp) {
                   sge_free(&notify_susp);
                }
-               notify_susp = sge_strdup(NULL, &(s[sizeof("NOTIFY_SUSP")]));
+               notify_susp = sge_strdup(&(s[sizeof("NOTIFY_SUSP")]));
             }
             continue;
          } 
@@ -1332,7 +1332,7 @@ char* mconf_get_execd_spool_dir(void) {
    DENTER(BASIS_LAYER, "mconf_get_execd_spool_dir");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   execd_spool_dir = sge_strdup(execd_spool_dir, Master_Config.execd_spool_dir);
+   execd_spool_dir = sge_strdup(Master_Config.execd_spool_dir);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(execd_spool_dir);
@@ -1345,7 +1345,7 @@ char* mconf_get_mailer(void) {
    DENTER(BASIS_LAYER, "mconf_get_mailer");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   mailer = sge_strdup(mailer, Master_Config.mailer);
+   mailer = sge_strdup(Master_Config.mailer);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(mailer);
@@ -1358,7 +1358,7 @@ char* mconf_get_xterm(void) {
    DENTER(BASIS_LAYER, "mconf_get_xterm");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   xterm = sge_strdup(xterm, Master_Config.xterm);
+   xterm = sge_strdup(Master_Config.xterm);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(xterm);
@@ -1372,7 +1372,7 @@ char* mconf_get_load_sensor(void) {
    DENTER(BASIS_LAYER, "mconf_get_load_sensor");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   load_sensor = sge_strdup(load_sensor, Master_Config.load_sensor);
+   load_sensor = sge_strdup(Master_Config.load_sensor);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(load_sensor);
@@ -1385,7 +1385,7 @@ char* mconf_get_prolog(void) {
    DENTER(BASIS_LAYER, "mconf_get_prolog");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   prolog = sge_strdup(prolog, Master_Config.prolog);
+   prolog = sge_strdup(Master_Config.prolog);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(prolog);
@@ -1398,7 +1398,7 @@ char* mconf_get_epilog(void) {
    DENTER(BASIS_LAYER, "mconf_get_epilog");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   epilog = sge_strdup(epilog, Master_Config.epilog);
+   epilog = sge_strdup(Master_Config.epilog);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(epilog);
@@ -1411,7 +1411,7 @@ char* mconf_get_shell_start_mode(void) {
    DENTER(BASIS_LAYER, "mconf_get_shell_start_mode");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   shell_start_mode = sge_strdup(shell_start_mode, Master_Config.shell_start_mode);
+   shell_start_mode = sge_strdup(Master_Config.shell_start_mode);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(shell_start_mode);
@@ -1424,7 +1424,7 @@ char* mconf_get_login_shells(void) {
    DENTER(BASIS_LAYER, "mconf_get_login_shells");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   login_shells = sge_strdup(login_shells, Master_Config.login_shells);
+   login_shells = sge_strdup(Master_Config.login_shells);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(login_shells);
@@ -1497,7 +1497,7 @@ char* mconf_get_enforce_project(void) {
    DENTER(BASIS_LAYER, "mconf_get_enforce_project");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   enforce_project = sge_strdup(enforce_project, Master_Config.enforce_project);
+   enforce_project = sge_strdup(Master_Config.enforce_project);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(enforce_project);
@@ -1510,7 +1510,7 @@ char* mconf_get_enforce_user(void) {
    DENTER(BASIS_LAYER, "mconf_get_enforce_user");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   enforce_user = sge_strdup(enforce_user, Master_Config.enforce_user);
+   enforce_user = sge_strdup(Master_Config.enforce_user);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(enforce_user);
@@ -1524,7 +1524,7 @@ char* mconf_get_administrator_mail(void) {
    DENTER(BASIS_LAYER, "mconf_get_administrator_mail");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   administrator_mail = sge_strdup(administrator_mail, Master_Config.administrator_mail);
+   administrator_mail = sge_strdup(Master_Config.administrator_mail);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(administrator_mail);
@@ -1589,7 +1589,7 @@ char* mconf_get_set_token_cmd(void) {
    DENTER(BASIS_LAYER, "mconf_get_set_token_cmd");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   set_token_cmd = sge_strdup(set_token_cmd, Master_Config.set_token_cmd);
+   set_token_cmd = sge_strdup(Master_Config.set_token_cmd);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(set_token_cmd);
@@ -1602,7 +1602,7 @@ char* mconf_get_pag_cmd(void) {
    DENTER(BASIS_LAYER, "mconf_get_pag_cmd");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   pag_cmd = sge_strdup(pag_cmd, Master_Config.pag_cmd);
+   pag_cmd = sge_strdup(Master_Config.pag_cmd);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(pag_cmd);
@@ -1627,7 +1627,7 @@ char* mconf_get_shepherd_cmd(void) {
    DENTER(BASIS_LAYER, "mconf_get_shepherd_cmd");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   shepherd_cmd = sge_strdup(shepherd_cmd, Master_Config.shepherd_cmd);
+   shepherd_cmd = sge_strdup(Master_Config.shepherd_cmd);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(shepherd_cmd);
@@ -1640,7 +1640,7 @@ char* mconf_get_qmaster_params(void) {
    DENTER(BASIS_LAYER, "mconf_get_qmaster_params");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   qmaster_params = sge_strdup(qmaster_params, Master_Config.qmaster_params);
+   qmaster_params = sge_strdup(Master_Config.qmaster_params);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(qmaster_params);
@@ -1653,7 +1653,7 @@ char* mconf_get_execd_params(void) {
    DENTER(BASIS_LAYER, "mconf_get_execd_params");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   execd_params = sge_strdup(execd_params, Master_Config.execd_params);
+   execd_params = sge_strdup(Master_Config.execd_params);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(execd_params);
@@ -1666,7 +1666,7 @@ char* mconf_get_reporting_params(void) {
    DENTER(BASIS_LAYER, "mconf_get_reporting_params");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   reporting_params = sge_strdup(reporting_params, Master_Config.reporting_params);
+   reporting_params = sge_strdup(Master_Config.reporting_params);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(reporting_params);
@@ -1679,7 +1679,7 @@ char* mconf_get_gid_range(void) {
    DENTER(BASIS_LAYER, "mconf_get_gid_range");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   gid_range = sge_strdup(gid_range, Master_Config.gid_range);
+   gid_range = sge_strdup(Master_Config.gid_range);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(gid_range);
@@ -1704,7 +1704,7 @@ char* mconf_get_qlogin_daemon(void) {
    DENTER(BASIS_LAYER, "mconf_get_qlogin_daemon");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   qlogin_daemon = sge_strdup(qlogin_daemon, Master_Config.qlogin_daemon);
+   qlogin_daemon = sge_strdup(Master_Config.qlogin_daemon);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(qlogin_daemon);
@@ -1717,7 +1717,7 @@ char* mconf_get_qlogin_command(void) {
    DENTER(BASIS_LAYER, "mconf_get_qlogin_command");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   qlogin_command = sge_strdup(qlogin_command, Master_Config.qlogin_command);
+   qlogin_command = sge_strdup(Master_Config.qlogin_command);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(qlogin_command);
@@ -1730,7 +1730,7 @@ char* mconf_get_rsh_daemon(void) {
    DENTER(BASIS_LAYER, "mconf_get_rsh_daemon");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   rsh_daemon = sge_strdup(rsh_daemon, Master_Config.rsh_daemon);
+   rsh_daemon = sge_strdup(Master_Config.rsh_daemon);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(rsh_daemon);
@@ -1767,7 +1767,7 @@ char* mconf_get_rsh_command(void) {
    DENTER(BASIS_LAYER, "mconf_get_rsh_command");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   rsh_command = sge_strdup(rsh_command, Master_Config.rsh_command);
+   rsh_command = sge_strdup(Master_Config.rsh_command);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(rsh_command);
@@ -1780,7 +1780,7 @@ char* mconf_get_jsv_url(void) {
    DENTER(BASIS_LAYER, "mconf_get_jsv_url");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   jsv_url = sge_strdup(jsv_url, Master_Config.jsv_url);
+   jsv_url = sge_strdup(Master_Config.jsv_url);
    sge_strip_white_space_at_eol(jsv_url);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
@@ -1794,7 +1794,7 @@ char* mconf_get_jsv_allowed_mod(void) {
    DENTER(BASIS_LAYER, "mconf_get_jsv_allowed_mod");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   jsv_allowed_mod = sge_strdup(jsv_allowed_mod, Master_Config.jsv_allowed_mod);
+   jsv_allowed_mod = sge_strdup(Master_Config.jsv_allowed_mod);
    sge_strip_white_space_at_eol(jsv_allowed_mod);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
@@ -1808,7 +1808,7 @@ char* mconf_get_rlogin_daemon(void) {
    DENTER(BASIS_LAYER, "mconf_get_rlogin_daemon");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   rlogin_daemon = sge_strdup(rlogin_daemon, Master_Config.rlogin_daemon);
+   rlogin_daemon = sge_strdup(Master_Config.rlogin_daemon);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(rlogin_daemon);
@@ -1821,7 +1821,7 @@ char* mconf_get_rlogin_command(void) {
    DENTER(BASIS_LAYER, "mconf_get_rlogin_command");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   rlogin_command = sge_strdup(rlogin_command, Master_Config.rlogin_command);
+   rlogin_command = sge_strdup(Master_Config.rlogin_command);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(rlogin_command);
@@ -1942,7 +1942,7 @@ char* mconf_get_auto_user_default_project(void) {
    DENTER(BASIS_LAYER, "mconf_get_auto_user_default_project");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   auto_user_default_project = sge_strdup(auto_user_default_project, Master_Config.auto_user_default_project);
+   auto_user_default_project = sge_strdup(Master_Config.auto_user_default_project);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(auto_user_default_project);
@@ -1967,7 +1967,7 @@ char* mconf_get_delegated_file_staging(void) {
    DENTER(BASIS_LAYER, "mconf_get_delegated_file_staging");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   delegated_file_staging = sge_strdup(delegated_file_staging, Master_Config.delegated_file_staging);
+   delegated_file_staging = sge_strdup(Master_Config.delegated_file_staging);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(delegated_file_staging);
@@ -2252,7 +2252,7 @@ char* mconf_get_notify_susp(void) {
    DENTER(BASIS_LAYER, "mconf_get_notify_susp");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   ret = sge_strdup(ret, notify_susp);
+   ret = sge_strdup(notify_susp);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(ret);
@@ -2277,7 +2277,7 @@ char* mconf_get_notify_kill(void) {
    DENTER(BASIS_LAYER, "mconf_get_notify_kill");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   ret = sge_strdup(ret, notify_kill);
+   ret = sge_strdup(notify_kill);
 
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN(ret);
