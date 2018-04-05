@@ -135,6 +135,20 @@ void *sge_realloc(void *ptr, int size, int do_abort)
    DRETURN_(cp);
 }
 
+void *sge_calloc(size_t nmemb, size_t size)
+{
+   void *p;
+
+   DENTER_(BASIS_LAYER, "sge_calloc");
+   p = calloc(nmemb, size);
+   if (!p) {
+      CRITICAL((SGE_EVENT, SFNMAX, MSG_MEMORY_MALLOCFAILED));
+      DEXIT_;
+      abort();
+   }
+   DRETURN_(p);
+}
+
 /****** uti/stdlib/sge_free() *************************************************
 *  NAME
 *     sge_free() -- replacement for free 

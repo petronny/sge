@@ -39,8 +39,9 @@
 void *sge_malloc(size_t size) __attribute__ ((__malloc__));
 
 void *sge_realloc(void *ptr, int size, int do_abort);
+void *sge_calloc(size_t nmemb, size_t size) __attribute__ ((__malloc__));
 
-void sge_free(void *cp);        
+void sge_free(void *cp);
 
 int sge_putenv(const char *var);
 int sge_setenv(const char *name, const char *value);
