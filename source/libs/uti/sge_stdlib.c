@@ -75,7 +75,9 @@ void *sge_malloc(size_t size)
    DENTER_(BASIS_LAYER, "sge_malloc");
 
    if (!size) {
-      DRETURN_(NULL);
+      CRITICAL((SGE_EVENT, SFNMAX, MSG_POINTER_NULLPARAMETER));
+      DEXIT_;
+      abort();
    }
 
    cp = malloc(size);
