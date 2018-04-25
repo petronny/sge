@@ -86,7 +86,7 @@ static void set_sge_execd_port(sge_env_state_class_t *thiz, u_long32 sge_qmaster
 
 sge_env_state_class_t *sge_env_state_class_create(const char *sge_root, const char *sge_cell, int sge_qmaster_port, int sge_execd_port, bool from_services, bool qmaster_internal, sge_error_class_t *eh)
 {
-   sge_env_state_class_t *ret = (sge_env_state_class_t *)sge_malloc(sizeof(sge_env_state_class_t));
+   sge_env_state_class_t *ret = malloc(sizeof(sge_env_state_class_t));
 
    DENTER(TOP_LAYER, "sge_env_state_class_create");
    if (!ret) {
@@ -110,7 +110,7 @@ sge_env_state_class_t *sge_env_state_class_create(const char *sge_root, const ch
    ret->set_sge_qmaster_port = set_sge_qmaster_port;
    ret->set_sge_execd_port = set_sge_execd_port;
 
-   ret->sge_env_state_handle = (sge_env_state_t*)sge_malloc(sizeof(sge_env_state_t));
+   ret->sge_env_state_handle = malloc(sizeof(sge_env_state_t));
    if (ret->sge_env_state_handle == NULL) {
       eh->error(eh, STATUS_EMALLOC, ANSWER_QUALITY_ERROR, "%s",
                 MSG_MEMORY_MALLOCFAILED);

@@ -348,7 +348,7 @@ bool sge_setup_paths(u_long32 progid, const char *sge_cell, dstring *error_dstri
       }
    } 
 
-   cell_root = sge_malloc(strlen(sge_root) + strlen(sge_cell) + 2);
+   cell_root = malloc(strlen(sge_root) + strlen(sge_cell) + 2);
    if (cell_root == NULL) {
       if (error_dstring == NULL) {
          CRITICAL((SGE_EVENT, SFNMAX, MSG_SGETEXT_NOMEM));
@@ -538,7 +538,7 @@ static void path_state_init( path_state_t* theState)
 
 sge_path_state_class_t *sge_path_state_class_create(sge_env_state_class_t *sge_env, sge_error_class_t *eh)
 {
-   sge_path_state_class_t *ret = (sge_path_state_class_t *)sge_malloc(sizeof(sge_path_state_class_t));
+   sge_path_state_class_t *ret = malloc(sizeof(sge_path_state_class_t));
 
    DENTER(TOP_LAYER, "sge_path_state_class_create");
 
@@ -574,7 +574,7 @@ sge_path_state_class_t *sge_path_state_class_create(sge_env_state_class_t *sge_e
    ret->set_sched_conf_file = set_sched_conf_file;
    ret->set_alias_file = set_alias_file;
    
-   ret->sge_path_state_handle = sge_malloc(sizeof(sge_path_state_t));
+   ret->sge_path_state_handle = malloc(sizeof(sge_path_state_t));
    if (ret->sge_path_state_handle == NULL) {
       sge_free(&ret);
       DEXIT;

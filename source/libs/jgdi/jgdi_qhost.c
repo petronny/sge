@@ -97,7 +97,7 @@ static int jgdi_destroy_report_handler(qhost_report_handler_t** handler, lList *
 
 static qhost_report_handler_t* jgdi_report_handler_create(JNIEnv *env, jobject qhost_result, lList **alpp)
 {
-   jgdi_report_handler_t* jgdi_handler = (jgdi_report_handler_t*)sge_malloc(sizeof(jgdi_report_handler_t));
+   jgdi_report_handler_t* jgdi_handler = malloc(sizeof(jgdi_report_handler_t));
    qhost_report_handler_t *ret = NULL;
 
    DENTER(JGDI_LAYER, "jgdi_report_handler_create");
@@ -108,7 +108,7 @@ static qhost_report_handler_t* jgdi_report_handler_create(JNIEnv *env, jobject q
       DRETURN(NULL);
    }
    
-   ret = (qhost_report_handler_t*)sge_malloc(sizeof(qhost_report_handler_t));
+   ret = malloc(sizeof(qhost_report_handler_t));
    if (ret == NULL) {
       answer_list_add(alpp, "malloc of qhost_report_handler_t failed",
                             STATUS_EMALLOC, ANSWER_QUALITY_ERROR);

@@ -361,7 +361,7 @@ sge_gdi_ctx_class_create(int prog_number, const char *component_name,
                          bool from_services, bool is_qmaster_internal_client, 
                          lList **alpp)
 {
-   sge_gdi_ctx_class_t *ret = (sge_gdi_ctx_class_t *)sge_malloc(sizeof(sge_gdi_ctx_class_t));
+   sge_gdi_ctx_class_t *ret = malloc(sizeof(sge_gdi_ctx_class_t));
    sge_gdi_ctx_t *gdi_ctx = NULL;
 
    DENTER(TOP_LAYER, "sge_gdi_ctx_class_create");
@@ -447,7 +447,7 @@ sge_gdi_ctx_class_create(int prog_number, const char *component_name,
 
    ret->dprintf = sge_gdi_ctx_class_dprintf;
 
-   ret->sge_gdi_ctx_handle = (sge_gdi_ctx_t*)sge_malloc(sizeof(sge_gdi_ctx_t));
+   ret->sge_gdi_ctx_handle = malloc(sizeof(sge_gdi_ctx_t));
    memset(ret->sge_gdi_ctx_handle, 0, sizeof(sge_gdi_ctx_t));
 
    if (!ret->sge_gdi_ctx_handle) {

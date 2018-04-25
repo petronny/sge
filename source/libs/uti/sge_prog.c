@@ -756,7 +756,7 @@ sge_prog_state_class_t *
 sge_prog_state_class_create(sge_env_state_class_t *sge_env, 
                             u_long32 program_number, sge_error_class_t *eh)
 {
-   sge_prog_state_class_t *ret = (sge_prog_state_class_t *)sge_malloc(sizeof(sge_prog_state_class_t));
+   sge_prog_state_class_t *ret = malloc(sizeof(sge_prog_state_class_t));
 
    DENTER(TOP_LAYER, "sge_prog_state_class_create");
 
@@ -793,7 +793,7 @@ sge_prog_state_class_create(sge_env_state_class_t *sge_env,
    ret->set_exit_on_error = set_exit_on_error;
    ret->set_exit_func = set_exit_func;
 
-   ret->sge_prog_state_handle = sge_malloc(sizeof(sge_prog_state_t));
+   ret->sge_prog_state_handle = malloc(sizeof(sge_prog_state_t));
    if (ret->sge_prog_state_handle == NULL) {
       eh->error(eh, STATUS_EMALLOC, ANSWER_QUALITY_ERROR, "%s",
                 MSG_MEMORY_MALLOCFAILED);

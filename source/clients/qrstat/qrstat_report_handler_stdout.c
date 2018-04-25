@@ -166,7 +166,7 @@ qrstat_create_report_handler_stdout(qrstat_env_t *qrstat_env,
 
    DENTER(TOP_LAYER, "qrstat_create_report_handler_stdout");
 
-   ret = (qrstat_report_handler_t*)sge_malloc(sizeof(qrstat_report_handler_t));
+   ret = malloc(sizeof(qrstat_report_handler_t));
    if (ret == NULL) {
       answer_list_add_sprintf(answer_list, STATUS_EMALLOC, ANSWER_QUALITY_ERROR,
                               MSG_MEM_MEMORYALLOCFAILED_S, SGE_FUNC);      

@@ -101,14 +101,14 @@ static int xml_report_finished(report_handler_t* handler, lList **alpp) {
 }
 
 static report_handler_t* create_xml_report_handler(lList **alpp) {
-   
-   report_handler_t* ret = (report_handler_t*)sge_malloc(sizeof(report_handler_t));
+
+   report_handler_t* ret = malloc(sizeof(report_handler_t));
    if (ret == NULL ) {
       answer_list_add(alpp, "malloc of report_handler_t failed",
                             STATUS_EMALLOC, ANSWER_QUALITY_ERROR);
       return NULL;
    }
-   ret->ctx = sge_malloc(sizeof(dstring));
+   ret->ctx = malloc(sizeof(dstring));
    if (ret->ctx == NULL ) {
       answer_list_add(alpp, "malloc of dstring buffer failed",
                             STATUS_EMALLOC, ANSWER_QUALITY_ERROR);

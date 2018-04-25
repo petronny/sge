@@ -260,7 +260,7 @@ sge_gdi_task_create(sge_gdi_packet_class_t * packet, lList **answer_list,
 
    DENTER(TOP_LAYER, "sge_gdi_task_create");
 
-   task = (sge_gdi_task_class_t *) sge_malloc(sizeof(sge_gdi_task_class_t));
+   task = malloc(sizeof(sge_gdi_task_class_t));
    if (task != NULL) {
       task->id =
          ((packet->last_task != NULL) ? (packet->last_task->id + 1) : 1);
@@ -441,7 +441,7 @@ sge_gdi_packet_create_base(lList **answer_list)
    sge_gdi_packet_class_t *ret = NULL;
 
    DENTER(TOP_LAYER, "sge_gdi_packet_create_base");
-   ret = (sge_gdi_packet_class_t *) sge_malloc(sizeof(sge_gdi_packet_class_t));
+   ret = malloc(sizeof(sge_gdi_packet_class_t));
    if (ret != NULL) {
       int local_ret1;
       int local_ret2;

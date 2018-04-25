@@ -84,7 +84,7 @@ static int jgdi_report_resource_value(report_handler_t* handler, const char* res
 static int jgdi_destroy_report_handler(report_handler_t** handler, lList **alpp);
 
 static report_handler_t* jgdi_report_handler_create(JNIEnv *env, jobject qquota_result, lList **alpp) {
-   jgdi_report_handler_t* jgdi_handler = (jgdi_report_handler_t*)sge_malloc(sizeof(jgdi_report_handler_t));
+   jgdi_report_handler_t* jgdi_handler = malloc(sizeof(jgdi_report_handler_t));
    report_handler_t *ret = NULL;
 
    DENTER( JGDI_LAYER, "jgdi_report_handler_create" );
@@ -95,7 +95,7 @@ static report_handler_t* jgdi_report_handler_create(JNIEnv *env, jobject qquota_
       DRETURN(NULL);
    }
    
-   ret = (report_handler_t*)sge_malloc(sizeof(report_handler_t));
+   ret = malloc(sizeof(report_handler_t));
    if (ret == NULL ) {
       answer_list_add(alpp, "malloc of report_handler_t failed",
                             STATUS_EMALLOC, ANSWER_QUALITY_ERROR);

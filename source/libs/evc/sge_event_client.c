@@ -742,7 +742,7 @@ sge_evc_class_create(sge_gdi_ctx_class_t *sge_gdi_ctx, ev_registration_id reg_id
 
    ret->sge_evc_handle = NULL;
 
-   sge_evc = (sge_evc_t*)sge_malloc(sizeof(sge_evc_t));
+   sge_evc = malloc(sizeof(sge_evc_t));
    if (!sge_evc) {
       answer_list_add_sprintf(alpp, STATUS_EMALLOC, ANSWER_QUALITY_ERROR,
                               "%s", MSG_MEMORY_MALLOCFAILED);

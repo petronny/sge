@@ -636,7 +636,7 @@ static void bootstrap_thread_local_init(sge_bootstrap_thread_local_t* theState)
 
 sge_bootstrap_state_class_t *sge_bootstrap_state_class_create(sge_path_state_class_t *sge_paths, sge_error_class_t *eh)
 {
-   sge_bootstrap_state_class_t *ret = (sge_bootstrap_state_class_t *)sge_malloc(sizeof(sge_bootstrap_state_class_t));
+   sge_bootstrap_state_class_t *ret = malloc(sizeof(sge_bootstrap_state_class_t));
 
    DENTER(TOP_LAYER, "sge_bootstrap_state_class_create");
 
@@ -702,7 +702,7 @@ static bool sge_bootstrap_state_class_init(sge_bootstrap_state_class_t *st, sge_
    st->set_scheduler_thread_count = set_scheduler_thread_count;   
    st->set_jvm_thread_count = set_jvm_thread_count;   
    
-   st->sge_bootstrap_state_handle = sge_malloc(sizeof(sge_bootstrap_state_t));
+   st->sge_bootstrap_state_handle = malloc(sizeof(sge_bootstrap_state_t));
    
    if (st->sge_bootstrap_state_handle == NULL ) {
       if (eh != NULL) {

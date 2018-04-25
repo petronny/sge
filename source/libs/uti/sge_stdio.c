@@ -420,7 +420,7 @@ pid_t sge_peopen_r(const char *shell, int login_shell, const char *command,
    if (user) {
       struct passwd pw_struct;
       int size = get_pw_buffer_size();
-      char *buffer = sge_malloc(size);
+      char *buffer = malloc(size);
 
       /*
        * get information about the target user

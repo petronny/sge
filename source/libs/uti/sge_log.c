@@ -888,7 +888,7 @@ static log_context_t* log_context_getspecific(void)
       return myctx;
    }
 
-   myctx = (log_context_t*)sge_malloc(sizeof(log_context_t));
+   myctx = malloc(sizeof(log_context_t));
    if (myctx != NULL) {
       myctx->context = NULL;
    }   

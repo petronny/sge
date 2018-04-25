@@ -99,7 +99,7 @@ sge_schedd_add_gdi_order_request(sge_gdi_ctx_class_t *ctx, order_t *orders, lLis
    state_gdi_multi *state = NULL;
 
    DENTER(TOP_LAYER, "sge_schedd_add_gdi_order_request");
-   state = (state_gdi_multi *)sge_malloc(sizeof(state_gdi_multi));
+   state = malloc(sizeof(state_gdi_multi));
    if (state != NULL) {
       int order_id;
 

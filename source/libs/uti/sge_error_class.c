@@ -87,7 +87,7 @@ static bool sge_error_iterator_next(sge_error_iterator_class_t* thiz);
                                
 sge_error_class_t* sge_error_class_create(void) {
    
-   sge_error_class_t *ret = (sge_error_class_t*)sge_malloc(sizeof(sge_error_class_t));
+   sge_error_class_t *ret = malloc(sizeof(sge_error_class_t));
    if( ret == NULL ) {
       return NULL;
    }

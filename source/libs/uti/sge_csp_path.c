@@ -216,7 +216,7 @@ sge_csp_path_class_t *sge_csp_path_class_create(sge_env_state_class_t *sge_env, 
 
    DENTER(TOP_LAYER, "sge_csp_path_class_create");
 
-   ret = (sge_csp_path_class_t *)sge_malloc(sizeof(sge_csp_path_class_t));
+   ret = malloc(sizeof(sge_csp_path_class_t));
    if (!ret) {
       eh->error(eh, STATUS_EMALLOC, ANSWER_QUALITY_ERROR, "%s",
                 MSG_MEMORY_MALLOCFAILED);
@@ -250,7 +250,7 @@ sge_csp_path_class_t *sge_csp_path_class_create(sge_env_state_class_t *sge_env, 
    ret->set_password = set_password;
    ret->set_verify_func = set_verify_func;
 
-   ret->sge_csp_path_handle = (sge_csp_path_t*)sge_malloc(sizeof(sge_csp_path_t));
+   ret->sge_csp_path_handle = malloc(sizeof(sge_csp_path_t));
    if (ret->sge_csp_path_handle == NULL) {
       eh->error(eh, STATUS_EMALLOC, ANSWER_QUALITY_ERROR, "%s",
                 MSG_MEMORY_MALLOCFAILED);

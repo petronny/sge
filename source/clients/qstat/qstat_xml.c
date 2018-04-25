@@ -66,8 +66,8 @@ static int qselect_xml_started(qselect_handler_t *thiz, lList** alpp);
 int qselect_xml_init(qselect_handler_t* handler, lList **alpp _UNUSED) {
    
    memset(handler, 0, sizeof(qselect_handler_t));
-   
-   handler->ctx = sge_malloc(sizeof(dstring));
+
+   handler->ctx = malloc(sizeof(dstring));
    if (handler->ctx == NULL ) {
       answer_list_add(alpp, "malloc of dstring buffer failed",
                             STATUS_EMALLOC, ANSWER_QUALITY_ERROR);
@@ -240,8 +240,8 @@ typedef struct {
 
 int qstat_xml_handler_init(qstat_handler_t* handler, lList **alpp) {
    int ret = 0;
-   qstat_xml_ctx_t *ctx = (qstat_xml_ctx_t*)sge_malloc(sizeof(qstat_xml_ctx_t));
-   
+   qstat_xml_ctx_t *ctx = malloc(sizeof(qstat_xml_ctx_t));
+
    DENTER(TOP_LAYER, "qstat_xml_handler_init");
    
    if (ctx == NULL) {
