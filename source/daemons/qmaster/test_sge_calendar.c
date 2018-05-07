@@ -436,8 +436,8 @@ static void printDateError(time_t *when, struct tm *time)
    struct tm *result;
    struct tm res;
 
-   result = localtime_r(when, &res);
-   
+   result = sge_localtime_r(when, &res);
+
    printf("wrong change date:\n");
    printf("expected: sec:%d min:%d hour:%d mday:%d mon:%d year:%d wday:%d yday:%d isdst:%d\n",
       time->tm_sec,
@@ -656,7 +656,7 @@ static int test_time_frame(void *context, time_frame_entry_t *test, cal_entry_t 
    u_long32 start_time = (u_long32)mktime(&test->start_time);
    time_t end_time = (time_t)duration_add_offset(start_time, test->duration);
 
-   end_tm = localtime_r(&end_time, &res);
+   end_tm = sge_localtime_r(&end_time, &res);
 
     /* test output*/
    printf("\n==> Test Nr:     %d(%d)\n", test_nr, test->cal_nr);

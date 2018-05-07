@@ -1410,7 +1410,7 @@ jsv_handle_started_command(sge_gdi_ctx_class_t *ctx, lListElem *jsv, lList **ans
       if (clocks > 0) {
          struct tm time_struct;
 
-         localtime_r(&clocks, &time_struct);
+         sge_localtime_r(&clocks, &time_struct);
          sge_dstring_clear(&buffer);
          sge_dstring_sprintf(&buffer, "%s a %04d%02d%02d%02d%02d.%02d", prefix,
                              time_struct.tm_year + 1900, time_struct.tm_mon, 
@@ -1568,7 +1568,7 @@ jsv_handle_started_command(sge_gdi_ctx_class_t *ctx, lListElem *jsv, lList **ans
       if (clocks > 0) {
          struct tm time_struct;
 
-         localtime_r(&clocks, &time_struct);
+         sge_localtime_r(&clocks, &time_struct);
          sge_dstring_clear(&buffer);
          sge_dstring_sprintf(&buffer, "%s dl %04d%02d%02d%02d%02d.%02d", prefix,
                              time_struct.tm_year + 1900, time_struct.tm_mon, 

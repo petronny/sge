@@ -290,7 +290,7 @@ static int state_at(time_t now, const lList *ycal, const lList *wcal, time_t *ne
    DENTER(TOP_LAYER, "state_at");
 
    /* convert time_t format into struct tm format */
-   tm_now = localtime_r(&now, &res);
+   tm_now = sge_localtime_r(&now, &res);
 
    /* cullify struct tm */
    tm = lCreateElem(TM_Type);
@@ -349,7 +349,7 @@ static int state_at(time_t now, const lList *ycal, const lList *wcal, time_t *ne
                   isOverlapping = true;
                   visited[counter] = true;
                   temp_next_event += 1;
-                  tm_now = localtime_r(&temp_next_event, &res);
+                  tm_now = sge_localtime_r(&temp_next_event, &res);
                   cullify_tm(tm, tm_now);
 
                   temp_next_event = 0;
@@ -464,7 +464,7 @@ static u_long32 is_week_entry_active(lListElem *tm, lListElem *week_entry, time_
          (*limit)++;
          
          /* convert time_t format into struct tm format */
-         tm_now = localtime_r(limit, &res);
+         tm_now = sge_localtime_r(limit, &res);
 
          /* cullify struct tm */
          new_tm= lCreateElem(TM_Type);
@@ -564,7 +564,7 @@ static u_long32 is_year_entry_active(lListElem *tm, lListElem *year_entry, time_
          (*limit)++;
          
          /* convert time_t format into struct tm format */
-         tm_now = localtime_r(limit, &res);
+         tm_now = sge_localtime_r(limit, &res);
 
          /* cullify struct tm */
          new_tm= lCreateElem(TM_Type);
@@ -689,7 +689,7 @@ u_long32 calender_state_changes(const lListElem *cep, lList **state_changes_list
          struct tm *tm_limit;
          struct tm res; 
                   /* convert time_t format into struct tm format */
-         tm_limit= localtime_r(when, &res);
+         tm_limit = sge_localtime_r(when, &res);
 
          DPRINTF(("first change: state %d, time "sge_u32", sec:%d min:%d hour:%d mday:%d mon:%d year:%d wday:%d yday:%d isdst:%d\n",
             state0,
@@ -704,7 +704,7 @@ u_long32 calender_state_changes(const lListElem *cep, lList **state_changes_list
             tm_limit->tm_yday,
             tm_limit->tm_isdst));
 
-         tm_limit= localtime_r(&when1, &res);
+         tm_limit = sge_localtime_r(&when1, &res);
 
          DPRINTF(("second change: state %d, time "sge_u32", sec:%d min:%d hour:%d mday:%d mon:%d year:%d wday:%d yday:%d isdst:%d\n",
             state1,

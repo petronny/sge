@@ -45,6 +45,7 @@
 #include "uti/sge_string.h"
 #include "uti/sge_dstring.h"
 #include "uti/sge_varargs.h"
+#include "uti/sge_time.h"
 #include "symbols.h"
 
 #define REALLOC_CHUNK   1024
@@ -144,7 +145,7 @@ sge_dstring_allocate(dstring *sb, size_t request)
    if (sb->s != NULL) {
       sb->s = sge_realloc(sb->s, sb->size * sizeof(char), 1);
    } else {
-      sb->s = malloc(sb->size * sizeof(char));
+      sb->s = sge_malloc(sb->size * sizeof(char));
       sb->s[0] = '\0';
    }
 }
@@ -250,7 +251,7 @@ const char* sge_dstring_append_time(dstring *buffer, time_t time, bool as_xml)
           
    DENTER(DSTRING_LAYER, "sge_dstring_append_time");
 
-   tm = localtime_r(&time, &tm_buffer);
+   tm = sge_localtime_r(&time, &tm_buffer);
 
    if (as_xml) {
       sge_dstring_sprintf_append(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",

@@ -54,6 +54,7 @@
 #include "uti/sge_rmon.h"
 #include "uti/sge_profiling.h"
 #include "uti/sge_stdio.h"
+#include "uti/sge_time.h"
 
 #include "comm/commlib.h"
 
@@ -3816,11 +3817,10 @@ static int test(sge_gdi_ctx_class_t *ctx, int *argc, char **argv[], int parse_ar
             job_argv[0] = "0"; 
             job_argv[1] = NULL;
             drmaa_set_vector_attribute(jt, DRMAA_V_ARGV, job_argv, NULL, 0);
-            drmaa_set_attribute(jt, DRMAA_REMOTE_COMMAND, exit_job, NULL, 0);         
-            
+            drmaa_set_attribute(jt, DRMAA_REMOTE_COMMAND, exit_job, NULL, 0);  
             time (&now);
-            localtime_r (&now, &timenow);
-            
+            sge_localtime_r (&now, &timenow);
+
             timenow.tm_min++;
             
             /* This fails at midnight. */
@@ -3867,10 +3867,10 @@ static int test(sge_gdi_ctx_class_t *ctx, int *argc, char **argv[], int parse_ar
                failed_test = 1;
                continue;
             }
-            
-            localtime_r (&now, &timenow);            
-            localtime_r (&later, &timelater);
-            
+
+            sge_localtime_r (&now, &timenow);
+            sge_localtime_r (&later, &timelater);
+
             time_diff = (((timelater.tm_hour * 60) + timelater.tm_min) * 60 + timelater.tm_sec) -
                 (((timenow.tm_hour * 60) + timenow.tm_min) * 60 + timenow.tm_sec);
             

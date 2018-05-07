@@ -1164,7 +1164,7 @@ reporting_is_intermediate_acct_required(const lListElem *job,
     * optimization: only do the following actions "shortly after midnight" 
     */
    now = (time_t)sge_get_gmt();
-   localtime_r(&now, &tm_now);
+   sge_localtime_r(&now, &tm_now);
 #if 1
    if (tm_now.tm_hour != 0 || tm_now.tm_min > INTERMEDIATE_ACCT_WINDOW) {
       DRETURN(false);
@@ -1207,7 +1207,7 @@ reporting_is_intermediate_acct_required(const lListElem *job,
    /* compare day portion of last_intermediate vs. current time 
     * if day changed, we have to write an intermediate report
     */
-   localtime_r(&last_intermediate, &tm_last_intermediate);
+   sge_localtime_r(&last_intermediate, &tm_last_intermediate);
    /* new day? */
    if (
 #if 0 /* for development and debugging: write intermediate data every hour */

@@ -35,7 +35,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <sys/types.h>
-#include <sys/times.h> 
+#include <sys/times.h>
+#include <errno.h>
 
 #ifndef WIN32NATIVE
 #	include <sys/time.h>
@@ -47,6 +48,7 @@
 #include "uti/sge_time.h"
 #include "uti/sge_unistd.h"
 #include "uti/sge_log.h"
+#include "uti/sge_rmon.h"
 
 #ifdef WIN32
 int gettimeofday(struct timeval *tz, struct timezone *tzp);
@@ -169,8 +171,9 @@ void append_time(time_t i, dstring *buffer, bool is_xml)
    struct tm *tm;
 
    struct tm tm_buffer;
-   
-   tm = localtime_r(&i, &tm_buffer);
+
+   DENTER(TOP_LAYER, "append_time");
+   tm = sge_localtime_r(&i, &tm_buffer);
 
    if (is_xml) {
       sge_dstring_sprintf_append(buffer, "%04d-%02d-%02dT%02d:%02d:%02d", 
@@ -181,6 +184,7 @@ void append_time(time_t i, dstring *buffer, bool is_xml)
               tm->tm_mon + 1, tm->tm_mday, 1900 + tm->tm_year,
               tm->tm_hour, tm->tm_min, tm->tm_sec);
    }
+   DEXIT;
 }
 
 /****** uti/time/sge_ctime() **************************************************
@@ -211,13 +215,15 @@ const char *sge_ctime(time_t i, dstring *buffer)
    struct tm tm_buffer;
    struct tm *tm;
 
+   DENTER(TOP_LAYER, "sge_ctime");
    if (!i)
       i = (time_t)sge_get_gmt();
-   tm = localtime_r(&i, &tm_buffer);
+   tm = sge_localtime_r(&i, &tm_buffer);
    sge_dstring_sprintf(buffer, "%02d/%02d/%04d %02d:%02d:%02d",
            tm->tm_mon + 1, tm->tm_mday, 1900 + tm->tm_year,
            tm->tm_hour, tm->tm_min, tm->tm_sec);
 
+   DEXIT;
    return sge_dstring_get_string(buffer);
 }
 
@@ -229,7 +235,7 @@ const char *sge_ctimeXML(time_t i, dstring *buffer)
 
    if (!i)
       i = (time_t)sge_get_gmt();
-   tm = localtime_r(&i, &tm_buffer);
+   tm = sge_localtime_r(&i, &tm_buffer);
    sge_dstring_sprintf(buffer, "%04d-%02d-%02dT%02d:%02d:%02d",
            1900 + tm->tm_year, tm->tm_mon + 1, tm->tm_mday,
            tm->tm_hour, tm->tm_min, tm->tm_sec);
@@ -309,7 +315,7 @@ const char *sge_at_time(time_t i, dstring *buffer)
 
    if (!i)
       i = (time_t)sge_get_gmt();
-   tm = localtime_r(&i, &tm_buffer);
+   tm = sge_localtime_r(&i, &tm_buffer);
    return sge_dstring_sprintf(buffer, "%04d%02d%02d%02d%02d.%02d",
            tm->tm_year+1900, tm->tm_mon + 1, tm->tm_mday,
            tm->tm_hour, tm->tm_min, tm->tm_sec);
@@ -476,4 +482,22 @@ void sge_usleep(int sleep_time)
       req.tv_sec = rem.tv_sec;
       req.tv_nsec = rem.tv_nsec;
    }
+}
+
+/* Avoid having to check for null return from localtime_r generally to
+   mollify null dereference static checks.  */
+struct tm *sge_localtime_r(const time_t *timep, struct tm *result)
+{
+   struct tm *tm;
+
+   DENTER(TOP_LAYER, "sge_localtime_r");
+   tm = localtime_r(timep, result);
+   if (!tm) {
+      /* Something must be very wrong */
+      CRITICAL((SGE_EVENT, MSG_GENERAL_ERROR_SS, "localtime_r", strerror(errno)));
+      DEXIT;
+      abort();
+   }
+   DEXIT;
+   return tm;
 }

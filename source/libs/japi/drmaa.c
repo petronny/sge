@@ -81,6 +81,8 @@
 
 #include "gdi/sge_gdi_ctx.h"
 
+#include "uti/sge_time.h"
+
 extern sge_gdi_ctx_class_t *ctx;
 
 
@@ -3597,7 +3599,7 @@ static char *drmaa_time2sge_time(const char *drmaa_time, dstring *diag)
    /* Get default times */
    time(&now);
    gmtime_r(&now, &gmnow);
-   localtime_r(&now, &herenow);
+   sge_localtime_r(&now, &herenow);
 
    /* Set parsed times to defaults */
    year = -1;

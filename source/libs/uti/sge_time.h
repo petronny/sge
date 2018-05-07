@@ -59,5 +59,7 @@ u_long32 duration_add_offset(u_long32 duration, u_long32 offset);
 
 void sge_usleep(int);
 
+struct tm *sge_localtime_r(const time_t *timep, struct tm *result);
+
 #endif /* __SGE_TIME_H */
 

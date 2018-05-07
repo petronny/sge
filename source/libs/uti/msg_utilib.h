@@ -260,6 +260,7 @@
 #define MSG_TMPNAM_CANNOT_GET_TMP_PATH         _MESSAGE(59161, _("can't get temporary directory path"))
 #define MSG_TMPNAM_SGE_MAX_PATH_LENGTH_US      _MESSAGE(59162, _("reached max path length of "sge_U32CFormat" bytes for file "SFQ))
 #define MSG_TMPNAM_GOT_SYSTEM_ERROR_SS         _MESSAGE(59163, _("got system error "SFQ" while checking file in "SFQ))
+#define MSG_GENERAL_ERROR_SS                   _MESSAGE(59164, _("Calling "SFQ" failed: "SFN))
 
 /* libs/uti/sge_binding_hlp.c */
 #define MSG_SYN_EXPLICIT_NOTFOUND              _MESSAGE(59200, _("'explicit:' not found in string!"))

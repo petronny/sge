@@ -250,7 +250,7 @@ static void qping_convert_time(char* buffer, char* dest, bool show_hour) {
    } else {
 
       i = atoi(help);
-      tm = localtime_r(&i, &tm_buffer);
+      tm = sge_localtime_r(&i, &tm_buffer);
       if (show_hour == true) {
          sprintf(dest, "%02d:%02d:%02d.%s", tm->tm_hour, tm->tm_min, tm->tm_sec, help2);
       } else {

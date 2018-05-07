@@ -41,6 +41,7 @@
 #include "comm/lists/cl_lists.h"
 #include "comm/cl_commlib.h"
 #include "basis_types.h"
+#include "uti/sge_time.h"
 
 void sighandler_client(int sig);
 static int do_shutdown = 0;
@@ -127,7 +128,7 @@ void convert_time(char* buffer, char* dest) {
    help=strtok(buffer, ".");
    help2=strtok(NULL,".");
    i = atoi(help);
-   tm = localtime_r(&i, &tm_buffer);
+   tm = sge_localtime_r(&i, &tm_buffer);
 
 #if 0
    sprintf(dest, "%04d%02d%02d%02d%02d.%02d",
