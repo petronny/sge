@@ -1148,6 +1148,7 @@ static lCondition *_read_val(lDescr *dp, cull_parse_state *state, WhereArgList *
 
    default:
       unknownType("_lWhere");
+      lFreeWhere(&cp);
       DRETURN(NULL);
    }
 

@@ -91,12 +91,14 @@ char *sge_read_token(const char *file)
 
    if ((fd = open(file, O_RDONLY)) == -1) {
       DTRACE;
+      free(tokenbuf);
       return NULL;
    }
 
    if (read(fd, tokenbuf, sb.st_size) != sb.st_size) {
       DTRACE;
       close(fd);
+      free(tokenbuf);
       return NULL;
    }
 

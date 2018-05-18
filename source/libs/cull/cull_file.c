@@ -244,6 +244,7 @@ lListElem *lReadElemFromDisk(const char *prefix, const char *name,
 
    /* open file */
    if ((fd = open(filename, O_RDONLY)) < 0) {
+      free(buf);
       CRITICAL((SGE_EVENT, MSG_CULL_CANTREADXFROMFILEY_SS , obj_name, filename));
       clear_packbuffer(&pb);    /* this one frees buf */
       DEXIT;
