@@ -82,7 +82,7 @@ struct uidgid_state_t {
    char  last_groupname[SGE_MAX_USERGROUP_BUF]; 
 };
 
-static admin_user_t admin_user = {PTHREAD_MUTEX_INITIALIZER, NULL, (uid_t)-1, (gid_t)-1, false};
+static admin_user_t admin_user = {PTHREAD_MUTEX_INITIALIZER, NULL, (uid_t)-1, (gid_t)-1, false, NULL, false};
 
 static pthread_once_t uidgid_once = PTHREAD_ONCE_INIT;
 static pthread_key_t  uidgid_state_key;

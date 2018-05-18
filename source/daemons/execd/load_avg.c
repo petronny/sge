@@ -107,7 +107,7 @@ report_source execd_report_sources[] = {
    { NUM_REP_REPORT_PROCESSORS, execd_add_license_report , 0 },
 #endif
    { NUM_REP_REPORT_JOB, execd_add_job_report , 0 },
-   { 0, NULL }
+   { 0, NULL, 0 }
 };
 
 lUlong sge_execd_report_seqno = 0;

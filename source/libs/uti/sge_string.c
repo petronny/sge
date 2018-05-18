@@ -1085,12 +1085,12 @@ char **sge_stradup(char **cpp, int n)
       cpp2++;
       count++;
    }
- 
+
    /* alloc space */
-   cpp1 = (char **) malloc((count + 1) * sizeof(char **));
+   cpp1 = malloc((count + 1) * sizeof(char *));
    if (!cpp1)
       return NULL;
- 
+
    /* copy  */
    cpp2 = cpp;
    cpp3 = cpp1;
