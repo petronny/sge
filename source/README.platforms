@@ -1,4 +1,4 @@
-SGE Platform Support (as of version 8.1.3)
+SGE Platform Support (as of version 8.1.10)
 ==========================================
 
 Please report portability problems, preferably with fixes, or success
@@ -8,18 +8,16 @@ GNU/Linux
 ---------
 
 * x86_64/amd64:  Widely in production.  Should work at least on any
-  currently-supported distribution (e.g. Debian stable, RHEL 5 or
-  later).  Binary packages are available for RHEL 5 and 6.
+  currently-supported distribution (e.g. Debian 7, RHEL 6 or later).
 
 * Other GNU/Linux architectures:  x86 known to work, others should
   work.  Problems are most likely due to naming conventions for
-  architectures (uname -m) and Java locations.
+  architectures (uname -m) and Java locations.  At least the Java
+  mangement support (which isn't know to be used) currently won't
+  build with Java 9.
 
-Source packaging is available for Debian (and derivatives) and RHEL
-but probably needs small adjustment for SuSE.  The included dpkg
-packaging is a much better bet than the current official Debian
-packaging (which is being worked on); it doesn't provide GUI installer
-or Hadoop support.  See README.packages.
+Packaging is available for Debian (and derivatives) and RHEL but
+probably needs small adjustment for SuSE.  See README.packages.
 
 Some support libraries are available in
 <http://arc.liv.ac.uk/downloads/SGE/support/>.
@@ -27,9 +25,11 @@ Some support libraries are available in
 Solaris
 -------
 
-* Known to build on Solaris 10 with GCC or the system compiler and
-  should do on 11.  Requires add-on library support for openssl,
-  Berkeley DB, and hwloc, e.g. from <http://www.opencsw.org/>.
+* Previous releases were known to build on Solaris 10 with GCC or the
+  system compiler and should do on 11, but Solaris builds haven't been
+  tried for several releases.  Requires add-on library support for
+  openssl, Berkeley DB, and hwloc, e.g. from
+  <http://www.opencsw.org/>.
 
 MS Windows
 ----------
@@ -42,36 +42,41 @@ MS Windows
   least Service Pack 3 using Services for UNIX.  qmaster, qmon, DRMAA,
   and qsh not supported.
 
-* Cygwin:  Builds, and clients work, but there are problems with
-  daemons (tested on Windows 7), apparently related to threading.
+* Cygwin:  Builds, and clients work.  There may be problems with
+  daemons (tested on Windows 7), apparently related to threading, but
+  success has been reported elsewhere.
+
+* MS Windows 10:  It isn't clear whether running in the GNU/Linux
+  subsystem works -- I assume it does as a client if the networking is
+  OK -- or whether that is useful for the servers if so.
 
 FreeBSD, NetBSD, DragonFly, OpenBSD
 -----------------------------------
 
-Works on recent NetBSD.  Support present for FreeBSD and OpenBSD, with
-available patches imported.  Binding/topology support via hwloc may
-not work.
+Previous releases were reported to work on recent NetBSD.  Support is
+present for FreeBSD and OpenBSD, with available patches imported.
+Binding/topology support via hwloc may not work.
 
 Darwin (Apple Mac OS X)
 -----------------------
 
-Support present for recent versions (10.4+?) on x86 and Power.
+Support is present for recent versions (10.4+?) on x86 and Power.
 
 AIX
 ---
 
-Support present for version 5.1 and above.
+Support is present for version 5.1 and above, operating status unknown.
 
 HP-UX
 -----
 
-Support present for version 11, 32- or 64-bit.
+Support is present for version 11, 32- or 64-bit, operating status
+unknown.
 
 Others
 ------
 
 Support for obsolete NEC SX, ("classic") Cray, Tru64, Irix, and
 vestigial bits for other systems has been removed, but could
-conceivably be revived from the repository.  (SX had
-possibly-interesting resource management features.  Some similar from
-Irix is still in the source.)
+conceivably be revived from the repository.  (SX and Irix had
+possibly-interesting resource management features..)

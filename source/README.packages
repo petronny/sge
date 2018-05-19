@@ -7,8 +7,15 @@ distributions (RHEL, Fedora, CentOS, SL).  SuSE and other RPM-based
 distributions aren't currently support, but patches for the RPM spec
 file would be welcome.
 
-The binary packages will install into /opt/sge, intended for shared
-installations, although they will also work with a local installation.
+The binary packages will install into /opt/sge, as traditional,
+intended for shared installations, although they will also work with a
+local installation.  (Actual distribution packages will install into
+/usr.)
+
+Source and binary packages for the architectures supported by copr,
+installing into /opt, are available for RHEL and Fedora
+<https://copr.fedorainfracloud.org/coprs/loveshack/SGE/>.  There are
+official packages in Debian.
 
 Dpkg
 ----
