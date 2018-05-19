@@ -1266,6 +1266,13 @@ case LINUX*:
    set HWLOC = 1
 
    set CFLAGS = "$CFLAGS"
+   if ( -f /usr/include/tirpc/rpc/types.h ) then
+      set CFLAGS = "$CFLAGS -I/usr/include/tirpc"
+      set LFLAGS = "$LFLAGS -ltirpc"
+   else if ( ! -f /usr/include/rpc/types.h ) then
+      echo "ERROR: rpc/types.h not found; maybe install libtirpc headers?"
+      exit 1
+   endif
 
    set COMPILE_DC = 1
 
