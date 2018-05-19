@@ -208,7 +208,7 @@ my_realloc (p, n)
 #endif /* __GNU_LIBRARY__ || __DJGPP__ */
 
 
-#if !defined __alloca && !defined __GNU_LIBRARY__
+#if !defined __alloca
 
 # ifdef	__GNUC__
 #  undef alloca
@@ -231,7 +231,6 @@ extern char *alloca ();
 
 #endif
 
-#ifndef __GNU_LIBRARY__
 # define __stat stat
 # ifdef STAT_MACROS_BROKEN
 #  undef S_ISDIR
@@ -239,7 +238,6 @@ extern char *alloca ();
 # ifndef S_ISDIR
 #  define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)
 # endif
-#endif
 
 #ifdef _LIBC
 # undef strdup
