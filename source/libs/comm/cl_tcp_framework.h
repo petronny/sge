@@ -71,7 +71,7 @@ int cl_com_tcp_connection_request_handler_cleanup(cl_com_connection_t* connectio
 
 /* connection establish help functions */
 int cl_com_tcp_read_GMSH(cl_com_connection_t* connection, unsigned long *only_one_read);
-int cl_com_tcp_write(cl_com_connection_t* connection, cl_byte_t* message, unsigned long size, unsigned long *only_one_write);
+int cl_com_tcp_write(cl_com_connection_t* connection, cl_byte_t* message, ssize_t size, unsigned long *only_one_write);
 int cl_com_tcp_read(cl_com_connection_t* connection, cl_byte_t* message, unsigned long size, unsigned long *only_one_read);
 
 

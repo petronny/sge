@@ -658,7 +658,7 @@ int cl_com_tcp_close_connection(cl_com_connection_t** connection) {
 #undef __CL_FUNCTION__
 #endif
 #define __CL_FUNCTION__ "cl_com_tcp_write()"
-int cl_com_tcp_write(cl_com_connection_t* connection, cl_byte_t* message, unsigned long size, unsigned long *only_one_write) {
+int cl_com_tcp_write(cl_com_connection_t* connection, cl_byte_t* message, ssize_t size, unsigned long *only_one_write) {
    cl_com_tcp_private_t* private = NULL;
    size_t data_written = 0;
    int my_errno;
