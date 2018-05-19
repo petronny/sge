@@ -72,9 +72,11 @@ include $(COMMON_DIR)/common_dependencies
 
 sge_config.h: $(COMMON_DIR)/sge_config.h.in $(SDIR)/configure
 	../configure CC="$(CC)" CFLAGS="`echo $(CFLAGS) | sed -e's/-DSGE_ARCH_STRING=[^ ]*//'`"
+	touch $@
 
 $(COMMON_DIR)/sge_config.h.in $(SDIR)/configure: $(SDIR)/configure.ac
 	cd .. && autoreconf
+	touch $(COMMON_DIR)/sge_config.h.in
 
 ###############################################################################
 # rules to build object codes

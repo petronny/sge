@@ -34,6 +34,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "comm/lists/cl_parameter_list.h"
+#include "uti/sge_string.h"
 
 
 #ifdef __CL_FUNCTION__
