@@ -329,7 +329,8 @@ ___INFO__MARK_END__-->
         <condition property="aimk.targetbits" value="-32" else="">
             <equals arg1="${sge.src.targetbits}" arg2="TARGET_32BIT"/>
         </condition>
-        
+
+        <!--
         <condition property="datamodel" value="-d64" else="">
             <or>
                 <equals arg1="${sge.arch}" arg2="sol-sparc64"/>
@@ -341,11 +342,12 @@ ___INFO__MARK_END__-->
                 <equals arg1="${sge.src.targetbits}" arg2="TARGET_64BIT"/>
             </or>   
         </condition>
-        
+        -->
+
         <fail message="Unsuported ARCH ${sge.arch}" unless="sge.src.arch"/>
         
         <property name="sge.lib.path" value="${sge.srcdir}/${sge.src.arch}"/>
-        <property name="sge.jvmargs"  value="-Djava.library.path=${sge.lib.path} ${datamodel}"/>
+        <property name="sge.jvmargs"  value="-Djava.library.path=${sge.lib.path}"/>
         <echo>sge.jvmargs = ${sge.jvmargs}</echo>
     </target>
     
