@@ -102,12 +102,7 @@ if ( ! $?JAVA_HOME ) then
    endif
 
    if ( -e "$JAVAC_BIN" ) then
-      set JAVAV = `$JAVAC_BIN -version |& head -1`
-      set JAVAV = `expr "$JAVAV" : 'javac 1\.\([0-9]\).*'`
-
-      if ( $JAVAV >= 4 ) then
-         setenv JAVA_HOME `expr //$JAVAC_BIN : '//\(.*\)/bin/.*'`
-      endif
+      setenv JAVA_HOME `expr //$JAVAC_BIN : '//\(.*\)/bin/.*'`
    endif
 endif
 
