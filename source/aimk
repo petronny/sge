@@ -284,7 +284,11 @@ set GPROFFED         = 0
 set COVED            = 0
 set DEBUGGED         = 0
 set COMPILE_DC       = 0
+if ($?CC) then
+set CC               = "$CC"
+else
 set CC               = cc
+endif
 set CFLAGS           = "-D$TARGET_BITS $INP_CFLAGS -DSGE_PQS_API"
 # Keep . first, so the autoconf sge_config.h is found before the sgeobj one.
 # Maybe the naming needs revisiting.
@@ -1285,12 +1289,6 @@ case LINUX*:
       set OFLAG = ""
    endif
 
-   if (! $?CC) then
-      set CC  = gcc
-   endif
-#       set CC  = clanga
-#       set CFLAGS = "$CFLAGS -Wno-unused-value"
-
    if ($BUILDARCH == LINUXS390X && $FORCE_32BIT == 1) then
       set CFLAGS = "-m31 $CFLAGS"
       set LFLAGS = "-m31 $LFLAGS"
@@ -1324,7 +1322,7 @@ case LINUX*:
    endif
    set LFLAGS   = "$DEBUG_FLAG $LFLAGS"
 
-   set SHAREDLD = $CC
+   set SHAREDLD = "$CC"
    set SHARED_CFLAGS = "$INP_CFLAGS -fPIC"
    set SHARED_LFLAGS = "$SHARED_LFLAGS -L. -shared"
 
