@@ -1,0 +1,21 @@
+These SELinux policy files are taken from RHEL 7's
+selinux-policy-targeted package with sge.fc adjusted for paths under
+/opt.
+
+On an RHEL/Fedora system, I think you can install them as follows:*
+Install policycoreutils-python setools-console selinux-policy-devel
+with yum/dnf, and in this directory do as root:
+
+  make -f /usr/share/selinux/devel/Makefile DISTRO=rhel7
+  semodule -i splunk.pp
+  fixfiles restore /opt
+
+The Debian handbook has information for SELinux on Debian-based
+systems.
+
+The file labelling may not work for /opt on a networked filesystem.
+Specifically, an NFS server will need to be configured for SELinux
+support -- see the relevant system administrative documentation.
+
+__
+* Not from an SELinux expert!

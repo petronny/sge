@@ -280,6 +280,10 @@ Files: debian/*
 Copyright: 2012 Dave Love, The University of Liverpool
 License: GPL-3+
 
+Files: source/dist/util/resources/selinux/*
+Copyright: Red Hat
+License: GPL-2+
+
 License: Apache-2.0
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
