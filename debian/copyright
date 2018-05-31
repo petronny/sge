@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Son of Grid Engine
 Upstream-Contact: Dave Love <d.love@liverpool.ac.uk>
-Source: http://arc.liv.ac.uk/downloads/SGE/releases/
+Source: https://arc.liv.ac.uk/downloads/SGE/releases/
 
 Files: *
 Copyright: 2001-2009 Sun Microsystems, Inc. and others

@@ -25,7 +25,7 @@ Programs menu and install it.  You need the GNU utilities and
 SDK components.  To build CSP support, you need openssl.  There isn't
 currently an official distribution for Interix, so either build it
 yourself, or use the somewhat old version from
-<http://arc.liv.ac.uk/downloads/SGE/support/>.  aimk.site expects it
+<https://arc.liv.ac.uk/downloads/SGE/support/>.  aimk.site expects it
 to be unpacked into /usr/local/ssl.
 
 You also need the native compiler from Microsoft Visual C++.  You can

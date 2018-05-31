@@ -9,8 +9,8 @@ Build-Depends: debhelper (>= 7.0.50), tcsh | c-shell, libdb-dev, libssl-dev,
  autoconf
 # add quilt if we acquire patches
 Standards-Version: 3.9.3
-Homepage: http://arc.liv.ac.uk/SGE
-Vcs-darcs: http://arc.liv.ac.uk/repos/darcs/sge/
+Homepage: https://arc.liv.ac.uk/SGE
+Vcs-darcs: https://arc.liv.ac.uk/repos/darcs/sge/
 Vcs-Browser: https://arc.liv.ac.uk/trac/SGE/browser/sge
 
 Package: sge

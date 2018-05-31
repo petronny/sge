@@ -45,7 +45,7 @@ installer or Hadoop support, unlike the RPM packaging.
   architectures (`uname -m`) and Java locations.
 
 Some support libraries are available in the
-http://arc.liv.ac.uk/downloads/SGE/support/[distribution area] in case
+https://arc.liv.ac.uk/downloads/SGE/support/[distribution area] in case
 they aren't available from your OS.
 
 === Solaris
@@ -112,7 +112,7 @@ and used in the build and installation processes.
 == Prerequisites
 
 For up-to-date source, see <https://arc.liv.ac.uk/trac/SGE>, and for
-more information, see <http://arc.liv.ac.uk/SGE>.
+more information, see <https://arc.liv.ac.uk/SGE>.
 
 The following are requirements for building from source and installing
 the result.  If you are on a Debian- or Red Hat-ish system and aren't
@@ -125,7 +125,7 @@ build dependencies mentioned below.
 * GNU autoconf if you are building from the repository rather than
   a distribution;
 * It is highly recommended to use CSP security or MUNGE authentication
-  <http://arc.liv.ac.uk/SGE/howto/sge-security.html>.  For CSP you
+  <https://arc.liv.ac.uk/SGE/howto/sge-security.html>.  For CSP you
   need the http://www.openssl.org/[openSSL library], preferably your OS's
   packaged version; without it, build with `aimk -no-secure`.
   To provide http://munge.googlecode.com/[MUNGE authentication],
@@ -157,13 +157,13 @@ build dependencies mentioned below.
   http://swing-layout.dev.java.net[swing-layout].  Izpack 4.1.1 is
   known to work, later versions may not; swing-layout 1.0.3 is known
   to work.  Copies are available from
-  <http://arc.liv.ac.uk/downloads/SGE/support/> and are included in
+  <https://arc.liv.ac.uk/downloads/SGE/support/> and are included in
   the source RPM.
 +
 The `herd` library
 requires a basic Hadoop distribution (hadoop-0.20 GNU/Linux
 packages) of a suitable version
-(e.g. <http://archive.cloudera.com/cdh/3/>).  The cdh3u3
+(e.g. <https://archive.cloudera.com/cdh/3/>).  The cdh3u3
 (0.20.2+923.197) and cdh3u4 (0.20.2+923.256) versions are known to
 work and cdh3u0 is known not to with this version of
 SGE.  (There was an incompatible change in the Hadoop distribution,
@@ -368,7 +368,7 @@ Programs'' menu and install it.  You need the GNU utilities
 and SDK components.    To build CSP support, you need openssl.  There isn't
 currently an official distribution for Interix, so either build it
 yourself, or use the somewhat old version from
-<http://arc.liv.ac.uk/downloads/SGE/support/>.  `aimk.site` expects it
+<https://arc.liv.ac.uk/downloads/SGE/support/>.  `aimk.site` expects it
 to be unpacked into `/usr/local/ssl`.
 
 You also need the native compiler from Microsoft Visual C++.  (It may
@@ -468,4 +468,4 @@ avoid the Java components, add `--without java`.
 ------
 Copyright (C) 2013, Dave Love, University of Liverpool
 
-Licence http://arc.liv.ac.uk/repos/darcs/sge/LICENCES/GFDL-1.3[GFDL].
+Licence https://arc.liv.ac.uk/repos/darcs/sge/LICENCES/GFDL-1.3[GFDL].

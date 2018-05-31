@@ -20,7 +20,7 @@ Packaging is available for Debian (and derivatives) and RHEL but
 probably needs small adjustment for SuSE.  See README.packages.
 
 Some support libraries are available in
-<http://arc.liv.ac.uk/downloads/SGE/support/>.
+<https://arc.liv.ac.uk/downloads/SGE/support/>.
 
 Solaris
 -------

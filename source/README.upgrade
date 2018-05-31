@@ -4,9 +4,9 @@ Upgrading SGE installations
 It is possible to do a live upgrade an installation of a previous SGE 8
 release or a 6.2u5-compatible one, without stopping jobs on the
 cluster, but at least ensure you have a configuration backup in case
-of problems <http://arc.liv.ac.uk/SGE/howto/backup.html>.  For
+of problems <https://arc.liv.ac.uk/SGE/howto/backup.html>.  For
 upgrading from an older version, see
-<http://arc.liv.ac.uk/SGE/howto/install62patch.txt>.  From Oracle OGE
+<https://arc.liv.ac.uk/SGE/howto/install62patch.txt>.  From Oracle OGE
 6.2u6 or 6.2u7, or Univa UGE 8.1+, a re-installation will be required.
 
 * Stop the execds (qconf -ke).

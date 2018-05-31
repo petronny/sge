@@ -84,7 +84,7 @@ Content
    Also in the $SGE_ROOT/examples/drmaa directory you will find the example
    programs from the online tutorial at:
 
-      http://arc.liv.ac.uk/SGE/howto/drmaa.html
+      https://arc.liv.ac.uk/SGE/howto/drmaa.html
 
    Once you're familiar with the DRMAA API, you're ready to begin
    development of your application.  Every source file which will call
@@ -119,7 +119,7 @@ Content
 
    The first step is to look at the example program found at:
 
-      http://arc.liv.ac.uk/repos/darcs/sge/source/libs/jdrmaa/src/DrmaaExample.java
+      https://arc.liv.ac.uk/repos/darcs/sge/source/libs/jdrmaa/src/DrmaaExample.java
 
    The example program demonstrates a simple usage of the DRMAA library to
    submit several bulk jobs and several single jobs, wait for the jobs to
@@ -127,11 +127,11 @@ Content
 
    In the:
 
-      http://arc.liv.ac.uk/repos/darcs/sge/source/libs/jdrmaa/src/com/sun/grid/drmaa/howto
+      https://arc.liv.ac.uk/repos/darcs/sge/source/libs/jdrmaa/src/com/sun/grid/drmaa/howto
 
    directory you will find the example programs from the online tutorial at:
 
-      http://arc.liv.ac.uk/SGE/howto/drmaa_java.html
+      https://arc.liv.ac.uk/SGE/howto/drmaa_java.html
 
    API documentation can be found at:
 
