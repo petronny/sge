@@ -355,9 +355,11 @@ static int cl_com_ssl_set_default_mode(SSL_CTX *ctx, SSL *ssl) {
 
    /* 
     * see: http://www.openssl.org/docs/apps/ciphers.html#
-    * test this cipher string with openssl ciphers -v "RC4-MD5:NULL-MD5" command 
+    * test this cipher string with openssl ciphers -v "AES256-SHA256:NULL-SHA256" command 
     */
-   const char* commlib_ciphers_string = "RC4-MD5:NULL-MD5"; /* "RC4-MD5:NULL-MD5"; */ /* or "DEFAULT" */
+   /* new cipher for openssl 1.1 (works with 1.0) */
+   /* @TODO: make this configurable at compiletime or via bootstrap */
+   const char* commlib_ciphers_string = "AES256-SHA256:NULL-SHA256"; 
 
    if (ctx != NULL) {
       CL_LOG(CL_LOG_INFO,"setting CTX object defaults");      
