@@ -83,18 +83,21 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # OpenSuSE support; SLES changes welcome
 # Fixme: maybe just depend on specific file names
+%global with_jemalloc %nil
 %if 0%{?suse_version}
 %global sslpkg libopenssl
 # Only in Factory as of OS 13.1
 %global hwlocpkg libhwloc
 %global xmupkg xorg-x11-libXmu
-%global with_jemalloc %nil
 %global with_munge %nil
 %else
 %global sslpkg openssl
 %global hwlocpkg hwloc
 %global xmupkg libXmu
+%if ! 0%{?fedora} == 28
+# Avoid https://github.com/jemalloc/jemalloc/issues/937
 %global with_jemalloc -with-jemalloc
+%endif
 %global with_munge -with-munge
 BuildRequires: jemalloc-devel munge-devel
 %endif
@@ -111,6 +114,10 @@ BuildRequires: motif-devel
 %else
 # el5, el6, openSuSE
 BuildRequires: openmotif-devel
+%endif
+%if 0%{?fedora} >= 28
+# No longer in glibc
+BuildRequires: libtirpc-devel
 %endif
 %if %{with java}
 BuildRequires: java-devel >= 1.6.0, javacc, ant-junit
@@ -338,6 +345,7 @@ echo 'y'| scripts/distinst -local -allall ${gearch}
 # pages, so don't bother.
 #   find man -type l | xargs rm -f
 #   gzip man/man*/*
+  sed -i -e "s|/usr/bin|%sge_bin/$gearch|"  -e "s|/var/spool/gridengine|%_sge_home/common|" util/resources/selinux/sge.fc
 )
 cat ../README - > $RPM_BUILD_ROOT/%{sge_home}/doc/README <<+
 
@@ -462,6 +470,10 @@ fi
 
 
 %changelog
+* Sun May 20 2018 Dave Love <dave.love@manchester.ac.uk> - 1:8.1.10-1
+- New version with fixes for recent Fedora
+- Adjust selinux file spec
+
 * Sun Feb 28 2016 Dave Love <d.love@liverpool.ac.uk> 8.1.9
 - Fix OpenSuSE build
 - Don't install testsuidroot suid
