@@ -247,7 +247,7 @@ ___INFO__MARK_END__-->
         A range of IDs that will be assigned dynamically for jobs. The range<br>
         must be big enough to provide enough numbers for the maximum number<br>
         of Grid Engine jobs running at a single moment on a single host.<br>
-        For example, a range of 20000-20100 allows 100 jobs to run concurrently<br>
+        For example, a range of 20000-20200 allows 100 jobs to run concurrently<br>
         on a single host.<br><br>
         <b>Variable: </b><code>$GID_RANGE</code></html>" />
         <str id="cfg.shell.name.label.tooltip" txt="<html><b>Shell name</b><br><br>

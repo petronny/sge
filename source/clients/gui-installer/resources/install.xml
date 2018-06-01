@@ -221,7 +221,7 @@ ___INFO__MARK_END__-->
         <variable name="cfg.sge.additional.jvm.args" value="-Xmx256m"/>
         <variable name="cfg.cell.name" value="default"/>
         <variable name="cfg.admin.user" value=""/>
-        <variable name="cfg.gid.range" value="20000-20100"/>
+        <variable name="cfg.gid.range" value="20000-20200"/>
         <variable name="cfg.spooling.method" value=""/> <!-- init in IntermediateActionPanel -->
         <variable name="add.spooling.method.classic" value="classic"/>
         <variable name="add.spooling.method.berkeleydb" value="berkeleydb"/>

@@ -948,7 +948,7 @@ GetGidRange()
 {
    done=false
    if [ -z "$GID_RANGE" ]; then
-        GID_RANGE=20000-20100
+        GID_RANGE=20000-20200
    fi
    
    while [ $done = false ]; do
@@ -964,8 +964,8 @@ GetGidRange()
                 "dynamically for jobs.\n\n" \
                 "The range must be big enough to provide enough numbers for the maximum number\n" \
                 "of Grid Engine jobs running at a single moment on a single host. E.g. a range\n" \
-                "like >20000-20100< means that Grid Engine will use the group ids from\n" \
-                "20000-20100 and provides a range for 100 Grid Engine jobs at the same time\n" \
+                "like >20000-20200< means that Grid Engine will use the group ids from\n" \
+                "20000-20200 and provides a range for 100 Grid Engine jobs at the same time\n" \
                 "on a single host.\n\n" \
                 "You can change at any time the group id range in your cluster configuration.\n"
 

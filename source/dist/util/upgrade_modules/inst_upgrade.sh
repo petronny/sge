@@ -399,7 +399,7 @@ AddDummyConfiguration()
    MAILER=mailx
    XTERM=xterm
    CFG_MAIL_ADDR=none
-   CFG_GID_RANGE=20000-21000
+   CFG_GID_RANGE=20000-20200
    QLOGIN_COMMAND=builtin
    QLOGIN_DAEMON=builtin
    RLOGIN_COMMAND=builtin
