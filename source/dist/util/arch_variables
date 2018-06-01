@@ -117,34 +117,6 @@ case $ARCH in
    RSH_DAEMON=undef
    LOADSENSOR_COMMAND=undef
    ;;
- tru64)
-   AWK=/usr/bin/nawk
-   ECHO=/usr/bin/echo
-   RC_FILE=sysv_rc
-   RC_PREFIX=/sbin
-   RC_DIR=rc3.d
-   XTERM=/usr/bin/X11/xterm
-   MAILER=/usr/bin/Mail
-   QLOGIN_COMMAND=telnet
-   QLOGIN_DAEMON=/usr/sbin/telnetd
-   RLOGIN_DAEMON=/usr/sbin/rlogind
-   RSH_DAEMON=undef
-   LOADSENSOR_COMMAND=undef
-   ;;
- irix*)
-   AWK=/usr/bin/nawk
-   ECHO=/sbin/echo
-   RC_FILE=sysv_rc
-   RC_PREFIX=/etc
-   RC_DIR=rc2.d
-   XTERM=/usr/bin/X11/xterm
-   MAILER=/usr/sbin/Mail
-   QLOGIN_COMMAND=telnet
-   QLOGIN_DAEMON=/usr/etc/telnetd
-   RLOGIN_DAEMON=/usr/etc/rlogind
-   RSH_DAEMON=undef
-   LOADSENSOR_COMMAND=undef
-   ;;
  hp*)
    AWK=/usr/bin/awk
    ECHO=/bin/echo
