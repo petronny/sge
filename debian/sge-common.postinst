@@ -27,10 +27,5 @@ case "$1" in
       chown -R ${user}:${user} /opt/sge
     fi
   ;;
-
-  *)
-    echo "postinst called with unknown argument \`$1'" >&2
-    exit 1
-  ;;
 esac
 exit 0

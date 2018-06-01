@@ -11,9 +11,26 @@ user=sgeadmin
 
 case "$1" in
     purge)
-        rm -rf /opt/sge
-        delgroup ${user}
-        deluser ${user} ;;
+# make backup of config before purging the directory
+        if [ -d "/opt/sge/default" ]; then
+            mkdir -p /var/backups && tar -C /opt/sge -czf "/var/backups/sge_default_`date +%s`.tar.gz" default
+            rm -rf /opt/sge
+        else
+            rm -f /opt/sge || true
+        fi
+
+# find and remove init scripts
+        find /etc/init.d -maxdepth -name "sge*" -printf "%f\n" | while read -r initscript
+        do
+            if grep -q "SGE startup script" ; then
+                update-rc.d "${initscript}" remove && rm -f -- "/etc/init.d/${initscript}"
+            fi
+        done
+
+# could be that user and group are NOT local
+        delgroup ${user} || true
+        deluser ${user} || true
+        ;;
 esac
 exit 0
 

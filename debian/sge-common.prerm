@@ -1,0 +1,23 @@
+#!/bin/sh
+# prerm script for gridengine-common
+#
+# see: dh_installdeb(1)
+
+set -e
+
+#DEBHELPER#
+
+case "$1" in
+    remove)
+        if masterpids=`pgrep -x sge_master`; then
+            echo "sge_master still running: ${masterpids}"
+            exit 1
+        fi
+        if execpids=`pgrep -x sge_execd`; then
+            echo "sge_execd still running: ${execdpids}"
+            exit 1
+        fi
+        ;;
+esac
+exit 0
+
