@@ -28,17 +28,18 @@ of working platforms.
 
 === GNU/Linux
 
-<<packages,Source packaging>> is available for Debian (and derivatives) and RHEL
-but probably needs small adjustment for SuSE.  The included dpkg
-packaging is a much better bet than the current official Debian
-packaging (which is being worked on); it doesn't currently provide GUI
-installer or Hadoop support, unlike the RPM packaging.
+<<packages,Source packaging>> is available for Debian (and
+derivatives) and RHEL but may need small adjustment for SuSE.  The
+included dpkg packaging installs in the traditional `/opt/sge`, unlike
+the official packaging; it doesn't currently provide GUI installer or
+Hadoop support, unlike the RPM packaging.  See `README.packaging`.
 
 [horizontal]
 * x86_64/amd64::  Widely used in production.  Should work at least on
-  any currently-supported distribution (e.g. Debian stable, RHEL 5 or
-  later).  Binary packages are available for RHEL 5 and 6, and Debian
-  Wheezy.
+  any currently-supported distribution (e.g. Debian stable, RHEL 6 or
+  later, Fedora).  Binary packages are available for
+  https://copr.fedorainfracloud.org/coprs/loveshack/SGE/[RHEL/Fedora],
+  and Debian some Debian releases.
 * Other GNU/Linux architectures::  Debian packages are available for
   armel; x86 is known to work; other architectures should work.  Build
   problems are most likely to be due to naming conventions for
@@ -73,8 +74,7 @@ Service Pack 3 using Services for UNIX.  `qmaster`, `qmon`, DRMAA, and
 The native components as in the Interix/SUA build are currently not
 supported.  (Some functions from the Interix/SUA library are missing.)
 execd is reported to run under cygrunsrv, but needs SGE_ND set in the
-environment, since cygrunsrv stops on a fork.  inst_sge needs fixing
-for Cygwin.  [See issue #1557.]
+environment, since cygrunsrv stops on a fork.
 
 === FreeBSD, NetBSD, DragonFly, OpenBSD
 
@@ -99,25 +99,24 @@ Support is present for version 11, 32- or 64-bit.
 Support for obsolete NEC SX, (`classic') Cray, Tru64, Irix, and
 vestigial bits for other systems has been removed, but could
 conceivably be revived from the repository.  (SX had
-possibly-interesting resource management features like Irix, and some
-of that from Irix is still in the code.)
+possibly-interesting resource management features like Irix.)
 
-New ports require at least support in the       `arch`, `compilearch`,
-and `aimk` scripts, but may need other substantial changes, depending
-on how similar they are to an existing port.
+New ports require at least support in the `arch`, `compilearch`, and
+`aimk` scripts, but may need other substantial changes, depending on
+how similar they are to an existing port.
 
 See `source/dist/README.arch` for how the architecture is determined
 and used in the build and installation processes.
 
 == Prerequisites
 
-For up-to-date source, see <https://arc.liv.ac.uk/trac/SGE>, and for
-more information, see <https://arc.liv.ac.uk/SGE>.
+For up-to-date source, see https://arc.liv.ac.uk/trac/SGE, and for
+more information, see https://arc.liv.ac.uk/SGE.
 
 The following are requirements for building from source and installing
 the result.  If you are on a Debian- or Red Hat-ish system and aren't
-building packages for some reason, check +gridengine.spec+ and
-+debian/control+ in the sources for the names of packages to satisfy
+building packages for some reason, check `gridengine.spec` and
+`debian/control+ in the sources for the names of packages to satisfy
 build dependencies mentioned below.
 
 * A version of `csh` (e.g. http://www.tcsh.org/Welcome[tcsh]) and the
@@ -125,7 +124,7 @@ build dependencies mentioned below.
 * GNU autoconf if you are building from the repository rather than
   a distribution;
 * It is highly recommended to use CSP security or MUNGE authentication
-  <https://arc.liv.ac.uk/SGE/howto/sge-security.html>.  For CSP you
+  https://arc.liv.ac.uk/SGE/howto/sge-security.html.  For CSP you
   need the http://www.openssl.org/[openSSL library], preferably your OS's
   packaged version; without it, build with `aimk -no-secure`.
   To provide http://munge.googlecode.com/[MUNGE authentication],
@@ -157,13 +156,13 @@ build dependencies mentioned below.
   http://swing-layout.dev.java.net[swing-layout].  Izpack 4.1.1 is
   known to work, later versions may not; swing-layout 1.0.3 is known
   to work.  Copies are available from
-  <https://arc.liv.ac.uk/downloads/SGE/support/> and are included in
+  https://arc.liv.ac.uk/downloads/SGE/support/ and are included in
   the source RPM.
 +
 The `herd` library
-requires a basic Hadoop distribution (hadoop-0.20 GNU/Linux
-packages) of a suitable version
-(e.g. <https://archive.cloudera.com/cdh/3/>).  The cdh3u3
+requires a basic obsolete version of a Hadoop distribution
+(e.g. hadoop-0.20 GNU/Linux packages) of a suitable version
+(e.g. https://archive.cloudera.com/cdh/3/).  The cdh3u3
 (0.20.2+923.197) and cdh3u4 (0.20.2+923.256) versions are known to
 work and cdh3u0 is known not to with this version of
 SGE.  (There was an incompatible change in the Hadoop distribution,
@@ -185,7 +184,7 @@ component directory;
   libcrypt-devel, depending on version), libncurses-devel,
   libXm-devel, libXext-devel, libXmu-devel (the last three for qmon);
   also build and install hwloc from
-  <http://www.open-mpi.org/software/hwloc/> or use `aimk -hwloc` (see
+  http://www.open-mpi.org/software/hwloc/ or use `aimk -hwloc` (see
   below) to avoid core binding support.
 
 If in doubt for other systems, maybe consult and adapt the Red Hat recipe
@@ -195,7 +194,7 @@ source directory.
 == Building
 
 The following commands assume that your current working directory is
-++sge-++__version__++/source++ from unpacking the source distribution
+``sge-``__version__``/source`` from unpacking the source distribution
 tarball, and that you are using a Bourne-like shell.
 
 A summary of the build procedure is:
@@ -295,7 +294,7 @@ including documentation and binaries for the built architectures
 ==== Distribution Staging
 
 To create a distribution tarball, the first step is to install the
-files into a `staging' directory with +distinst+, e.g.
+files into a `staging' directory with `distinst`, e.g.
 ....
   $ echo y | scripts/distinst -allall -basedir `pwd`/dist -vdir 8.1.4 -noexit -noopenssl -nobdb
 ....
@@ -348,11 +347,11 @@ the possible binaries.
 
 == Building on MS Windows with SUA/SFU[[windowsbuild]]
 
-These are notes from building 8.1.3+ on 64-bit MS ``Windows 7
-Enterprise'' in the ``normal'' way with the ``SUA'' system.  The
+These are notes from building 8.1.3+ on 64-bit MS ‘Windows 7
+Enterprise’ in the ‘normal’ way with the SUA system.  The
 procedure will be different for installing the basic environment with
-the earlier ``SFU'' system in MS Windows XP.  +aimk+ may well need
-hacking for other versions, as well as +aimk.site+.
+the earlier SFU system in MS Windows XP.  `aimk` may well need
+hacking for other versions, as well as `aimk.site`.
 
 The initial SUA installation is via:
 ====
@@ -363,20 +362,20 @@ and off -> Subsystem for UNIX-based applications
 There is a parallel item to enable the NFS client, which you may want
 on execution hosts.
 
-Then go to ``Download utilities ...'' from the SUA item in the ``All
-Programs'' menu and install it.  You need the GNU utilities
+Then go to `Download utilities ...` from the SUA item in the `All
+Programs` menu and install it.  You need the GNU utilities
 and SDK components.    To build CSP support, you need openssl.  There isn't
-currently an official distribution for Interix, so either build it
+an official distribution for Interix, so either build it
 yourself, or use the somewhat old version from
-<https://arc.liv.ac.uk/downloads/SGE/support/>.  `aimk.site` expects it
+https://arc.liv.ac.uk/downloads/SGE/support/.  `aimk.site` expects it
 to be unpacked into `/usr/local/ssl`.
 
 You also need the native compiler from Microsoft Visual C++.  (It may
 be possible to use the free MinGW compiler, but that has not been
 tried.)  You can
-use the gratis ``Express Edition'', which appears to be available from
-<https://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products>.  The tested procedure here was with ``Visual Studio 9.0'' ``2008
-Express Edition''.  There's a crucial, obscure step necessary to be
+use the gratis ‘Express Edition’, which appears to be available from
+https://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products.  The tested procedure here was with ‘Visual Studio 9.0’ ‘2008
+Express Edition’.  There's a crucial, obscure step necessary to be
 able to run the compiler;  without it, `cl.exe` won't run (or the
 Interix `/bin/ar`), and you won't see why not (a missing dll) unless you
 run the binary explicitly, i.e. not via the path.  Assuming the
@@ -402,70 +401,12 @@ It isn't currently clear whether a 64-bit Interix version can be built.
 
 == Building Debian or Red Hat packages[[packages]]
 
-Packaging is available for building binary packages for Debian and
-derived distributions (like Ubuntu), and for Red Hat-derived
-distributions (RHEL, Fedora, CentOS, SL).  SuSE and other RPM-based
-distributions aren't currently support, but patches for the RPM spec
-file would be welcome.
-
-The binary packages will install into `/opt/sge`, intended for shared
-installations, although they will also work with a local installation.
-
-=== dpkg
-
-See <http://wiki.debian.org/BuildingAPackage> for general help on
-building Debian packages.  It is intended that the
-http://wiki.debian.org/Hardening#hardening-wrapper[hardening-wrapper]
-package is used, but it isn't required by the build dependencies.
-
-* Ensure the `dpkg-dev` package is installed
-
-* Run
-+
-....
-  $ tar fx sge-<version>.tar.gz; cd sge-<version>
-....
-
-* Run
-+
-....
-  $ dpkg-buildpackage -b
-....
-* If necessary, satisfy build dependencies:
-+
-....
-  $ sudo apt-get install <missing packages>
-  $ dpkg-buildpackage -b
-....
-+
-If you run lintian, e.g. via `debuild` instead of `dpkg-buildpackage`,
-recent versions will complain bitterly about use of `/opt`,
-unfortunately.
-
-=== RPM
-
-* Ensure the `rpm-build` package is installed.  You may (RHEL5,
-  typically) or may not (RHEL6) need to be root to run `rpmbuild`.
-
-* Run
-+
-....
-  $ rpmbuild --rebuild gridengine-<version>.src.rpm
-....
-* If necessary, satisfy build dependencies:
-+
-....
-  $ sudo yum install <missing packages>
-  $ rpmbuild --rebuild gridengine-<version>.src.rpm
-....
-To build the Hadoop support after (installing the `hadoop-0.20`
-package from the http://archive.cloudera.com/redhat/cdh/3/[Cloudera
-CDH3 repository] add `--with hadoop` to the `rpmbuild` command, or to
-avoid the Java components, add `--without java`.
+See README.packages.
 
 [float]
 {nbsp}
 ------
 Copyright (C) 2013, Dave Love, University of Liverpool
+Copyright (C) 2018, Dave Love, University of Manchester
 
 Licence https://arc.liv.ac.uk/repos/darcs/sge/LICENCES/GFDL-1.3[GFDL].

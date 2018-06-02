@@ -3,14 +3,16 @@ Building SGE Debian or Red Hat packages
 
 Source packaging is available for building binary packages for Debian
 and derived distributions (like Ubuntu), and for Red Hat-derived
-distributions (RHEL, Fedora, CentOS, SL).  SuSE and other RPM-based
-distributions aren't currently support, but patches for the RPM spec
-file would be welcome.
+distributions (RHEL, Fedora, CentOS, SL).  Building on SuSE and other
+RPM-based distributions may or may not work, but packages for some
+OpenSuSE are likely to be available in the Fedora COPR (see below);
+patches for the RPM spec file for particular distributions would be
+welcome.
 
 The binary packages will install into /opt/sge, as traditional,
-intended for shared installations, although they will also work with a
-local installation.  (Actual distribution packages will install into
-/usr.)
+intended for shared installations, although that will also work fine
+with a local installation.  (Actual distribution packages will install
+into /usr etc.)
 
 Source and binary packages for the architectures supported by copr,
 installing into /opt, are available for RHEL and Fedora
@@ -20,7 +22,7 @@ official packages in Debian.
 Dpkg
 ----
 
-See <http://wiki.debian.org/BuildingAPackage> for general help on
+See <https://wiki.debian.org/BuildingTutorial> for general help on
 building Debian packages.  It is intended that the hardening-wrapper
 package <http://wiki.debian.org/Hardening#hardening-wrapper> is used,
 but it isn't required by the build dependencies.
@@ -31,8 +33,9 @@ but it isn't required by the build dependencies.
 
 * dpkg-buildpackage -b
 
-* If necessary, satisfy build dependencies:
-  sudo apt-get install <missing packages>
+* If necessary, satisfy build dependencies that were complained about:
+
+  sudo apt install <missing packages>
   dpkg-buildpackage -b
 
 If you run lintian, e.g. via debuild, it will complain bitterly about
@@ -41,16 +44,34 @@ use of /opt with recent versions, unfortunately.
 RPM
 ---
 
-* Ensure the rpm-build package is installed.  You may or may not
-  (RHEL6) need to be root to run rpmbuild.
+Substitute the appropriate SGE version below, and substitute "dnf" for
+"yum" on Fedora.
 
-* rpmbuild --rebuild gridengine-8.1.3-1.src.rpm
+* Ensure the rpm-build package is installed.
+
+* I fyou don't have the source package, you can make it with
+
+    rpmbuild -ts gridengine-8.1.10.tar.gz
+
+  Or build the binary package directly:
+
+    rpmbuild -tb gridengine-8.1.10.tar.gz
+
+* rpmbuild --rebuild gridengine-8.1.10-1.src.rpm
 
 * If necessary, satisfy build dependencies:
   sudo yum install <missing packages>
-  rpmbuild --rebuild gridengine-8.1.3-1.src.rpm
+  rpmbuild --rebuild gridengine-8.1.10-1.src.rpm
 
 * To build the Hadoop support after installing the hadoop-0.20 package
-  from the Cloudera CDH3 repository.
+  from the http://archive.cloudera.com/redhat/cdh/3/[Cloudera CDH3
+  repository].  note that this is an obsolete version, and you should
+  probably use one of the systems for starting a current one on a set
+  of nodes if you need to.
 
 * To avoid Java components, add "--without java" to rpmbuild.
+
+Copyright (C) 2013, Dave Love, University of Liverpool
+Copyright (C) 2018, Dave Love, University of Manchester
+
+Licence  GNU Free Documentation License 1.3
