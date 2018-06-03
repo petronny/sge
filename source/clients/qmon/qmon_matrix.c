@@ -528,9 +528,6 @@ int num_fields,
 
    field = sge_malloc(num_fields*sizeof(int));
    col = sge_malloc(num_fields*sizeof(char *));
-   if (field == NULL || col == NULL) {
-      abort();
-   }
 
    va_start(ap, num_fields);
    for(i=0; i<num_fields; i++)
@@ -618,9 +615,6 @@ int num_fields,
 
    field = sge_malloc(num_fields*sizeof(int));
    col = sge_malloc(num_fields*sizeof(char *));
-   if (field == NULL || col == NULL) {
-      abort();
-   }
 
    va_start(ap, num_fields);
    for(i=0; i<num_fields; i++)

@@ -830,7 +830,7 @@ bool get_linear_automatic_socket_core_list_and_account(const int amount,
    int i;
 
    /* get the topology which could be used by the job */
-   tmp_topo_busy = (char *) calloc(logical_used_topology_length, sizeof(char));
+   tmp_topo_busy = sge_calloc(logical_used_topology_length, sizeof(char));
    memcpy(tmp_topo_busy, logical_used_topology, logical_used_topology_length*sizeof(char));
 
    /* 1. Find all free sockets and try to fit the request on them     */
@@ -1184,7 +1184,7 @@ bool get_striding_first_socket_first_core_and_account(const int amount, const in
    /* temporary accounting string -> account on this and
       when eventually successful then copy this string back
       to global topo_busy string */
-   tmp_topo_busy = (char *) calloc(logical_used_topology_length + 1, sizeof(char));
+   tmp_topo_busy = sge_calloc(logical_used_topology_length + 1, sizeof(char));
    memcpy(tmp_topo_busy, logical_used_topology, logical_used_topology_length*sizeof(char));
 
    /* we have to go to the first position given by the arguments

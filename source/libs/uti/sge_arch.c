@@ -122,7 +122,7 @@ const char *sge_get_root_dir(int do_exit, char *buffer, size_t size, int do_erro
     * Check the env variables
     */
    if (sge_root && strlen(sge_root) > 0) {
-      s = strdup(sge_root);
+      s = sge_strdup(sge_root);
    } else {
       goto error;
    }

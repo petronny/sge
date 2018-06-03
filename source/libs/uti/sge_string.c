@@ -256,7 +256,7 @@ char *sge_strtok(const char *str, const char *delimitor)
             alloc_len = n;
          }
       } else {
-         static_str = malloc(n + 1);
+         static_str = sge_malloc(n + 1);
          alloc_len = n;
       }
       strcpy(static_str, str);
@@ -452,7 +452,7 @@ char *sge_strtok_r(const char *str, const char *delimitor,
       if (*context != NULL) {
          ERROR((SGE_EVENT, SFNMAX, MSG_POINTER_INVALIDSTRTOKCALL));
       }
-      *context = (struct saved_vars_s *)malloc(sizeof(struct saved_vars_s));
+      *context = sge_malloc(sizeof(struct saved_vars_s));
       memset(*context, 0, sizeof(struct saved_vars_s));
       saved = *context;
 
@@ -564,15 +564,11 @@ char *sge_strdup(const char *s)
    char *ret = NULL;
 
    DENTER(TOP_LAYER, "sge_strdup");
-   if (s == NULL) {
-      CRITICAL((SGE_EVENT, SFNMAX, MSG_POINTER_NULLPARAMETER));
-      DEXIT_;
-      abort();
+   if (s != NULL) {
+      ret = sge_malloc(strlen(s) + 1);
+      strcpy(ret, s);
+      DEXIT;
    }
-
-   ret = sge_malloc(strlen(s) + 1);
-   strcpy(ret, s);
-   DEXIT;
    return ret;
 }
 
@@ -1737,7 +1733,7 @@ const char *sge_replace_substring(const char *input, const char *old, const char
 
 const char *unescape_env_value(const char *value)
 {
-   char *new_value = strdup(value);
+   char *new_value = sge_strdup(value);
    int i, j, nchars = strlen(value);
 
    for (i = 0, j = 0; i <= nchars; j++) {

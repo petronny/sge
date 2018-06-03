@@ -464,6 +464,7 @@ int drmaa_allocate_job_template(drmaa_job_template_t **jtp, char *error_diagnosi
    }
 
    *jtp = (drmaa_job_template_t *)malloc(sizeof(drmaa_job_template_t));
+   if (!*jtp) DRETURN(DRMAA_ERRNO_INTERNAL_ERROR);
    (*jtp)->strings = (*jtp)->string_vectors = NULL;
 
    DRETURN(DRMAA_ERRNO_SUCCESS);
@@ -2662,6 +2663,7 @@ static int drmaa_job2sge_job(lListElem **jtp, const drmaa_job_template_t *drmaa_
 
       num_args = sge_quick_count_num_args(value);
       args = (char **)malloc(sizeof(char *) * (num_args + 1));
+      if (!args) DRETURN(DRMAA_ERRNO_INTERNAL_ERROR);
       memset(args, 0, sizeof(char *) * (num_args + 1));
 
       DPRINTF(("processing %s, count %d = \"%s\"\n", DRMAA_NATIVE_SPECIFICATION, num_args, value));
@@ -3929,6 +3931,7 @@ static char *drmaa_expand_wd_path(const char*username, const char *path, lList *
       length = strlen(path) - 5 + strlen(homedir) + 1;
       
       file = (char *)malloc(sizeof(char) * length);
+      if (!file) return NULL;
       strcpy(file, homedir);         /* RATS: ignore */
       file = strcat(file, path + 5); /* RATS: ignore */
       
@@ -3936,6 +3939,7 @@ static char *drmaa_expand_wd_path(const char*username, const char *path, lList *
    }
    else {
       file = (char *)malloc(sizeof(char) * (strlen(path) + 1));
+      if (!file) return NULL;
       file = strcpy(file, path); /* RATS: ignore */
    }
 
@@ -3976,6 +3980,7 @@ static char *drmaa_get_home_directory(const char* username, lList **answer_list)
    
    size = get_pw_buffer_size();
    buffer = sge_malloc(size);
+   if (!buffer) return NULL;
    pwd = sge_getpwnam_r(username, &pw_struct, buffer, size);
 
    if (!pwd) {

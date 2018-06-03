@@ -1715,7 +1715,7 @@ int type
    base = get_conf_val(name);
 
    /* Try to get information about 'base' */
-   if( SGE_STAT(base, &statbuf)) {
+   if (base && SGE_STAT(base, &statbuf)) {
       /* An error occurred */
       if (errno != ENOENT) {
          char *t;
@@ -1749,8 +1749,9 @@ int type
          job_id = get_conf_val("job_id");
          ja_task_id = get_conf_val("ja_task_id");
 
-         if (!(path = (char *)malloc(pathlen=(strlen(base) + strlen(job_name) 
-                       + strlen(job_id) + strlen(ja_task_id) + 25)))) {
+         if (!(path =
+               sge_malloc(pathlen=(strlen(base) + strlen(job_name)
+                                   + strlen(job_id) + strlen(ja_task_id) + 25)))) {
             shepherd_error(1, "malloc(%d) failed for %s@", pathlen, name);
          }
 

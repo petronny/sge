@@ -94,9 +94,11 @@ sge_create_cull_order_pos(order_pos_t **cull_order_pos, lListElem *jep, lListEle
 
    if (*cull_order_pos != NULL) {
       sge_free(&cull_order_pos);
+   } else {
+      return;                   /* Fixme: Is that right?  */
    }
 
-   *cull_order_pos = malloc(sizeof(order_pos_t));
+   *cull_order_pos = sge_malloc(sizeof(order_pos_t));
 
    ja_pos = &((*cull_order_pos)->ja_task);
    order_ja_pos = &((*cull_order_pos)->order_ja_task);

@@ -675,7 +675,7 @@ sge_evc_class_t *
 sge_evc_class_create(sge_gdi_ctx_class_t *sge_gdi_ctx, ev_registration_id reg_id, 
                      lList **alpp, const char *name)
 {
-   sge_evc_class_t *ret = (sge_evc_class_t *)sge_malloc(sizeof(sge_evc_class_t));
+   sge_evc_class_t *ret = malloc(sizeof(sge_evc_class_t));
    sge_evc_t *sge_evc = NULL;
    bool is_qmaster_internal = false;
 

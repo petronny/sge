@@ -197,23 +197,6 @@ void shepherd_trace_chown(const char* job_owner)
    shepherd_trace_chown_intern(job_owner, shepherd_trace_fp, st_trace);
 }
 
-/****** err_trace/shepherd_trace_exit() **************************************
-*  NAME
-*     shepherd_trace_exit() -- End shepherd's tracing.
-*
-*  SYNOPSIS
-*     static FILE* shepherd_trace_exit()
-*
-*  FUNCTION
-*     Closes the shepherd's trace file.
-*     Call it as shepherd's last function.
-*
-*  INPUTS
-*     void - none
-*
-*  RESULT
-*     void - none
-*******************************************************************************/
 void shepherd_error_init()
 {
    if (shepherd_error_fp == NULL) {

@@ -152,7 +152,7 @@ spool_berkeleydb_create_context(lList **answer_list, const char *args)
 
       /* parse arguments */
       {
-         char *dup = strdup(args);
+         char *dup = sge_strdup(args);
          options = strchr (dup, ';');
          if (options != NULL) {
             *options = '\0';

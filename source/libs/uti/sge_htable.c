@@ -181,7 +181,7 @@ static void sge_htable_resize(htable ht, int grow)
       DRETURN_VOID_;
    }   
     
-   ht->table = (Bucket **) calloc(1<<ht->size, sizeof(Bucket *));
+   ht->table = sge_calloc(1<<ht->size, sizeof(Bucket *));
    ht->mask = (1<<ht->size) - 1;
 
    for(i=0; i < otablesize; i++) {
@@ -236,11 +236,11 @@ htable sge_htable_create(int size,
                           unsigned int (*hash_func)(const void *),
                           int (*compare_func)(const void *, const void *))
 {
-    htable ht = (htable) malloc(sizeof(htable_rec));
+    htable ht = sge_malloc(sizeof(htable_rec));
 
     ht->size = size;
     ht->mask = (1<<size)-1;
-    ht->table = (Bucket **)calloc(ht->mask + 1, sizeof(Bucket *));
+    ht->table = sge_calloc(ht->mask + 1, sizeof(Bucket *));
     ht->numentries = 0;
     ht->dup_func = dup_func;
     ht->hash_func = hash_func;

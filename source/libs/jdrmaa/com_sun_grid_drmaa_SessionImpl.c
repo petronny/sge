@@ -138,7 +138,7 @@ static void throw_exception (JNIEnv *env, int errnum, const char *message);
 static jclass get_exception_class(JNIEnv *env, int errnum, const char *message);
 static char *get_exception_class_name (int errnum);
 static drmaa_job_template_t *get_from_list (int id);
-static int insert_into_list (drmaa_job_template_t *jt);
+static int insert_into_list (JNIEnv *env, drmaa_job_template_t *jt);
 
 JNIEXPORT void JNICALL Java_com_sun_grid_drmaa_SessionImpl_nativeControl
   (JNIEnv *env, jobject object, jstring jobId, jint action)
@@ -405,8 +405,10 @@ JNIEXPORT void JNICALL Java_com_sun_grid_drmaa_SessionImpl_nativeSynchronize
    }
    
    length = (*env)->GetArrayLength(env, ids);
-   job_ids = (const char**)malloc ((length + 1) * sizeof (char *));
-   
+   job_ids = malloc ((length + 1) * sizeof (char *));
+   if (!job_ids)
+      print_message_and_throw_exception(env, DRMAAJ_ERRNO_INTERNAL_ERROR, NULL);
+
    for (count = 0; count < length; count++) {
       tmp_obj = (*env)->GetObjectArrayElement(env, ids, count);
       job_ids[count] = (*env)->GetStringUTFChars(env, (jstring)tmp_obj, NULL);
@@ -545,8 +547,8 @@ JNIEXPORT jint JNICALL Java_com_sun_grid_drmaa_SessionImpl_nativeAllocateJobTemp
       throw_exception (env, errnum, error);
       return -1;
    }
-   
-   return insert_into_list (jt);
+
+   return insert_into_list (env, jt);
 }
 
 JNIEXPORT void JNICALL Java_com_sun_grid_drmaa_SessionImpl_nativeSetAttributeValue
@@ -638,8 +640,10 @@ JNIEXPORT void JNICALL Java_com_sun_grid_drmaa_SessionImpl_nativeSetAttributeVal
    
    /* Get the strings out of the Strings. */
    name = (*env)->GetStringUTFChars (env, nameStr, NULL);
-   value = (const char**)malloc ((length + 1) * sizeof (char *));
-   
+   value = malloc ((length + 1) * sizeof (char *));
+   if (!value)
+      print_message_and_throw_exception (env, DRMAAJ_ERRNO_INTERNAL_ERROR, NULL);
+
    for (count = 0; count < length; count++) {
       tmp_obj = (*env)->GetObjectArrayElement(env, values, count);
       value[count] = (*env)->GetStringUTFChars(env, (jstring)tmp_obj, NULL);
@@ -1049,7 +1053,7 @@ static char *get_exception_class_name (int errnum)
    }
 }
 
-static int insert_into_list (drmaa_job_template_t *jt)
+static int insert_into_list (JNIEnv *env, drmaa_job_template_t *jt)
 {
    int count = 0;
    drmaa_job_template_t **tmp_list = NULL;
@@ -1060,8 +1064,9 @@ static int insert_into_list (drmaa_job_template_t *jt)
    /* If we haven't initialized the template list yet, do so. */
    if (job_templates == NULL) {
       list_length = TEMPLATE_LIST_LENGTH;
-      job_templates = (drmaa_job_template_t **)malloc
-                                (sizeof (drmaa_job_template_t *) * list_length);
+      job_templates = malloc(sizeof (drmaa_job_template_t *) * list_length);
+      if (!job_templates)
+         print_message_and_throw_exception(env, DRMAAJ_ERRNO_INTERNAL_ERROR, NULL);
       memset (job_templates, 0, list_length * sizeof (drmaa_job_template_t *));
    }
 

@@ -674,8 +674,8 @@ sge_parse_qstat(sge_gdi_ctx_class_t *ctx, lList **ppcmdline, qstat_env_t *qstat_
 static int qstat_stdout_init(qstat_handler_t *handler, lList **alpp) 
 {
    int ret = 0;
-   qstat_stdout_ctx_t *ctx = (qstat_stdout_ctx_t*)sge_malloc(sizeof(qstat_stdout_ctx_t));
-   
+   qstat_stdout_ctx_t *ctx = malloc(sizeof(qstat_stdout_ctx_t));
+
    DENTER(TOP_LAYER, "qstat_stdout_init");
    
    if (ctx == NULL) {

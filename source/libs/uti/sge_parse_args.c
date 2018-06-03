@@ -319,7 +319,7 @@ char ***pargs)
    sge_sl_elem_t *pelem;
 
    count = sge_sl_get_elem_count(sl_args);
-   *pargs = (char**)malloc((count+1)*sizeof(char*));
+   *pargs = sge_malloc((count+1)*sizeof(char*));
 
    i = 0;
    for_each_sl(pelem, sl_args) {

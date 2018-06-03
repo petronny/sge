@@ -404,8 +404,12 @@ lCopySwitchPack(const lListElem *sep, lListElem *dep, int src_idx, int dst_idx,
          dep->cont[dst_idx].obj = NULL;
       } else {
          lListElem *new = lSelectElemPack(tep, NULL, ep, isHash, pb);
-         new->status = OBJECT_ELEM;
-         dep->cont[dst_idx].obj = new;
+         if (new) {
+            new->status = OBJECT_ELEM;
+            dep->cont[dst_idx].obj = new;
+         } else {
+            dep->cont[dst_idx].obj = NULL;
+         }
       }   
       break;
    case lIntT:
@@ -1849,6 +1853,11 @@ lDechainList(lList *source, lList **target, lListElem *ep)
   
    if (*target == NULL) {
       *target = lCreateList(lGetListName(source), source->descr);
+      if (!*target) {
+         CRITICAL((SGE_EVENT,"Couldn't create list !!!"));
+         DEXIT;
+         abort();
+      }
    } else {
       if (lCompListDescr(source->descr, (*target)->descr) != 0) {
          CRITICAL((SGE_EVENT,"Dechaining element into a different list !!!"));

@@ -1624,8 +1624,8 @@ _spool_flatfile_read_object(lList **answer_list, const lDescr *descr,
       my_fields_out = fields_out;
    }
    else {
-      my_fields_out = (int *)malloc ((spool_get_number_of_fields (fields) + 1) *
-                                                                  sizeof (int));
+      my_fields_out = sge_malloc ((spool_get_number_of_fields (fields) + 1) *
+                                  sizeof (int));
       my_fields_out[0] = NoName;
    }
 
@@ -2379,7 +2379,7 @@ FF_DEBUG("after parsing list");
 static spooling_field *get_recursion_field_list(const spool_flatfile_instr *instr)
 {
    /* Only 2 entries in a recursion field list */
-   spooling_field *fields = (spooling_field *)malloc(sizeof(spooling_field) * 2);
+   spooling_field *fields = sge_malloc(sizeof(spooling_field) * 2);
    memset(fields, 0, sizeof(spooling_field)*2);
    fields[0].nm = instr->recursion_info.id_field;
    fields[1].nm = NoName;
@@ -2468,8 +2468,8 @@ static void spool_flatfile_add_line_breaks(dstring *buffer)
    if (tmp_orig == NULL) {
       return;
    }
-   
-   orig = strdup(tmp_orig);
+
+   orig = sge_strdup(tmp_orig);
    strp = orig;
    
    sge_dstring_clear(buffer);

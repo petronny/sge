@@ -905,7 +905,10 @@ int unpackbitfield(sge_pack_buffer *pb, bitfield *bitfield, int descr_size)
       DEXIT;
       return ret;
    }
-   
+   if (!buffer) {
+      DEXIT;
+      return ret;
+   }
    memcpy(sge_bitfield_get_buffer(bitfield), buffer, char_size);
 
    /* free unpacked bitfield buffer */

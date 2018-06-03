@@ -123,7 +123,7 @@ bdb_create(const char *server, const char *path, const char *options)
    info->path   = path;
    info->env    = NULL;
 
-   info->db     = (DB **)malloc(BDB_ALL_DBS * sizeof(DB *));
+   info->db     = sge_malloc(BDB_ALL_DBS * sizeof(DB *));
    for (i = 0; i < BDB_ALL_DBS; i++) {
       info->db[i] = NULL;
    }
@@ -152,7 +152,7 @@ bdb_init_connection(bdb_connection *con)
 
    con->env = NULL;
 
-   con->db     = (DB **)malloc(BDB_ALL_DBS * sizeof(DB *));
+   con->db     = sge_malloc(BDB_ALL_DBS * sizeof(DB *));
    for (i = 0; i < BDB_ALL_DBS; i++) {
       con->db[i] = NULL;
    }

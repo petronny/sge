@@ -218,7 +218,7 @@ int sge_putenv(const char *var)
    if(putenv(duplicate) != 0) {
       return 0;
    }
-
+   /* duplicate shouldn't be freed */
    return 1;
 }
 

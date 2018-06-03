@@ -40,6 +40,7 @@
 #include "uti/rmon.h"
 #include "uti/msg_rmon.h"
 #include "uti/sge_mtutil.h"
+#include "uti/sge_string.h"
 
 #define DEBUG RMON_LOCAL
 
@@ -126,7 +127,7 @@ rmon_helper_t *rmon_get_helper(void)
 
    helper = pthread_getspecific(rmon_helper_key);
    if (helper == NULL) {
-      helper = (rmon_helper_t *)malloc(sizeof(rmon_helper_t));
+      helper = (rmon_helper_t *)sge_malloc(sizeof(rmon_helper_t));
 
       memset(helper, 0, sizeof(rmon_helper_t));
       pthread_setspecific(rmon_helper_key, helper);
@@ -698,7 +699,7 @@ static int set_debug_target_from_env(void)
       return 0;
    }
 
-   s = strdup(env);
+   s = sge_strdup(env);
    if (strcmp(s, "stdout") == 0) {
          rmon_fp = stdout;
    } else if (strcmp(s, "stderr") == 0) {

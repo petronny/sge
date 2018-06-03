@@ -68,6 +68,7 @@ int verydummyprocfs;
 #include "uti/sge_stdio.h"
 #include "uti/sge_unistd.h"
 #include "uti/sge_log.h"
+#include "uti/msg_utilib.h"
 
 #include "uti2/sge_cgroup.h"
 
@@ -82,6 +83,8 @@ int verydummyprocfs;
 #include "procfs.h"
 
 #if __linux__ || __CYGWIN__ || __sun
+static int pt_open(void);
+static void pt_close(void);
 #ifdef MONITOR_PDC
 static bool monitor_pdc = true;
 #else
@@ -201,7 +204,11 @@ void procfs_kill_addgrpid(gid_t add_grp_id, int sig, tShepherd_trace shepherd_tr
       }
    list = sge_malloc(max_groups*sizeof(gid_t));
 
-   pt_open();
+   if (pt_open()) {
+      /* Fixme: not having /proc mounted probably shouldn't be fatal.  */
+      CRITICAL((SGE_EVENT, MSG_FILE_OPENDIRFAILED_SS, PROC_DIR, strerror(errno)));
+      sge_exit(NULL, 1);
+   }
 
    /* find next valid entry in procfs  */
    while ((dent = readdir(cwd))) {
@@ -328,12 +335,12 @@ FCLOSE_ERROR:
    DEXIT;
 }
 
-int pt_open(void)
+static int pt_open(void)
 {
    cwd = opendir(PROC_DIR);
    return !cwd;
 }
-void pt_close(void)
+static void pt_close(void)
 {
    closedir(cwd);
 }
@@ -523,6 +530,7 @@ int pt_dispatch_proc_to_job(char *pidname, lnk_link_t *job_list,
 
       job_elem = LNK_DATA(curr, job_elem_t, link);
       for (group=0; !found_it && group<groups; group++) {
+         /* fixme: comparison of JobId with gid_t */
          if (job_elem->job.jd_jid == list[group]) {
 #if (__linux__ || __CYGWIN__)
             lSetPosBool(pr, pos_rel, true); /* mark process as relevant */
@@ -642,8 +650,13 @@ int pt_dispatch_proc_to_job(char *pidname, lnk_link_t *job_list,
 void
 pt_dispatch_procs_to_jobs(lnk_link_t *job_list, int time_stamp, time_t last_time)
 {
+   DENTER(TOP_LAYER, "pt_dispatch_procs_to_jobs")
    /* fixme: use fopen_cgroup_procs_dir */
-   pt_open();
+   if (pt_open()) {
+      CRITICAL((SGE_EVENT, MSG_FILE_OPENDIRFAILED_SS, PROC_DIR, strerror(errno)));
+      DEXIT;
+      sge_exit(NULL, 1);
+   }
    while ((dent = readdir(cwd)))
       pt_dispatch_proc_to_job(dent->d_name, job_list, time_stamp, last_time);
    last_time = time_stamp;
@@ -651,6 +664,7 @@ pt_dispatch_procs_to_jobs(lnk_link_t *job_list, int time_stamp, time_t last_time
    clean_procList();
 #endif
    pt_close();
+   DEXIT;
 }
 #endif  /* (__linux__ || _CYGWIN__) || __sun */
 

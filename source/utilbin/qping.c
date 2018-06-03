@@ -156,6 +156,10 @@ static void qping_set_output_option(char* option_string) {
          opt = 3;
          option++;
          value2=strstr(option,":");
+         if (!value2) {
+            fprintf(stderr, "Bad output option: %s\n", option);
+            exit(1);
+            }
          value2[0] = 0;
          value1=option;
          value2++;

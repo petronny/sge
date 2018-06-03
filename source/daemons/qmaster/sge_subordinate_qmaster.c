@@ -818,7 +818,7 @@ get_slotwise_sos_sub_tree_qinstances(lListElem *qinstance,
       sge_sl_create(tree_qinstances);
 
       /* first add the super qinstance to the list */
-      ssos_qinstance = (ssos_qinstance_t*)calloc(1, sizeof(ssos_qinstance_t));
+      ssos_qinstance = sge_calloc(1, sizeof(ssos_qinstance_t));
       ssos_qinstance->seq_no    = 0;    /* the super qinstance has always top priority */
       ssos_qinstance->depth     = 0;    /* the super qinstance is on top */
       ssos_qinstance->action    = 0;    /* the super qinstances tasks don't get modified */
@@ -853,7 +853,7 @@ get_slotwise_sos_sub_tree_qinstances(lListElem *qinstance,
          sge_dstring_free(&dstr_so_full_name);
 
          if (sub_qinstance != NULL) {
-             ssos_qinstance = (ssos_qinstance_t*)calloc(1, sizeof(ssos_qinstance_t));
+             ssos_qinstance = sge_calloc(1, sizeof(ssos_qinstance_t));
              ssos_qinstance->seq_no    = lGetUlong(so, SO_seq_no);
              ssos_qinstance->action    = lGetUlong(so, SO_action);
              ssos_qinstance->depth     = depth;
@@ -981,7 +981,7 @@ count_running_jobs_in_slotwise_sos_tree(sge_sl_list_t *qinstances_in_slotwise_so
                         /* The qinstance of the current task is in our ssos tree, so
                          * we can store this task in our ssos tree list.
                          */
-                        ssos_task_t *ssos_task = (ssos_task_t*)calloc(1, sizeof(ssos_task_t));
+                        ssos_task_t *ssos_task = sge_calloc(1, sizeof(ssos_task_t));
                         if (ssos_qinstance->tasks == NULL) {
                            sge_sl_create(&(ssos_qinstance->tasks));
                         }

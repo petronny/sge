@@ -284,8 +284,8 @@ static void sge_error_error(sge_error_class_t* thiz, int error_type, int error_q
 void sge_error_iterator_class_destroy(sge_error_iterator_class_t** thiz)
 {
    sge_error_iterator_t *elem = NULL;
-   
-   if (!thiz) {
+
+   if (!thiz || !(*thiz) || !(*thiz)->sge_error_iterator_handle) {
       return;
    }
 

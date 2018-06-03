@@ -300,7 +300,7 @@ char* cqueue_get_name_from_qinstance(const char *queue_instance)
 
    if ((at_sign = strchr(queue_instance, '@'))) {
       int size = at_sign - queue_instance;
-      cqueue = malloc(sizeof(char) * (size + 1));
+      cqueue = sge_malloc(sizeof(char) * (size + 1));
       cqueue = strncpy(cqueue, queue_instance, size);
       cqueue[size] = '\0';
    } else {

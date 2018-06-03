@@ -272,8 +272,7 @@ search_by_path( lListElem *ep,  /* root of the [sub]tree */
             ret = ep;
             if (ancestors && depth > 0) {
                ancestors->depth = depth;
-               ancestors->nodes =
-                     (lListElem **)malloc(depth * sizeof(lListElem *));
+               ancestors->nodes = sge_malloc(depth * sizeof(lListElem *));
                ancestors->nodes[depth-1] = ep;
             }
          }

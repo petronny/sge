@@ -674,10 +674,10 @@ const char *sge_gettext_(int msg_id, const char *msg_str)
          
          gettext_return_string = sge_gettext__((char*)msg_str);
 
-         org_message   = malloc(strlen(msg_str)+1);
+         org_message   = sge_malloc(strlen(msg_str)+1);
          len = strlen(gettext_return_string)+1+8; /* max "(99999) "*/
-         trans_message = malloc(len);
-         new_mp        = malloc(sizeof(sge_error_message_t));
+         trans_message = sge_malloc(len);
+         new_mp        = sge_malloc(sizeof(sge_error_message_t));
          if (new_mp != NULL && org_message != NULL && trans_message != NULL) {
             DPRINTF_(("add new hash table entry for message id: %d\n",msg_id));
             new_mp->id = msg_id;

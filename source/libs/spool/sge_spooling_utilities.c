@@ -392,7 +392,7 @@ bool spool_default_validate_func(lList **answer_list,
          {
             int cl_ret;
             int key_nm = object_type_get_key_nm(object_type);
-            char *old_name = strdup(lGetHost(object, key_nm));
+            char *old_name = sge_strdup(lGetHost(object, key_nm));
 
             /* try hostname resolving */
             if (strcmp(old_name, SGE_GLOBAL_NAME) != 0) {
