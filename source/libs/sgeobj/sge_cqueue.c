@@ -715,7 +715,7 @@ cqueue_set_template_attributes(lListElem *this_elem, lList **answer_list)
       if (ret) {
          const char *value[] = {
             "/tmp", "/bin/sh", "NONE",
-            "0", "UNDEFINED", "NONE",
+            "0", "NONE",
             "NONE", "posix_compliant", "NONE",
             "NONE", "NONE", "NONE",
             "default", 
