@@ -164,7 +164,7 @@ Enter()
 ExecuteAsAdmin()
 {
    if [ "$verbose" = true ]; then
-      $ECHO "$@"
+      $ECHO "$*"
    fi
 
    if [ $ADMINUSER = default ]; then
@@ -182,7 +182,7 @@ ExecuteAsAdmin()
 Execute()
 {
    if [ "$verbose" = true ]; then
-      $ECHO "$@"
+      $ECHO "$*"
    fi
    "$@"
    return $?

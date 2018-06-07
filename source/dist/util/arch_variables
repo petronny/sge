@@ -81,7 +81,9 @@ case $ARCH in
  lx*|ulx*)
    AWK=/usr/bin/awk
    # fixme:  Is -e actually necessary?
-   ECHO="/bin/echo -e"
+   ECHO="printf %b\\n"
+   # /bin/echo no longer used, butleave this just in case anything
+   # else depends on it.
    unset POSIXLY_CORRECT        # so we can rely on echo -e
    if [ -x /usr/lib/lsb/install_initd ]; then
       # RedHat, CentOS etc.
@@ -357,13 +359,13 @@ WaitClear()
 Enter()
 {
    if [ "$autoinst" = true ]; then
-      $ECHO $1
+      $ECHO "$1"
    else
       read INP
       if [ "$INP" = "" ]; then
-         $ECHO $1
+         $ECHO "$1"
       else
-         $ECHO $INP
+         $ECHO "$INP"
       fi
    fi
 }
@@ -387,7 +389,7 @@ YesNo()
 
    if [ "$autoinst" = true -a $default != x -a $default != X ]; then
       $ECHO "$text"
-      $ECHO $default
+      $ECHO "$default"
       if [ $default = y -o $default = Y ]; then
          return 0
       else
@@ -427,7 +429,7 @@ YesNo()
 #
 FatalError()
 {
-   $ECHO $*                           >&2
+   $ECHO "$*"                         >&2
    $ECHO ""                           >&2
    Translate 1 "Installation failed. Exit."
    $ECHO ""                           >&2
@@ -440,7 +442,7 @@ FatalError()
 Execute()
 {
    if [ "$verbose" = true ]; then
-      $ECHO $*
+      $ECHO "$*"
    fi
    $*
    if [ $? != 0 ]; then
@@ -460,7 +462,7 @@ Execute()
 ExecuteEval()
 {
    if [ "$verbose" = true ]; then
-      $ECHO $*
+      $ECHO "$*"
    fi
    eval $*
    if [ $? != 0 ]; then
@@ -487,7 +489,7 @@ ExecuteEval()
 ExecuteAsAdmin()
 {
    if [ "$verbose" = true ]; then
-      $ECHO $*
+      $ECHO "$*"
    fi
 
    if [ $ADMINUSER = default ]; then

@@ -998,7 +998,7 @@ AddActQmaster()
    $INFOTEXT "Creating >act_qmaster< file"
 
    TruncCreateAndMakeWriteable $COMMONDIR/act_qmaster
-   $ECHO $HOST >> $COMMONDIR/act_qmaster
+   $ECHO "$HOST" >> $COMMONDIR/act_qmaster
    SetPerm $COMMONDIR/act_qmaster
 }
 

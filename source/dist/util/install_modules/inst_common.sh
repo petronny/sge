@@ -169,13 +169,13 @@ fi
 Enter()
 {
    if [ "$AUTO" = "true" ]; then
-      $ECHO $1
+      $ECHO "$1"
    else
       read INP
       if [ "$INP" = "" ]; then
-         $ECHO $1
+         $ECHO "$1"
       else
-         $ECHO $INP
+         $ECHO "$INP"
       fi
    fi
 }
@@ -251,7 +251,7 @@ Removedir()
 ExecuteAsAdmin()
 {
    if [ "$verbose" = true ]; then
-      $ECHO "$@"
+      $ECHO "$*"
    fi
 
    if [ "$ADMINUSER" = root ]; then
@@ -303,7 +303,7 @@ ExecuteAsAdmin()
 ExecuteAsAdminForUpgrade()
 {
    if [ "$verbose" = true ]; then
-      $ECHO "$@"
+      $ECHO "$*"
    fi
 
    if [ "$ADMINUSER" = root ]; then
@@ -2578,7 +2578,7 @@ PLIST
          $ECHO "" >> $RC_FILE
          $ECHO "# Grid Engine start up" >> $RC_FILE
          $ECHO "#-$LINE---------" >> $RC_FILE
-         $ECHO $SGE_STARTUP_FILE >> $RC_FILE
+         $ECHO "$SGE_STARTUP_FILE" >> $RC_FILE
          $ECHO "exit 0" >> $RC_FILE
          rm $RC_FILE.new.1
       else
@@ -2620,7 +2620,7 @@ AddDefaultManager()
 {
    ExecuteAsAdmin $SPOOLDEFAULTS managers "$@"
 #  TruncCreateAndMakeWriteable $QMDIR/managers
-#  $ECHO $1 >> $QMDIR/managers
+#  $ECHO "$1" >> $QMDIR/managers
 #  SetPerm $QMDIR/managers
 }
 

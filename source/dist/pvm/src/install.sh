@@ -92,7 +92,7 @@ read INP
 if [ "$INP" = "" -o "$INP" = y -o "$INP" = Y ]; then
    :
 else
-   $ECHO No installation
+   $ECHO "No installation"
    exit 1
 fi
 
