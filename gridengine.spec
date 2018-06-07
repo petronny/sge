@@ -30,18 +30,18 @@
 # Perhaps this should be herd, not hadoop?
 %bcond_with hadoop
 
-%define sge_home /opt/sge
-%define sge_lib %{sge_home}/lib
+%global sge_home /opt/sge
+%global sge_lib %{sge_home}/lib
 # Binaries actually go in arch-dependent subdir of this
-%define sge_bin %{sge_home}/bin
-%define sge_mandir %{sge_home}/man
-%define sge_libexecdir %{sge_home}/utilbin
-%define sge_javadir %sge_lib
-%define sge_include %{sge_home}/include
-%define sge_docdir %{sge_home}/doc
-%define _docdir %{sge_docdir}
+%global sge_bin %{sge_home}/bin
+%global sge_mandir %{sge_home}/man
+%global sge_libexecdir %{sge_home}/utilbin
+%global sge_javadir %sge_lib
+%global sge_include %{sge_home}/include
+%global sge_docdir %{sge_home}/doc
+%global _docdir %{sge_docdir}
 # admin user maybe to create
-%define username sgeadmin
+%global username sgeadmin
 
 %global _hardened_build 1
 
@@ -79,7 +79,6 @@ Source2: swing-layout-1.0.3.tar.gz
 
 Prefix: %{sge_home}
 
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # OpenSuSE support; SLES changes welcome
 # Fixme: maybe just depend on specific file names
@@ -321,14 +320,13 @@ ant herd.javadoc
 %endif
 
 %install 
-rm -rf $RPM_BUILD_ROOT
 SGE_ROOT=$RPM_BUILD_ROOT%{sge_home}
 export SGE_ROOT
 mkdir -p $SGE_ROOT
 cd source
 echo instremote=false >> distinst.private
 gearch=`dist/util/arch`
-echo 'y'| scripts/distinst -local -allall ${gearch}
+echo y | scripts/distinst -local -allall ${gearch}
 ( cd $RPM_BUILD_ROOT/%{sge_home}
   rm -rf dtrace catman
 %if %{without hadoop}
@@ -354,9 +352,6 @@ the system, or provide its own init scripts, and installs into /opt/sge,
 which is appropriate for a cluster shared installation, consistent with
 the old Sun binaries.
 +
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %pre
 %{_sbindir}/useradd -d / -s /sbin/nologin \
