@@ -224,7 +224,7 @@ buffer_append(char **buffer, size_t *buffer_size, size_t *fill_size,
    DENTER(TOP_LAYER, "buffer_append");
    if (*buffer == NULL || *buffer_size == 0) {
       *buffer_size = initial_size;
-      *buffer = sge_calloc(initial_size);
+      *buffer = sge_calloc(initial_size, 1);
    } else if (*fill_size + size_append > *buffer_size) {
       *buffer_size += size_append;
       *buffer = sge_realloc(*buffer, *buffer_size, 1);
@@ -600,7 +600,7 @@ buffer_decode_hex(unsigned char *input, size_t *len, unsigned char **output)
    DENTER(TOP_LAYER, "buffer_decode_hex");
 
    s = *len / 2 + 1;
-   *output = sge_calloc(s);
+   *output = sge_calloc(s, 1);
 
    for (s = 0; s < *len; s+=2) {
       char buffer[32] = "";

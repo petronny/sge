@@ -792,7 +792,7 @@ static log_buffer_t* log_buffer_getspecific(void)
       return buf;
    }
 
-   buf = (log_buffer_t*)sge_calloc(sizeof(log_buffer_t));
+   buf = sge_calloc(sizeof(log_buffer_t), 1);
 
    res = pthread_setspecific(log_buffer_key, (const void*)buf);
 

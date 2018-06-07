@@ -550,7 +550,7 @@ int pt_dispatch_proc_to_job(char *pidname, lnk_link_t *job_list,
 
    if (curr == &job_elem->procs) {
       /* new process, add a proc element into jobs proc list */
-      proc_elem = sge_calloc(sizeof(proc_elem_t));
+      proc_elem = sge_calloc(sizeof(proc_elem_t), 1);
       proc_elem->proc.pd_length = sizeof(psProc_t);
       proc_elem->proc.pd_state  = 1; /* active */
       LNK_ADD(job_elem->procs.prev, &proc_elem->link);
