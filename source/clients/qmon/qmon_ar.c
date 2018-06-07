@@ -866,7 +866,8 @@ Boolean *ctd
                                           (u_long32)ar_nr);
                      if (ar) {
                         dstring ar_info = DSTRING_INIT;
-                        sprintf(line, "+++++++++++++++++++++++++++++++++++++++++++\n");  
+                        snprintf(line, sizeof line,
+                                 "+++++++++++++++++++++++++++++++++++++++++++\n");
                         qmonBrowserShow(line);
                         qmonARShowBrowserInfo(&ar_info, ar);      
                         qmonBrowserShow(sge_dstring_get_string(&ar_info));

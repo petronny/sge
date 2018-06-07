@@ -523,7 +523,7 @@ static char *get_bulk_jobid_string(long job_id, int start, int end, int step)
    char *jobid_str = sge_malloc(sizeof(char) * 1024);
    char *ret_str = NULL;
    
-   sprintf(jobid_str, "%ld.%d-%d:%d", job_id, start, end, step);
+   snprintf(jobid_str, 1024, "%ld.%d-%d:%d", job_id, start, end, step);
    ret_str = sge_strdup(jobid_str);
    sge_free(&jobid_str);
    

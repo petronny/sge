@@ -1006,7 +1006,7 @@ int sge_exec_job(sge_gdi_ctx_class_t *ctx, lListElem *jep, lListElem *jatep,
          }
 
          /* write add_grp_id to job-structure and file */
-         sprintf(str_id, "%ld", (long) last_addgrpid);
+         snprintf(str_id, sizeof str_id, "%ld", (long) last_addgrpid);
          fprintf(fp, "add_grp_id="gid_t_fmt"\n", last_addgrpid);
          if(petep == NULL) {
             lSetString(jatep, JAT_osjobid, str_id);

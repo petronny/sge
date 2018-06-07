@@ -245,7 +245,7 @@ const char *lNm2Str(int nm)
    }
 
 Error:
-   sprintf(stack_noinit, "Nameindex = %d", nm);
+   snprintf(stack_noinit, sizeof stack_noinit, "Nameindex = %d", nm);
    cull_state_set_noinit(stack_noinit);
    LERROR(LENAMENOT);
    DEXIT;

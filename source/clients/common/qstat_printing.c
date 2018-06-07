@@ -863,7 +863,7 @@ lList **alpp
          report_handler->report_job_string_value(report_handler, cqname, jobid, "queue_name", queue_name, alpp);
       } else {
          char temp[20];
-         sprintf(temp,"%%-%d.%ds ", queue_name_length, queue_name_length);
+         snprintf(temp, sizeof temp,"%%-%d.%ds ", queue_name_length, queue_name_length);
          printf(temp, queue_name?queue_name:"");
       }
    }

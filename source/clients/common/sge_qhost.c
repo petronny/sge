@@ -588,7 +588,7 @@ lList **alpp
             ** number of used/free slots 
             */
             if (report_handler == NULL) {
-               sprintf(buf, "%d/%d/%d ",
+               snprintf(buf, sizeof buf, "%d/%d/%d ",
                        qinstance_slots_reserved(qep),
                        qinstance_slots_used(qep),
                        (int)lGetUlong(qep, QU_job_slots));

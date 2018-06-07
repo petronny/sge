@@ -1224,7 +1224,7 @@ int sub_command
       const char *job_id_str = NULL;
       char job_id[40];
       if (!job_name_flag){
-         sprintf(job_id, sge_u32, lGetPosUlong(jep, job_id_pos)); 
+         snprintf(job_id, sizeof job_id, sge_u32, lGetPosUlong(jep, job_id_pos));
          job_id_str = job_id;
       } else {   
          /* format: <delimiter>old_name<delimiter>new_name */
@@ -1414,7 +1414,7 @@ int sub_command
       const char *job_id_str = NULL;
       char job_id[40];
       if (!job_name_flag){
-         sprintf(job_id, sge_u32,lGetPosUlong(jep, job_id_pos)); 
+         snprintf(job_id, sizeof job_id, sge_u32,lGetPosUlong(jep, job_id_pos));
          job_id_str = job_id;
          }
       else {  
@@ -2312,7 +2312,7 @@ int *trigger
          char job_descr[100];
          const char *job_name;
 
-         sprintf(job_descr, "job "sge_u32, jobid);
+         snprintf(job_descr, sizeof job_descr, "job "sge_u32, jobid);
          job_name = lGetString(new_job, JB_job_name);
          lSetString(new_job, JB_job_name, new_name);
          if (object_verify_name(new_job, alpp, JB_job_name)) {

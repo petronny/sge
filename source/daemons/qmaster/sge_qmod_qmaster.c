@@ -379,7 +379,7 @@ sge_gdi_qmod(sge_gdi_ctx_class_t *ctx, sge_gdi_packet_class_t *packet, sge_gdi_t
                if (!fnmatch(job_name, lGetString(job, JB_job_name), 0)) {
                   char job_id[40];
                   mod = lCopyElem(dep);
-                  sprintf(job_id, sge_u32, lGetUlong(job, JB_job_number));
+                  snprintf(job_id, sizeof job_id, sge_u32, lGetUlong(job, JB_job_number));
                   lSetString(mod, ID_str, job_id);
                   lAppendElem(task->data_list, mod);
                   found = true;

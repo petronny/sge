@@ -1442,7 +1442,8 @@ main(int argc, char **argv)
                       getuid() == procs->pd_uid) {
                      if (kill(procs->pd_pid, signo)<0) {
                         char buf[128];
-                        sprintf(buf, "kill("pid_t_fmt", %d)", procs->pd_pid, signo);
+                        snprintf(buf, sizeof buf, "kill("pid_t_fmt", %d)",
+                                 procs->pd_pid, signo);
                         perror(buf);
                      } else if (verbose)
                         printf("kill("pid_t_fmt", %d) issued\n", procs->pd_pid, signo);

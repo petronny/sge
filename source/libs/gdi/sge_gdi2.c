@@ -877,7 +877,7 @@ lList *gdi2_kill(sge_gdi_ctx_class_t *thiz, lList *id_list, const char *cell,
    if (action_flag & SCHEDD_KILL) {
       char buffer[10];
 
-      sprintf(buffer, "%d", EV_ID_SCHEDD);
+      snprintf(buffer, sizeof buffer, "%d", EV_ID_SCHEDD);
       id_list = lCreateList("kill scheduler", ID_Type);
       id_list_created = true;
       lAddElemStr(&id_list, ID_str, buffer, ID_Type);
@@ -893,7 +893,7 @@ lList *gdi2_kill(sge_gdi_ctx_class_t *thiz, lList *id_list, const char *cell,
    if (action_flag & EVENTCLIENT_KILL) {
       if (id_list == NULL) {
          char buffer[10];
-         sprintf(buffer, "%d", EV_ID_ANY);
+         snprintf(buffer, sizeof buffer, "%d", EV_ID_ANY);
          id_list = lCreateList("kill all event clients", ID_Type);
          id_list_created = true;
          lAddElemStr(&id_list, ID_str, buffer, ID_Type);

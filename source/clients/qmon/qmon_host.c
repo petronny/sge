@@ -572,8 +572,8 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       pos = 0;
       XmTextSetString(exechost_load_scaling, "");
       for_each(ep, lsl) {
-         sprintf(buf, "%-15.15s   %3.2f\n", lGetString(ep, HS_name),
-                  lGetDouble(ep, HS_value));
+         snprintf(buf, sizeof buf, "%-15.15s   %3.2f\n",
+                  lGetString(ep, HS_name), lGetDouble(ep, HS_value));
          XmTextInsert(exechost_load_scaling, pos, buf);
          pos += strlen(buf);
       }
@@ -587,8 +587,8 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       pos = 0;
       XmTextSetString(exechost_consumables, "");
       for_each(ep, lsl) {
-         sprintf(buf, "%-15.15s   %-15.15s\n", lGetString(ep, CE_name),
-                  lGetString(ep, CE_stringval));
+         snprintf(buf, sizeof buf, "%-15.15s   %-15.15s\n",
+                  lGetString(ep, CE_name), lGetString(ep, CE_stringval));
          XmTextInsert(exechost_consumables, pos, buf);
          pos += strlen(buf);
       }
@@ -602,7 +602,7 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       pos = 0;
       XmTextSetString(exechost_reporting_variables, "");
       for_each(ep, lsl) {
-         sprintf(buf, "%s\n", lGetString(ep, STU_name));
+         snprintf(buf, sizeof buf, "%s\n", lGetString(ep, STU_name));
          XmTextInsert(exechost_reporting_variables, pos, buf);
          pos += strlen(buf);
       }
@@ -619,7 +619,7 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       ** acl
       */
       lsl = lGetList(ehp, EH_acl);
-      sprintf(buf, "%-15.15s", "Access");
+      snprintf(buf, sizeof buf, "%-15.15s", "Access");
       for_each(ep, lsl) {
          strcat(buf, " ");
          strcat(buf, lGetString(ep, US_name));
@@ -634,7 +634,7 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       ** xacl
       */
       lsl = lGetList(ehp, EH_xacl);
-      sprintf(buf, "%-15.15s", "XAccess");
+      snprintf(buf, sizeof buf, "%-15.15s", "XAccess");
       for_each(ep, lsl) {
          strcat(buf, " ");
          strcat(buf, lGetString(ep, US_name));
@@ -649,7 +649,7 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       ** projects
       */
       lsl = lGetList(ehp, EH_prj);
-      sprintf(buf, "%-15.15s", "Projects");
+      snprintf(buf, sizeof buf, "%-15.15s", "Projects");
       for_each(ep, lsl) {
          strcat(buf, " ");
          strcat(buf, lGetString(ep, PR_name));
@@ -664,7 +664,7 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       ** xprojects
       */
       lsl = lGetList(ehp, EH_xprj);
-      sprintf(buf, "%-15.15s", "XProjects");
+      snprintf(buf, sizeof buf, "%-15.15s", "XProjects");
       for_each(ep, lsl) {
          strcat(buf, " ");
          strcat(buf, lGetString(ep, PR_name));
@@ -682,8 +682,8 @@ static void qmonExecHostSelect(Widget w, XtPointer cld, XtPointer cad)
       pos = 0;
       XmTextSetString(exechost_usage_scaling, "");
       for_each(ep, usl) {
-         sprintf(buf, "%-15.15s   %3.2f\n", lGetString(ep, HS_name),
-                  lGetDouble(ep, HS_value));
+         snprintf(buf, sizeof buf, "%-15.15s   %3.2f\n",
+                  lGetString(ep, HS_name), lGetDouble(ep, HS_value));
          XmTextInsert(exechost_usage_scaling, pos, buf);
          pos += strlen(buf);
       }

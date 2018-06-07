@@ -563,7 +563,7 @@ static char *qquota_get_next_filter(stringT filter, const char *cp)
    if (ret - cp < MAX_STRING_SIZE && ret - cp > 1) { 
       snprintf(filter, ret - cp, "%s", cp);
    } else {
-      sprintf(filter, "-");
+      snprintf(filter, MAX_STRING_SIZE, "-");
    }
 
    return ret;

@@ -153,7 +153,7 @@ void qmonBrowserMessages(Widget w, XtPointer cld, XtPointer cad)
    /*
    ** get the path to the messages file
    */
-   sprintf(filename, "%s/%s/spool/", SGE_ROOT, default_cell);
+   snprintf(filename, sizeof filename, "%s/%s/spool/", SGE_ROOT, default_cell);
 
    if (!host || !strcmp(host , "global"))
       strcat(filename, "qmaster");

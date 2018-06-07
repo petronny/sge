@@ -211,44 +211,47 @@ lListElem *ep
    i = 0;
 
    /* name */
-   sprintf(buf, "%-20.20s %s", "Name", lGetString(ep, CK_name));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Name", lGetString(ep, CK_name));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* interface */
-   sprintf(buf, "%-20.20s %s", "Interface", lGetString(ep, CK_interface));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Interface",
+            lGetString(ep, CK_interface));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* ckpt command */
-   sprintf(buf, "%-20.20s %s", "Checkpoint command", 
-			lGetString(ep, CK_ckpt_command));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Checkpoint command",
+            lGetString(ep, CK_ckpt_command));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* migr command */
-   sprintf(buf, "%-20.20s %s", "Migrate command", 
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Migrate command",
 			lGetString(ep, CK_migr_command));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* rest command */
-   sprintf(buf, "%-20.20s %s", "Restart command", 
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Restart command",
 			lGetString(ep, CK_rest_command));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* clean command */
-   sprintf(buf, "%-20.20s %s", "Clean command", 
-			lGetString(ep, CK_clean_command));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Clean command",
+            lGetString(ep, CK_clean_command));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* CKPT directory  */
-   sprintf(buf, "%-20.20s %s", "Checkpoint directory", 
-               lGetString(ep, CK_ckpt_dir));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Checkpoint directory",
+            lGetString(ep, CK_ckpt_dir));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* CK_when */
-   sprintf(buf, "%-20.20s %s", "Checkpoint When", lGetString(ep, CK_when));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Checkpoint When",
+            lGetString(ep, CK_when));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
    /* CK_signal */
-   sprintf(buf, "%-20.20s %s", "Checkpoint Signal", lGetString(ep, CK_signal));
+   snprintf(buf, sizeof buf, "%-20.20s %s", "Checkpoint Signal",
+            lGetString(ep, CK_signal));
    items[i++] = XmStringCreateLtoR(buf, "LIST");
 
 

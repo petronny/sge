@@ -780,7 +780,7 @@ static int start_client_program(const char *client_name,
          sge_sl_insert(sl_args, (void*)port, SGE_SL_BACKWARD);
          sge_sl_insert(sl_args, (void*)host, SGE_SL_BACKWARD);
          if (is_rsh) {
-            sprintf(shellpath, "%s/qrsh_starter", utilbin_dir);
+            snprintf(shellpath, sizeof shellpath, "%s/qrsh_starter", utilbin_dir);
             sge_sl_insert(sl_args, "exec", SGE_SL_BACKWARD);
             sge_sl_insert(sl_args, (void*)quote_argument(shellpath), SGE_SL_BACKWARD);
             sge_sl_insert(sl_args, (void*)quote_argument(job_dir), SGE_SL_BACKWARD);
@@ -1174,7 +1174,7 @@ static void set_command_to_env(lList *envlp, lList *opts_qrsh)
       if (ep) {
          char delimiter[2];
          const char *help = NULL;
-         sprintf(delimiter, "%c", 0xff);
+         snprintf(delimiter, sizeof delimiter, "%c", 0xff);
          help = lGetString(ep, SPA_argval_lStringT);
          if (help != NULL) {
             sge_dstring_copy_string(&buffer, help); 
@@ -1498,8 +1498,8 @@ int main(int argc, char **argv)
    job = lCreateElem(JB_Type);
    
    if (job == NULL) {
-      sprintf(SGE_EVENT, MSG_MEM_MEMORYALLOCFAILED_S, SGE_FUNC);
-      answer_list_add(&answer, SGE_EVENT, 
+      snprintf(SGE_EVENT, sizeof SGE_EVENT, MSG_MEM_MEMORYALLOCFAILED_S, SGE_FUNC);
+      answer_list_add(&answer, SGE_EVENT,
                       STATUS_EMALLOC, ANSWER_QUALITY_ERROR);
       do_exit = parse_result_list(alp, &alp_error);
       lFreeList(&answer);
@@ -1766,7 +1766,7 @@ int main(int argc, char **argv)
       lList *envlp = NULL;
 
       sock = open_qrsh_socket(&my_port);
-      sprintf(buffer, "%s:%d", qualified_hostname, my_port);
+      snprintf(buffer, sizeof buffer, "%s:%d", qualified_hostname, my_port);
 
       if ((envlp = lGetList(job, JB_env_list)) == NULL) {
          envlp = lCreateList("environment list", VA_Type);
@@ -2323,7 +2323,7 @@ static void delete_job(sge_gdi_ctx_class_t *ctx, u_long32 job_id, lList *jlp)
       return;
    }
 
-   sprintf(job_str, sge_u32, job_id);
+   snprintf(job_str, sizeof job_str, sge_u32, job_id);
    lAddElemStr(&idlp, ID_str, job_str, ID_Type);
 
    alp = ctx->gdi(ctx, SGE_JB_LIST, SGE_GDI_DEL, &idlp, NULL, NULL, false);

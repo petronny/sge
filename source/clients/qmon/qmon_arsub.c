@@ -422,8 +422,8 @@ void qmonARSubPopup(Widget w, XtPointer cld, XtPointer cad)
       arsub_mode_data.mode = data->mode;
       arsub_mode_data.ar_id = data->ar_id;
       /* set dialog title */
-      sprintf(buf, "Alter AR " sge_u32, data->ar_id);
-      xtitle = XmtCreateXmString(buf); 
+      snprintf(buf, sizeof buf, "Alter AR " sge_u32, data->ar_id);
+      xtitle = XmtCreateXmString(buf);
       XtVaSetValues( qmon_arsub,
                      XmNdialogTitle, xtitle,
                      NULL);
@@ -514,10 +514,10 @@ String qmonARSubRequestType(void)
    XmtDialogGetDialogValues(arsub_layout, &ARSMData);
 
    if (ARSMData.pe) {
-      sprintf(buf, 
+      sprintf(buf, sizeof buf,
               XmtLocalize(arsub_layout, "@fBParallel AR Request - %s",
                            "@fBParallel AR Request - %s"),
-              ARSMData.pe); 
+              ARSMData.pe);
    }
    else
       strcpy(buf, 
@@ -942,7 +942,7 @@ static void qmonARSubARSub(Widget w, XtPointer cld, XtPointer cad)
 
       if (!(what = lIntVector2What(AR_Type, (int*) qalter_fields))) {
          DPRINTF(("lIntVector2What failure\n"));
-         sprintf(buf, "AR modify operation failed\n");
+         snprintf(buf, sizeof buf, "AR modify operation failed\n");
          goto error;
       }
 
@@ -950,14 +950,14 @@ static void qmonARSubARSub(Widget w, XtPointer cld, XtPointer cad)
       lReduceDescr(&rdp, AR_Type, what);
       if (!rdp) {
          DPRINTF(("lReduceDescr failure\n"));
-         sprintf(buf, "failed to build reduced descriptor\n");
+         snprintf(buf, sizeof buf, "failed to build reduced descriptor\n");
          goto error;
       }
       lFreeWhat(&what);
       
       if (!(lp = lCreateElemList("ARSubList", rdp, 1))) {
          DPRINTF(("lCreateElemList failure\n"));
-         sprintf(buf, "AR submission failed\n");
+         snprintf(buf, sizeof buf, "AR submission failed\n");
          goto error;
       }
 
@@ -965,7 +965,7 @@ static void qmonARSubARSub(Widget w, XtPointer cld, XtPointer cad)
       
       if (!qmonARSMToCull(&ARSMData,lFirst(lp), 0)) {
          DPRINTF(("qmonARSMToCull failure\n"));
-         sprintf(buf, "AR submission failed\n");
+         snprintf(buf, sizeof buf, "AR submission failed\n");
          goto error;
       }
 
@@ -1139,7 +1139,8 @@ tARSMEntry *data
       dstring range_string = DSTRING_INIT;
 
       range_list_print_to_string(lGetList(jep, AR_pe_range), &range_string, true, false, false);
-      sprintf(pe_tasks, "%s %s", pe, sge_dstring_get_string(&range_string));  
+      snprintf(pe_tasks, sizeof pe_tasks, "%s %s", pe,
+               sge_dstring_get_string(&range_string));
       sge_dstring_free(&range_string);
       data->pe = XtNewString(pe_tasks);
    }

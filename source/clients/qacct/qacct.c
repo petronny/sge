@@ -1003,15 +1003,16 @@ int main(int argc, char **argv)
          printf("%s\n", MSG_HISTORY_TOTSYSTEMUSAGE);
       }
 
-      sprintf(title_array, "%13.13s %13.13s %13.13s %13.13s %18.18s %18.18s %18.18s",
-                     "WALLCLOCK", 
-                     "UTIME", 
-                     "STIME", 
-                     "CPU", 
-                     "MEMORY", 
-                     "IO",
-                     "IOW");
-                        
+      snprintf(title_array, sizeof title_array,
+               "%13.13s %13.13s %13.13s %13.13s %18.18s %18.18s %18.18s",
+               "WALLCLOCK",
+               "UTIME",
+               "STIME",
+               "CPU",
+               "MEMORY",
+               "IO",
+               "IOW");
+
       printf("%s\n", title_array);
 
       dashcnt += strlen(title_array);
@@ -1174,8 +1175,8 @@ static void print_full_ulong(int full_length, u_long32 value) {
    char tmp_buf[100];
 
    DENTER(TOP_LAYER, "print_full_ulong");
-   sprintf(tmp_buf, "%5"sge_fu32, value);
-   print_full(full_length, tmp_buf); 
+   snprintf(tmp_buf, sizeof tmp_buf, "%5"sge_fu32, value);
+   print_full(full_length, tmp_buf);
    DRETURN_VOID;
 }
 
@@ -1309,14 +1310,16 @@ static void calc_column_sizes(lListElem* ep, sge_qacct_columns* column_size_data
          } 
 
          /* slots */
-         sprintf(tmp_buf,"%5"sge_fu32, lGetUlong(lep, QAJ_slots));
+         snprintf(tmp_buf, sizeof tmp_buf,
+                  "%5"sge_fu32, lGetUlong(lep, QAJ_slots));
          tmp_length = strlen(tmp_buf);
          if (column_size_data->slots <= tmp_length) {
             column_size_data->slots  = tmp_length + 1;
          }
 
          /* advance reservations */
-         sprintf(tmp_buf,"%5"sge_fu32, lGetUlong(lep, QAJ_arid));
+         snprintf(tmp_buf, sizeof tmp_buf,
+                  "%5"sge_fu32, lGetUlong(lep, QAJ_arid));
          tmp_length = strlen(tmp_buf);
          if (column_size_data->arid <= tmp_length) {
             column_size_data->arid = tmp_length + 1;

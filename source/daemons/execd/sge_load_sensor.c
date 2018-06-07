@@ -140,7 +140,7 @@ static void sge_ls_set_pid(lListElem *this_ls, pid_t pid)
 {
    char pid_buffer[256];
 
-   sprintf(pid_buffer, pid_t_fmt, pid);
+   snprintf(pid_buffer, sizeof pid_buffer, pid_t_fmt, pid);
    lSetString(this_ls, LS_pid, pid_buffer);
 }
 

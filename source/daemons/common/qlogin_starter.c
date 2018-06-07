@@ -247,7 +247,7 @@ void write_exit_code_to_qrsh(int exit_code)
    shepherd_trace("write_exit_code_to_qrsh(%d)", exit_code);
 
    /* write exit code as string number to qrsh */
-   sprintf(buffer, "%d", exit_code);
+   snprintf(buffer, sizeof buffer, "%d", exit_code);
    if (write_to_qrsh(buffer) != 0) {
       shepherd_trace("writing exit code to qrsh failed");
    }

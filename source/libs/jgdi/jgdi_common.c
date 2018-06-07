@@ -2396,8 +2396,8 @@ jgdi_result_t get_double(JNIEnv *env, jclass bean_class, jobject obj, const char
    jdouble jd = 0;
 
    DENTER(BASIS_LAYER, "get_double");
-   
-   sprintf(buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
+
+   snprintf(buf, sizeof buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()D", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2418,7 +2418,7 @@ jgdi_result_t set_double(JNIEnv *env, jclass bean_class, jobject obj, const char
    jmethodID mid;
    
    DENTER(BASIS_LAYER, "set_double");
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(D)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2439,7 +2439,7 @@ jgdi_result_t get_float(JNIEnv *env, jclass bean_class, jobject obj, const char*
 
    DENTER(BASIS_LAYER, "get_float");
    
-   sprintf(buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()F", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2461,7 +2461,7 @@ jgdi_result_t set_float(JNIEnv *env, jclass bean_class, jobject obj, const char*
    jmethodID mid;
    
    DENTER(BASIS_LAYER, "set_float");
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(F)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2483,7 +2483,7 @@ jgdi_result_t get_string(JNIEnv *env, jclass bean_class, jobject obj, const char
 
    DENTER(BASIS_LAYER, "get_string");
    
-   sprintf(buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()Ljava/lang/String;", alpp);
    if (!mid) {
       *retstr = NULL;
@@ -2518,7 +2518,7 @@ jgdi_result_t set_string(JNIEnv *env, jclass bean_class, jobject obj, const char
 
    DENTER(BASIS_LAYER, "set_string");
    
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(Ljava/lang/String;)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2544,7 +2544,7 @@ jgdi_result_t get_int(JNIEnv *env, jclass bean_class, jobject obj, const char* p
 
    DENTER(BASIS_LAYER, "get_int");
    
-   sprintf(buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()I", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2571,7 +2571,7 @@ jgdi_result_t set_int(JNIEnv *env, jclass bean_class, jobject obj, const char* p
       DPRINTF(("set_int: ulong32 to jint overflow (returning -1)\n"));
       value = -1;
    }
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(I)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2592,7 +2592,7 @@ jgdi_result_t get_long(JNIEnv *env, jclass bean_class, jobject obj, const char* 
 
    DENTER(BASIS_LAYER, "get_long");
    
-   sprintf(buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "get%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()J", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2614,7 +2614,7 @@ jgdi_result_t set_long(JNIEnv *env, jclass bean_class, jobject obj, const char* 
    
    DENTER(BASIS_LAYER, "set_long");
 
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(J)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2636,7 +2636,7 @@ jgdi_result_t get_bool(JNIEnv *env, jclass bean_class, jobject obj, const char* 
 
    DENTER(BASIS_LAYER, "get_bool");
    
-   sprintf(buf, "is%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "is%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "()Z", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -2660,7 +2660,7 @@ jgdi_result_t set_bool(JNIEnv *env, jclass bean_class, jobject obj, const char* 
    
    DENTER(BASIS_LAYER, "set_bool");
 
-   sprintf(buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
+   snprintf(buf, sizeof buf, "set%c%s", toupper(property_name[0]), &property_name[1]);
    mid = get_methodid(env, bean_class, buf, "(Z)V", alpp);
    if (!mid) {
       DRETURN(JGDI_ERROR);
@@ -4105,13 +4105,13 @@ void jgdi_delete(JNIEnv *env, jobject jgdi, jobject jobj, const char* classname,
    **                       user list support
    */
    if (target_list == SGE_JB_LIST) {
-      sprintf(id_buf, sge_u32, lGetUlong(ep, JB_job_number));
+      snprintf(id_buf, sizeof id_buf, sge_u32, lGetUlong(ep, JB_job_number));
       lFreeElem(&ep);
       iep = lAddElemStr(&lp, ID_str, id_buf, ID_Type); 
       lSetUlong(iep, ID_force, force);
       what = lWhat("%T(ALL)", ID_Type);
    } else if (target_list == SGE_AR_LIST) {
-      sprintf(id_buf, sge_u32, lGetUlong(ep, AR_id));
+      snprintf(id_buf, sizeof id_buf, sge_u32, lGetUlong(ep, AR_id));
       lFreeElem(&ep);
       iep = lAddElemStr(&lp, ID_str, id_buf, ID_Type);
       lSetUlong(iep, ID_force, force);
@@ -4777,7 +4777,7 @@ JNIEXPORT void JNICALL Java_com_sun_grid_jgdi_jni_JGDIBaseImpl_nativeKillEventCl
    (*env)->GetIntArrayRegion(env, iarray, 0, length, ibuf);
    for (i=0; i<length; i++) {
       char buffer[BUFSIZ];
-      sprintf(buffer, "%d", (int) ibuf[i]);
+      snprintf(buffer, sizeof buffer, "%d", (int) ibuf[i]);
       DPRINTF(("ec: %s\n", buffer));
       lAddElemStr(&lp, ID_str, buffer, ID_Type);
    }
@@ -5247,7 +5247,7 @@ JNIEXPORT jstring JNICALL Java_com_sun_grid_jgdi_JGDIFactory_nativeSetJGDIVersio
    char version_string[BUFSIZ];
 
    DENTER(TOP_LAYER, "Java_com_sun_grid_jgdi_JGDIFactory_nativeSetJGDIVersion");
-   sprintf(version_string, "%s %s", GE_SHORTNAME, GDI_VERSION);
+   snprintf(version_string, sizeof version_string, "%s %s", GE_SHORTNAME, GDI_VERSION);
    DRETURN((*env)->NewStringUTF(env, version_string));
 }
 

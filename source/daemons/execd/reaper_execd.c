@@ -551,11 +551,11 @@ static int clean_up_job(lListElem *jr, int failed, int shepherd_exit_status,
 
    if (failed) {
       if (failed == ESSTATE_DIED_THRU_SIGNAL)
-         sprintf(error, SFNMAX, MSG_SHEPHERD_DIEDTHROUGHSIGNAL);
+         snprintf(error, sizeof error, SFNMAX, MSG_SHEPHERD_DIEDTHROUGHSIGNAL);
       else if (failed == ESSTATE_NO_PID)
-         sprintf(error, SFNMAX, MSG_SHEPHERD_NOPIDFILE);
+         snprintf(error, sizeof error, SFNMAX, MSG_SHEPHERD_NOPIDFILE);
       else
-         sprintf(error, MSG_SHEPHERD_EXITEDWISSTATUS_IS, failed, 
+         snprintf(error, sizeof error, MSG_SHEPHERD_EXITEDWISSTATUS_IS, failed,
                  get_sstate_description(failed));
    }
 
@@ -2040,7 +2040,7 @@ static void reaper_sendmail(sge_gdi_ctx_class_t *ctx, lListElem *jep,
          err_str = MSG_UNKNOWNREASON;
 
       DPRINTF(("MAIL VALID at ABORT\n"));
-      sprintf(exitstr, "%d", exit_status);
+      snprintf(exitstr, sizeof exitstr, "%d", exit_status);
       if (pe_task_id_str == NULL) {
          if (job_is_array(jep)) {
             snprintf(sge_mail_subj, sizeof(sge_mail_subj),

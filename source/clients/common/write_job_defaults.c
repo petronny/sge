@@ -155,7 +155,7 @@ int flags
    else {
       fp = fopen(filename, "w");
       if (!fp) {
-         sprintf(str, MSG_FILE_ERROROPENFILEXFORWRITING_S, filename);
+         snprintf(str, sizeof str, MSG_FILE_ERROROPENFILEXFORWRITING_S, filename);
          answer_list_add(&answer, str, STATUS_EDISK, ANSWER_QUALITY_ERROR);
          DRETURN(answer);
       }
@@ -187,7 +187,7 @@ int flags
          i = fprintf(fp, "%s ", cp);
       }
       if ((*cp == '-') && (i != (int) strlen(cp) + 1)) {
-         sprintf(str, MSG_FILE_ERRORWRITETOFILEX_S, filename);
+         snprintf(str, sizeof str, MSG_FILE_ERRORWRITETOFILEX_S, filename);
          answer_list_add(&answer, str, STATUS_EDISK, ANSWER_QUALITY_ERROR);
          if (filename) {
             FCLOSE(fp);
@@ -198,7 +198,7 @@ int flags
       if (lGetUlong(ep, SPA_occurrence) & BIT_SPA_OCC_ARG) {
          cp = lGetString(ep, SPA_switch_arg);
          if (!cp) {
-            sprintf(str, MSG_ANSWER_ARGUMENTMISSINGFORX_S , 
+            snprintf(str, sizeof str, MSG_ANSWER_ARGUMENTMISSINGFORX_S ,
                     lGetString(ep, SPA_switch));
             answer_list_add(&answer, str, STATUS_ESYNTAX, ANSWER_QUALITY_ERROR);
             if (filename) {
@@ -209,7 +209,7 @@ int flags
          }
          i = fprintf(fp, "%s ", cp);
          if (i != (int) strlen(cp) + 1) {
-            sprintf(str, MSG_FILE_ERRORWRITETOFILEX_S, filename);
+            snprintf(str, sizeof str, MSG_FILE_ERRORWRITETOFILEX_S, filename);
             answer_list_add(&answer, str, STATUS_EDISK, ANSWER_QUALITY_ERROR);
             if (filename) {
                FCLOSE(fp);

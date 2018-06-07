@@ -656,7 +656,7 @@ sge_parse_qstat(sge_gdi_ctx_class_t *ctx, lList **ppcmdline, qstat_env_t *qstat_
    }
 
    if (lGetNumberOfElem(*ppcmdline)) {
-     sprintf(str, "%s\n", MSG_PARSE_TOOMANYOPTIONS);
+     snprintf(str, sizeof str, "%s\n", MSG_PARSE_TOOMANYOPTIONS);
      if (!usageshowed)
         qstat_usage(qstat_env->qselect_mode, stderr, NULL);
      answer_list_add(&alp, str, STATUS_ESEMANTIC, ANSWER_QUALITY_ERROR);
@@ -1105,7 +1105,8 @@ static int job_stdout_job(job_handler_t* handler, u_long32 jid, job_summary_t *s
    /* if not full listing we need the queue's name in each line */
    if (!(qstat_env->full_listing & QSTAT_DISPLAY_FULL)) {
       char temp[20];
-	   sprintf(temp,"%%-%d.%ds ", qstat_env->longest_queue_length, qstat_env->longest_queue_length);
+      snprintf(temp, sizeof temp,"%%-%d.%ds ", qstat_env->longest_queue_length,
+               qstat_env->longest_queue_length);
       printf(temp, summary->queue?summary->queue:"");
    }
    
@@ -1642,10 +1643,11 @@ static int qstat_stdout_queue_summary(qstat_handler_t* handler, const char* qnam
    if (ctx->header_printed == false) {
       char temp[20];
       ctx->header_printed = true;
-      
-      sprintf(temp, "%%-%d.%ds", qstat_env->longest_queue_length, qstat_env->longest_queue_length);
 
-      printf(temp,MSG_QSTAT_PRT_QUEUENAME); 
+      snprintf(temp, sizeof temp, "%%-%d.%ds", qstat_env->longest_queue_length,
+               qstat_env->longest_queue_length);
+
+      printf(temp,MSG_QSTAT_PRT_QUEUENAME);
       
       printf(" %-5.5s %-14.14s %-8.8s %-13.13s %s\n", 
             MSG_QSTAT_PRT_QTYPE, 
@@ -1666,34 +1668,36 @@ static int qstat_stdout_queue_summary(qstat_handler_t* handler, const char* qnam
 
    {
       char temp[20];
-      sprintf(temp, "%%-%d.%ds ", qstat_env->longest_queue_length, qstat_env->longest_queue_length);
+      snprintf(temp, sizeof temp, "%%-%d.%ds ", qstat_env->longest_queue_length,
+               qstat_env->longest_queue_length);
       printf(temp, qname);
    }
 
    printf("%-5.5s ", summary->queue_type); 
 
    /* number of used/total slots */
-   sprintf(to_print, "%d/%d/%d ", (int)summary->resv_slots, (int)summary->used_slots, (int)summary->total_slots); 
-   printf("%-14.14s ", to_print);   
+   snprintf(to_print, sizeof to_print, "%d/%d/%d ", (int)summary->resv_slots,
+            (int)summary->used_slots, (int)summary->total_slots);
+   printf("%-14.14s ", to_print);
 
    /* load avg */
    if (!summary->has_load_value) {
       if (summary->has_load_value_from_object) {
-         sprintf(to_print, "%2.2f ", summary->load_avg);
+         snprintf(to_print, sizeof to_print, "%2.2f ", summary->load_avg);
       } else {
-         sprintf(to_print, "---  ");
+         snprintf(to_print, sizeof to_print, "---  ");
       }
    } else {
-      sprintf(to_print, "-NA- ");
+      snprintf(to_print, sizeof to_print, "-NA- ");
    }
    
    printf("%-8.8s ", to_print);   
 
    /* arch */
    if (summary->arch != NULL) {
-      sprintf(to_print, "%s ", summary->arch);
+      snprintf(to_print, sizeof to_print, "%s ", summary->arch);
    } else {
-      sprintf(to_print, "-NA- ");
+      snprintf(to_print, sizeof to_print, "-NA- ");
    }
    printf("%-13.13s ", to_print);   
    printf("%s", summary->state ? summary->state : "NA"); 
@@ -1821,7 +1825,9 @@ static int cqueue_summary_stdout_report_started(cqueue_summary_handler_t *handle
 
    DENTER(TOP_LAYER, "cqueue_summary_stdout_report_started");
 
-   sprintf(queue_def, "%%-%d.%ds %s ", qstat_env->longest_queue_length, qstat_env->longest_queue_length, fields);                         
+   snprintf(queue_def, sizeof queue_def, "%%-%d.%ds %s ",
+            qstat_env->longest_queue_length, qstat_env->longest_queue_length,
+            fields);
    printf( queue_def,
           "CLUSTER QUEUE", "CQLOAD", 
           "USED", "RES", "AVAIL", "TOTAL", "aoACDS", "cdsuE");
@@ -1861,7 +1867,8 @@ static int cqueue_summary_stdout_report_cqueue(cqueue_summary_handler_t *handler
 
    DENTER(TOP_LAYER, "cqueue_summary_stdout_report_cqueue");
 
-   sprintf(queue_def, "%%-%d.%ds ", qstat_env->longest_queue_length, qstat_env->longest_queue_length);
+   snprintf(queue_def, sizeof queue_def, "%%-%d.%ds ", qstat_env->longest_queue_length,
+            qstat_env->longest_queue_length);
 
    printf(queue_def, cqname);
 
@@ -2081,10 +2088,11 @@ qstat_show_job(sge_gdi_ctx_class_t *ctx, lList *jid_list, u_long32 isXML, qstat_
 
       for_each(elem1, jlp) {
          char buffer[256];
- 
-         sprintf(buffer, sge_U32CFormat, sge_u32c(lGetUlong(elem1, JB_job_number)));   
-         elem2 = lGetElemStr(jid_list, ST_name, buffer);     
-         
+
+         snprintf(buffer, sizeof buffer, sge_U32CFormat,
+                  sge_u32c(lGetUlong(elem1, JB_job_number)));
+         elem2 = lGetElemStr(jid_list, ST_name, buffer);
+
          if (elem2) {
             lDechainElem(jid_list, elem2);
             lFreeElem(&elem2);
@@ -2315,7 +2323,7 @@ static int qstat_show_job_info(sge_gdi_ctx_class_t *ctx, u_long32 isXML, qstat_e
                         strcat(text, ",\n\t");
                   else
                      strcat(text, ",\t");
-                  sprintf(ltext, sge_u32, jid);
+                  snprintf(ltext, sizeof ltext, sge_u32, jid);
                   strcat(text, ltext);
                   ids_per_line++;
                }

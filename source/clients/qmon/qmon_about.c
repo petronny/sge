@@ -88,8 +88,8 @@ void qmonAboutMsg(Widget w, XtPointer cld, XtPointer cad)
    const char* default_cell = ctx->get_default_cell(ctx);
 
    DENTER(TOP_LAYER, "qmonAboutMsg");
-   sprintf(buffer, "%s %s", GE_LONGNAME, GDI_VERSION);  
-   XmtDisplayMessage(w, "about_msg", "Help", header, 
+   snprintf(buffer, sizeof buffer, "%s %s", GE_LONGNAME, GDI_VERSION);
+   XmtDisplayMessage(w, "about_msg", "Help", header,
                      "About Qmon", NULL, None, XmDIALOG_MODELESS,
                      XmDIALOG_INFORMATION, 
                      username, qualified_hostname, 

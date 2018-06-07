@@ -931,7 +931,7 @@ lListElem *pe_task
       char addgrpid_str[64];
       lListElem *jr;
 
-      sprintf(addgrpid_str, gid_t_fmt, addgrpid);
+      snprintf(addgrpid_str, sizeof addgrpid_str, gid_t_fmt, addgrpid);
       if ((jr=get_job_report(job_id, ja_task_id, pe_task_id)))
          lSetString(jr, JR_osjobid, addgrpid_str); 
       DPRINTF(("job %s: addgrpid = %s\n", 
@@ -988,7 +988,7 @@ lListElem *pe_task
       char osjobid_str[64];
       lListElem *jr;
 
-      sprintf(osjobid_str, OSJOBID_FMT, osjobid);
+      snprintf(osjobid_str, sizeof osjobid_str, OSJOBID_FMT, osjobid);
       if ((jr=get_job_report(job_id, ja_task_id, pe_task_id)))
          lSetString(jr, JR_osjobid, osjobid_str); 
       DPRINTF(("job %s: osjobid = %s\n", 

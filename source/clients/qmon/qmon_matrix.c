@@ -565,19 +565,19 @@ int num_fields,
                val = (int)lGetUlong(ep, field[i]);
 #if 0
                if (val) {
-                  sprintf(buf, "%d", val);
+                  snprintf(buf, sizeof buf, "%d", val);
                   col[i] = buf;
                }
                else
                   col[i] = NULL;
 #else
-               sprintf(buf, "%d", val);
+               snprintf(buf, sizeof buf, "%d", val);
                col[i] = buf;
 #endif
                break;
             case lDoubleT:
                dval = lGetDouble(ep, field[i]);
-               sprintf(buf, "%.2f", dval);
+               snprintf(buf, sizeof buf, "%.2f", dval);
                col[i] = buf;
                break;
          }
@@ -753,7 +753,7 @@ int field2
          case lUlongT:
             val = (int)lGetUlong(ep, field2);
             if (val) {
-               sprintf(buf, "%d", val);
+               snprintf(buf, sizeof buf, "%d", val);
                col2 = buf;
             }
             else
@@ -761,7 +761,7 @@ int field2
             break;
          case lDoubleT:
             dval = lGetDouble(ep, field2);
-            sprintf(buf, "%.2f", dval);
+            snprintf(buf, sizeof buf, "%.2f", dval);
             col2 = buf;
             break;
       }

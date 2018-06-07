@@ -256,7 +256,7 @@ int nm
 
    DENTER(GUI_LAYER, "PrintUlong");
 
-   sprintf(buf, sge_u32, lGetUlong(ep, nm));
+   snprintf(buf, sizeof buf, sge_u32, lGetUlong(ep, nm));
 
    str = XtNewString(buf);
 

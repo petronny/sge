@@ -232,14 +232,15 @@ static void qmonMessageOk(Widget w, XtPointer cld, XtPointer cad)
             answer_status = lGetUlong(aep, AN_status);
 	    quality = lGetUlong(aep, AN_quality);
             if (quality == ANSWER_QUALITY_ERROR) {
-               sprintf(msg, "%s\nPlease correct above errors first !\n", 
+               snprintf(msg, sizeof msg,
+                        "%s\nPlease correct above errors first !\n",
                         lGetString(aep, AN_text));
                qmonMessageShow(w, True, msg);
                DEXIT;
                return;
             }
             else if (quality == ANSWER_QUALITY_WARNING) {
-               sprintf(msg, "WARNING!\n%s\n", 
+               snprintf(msg, sizeof msg, "WARNING!\n%s\n",
                         lGetString(aep, AN_text));
                qmonMessageShow(w, True, msg);
 	    }

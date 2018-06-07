@@ -235,8 +235,9 @@ char shadow_err_file[SGE_PATH_MAX];
       char *shadowd_name = SGE_SHADOWD;
 
       /* is there a running shadowd on this host (with unqualified name) */
-      sprintf(shadowd_pidfile, "%s/"SHADOWD_PID_FILE, ctx->get_qmaster_spool_dir(ctx), 
-              ctx->get_unqualified_hostname(ctx));
+      snprintf(shadowd_pidfile, sizeof shadowd_pidfile, "%s/"SHADOWD_PID_FILE,
+               ctx->get_qmaster_spool_dir(ctx),
+               ctx->get_unqualified_hostname(ctx));
 
       DPRINTF(("pidfilename: %s\n", shadowd_pidfile));
       if ((shadowd_pid = sge_readpid(shadowd_pidfile))) {
@@ -250,8 +251,9 @@ char shadow_err_file[SGE_PATH_MAX];
       ctx->prepare_enroll(ctx);
 
       /* is there a running shadowd on this host (with aliased name) */
-      sprintf(shadowd_pidfile, "%s/"SHADOWD_PID_FILE, ctx->get_qmaster_spool_dir(ctx), 
-              ctx->get_qualified_hostname(ctx));
+      snprintf(shadowd_pidfile, sizeof shadowd_pidfile, "%s/"SHADOWD_PID_FILE,
+               ctx->get_qmaster_spool_dir(ctx),
+               ctx->get_qualified_hostname(ctx));
       DPRINTF(("pidfilename: %s\n", shadowd_pidfile));
       if ((shadowd_pid = sge_readpid(shadowd_pidfile))) {
          DPRINTF(("shadowd_pid: "sge_U32CFormat"\n", sge_u32c(shadowd_pid)));
@@ -288,7 +290,8 @@ char shadow_err_file[SGE_PATH_MAX];
       SGE_EXIT((void**)&ctx, 1);
    }
 
-   sprintf(shadow_err_file, "messages_shadowd.%s", ctx->get_unqualified_hostname(ctx));
+   snprintf(shadow_err_file, sizeof shadow_err_file, "messages_shadowd.%s",
+            ctx->get_unqualified_hostname(ctx));
    log_state_set_log_as_admin_user(1);
    log_state_set_log_file(shadow_err_file);
 

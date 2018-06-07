@@ -818,13 +818,13 @@ int job_list_read_from_disk(lList **job_list, char *list_name, int check,
 
 
       first_entry_string = lGetString(first_direntry, ST_name);
-      sprintf(path, "%s/%s", first_dir, first_entry_string);
+      snprintf(path, sizeof path, "%s/%s", first_dir, first_entry_string);
       if (!sge_is_directory(path)) {
          ERROR((SGE_EVENT, MSG_CONFIG_NODIRECTORY_S, path)); 
          break;
       }
-   
-      sprintf(second_dir, SFN"/"SFN, first_dir, first_entry_string); 
+
+      snprintf(second_dir, sizeof second_dir, SFN"/"SFN, first_dir, first_entry_string);
       second_direnties = sge_get_dirents(second_dir);
       for (;
            (second_direntry = lFirst(second_direnties));
@@ -835,14 +835,14 @@ int job_list_read_from_disk(lList **job_list, char *list_name, int check,
          const char *second_entry_string;
 
          second_entry_string = lGetString(second_direntry, ST_name);
-         sprintf(path, "%s/%s/%s", first_dir, first_entry_string,
+         snprintf(path, sizeof path, "%s/%s/%s", first_dir, first_entry_string,
                  second_entry_string);
          if (!sge_is_directory(path)) {
             ERROR((SGE_EVENT, MSG_CONFIG_NODIRECTORY_S, path));
             break;
          } 
 
-         sprintf(third_dir, SFN"/"SFN, second_dir, second_entry_string);
+         snprintf(third_dir, sizeof third_dir, SFN"/"SFN, second_dir, second_entry_string);
          third_direnties = sge_get_dirents(third_dir);
          for (;
               (third_direntry = lFirst(third_direnties));
@@ -857,9 +857,9 @@ int job_list_read_from_disk(lList **job_list, char *list_name, int check,
             int all_finished;
 
             sge_status_next_turn();
-            sprintf(fourth_dir, SFN"/"SFN, third_dir,
+            snprintf(fourth_dir, sizeof fourth_dir, SFN"/"SFN, third_dir,
                     lGetString(third_direntry, ST_name));
-            sprintf(job_id_string, SFN SFN SFN, 
+            snprintf(job_id_string, sizeof job_id_string, SFN SFN SFN,
                     lGetString(first_direntry, ST_name),
                     lGetString(second_direntry, ST_name),
                     lGetString(third_direntry, ST_name)); 

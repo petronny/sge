@@ -604,7 +604,8 @@ lListElem *ep
       for(cep = lFirst(confl), i=0; cep; cep = lNext(cep), i++) {
          const char *name = lGetString(cep, CF_name);
          const char *value = lGetString(cep, CF_value);
-         sprintf(buf, "%-25.25s %s", name ? name : "", value ? value : "");
+         snprintf(buf, sizeof buf, "%-25.25s %s", name ? name : "",
+                  value ? value : "");
          items[i] = XmStringCreateLtoR(buf, "LIST");
       }
       XtVaSetValues( cluster_conf_list, 
@@ -1567,37 +1568,38 @@ int local
       }
       else
          lSetString(ep, CF_value, "none");
-         
+
       ep = lGetElemStr(confl, CF_name, "min_uid");
-      sprintf(min_uid, "%d", clen->min_uid);
+      snprintf(min_uid, sizeof min_uid, "%d", clen->min_uid);
       lSetString(ep, CF_value, min_uid);
-         
+
       ep = lGetElemStr(confl, CF_name, "min_gid");
-      sprintf(min_gid, "%d", clen->min_gid);
+      snprintf(min_gid, sizeof min_gid, "%d", clen->min_gid);
       lSetString(ep, CF_value, min_gid);
-         
+
       ep = lGetElemStr(confl, CF_name, "max_aj_instances");
-      sprintf(max_aj_instances, "%d", clen->max_aj_instances);
+      snprintf(max_aj_instances, sizeof max_aj_instances, "%d",
+               clen->max_aj_instances);
       lSetString(ep, CF_value, max_aj_instances);
-         
+
       ep = lGetElemStr(confl, CF_name, "max_aj_tasks");
-      sprintf(max_aj_tasks, "%d", clen->max_aj_tasks);
+      snprintf(max_aj_tasks, sizeof max_aj_tasks, "%d", clen->max_aj_tasks);
       lSetString(ep, CF_value, max_aj_tasks);
-         
+
       ep = lGetElemStr(confl, CF_name, "max_u_jobs");
-      sprintf(max_u_jobs, "%d", clen->max_u_jobs);
+      snprintf(max_u_jobs, sizeof max_u_jobs, "%d", clen->max_u_jobs);
       lSetString(ep, CF_value, max_u_jobs);
-         
+
       ep = lGetElemStr(confl, CF_name, "max_jobs");
-      sprintf(max_jobs, "%d", clen->max_jobs);
+      snprintf(max_jobs, sizeof max_jobs, "%d", clen->max_jobs);
       lSetString(ep, CF_value, max_jobs);
 
       ep = lGetElemStr(confl, CF_name, "max_advance_reservations");
-      sprintf(max_advance_reservations, "%d", clen->max_advance_reservations);
+      snprintf(max_advance_reservations, sizeof max_advance_reservations, "%d", clen->max_advance_reservations);
       lSetString(ep, CF_value, max_advance_reservations);
 
       ep = lGetElemStr(confl, CF_name, "finished_jobs");
-      sprintf(zombie_jobs, "%d", clen->zombie_jobs);
+      snprintf(zombie_jobs, sizeof zombie_jobs, "%d", clen->zombie_jobs);
       lSetString(ep, CF_value, zombie_jobs);
          
       ep = lGetElemStr(confl, CF_name, "prolog");
@@ -1820,13 +1822,13 @@ int local
       lSetString(ep, CF_value, buf);
 
       ep = lGetElemStr(confl, CF_name, "auto_user_fshare");
-      sprintf(buf, sge_u32, clen->auto_user_fshare);
+      snprintf(buf, sizeof buf, sge_u32, clen->auto_user_fshare);
       lSetString(ep, CF_value, buf);
 
       ep = lGetElemStr(confl, CF_name, "auto_user_oticket");
-      sprintf(buf, sge_u32, clen->auto_user_oticket);
+      snprintf(buf, sizeof buf, sge_u32, clen->auto_user_oticket);
       lSetString(ep, CF_value, buf);
-      
+
       ep = lGetElemStr(confl, CF_name, "auto_user_delete_time");
       if (check_white(clen->auto_user_delete_time)) {
          strcpy(errstr, "No whitespace allowed in value for auto_user_delete_time");

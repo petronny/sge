@@ -2067,19 +2067,20 @@ static int load_check_alarm(char *reason, const char *name, const char *load_val
                load_correction *= lc_host;
 
                if ((nproc = load_np_value_adjustment(name, hep,  &load_correction)) > 0) {
-                  sprintf(lc_diagnosis1, MSG_SCHEDD_LCDIAGHOSTNP_SFI,
-                         load_correction_str, lc_host, nproc);
+                  snprintf(lc_diagnosis1, sizeof lc_diagnosis1,
+                           MSG_SCHEDD_LCDIAGHOSTNP_SFI, load_correction_str,
+                           lc_host, nproc);
                }
                else {
-                  sprintf(lc_diagnosis1, MSG_SCHEDD_LCDIAGHOST_SF,
-                         load_correction_str, lc_host);
-               
+                  snprintf(lc_diagnosis1, sizeof lc_diagnosis1, MSG_SCHEDD_LCDIAGHOST_SF,
+                          load_correction_str, lc_host);
+
                }
             
             } 
             else {
                load_correction *= lc_global;
-               sprintf(lc_diagnosis1, MSG_SCHEDD_LCDIAGGLOBAL_SF,
+               snprintf(lc_diagnosis1, sizeof lc_diagnosis1, MSG_SCHEDD_LCDIAGGLOBAL_SF,
                          load_correction_str, lc_global);
             }
             /* it depends on relop in complex config
@@ -2088,7 +2089,8 @@ static int load_check_alarm(char *reason, const char *name, const char *load_val
             case CMPLXGE_OP:
             case CMPLXGT_OP:
                load += load_correction;
-               sprintf(lc_diagnosis2, MSG_SCHEDD_LCDIAGPOSITIVE_SS, load_value, lc_diagnosis1);
+               snprintf(lc_diagnosis2, sizeof lc_diagnosis2,
+                        MSG_SCHEDD_LCDIAGPOSITIVE_SS, load_value, lc_diagnosis1);
                break;
 
             case CMPLXNE_OP:
@@ -2097,7 +2099,8 @@ static int load_check_alarm(char *reason, const char *name, const char *load_val
             case CMPLXLE_OP:
             default:
                load -= load_correction;
-               sprintf(lc_diagnosis2, MSG_SCHEDD_LCDIAGNEGATIVE_SS, load_value, lc_diagnosis1);
+               snprintf(lc_diagnosis2, sizeof lc_diagnosis2,
+                        MSG_SCHEDD_LCDIAGNEGATIVE_SS, load_value, lc_diagnosis1);
                break;
             }
          } else  {

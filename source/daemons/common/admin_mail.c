@@ -252,11 +252,13 @@ void job_related_adminmail(u_long32 progid, lListElem *jr, int is_array, const c
       }
 
       if (is_array)
-         sprintf(sge_mail_subj, MSG_MAIL_SUBJECT_SUU, 
-                 feature_get_product_name(FS_SHORT_VERSION, &ds), sge_u32c(jobid), sge_u32c(jataskid));
+         snprintf(sge_mail_subj, sizeof sge_mail_subj, MSG_MAIL_SUBJECT_SUU,
+                  feature_get_product_name(FS_SHORT_VERSION, &ds),
+                  sge_u32c(jobid), sge_u32c(jataskid));
       else
-         sprintf(sge_mail_subj, MSG_MAIL_SUBJECT_SU, 
-                 feature_get_product_name(FS_SHORT_VERSION, &ds), sge_u32c(jobid));
+         snprintf(sge_mail_subj, sizeof sge_mail_subj, MSG_MAIL_SUBJECT_SU,
+                  feature_get_product_name(FS_SHORT_VERSION, &ds),
+                  sge_u32c(jobid));
       snprintf(sge_mail_body, sizeof(sge_mail_body),
               MSG_MAIL_BODY_USSSSSSS,
               sge_u32c(jobid),
@@ -294,8 +296,8 @@ void job_related_adminmail(u_long32 progid, lListElem *jr, int is_array, const c
       start = strlen(sge_mail_body_total);
       for (i=0; i<num_files; i++) {
          if (shepherd_files[i].exists) {
-            sprintf(sge_mail_body_total+start, "\nShepherd %s:\n", 
-		    shepherd_filenames[i]);
+            snprintf(sge_mail_body_total, sizeof sge_mail_body_total+start, "\nShepherd %s:\n",
+		     shepherd_filenames[i]);
             start = strlen(sge_mail_body_total);
             if ((fp = fopen(shepherd_files[i].filepath, "r"))) {
                int n;

@@ -1536,7 +1536,7 @@ Boolean *ctd
                                           (u_long32)job_nr);
                      if (jep) {
                         dstring job_info = DSTRING_INIT;
-                        sprintf(line, "+++++++++++++++++++++++++++++++++++++++++++\n");  
+                        snprintf(line, sizeof line, "+++++++++++++++++++++++++++++++++++++++++++\n");
                         qmonBrowserShow(line);
                         qmonJobShowBrowserInfo(&job_info, jep);      
                         qmonBrowserShow(sge_dstring_get_string(&job_info));
@@ -2137,7 +2137,7 @@ dstring *sb
                      strcat(text, ",\n\t");
                else
                   strcat(text, ",\t");
-               sprintf(ltext, sge_u32, jid);
+               snprintf(ltext, sizeof ltext, sge_u32, jid);
                strcat(text, ltext);
                ids_per_line++;
             }

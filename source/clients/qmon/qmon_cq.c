@@ -1198,7 +1198,7 @@ Boolean *ctd
                      qp = cqueue_list_locate_qinstance(
                                  qmonMirrorList(SGE_CQ_LIST), str);
                      if (qp) {
-                        sprintf(line, "+++++++++++++++++++++++++++++++++++++++++++\n");  
+                        snprintf(line, sizeof line, "+++++++++++++++++++++++++++++++++++++++++++\n");
                         qmonBrowserShow(line);
                         qmonQinstanceShowBrowserInfo(&queue_info, qp);      
                         qmonBrowserShow(sge_dstring_get_string(&queue_info));
@@ -1452,7 +1452,7 @@ static void qmonQinstanceExplain(Widget w, XtPointer cld, XtPointer cad)
    
    if (nr_selected_rows > 0) {
       char line[BUFSIZ];
-      sprintf(line, "+++++++++++++++++++++++++++++++++++++++++++\n");  
+      snprintf(line, sizeof line, "+++++++++++++++++++++++++++++++++++++++++++\n");
 
       qmonMirrorMultiAnswer(CQUEUE_T | EXECHOST_T | CENTRY_T,  &alp);
       if (alp) {
@@ -1651,7 +1651,7 @@ lListElem *qep
 
    DENTER(GUI_LAYER, "qmonCQShowBrowserInfo");
 
-   sprintf(info, WIDTH"%s\n", "\n","Cluster Queue:", lGetString(qep, CQ_name));
+   snprintf(info, sizeof info, WIDTH"%s\n", "\n","Cluster Queue:", lGetString(qep, CQ_name));
 
    sge_strlcat(info, "\n", sizeof(info)); 
 
@@ -1997,45 +1997,45 @@ static void qmonCQUpdateCQMatrix(void)
 
       XbaeMatrixSetCell(cluster_queue_settings, row, 0, (char*)lGetString(cq, CQ_name));
       if (is_load_available) {
-         sprintf(buf, "%7.2f ", load);
+         snprintf(buf, sizeof buf, "%7.2f ", load);
       } else {
-         sprintf(buf, "%7s ", "-NA-");
+         snprintf(buf, sizeof buf, "%7s ", "-NA-");
       }
       XbaeMatrixSetCell(cluster_queue_settings, row, 1, buf);
-      sprintf(buf, "%6d ", (int)used);
+      snprintf(buf, sizeof buf, "%6d ", (int)used);
       XbaeMatrixSetCell(cluster_queue_settings, row, 2, buf);
-      sprintf(buf, "%6d ", (int)resv);
+      snprintf(buf, sizeof buf, "%6d ", (int)resv);
       XbaeMatrixSetCell(cluster_queue_settings, row, 3, buf);
-      sprintf(buf, "%6d ", (int)available);
+      snprintf(buf, sizeof buf, "%6d ", (int)available);
       XbaeMatrixSetCell(cluster_queue_settings, row, 4, buf);
-      sprintf(buf, "%6d ", (int)total);
+      snprintf(buf, sizeof buf, "%6d ", (int)total);
       XbaeMatrixSetCell(cluster_queue_settings, row, 5, buf);
-      sprintf(buf, "%6d ", (int)temp_disabled);
+      snprintf(buf, sizeof buf, "%6d ", (int)temp_disabled);
       XbaeMatrixSetCell(cluster_queue_settings, row, 6, buf);
-      sprintf(buf, "%6d ", (int)manual_intervention);
+      snprintf(buf, sizeof buf, "%6d ", (int)manual_intervention);
       XbaeMatrixSetCell(cluster_queue_settings, row, 7, buf);
-      sprintf(buf, "%5d ", (int)suspend_manual);
+      snprintf(buf, sizeof buf, "%5d ", (int)suspend_manual);
       XbaeMatrixSetCell(cluster_queue_settings, row, 8, buf);
-      sprintf(buf, "%5d ", (int)suspend_threshold);
+      snprintf(buf, sizeof buf, "%5d ", (int)suspend_threshold);
       XbaeMatrixSetCell(cluster_queue_settings, row, 9, buf);
       /* fixme: slotwise */
-      sprintf(buf, "%5d ", (int)suspend_on_subordinate);
+      snprintf(buf, sizeof buf, "%5d ", (int)suspend_on_subordinate);
       XbaeMatrixSetCell(cluster_queue_settings, row, 10, buf);
-      sprintf(buf, "%5d ", (int)suspend_calendar);
+      snprintf(buf, sizeof buf, "%5d ", (int)suspend_calendar);
       XbaeMatrixSetCell(cluster_queue_settings, row, 11, buf);
-      sprintf(buf, "%5d ", (int)unknown);
+      snprintf(buf, sizeof buf, "%5d ", (int)unknown);
       XbaeMatrixSetCell(cluster_queue_settings, row, 12, buf);
-      sprintf(buf, "%5d ", (int)load_alarm);
+      snprintf(buf, sizeof buf, "%5d ", (int)load_alarm);
       XbaeMatrixSetCell(cluster_queue_settings, row, 13, buf);
-      sprintf(buf, "%5d ", (int)disabled_manual);
+      snprintf(buf, sizeof buf, "%5d ", (int)disabled_manual);
       XbaeMatrixSetCell(cluster_queue_settings, row, 14, buf);
-      sprintf(buf, "%5d ", (int)disabled_calendar);
+      snprintf(buf, sizeof buf, "%5d ", (int)disabled_calendar);
       XbaeMatrixSetCell(cluster_queue_settings, row, 15, buf);
-      sprintf(buf, "%5d ", (int)ambiguous);
+      snprintf(buf, sizeof buf, "%5d ", (int)ambiguous);
       XbaeMatrixSetCell(cluster_queue_settings, row, 16, buf);
-      sprintf(buf, "%5d ", (int)orphaned);
+      snprintf(buf, sizeof buf, "%5d ", (int)orphaned);
       XbaeMatrixSetCell(cluster_queue_settings, row, 17, buf);
-      sprintf(buf, "%5d ", (int)error);
+      snprintf(buf, sizeof buf, "%5d ", (int)error);
       XbaeMatrixSetCell(cluster_queue_settings, row, 18, buf);
    
       row++;
@@ -2188,9 +2188,11 @@ static void qmonCQUpdateQIMatrix(void)
                sge_dstring_free(&type_string);
             }
             /* number of used/free slots */
-            sprintf(to_print, "%d/%d/%d ", qinstance_slots_reserved_now(qp), qinstance_slots_used(qp),
+            snprintf(to_print, sizeof to_print, "%d/%d/%d ",
+                     qinstance_slots_reserved_now(qp),
+                     qinstance_slots_used(qp),
                      (int)lGetUlong(qp, QU_job_slots));
-            sprintf(buf, "%-9.9s ", to_print);   
+            snprintf(buf, sizeof buf, "%-9.9s ", to_print);
 #ifndef QI_SORTING
             XbaeMatrixSetCell(qinstance_settings, row, 2, buf);
 #else
@@ -2200,12 +2202,12 @@ static void qmonCQUpdateQIMatrix(void)
             /* load avg */
             if (!is_load_value) {
                if (has_value_from_object) {
-                  sprintf(to_print, "%2.2f ", load_avg);
+                  snprintf(to_print, sizeof to_print, "%2.2f ", load_avg);
                } else {
-                  sprintf(to_print, "---  ");
+                  snprintf(to_print, sizeof to_print, "---  ");
                }
             } else {
-               sprintf(to_print, "-NA- ");
+               snprintf(to_print, sizeof to_print, "-NA- ");
             }
 #ifndef QI_SORTING
             XbaeMatrixSetCell(qinstance_settings, row, 3, to_print);
@@ -2410,7 +2412,7 @@ static void qmonCQUpdateQhostMatrix(void)
      lep=get_attribute_by_name(NULL, eh, NULL, LOAD_ATTR_NP_LOAD_AVG, cl, DISPATCH_TIME_NOW, 0);
      if (lep) {
        /* lWriteElemTo(lep, stdout); */
-       sprintf(buffer, "%.1f%%", 100 * lGetDouble(lep, CE_pj_doubleval));
+       snprintf(buffer, sizeof buffer, "%.1f%%", 100 * lGetDouble(lep, CE_pj_doubleval));
        sge_dstring_clear(&rs);
        lFreeElem(&lep);
      }
@@ -2547,7 +2549,9 @@ static void qmonQinstanceSetLoad(Widget matrix, const char *qiname)
 /*    correct_capacities(ehl, cl);                    */
    queue_complexes2scheduler(&ncl, qep, ehl, cl);
 
-   sprintf(info, "%s %s", XmtLocalize(matrix, "Attributes for queue", "Attributes for queue"), lGetString(qep, QU_qname));
+   snprintf(info, sizeof info, "%s %s",
+            XmtLocalize(matrix, "Attributes for queue", "Attributes for queue"),
+            lGetString(qep, QU_qname));
 
    xstr = XmtCreateXmString(info);
    XtVaSetValues(XtParent(matrix), XmNdialogTitle, xstr, NULL);
@@ -2572,7 +2576,7 @@ static void qmonQinstanceSetLoad(Widget matrix, const char *qiname)
       type = lGetUlong(ep, CE_valtype);
       if (slot_limit && (type == TYPE_MEM || type == TYPE_DOUBLE) &&
          (n=sscanf(slot_limit, "%f%c", &fval, &unit))>=1) {
-         sprintf(info, "%8.3f%c", fval, (n>1) ? unit : '\0');
+         snprintf(info, sizeof info, "%8.3f%c", fval, (n>1) ? unit : '\0');
          lSetString(ep, CE_stringval, info);
          slot_limit = lGetString(ep, CE_stringval);
       }
@@ -2584,7 +2588,7 @@ static void qmonQinstanceSetLoad(Widget matrix, const char *qiname)
       type = lGetUlong(ep, CE_valtype);
       if (job_limit && (type == TYPE_MEM || type == TYPE_DOUBLE) &&
          (n = sscanf(job_limit, "%f%c", &fval, &unit))>=1) {
-         sprintf(info, "%8.3f%c", fval, (n>1) ? unit : '\0');
+         snprintf(info, sizeof info, "%8.3f%c", fval, (n>1) ? unit : '\0');
          lSetString(ep, CE_pj_stringval, info);
          job_limit = lGetString(ep, CE_pj_stringval);
       }

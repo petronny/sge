@@ -253,12 +253,12 @@ int nm
       }
  
       if (show_value) {
-         sprintf(buf, "%d", (int)lGetUlong(jat, nm));
+         snprintf(buf, sizeof buf, "%d", (int)lGetUlong(jat, nm));
       } else {
-         sprintf(buf, "NA");
-      }                      
+         snprintf(buf, sizeof buf, "NA");
+      }
    } else {
-      sprintf(buf, "%d", (int)lGetUlong(ep, nm));
+      snprintf(buf, sizeof buf, "%d", (int)lGetUlong(ep, nm));
    }
 
    str = XtNewString(buf);
@@ -316,12 +316,12 @@ int nm
          }
 
          if (show_value) {
-            sprintf(buf, "%d", (int)lGetDouble(jat, nm));
+            snprintf(buf, sizeof buf, "%d", (int)lGetDouble(jat, nm));
          } else {
-            sprintf(buf, "NA");
+            snprintf(buf, sizeof buf, "NA");
          }
       } else {
-         sprintf(buf, "%d", (int)lGetDouble(ep, nm));
+         snprintf(buf, sizeof buf, "%d", (int)lGetDouble(ep, nm));
       }
 
       str = XtNewString(buf);
@@ -380,13 +380,13 @@ int nm
          }
     
          if (show_value) {
-            sprintf(buf, "%f", lGetDouble(jat, nm));
+            snprintf(buf, sizeof buf, "%f", lGetDouble(jat, nm));
          } else {
-            sprintf(buf, "NA");
-         }                                
+            snprintf(buf, sizeof buf, "NA");
+         }
       }
       else
-         sprintf(buf, "%f", lGetDouble(ep, nm));
+         snprintf(buf, sizeof buf, "%f", lGetDouble(ep, nm));
 
       str = XtNewString(buf);
    }
@@ -409,9 +409,9 @@ int nm
 
 #define OPTI_PRINT8(value) \
    if (value > 99999999 ) \
-      sprintf(buf, "%8.3g ", value); \
+      snprintf(buf, sizeof buf, "%8.3g ", value); \
    else  \
-      sprintf(buf, "%8.0f ", value)
+      snprintf(buf, sizeof buf, "%8.0f ", value)
 
    OPTI_PRINT8(lGetDouble(ep, nm));
    str = XtNewString(buf);
@@ -601,7 +601,7 @@ int nm
 
       /* scaled cpu usage */
       if (!(up = lGetSubStr(jat, UA_name, USAGE_ATTR_CPU, JAT_scaled_usage_list)))
-         sprintf(buf, "%-10.10s ", running?"NA":"");
+         snprintf(buf, sizeof buf, "%-10.10s ", running?"NA":"");
       else {
          int secs, minutes, hours, days;
 
@@ -616,7 +616,7 @@ int nm
          minutes = secs/60;
          secs   -= minutes*60;
 
-         sprintf(buf, "%d:%2.2d:%2.2d:%2.2d", days, hours, minutes, secs);
+         snprintf(buf, sizeof buf, "%d:%2.2d:%2.2d:%2.2d", days, hours, minutes, secs);
       }
 
       str = XtNewString(buf);
@@ -691,12 +691,12 @@ const char *field
 
       /* scaled mem usage */
       if (!(up = lGetSubStr(jat, UA_name, field, JAT_scaled_usage_list))) {
-         sprintf(buf, "%-7.7s", running?"NA":"");
+         snprintf(buf, sizeof buf, "%-7.7s", running?"NA":"");
       } else {
          dstring mem_string = DSTRING_INIT;
 
          double_print_memory_to_dstring(lGetDouble(up, UA_value), &mem_string);
-         sprintf(buf, "%s", sge_dstring_get_string(&mem_string));
+         snprintf(buf, sizeof buf, "%s", sge_dstring_get_string(&mem_string));
          sge_dstring_free(&mem_string);
       }
 
@@ -742,9 +742,9 @@ int nm
       /* scaled io usage */
       if (!(up = lGetSubStr(jat, UA_name, USAGE_ATTR_IO,
          JAT_scaled_usage_list)))
-         sprintf(buf, "%-7.7s", running?"NA":"");
+         snprintf(buf, sizeof buf, "%-7.7s", running?"NA":"");
       else
-         sprintf(buf, "%-5.5f", lGetDouble(up, UA_value));
+         snprintf(buf, sizeof buf, "%-5.5f", lGetDouble(up, UA_value));
 
       str = XtNewString(buf);
    }
@@ -936,7 +936,7 @@ int nm
    ** prepare task ids, if the job contains only one job array task the job id!    ** is sufficient
    */
    if (jat) {
-      sprintf(buf, sge_u32, lGetUlong(jat, JAT_task_number));
+      snprintf(buf, sizeof buf, sge_u32, lGetUlong(jat, JAT_task_number));
    }
    else if (eleml) {
       buf[0] = '\0';
@@ -961,7 +961,7 @@ int nm
 
    DENTER(GUI_LAYER, "PrintJobId");
 
-   sprintf(buf, sge_u32, lGetUlong(ep, JB_job_number));
+   snprintf(buf, sizeof buf, sge_u32, lGetUlong(ep, JB_job_number));
 
    str = XtNewString(buf);
 
@@ -1167,7 +1167,7 @@ int nm
          jat = job_get_ja_task_template(ep, task_id);       
       }
    }
-   sprintf(buf, "%7.5f", lGetDouble(jat, JAT_prio));
+   snprintf(buf, sizeof buf, "%7.5f", lGetDouble(jat, JAT_prio));
 
    str = XtNewString(buf);
 

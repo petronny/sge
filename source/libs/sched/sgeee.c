@@ -3074,8 +3074,9 @@ sge_calc_tickets( scheduler_all_data_t *lists,
                lListElem *child;
 
                job = jref->job;
-               sprintf(tmpstr, sge_u32"."sge_u32, lGetUlong(job, JB_job_number),
-                      REF_GET_JA_TASK_NUMBER(jref));
+               snprintf(tmpstr, sizeof tmpstr, sge_u32"."sge_u32,
+                        lGetUlong(job, JB_job_number),
+                        REF_GET_JA_TASK_NUMBER(jref));
                child = lAddSubStr(node, STN_name, tmpstr, STN_children, STN_Type);
                lSetUlong(child, STN_jobid, lGetUlong(job, JB_job_number));
                lSetUlong(child, STN_taskid, REF_GET_JA_TASK_NUMBER(jref));

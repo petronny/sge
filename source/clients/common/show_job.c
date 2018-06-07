@@ -150,7 +150,7 @@ void cull_show_job(lListElem *job, int flags, bool show_binding)
          const char *value;
          char fullname[MAX_STRING_SIZE];
 
-         sprintf(fullname, "%s%s", VAR_PREFIX, name[i]);
+         snprintf(fullname, sizeof fullname, "%s%s", VAR_PREFIX, name[i]);
          value = job_get_env_string(job, fullname);
          if (value != NULL) {
             printf(fmt_string[i], value);
@@ -741,10 +741,10 @@ static void sge_show_y_n(int op, int how)
    DENTER(TOP_LAYER, "sge_show_y_n");
  
    if (op)
-      sprintf(tmp_str, "y");
+      snprintf(tmp_str, sizeof tmp_str, "y");
    else
-      sprintf(tmp_str, "n");
- 
+      snprintf(tmp_str, sizeof tmp_str, "n");
+
    if (VALID(how, SGE_STDOUT))
       printf("%s", tmp_str);
  

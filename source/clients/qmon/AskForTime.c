@@ -779,10 +779,10 @@ static String qmonGetTimeString(Widget timew, Boolean show_infinity)
    qmonGetTime(timew, &time, show_infinity);
 
    if (!time.infinity)
-      sprintf(buf, "%02d:%02d:%02d", time.days*24+time.hours, time.minutes,
+      snprintf(buf, sizeof buf, "%02d:%02d:%02d", time.days*24+time.hours, time.minutes,
                time.seconds);
    else
-      sprintf(buf, "INFINITY");
+      snprintf(buf, sizeof buf, "INFINITY");
 
    DEXIT;
    return buf;
@@ -853,9 +853,9 @@ Widget memoryw
    unit = *(String *) XmtChooserGetValue(memory_unit);
 
    if (!strcasecmp(unit, "infinity"))
-      sprintf(buf, "%s", unit);
-   else   
-      sprintf(buf, "%s%s", inputstring, unit);
+      snprintf(buf, sizeof buf, "%s", unit);
+   else
+      snprintf(buf, sizeof buf, "%s%s", inputstring, unit);
 
    DEXIT;
    return buf;
@@ -913,7 +913,7 @@ String mem
       strcpy(memstring, "");
    }
    else
-      sprintf(memstring, "%.2f", mem_val);
+      snprintf(memstring, sizeof memstring, "%.2f", mem_val);
 
    XmtChooserSetState(memory_unit, unit, True);
    XmtInputFieldSetString(memory_value, memstring);

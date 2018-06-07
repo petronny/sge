@@ -864,11 +864,11 @@ unsigned long flags
          switch (type) {
          case lFloatT:
 
-            sprintf(str, "%.10g", lGetFloat(ep, *rule));
+            snprintf(str, sizeof str, "%.10g", lGetFloat(ep, *rule));
             break;
 
          case lDoubleT:
-            sprintf(str, "%.10g", lGetDouble(ep, *rule));
+            snprintf(str, sizeof str, "%.10g", lGetDouble(ep, *rule));
             break;
        
          case lUlongT:

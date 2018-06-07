@@ -122,8 +122,8 @@ int sge_add_double2load_report(lList **lpp, char *name, double value,
    char load_string[255];
  
    DENTER(BASIS_LAYER, "sge_add_double2load_report");
- 
-   sprintf(load_string, "%f%s", value, units?units:"");
+
+   snprintf(load_string, sizeof load_string, "%f%s", value, units?units:"");
    sge_add_str2load_report(lpp, name, load_string, host);
 
    DRETURN(0); 
@@ -142,7 +142,7 @@ int sge_add_int2load_report(lList **lpp, const char *name, int value,
 
    DENTER(BASIS_LAYER, "sge_add_int2load_report");
 
-   sprintf(load_string, "%d", value);
+   snprintf(load_string, sizeof load_string, "%d", value);
    ret = sge_add_str2load_report(lpp, name, load_string, host);
 
    DRETURN(ret);

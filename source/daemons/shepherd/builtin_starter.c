@@ -1238,7 +1238,7 @@ static char **read_job_args(char **preargs, int extra_args)
    args[i] = NULL;
 
    for (i = 0; i < n_job_args; i++) {
-      sprintf(conf_val, "job_arg%lu", i + 1);
+      snprintf(conf_val, sizeof conf_val, "job_arg%lu", i + 1);
       cp = get_conf_val(conf_val);
      
       if(cp != NULL) {
@@ -1314,7 +1314,7 @@ int use_starter_method /* If this flag is set the shell path contains the
       for (i=0; i<(unsigned)n_job_args; i++) {
          char conf_val[256];
 
-         sprintf(conf_val, "job_arg%lu", i + 1);
+         snprintf(conf_val, sizeof conf_val, "job_arg%lu", i + 1);
          cp = get_conf_val(conf_val);
 
          if(cp != NULL) {
@@ -1504,17 +1504,17 @@ int use_starter_method /* If this flag is set the shell path contains the
           * "..." string, etc.
           */
          if (strlen(*pstr) < ((sizeof(err_str)  - (pc - err_str) - 15))) {
-            sprintf(pc, " \"%s\"", *pstr);
+            snprintf(pc, sizeof err_str, " \"%s\"", *pstr);
             pc += strlen(pc);
          }
          else {
-            sprintf(pc, " ...");
+            snprintf(pc, sizeof err_str, " ...");
             pc += strlen(pc);
             break;
          }      
       }
 
-      sprintf(pc, ")");
+      snprintf(pc, sizeof err_str, ")");
       shepherd_trace("%s", err_str);
 
       /* Bugfix: Issuezilla 1300

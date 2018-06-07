@@ -661,7 +661,7 @@ Widget mw
          percentage /= total_fshare;
       else
          percentage = 0;
-      sprintf(buf, "%.1f %%", percentage); 
+      snprintf(buf, sizeof buf, "%.1f %%", percentage);
       XbaeMatrixSetCell(mw, row, 2, buf);
       total_percentage += percentage;
    }
@@ -672,9 +672,9 @@ Widget mw
    */
    XbaeMatrixSetRowBackgrounds(mw, last_row, &JobSuspPixel, 1);
    XbaeMatrixSetCell(mw, last_row, 0, XmtLocalize2(mw, "Sum", "qmon_fticket", "Sum"));
-   sprintf(buf, "%.0f", total_fshare);
+   snprintf(buf, sizeof buf, "%.0f", total_fshare);
    XbaeMatrixSetCell(mw, last_row, 1, buf);
-   sprintf(buf, "%.1f %%", total_percentage);
+   snprintf(buf, sizeof buf, "%.1f %%", total_percentage);
    XbaeMatrixSetCell(mw, last_row, 2, buf);
 
    DPRINTF(("total_percentage: %f\n", total_percentage));
@@ -1078,13 +1078,13 @@ int nm1
 
    for (ep = lFirst(lp), row = 0; ep; ep = lNext(ep), row++) {
       if (nm0 == JB_job_number) {
-         sprintf(buf2, "%d", (int)lGetUlong(ep, nm0));
+         snprintf(buf2, sizeof buf2, "%d", (int)lGetUlong(ep, nm0));
          name = buf2;
       }
       else
          name = lGetString(ep, nm0);
       tickets = lGetUlong(ep, nm1);
-      sprintf(buf, sge_u32, tickets);
+      snprintf(buf, sizeof buf, sge_u32, tickets);
       if (row == max_rows-1) {
          XbaeMatrixAddRows(matrix,
                            max_rows-1,

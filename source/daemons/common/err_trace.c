@@ -413,7 +413,7 @@ void shepherd_error(int do_exit, const char *format, ...)
       shepherd_exit_status_fp = shepherd_trace_init_intern(st_exit_status);
    }
    if (shepherd_exit_status_fp != NULL) {
-      sprintf(header_str, "%d", shepherd_state);
+      snprintf(header_str, sizeof header_str, "%d", shepherd_state);
       sh_str2file(header_str, NULL, shepherd_exit_status_fp);
    }
 

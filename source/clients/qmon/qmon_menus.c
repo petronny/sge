@@ -439,7 +439,7 @@ static void qmonPointTo(Widget w, XtPointer cld, XtPointer cad)
    result = XmTrackingLocate(top, cursor, False);
 
    if (result && qmonBrowserObjectEnabled(BROWSE_STDOUT)) {
-      sprintf(buf, "Pointing to %s\n", XtName(result));   
+      snprintf(buf, sizeof buf, "Pointing to %s\n", XtName(result));
       qmonBrowserShow(buf);
    }
 

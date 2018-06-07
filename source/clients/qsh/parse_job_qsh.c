@@ -528,8 +528,8 @@ lList *cull_parse_qsh_parameter(u_long32 prog_number, u_long32 uid, const char *
    for_each(ep, cmdline) {
       char str[1024];
 
-      sprintf(str, MSG_ANSWER_UNKOWNOPTIONX_S, 
-         lGetString(ep, SPA_switch));
+      snprintf(str, sizeof str, MSG_ANSWER_UNKOWNOPTIONX_S,
+               lGetString(ep, SPA_switch));
       cp = lGetString(ep, SPA_switch_arg);
       if (cp) {
          strcat(str, " ");
