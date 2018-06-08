@@ -300,10 +300,8 @@ libs.swing-layout.classpath=${sge.srcdir}/../swing-layout-1.0.3/dist/swing-layou
 libs.ant.classpath=%{_javadir}/ant.jar
 EOF
 
-# -O2/-O3 gives warnings about type puns.  It's not clear whether
-# they're serious, but -fno-strict-aliasing just in case.
-export SGE_INPUT_CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing"
-export SGE_INPUT_LDFLAGS="$LDFLAGS"
+export SGE_INPUT_CFLAGS="$RPM_OPT_FLAGS -Wno-unused-value -Wno-unused-but-set-variable"
+export SGE_INPUT_LDFLAGS="%{?__global_ldflags} $LDFLAGS"
 %if 0%{?suse_version} >= 1500
 # rpc/types.h must be directly in /usr/include, so the aimk bit fails
 SGE_INPUT_LDFLAGS="$LDFLAGS -ltirpc"
@@ -480,6 +478,7 @@ fi
 * Sun May 20 2018 Dave Love <dave.love@manchester.ac.uk> - 1:8.1.10-1
 - New version with fixes for recent Fedora and SuSE
 - Adjust selinux file spec
+- Maybe use __global_ldflags and modify CFLAGS
 
 * Sun Feb 28 2016 Dave Love <d.love@liverpool.ac.uk> 8.1.9
 - Fix OpenSuSE build
