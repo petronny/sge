@@ -22,7 +22,13 @@
 %ifarch ppc64
 %bcond_with java
 %else
+%if 0%{?suse_version} >= 1500
+# It fails to find various sun.com stuff due to the version of Java
+# and/or ant.  Fixme:  Try to make JNI work, at least.
+%bcond_with java
+%else
 %bcond_without java
+%endif
 %endif
 
 # Use "rpmbuild --with hadoop" to build Hadoop support (the herd library)
@@ -114,7 +120,9 @@ BuildRequires: motif-devel
 # el5, el6, openSuSE
 BuildRequires: openmotif-devel
 %endif
-%if 0%{?fedora} >= 28
+# The SuSE test probably needs modifying.  It didn't work to test the
+# glibc rpm version simply for some reason.
+%if 0%{?fedora} >= 28 || 0%{?suse_version} >= 1500
 # No longer in glibc
 BuildRequires: libtirpc-devel
 %endif
@@ -296,6 +304,10 @@ EOF
 # they're serious, but -fno-strict-aliasing just in case.
 export SGE_INPUT_CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing"
 export SGE_INPUT_LDFLAGS="$LDFLAGS"
+%if 0%{?suse_version} >= 1500
+# rpc/types.h must be directly in /usr/include, so the aimk bit fails
+SGE_INPUT_LDFLAGS="$LDFLAGS -ltirpc"
+%endif
 [ -n "$RPM_BUILD_NCPUS" ] && parallel_flags="-parallel $RPM_BUILD_NCPUS"
 %if %{without java}
 JAVA_BUILD_OPTIONS="-no-java -no-jni"
@@ -466,7 +478,7 @@ fi
 
 %changelog
 * Sun May 20 2018 Dave Love <dave.love@manchester.ac.uk> - 1:8.1.10-1
-- New version with fixes for recent Fedora
+- New version with fixes for recent Fedora and SuSE
 - Adjust selinux file spec
 
 * Sun Feb 28 2016 Dave Love <d.love@liverpool.ac.uk> 8.1.9
