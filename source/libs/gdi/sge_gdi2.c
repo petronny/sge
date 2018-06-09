@@ -1974,7 +1974,8 @@ general_communication_error(const cl_application_error_list_elem_t* commlib_erro
                   sge_gdi_communication_error.com_access_denied_counter = 0;
                }
 
-               if (sge_gdi_communication_error.com_access_denied_time < now.tv_sec) {
+               if (sge_gdi_communication_error.com_access_denied_time
+                   < (unsigned long)now.tv_sec) {
                   if (sge_gdi_communication_error.com_access_denied_time == 0) {
                      time_diff = 1;
                   } else {
@@ -2000,7 +2001,8 @@ general_communication_error(const cl_application_error_list_elem_t* commlib_erro
                   sge_gdi_communication_error.com_endpoint_not_unique_counter = 0;
                }
 
-               if (sge_gdi_communication_error.com_endpoint_not_unique_time < now.tv_sec) {
+               if (sge_gdi_communication_error.com_endpoint_not_unique_time
+                   < (unsigned long)now.tv_sec) {
                   if (sge_gdi_communication_error.com_endpoint_not_unique_time == 0) {
                      time_diff = 1;
                   } else {

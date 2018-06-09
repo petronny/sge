@@ -530,8 +530,7 @@ int pt_dispatch_proc_to_job(char *pidname, lnk_link_t *job_list,
 
       job_elem = LNK_DATA(curr, job_elem_t, link);
       for (group=0; !found_it && group<groups; group++) {
-         /* fixme: comparison of JobId with gid_t */
-         if (job_elem->job.jd_jid == list[group]) {
+         if (job_elem->job.jd_jid == (JobID_t)list[group]) {
 #if (__linux__ || __CYGWIN__)
             lSetPosBool(pr, pos_rel, true); /* mark process as relevant */
 #endif

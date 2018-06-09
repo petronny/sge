@@ -358,9 +358,10 @@ static int handle_job(sge_gdi_ctx_class_t *ctx, lListElem *jelem, lListElem *jat
                   goto Error;
                }
 
-               if ((nwritten = sge_writenbytes(fd, lGetString(jelem, JB_script_ptr), 
-                  lGetUlong(jelem, JB_script_size))) !=
-                  lGetUlong(jelem, JB_script_size)) {
+               if ((nwritten =
+                    sge_writenbytes(fd, lGetString(jelem, JB_script_ptr),
+                                    lGetUlong(jelem, JB_script_size))) !=
+                   (int)lGetUlong(jelem, JB_script_size)) {
                   DPRINTF(("errno: %d\n", errno));
                   sge_dstring_sprintf(&err_str, MSG_EXECD_NOWRITESCRIPT_SIUS, 
                                       lGetString(jelem, JB_exec_file), nwritten, 
@@ -607,7 +608,7 @@ job_get_queue_for_task(lListElem *jatep, lListElem *petep,
          DTRACE;
 
          /* Queue must have free slots */
-         if (qinstance_slots_used(this_q) < lGetUlong(this_q, QU_job_slots)) {
+         if (qinstance_slots_used(this_q) < (int)lGetUlong(this_q, QU_job_slots)) {
             lList *jat_gdil = job_set_queue_info_in_task(qualified_hostname, lGetString(gdil_ep, JG_qname),
                                                           petep);
             DRETURN(jat_gdil); 

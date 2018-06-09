@@ -757,7 +757,7 @@ sge_run_jvm(sge_gdi_ctx_class_t *ctx, void *anArg, monitoring_t *monitor)
       DPRINTF(("jvm_argv[%d]: %s\n", i, jvm_argv[i]));
    }  
 
-   for (i=0; i<sizeof(main_argv)/sizeof(char*); i++) {
+   for (i=0; i<(int)(sizeof(main_argv)/sizeof(char*)); i++) {
       DPRINTF(("main_argv[%d]: %s\n", i, main_argv[i]));
    }  
 

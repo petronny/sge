@@ -2939,7 +2939,7 @@ int job_verify_predecessors(lListElem *job, lList **alpp)
             answer_list_add(alpp, SGE_EVENT, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR);
             DRETURN(STATUS_EUNKNOWN);
          }
-         if (atoi(pre_ident) == jobid) {
+         if (atoi(pre_ident) == (int)jobid) {
             lFreeList(&predecessors_id);
             DPRINTF(("got my own jobid in JRE_job_name\n"));
             ERROR((SGE_EVENT, MSG_JOB_MOD_GOTOWNJOBIDINHOLDJIDOPTION_U, sge_u32c(jobid)));
@@ -3055,7 +3055,7 @@ int job_verify_predecessors_ad(lListElem *job, lList **alpp)
             answer_list_add(alpp, SGE_EVENT, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR);
             DRETURN(STATUS_EUNKNOWN);
          }
-         if (atoi(pre_ident) == jobid) {
+         if (atoi(pre_ident) == (int)jobid) {
             lFreeList(&predecessors_id);
             DPRINTF(("got my own jobid in JRE_job_name\n"));
             ERROR((SGE_EVENT, MSG_JOB_MOD_GOTOWNJOBIDINHOLDJIDOPTION_U, sge_u32c(jobid)));

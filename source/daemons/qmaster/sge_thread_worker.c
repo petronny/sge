@@ -111,7 +111,7 @@ sge_worker_initialize(sge_gdi_ctx_class_t *ctx)
 {
    const u_long32 max_initial_worker_threads = ctx->get_worker_thread_count(ctx);
    cl_thread_settings_t* dummy_thread_p = NULL;
-   int i;   
+   u_long32 i;
 
    DENTER(TOP_LAYER, "sge_worker_initialize");
 

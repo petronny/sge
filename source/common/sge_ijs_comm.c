@@ -108,7 +108,7 @@ static bool do_timeout_handling(unsigned long *time, int *counter)
       *counter = 0;
    }
 
-   if (*time < now.tv_sec)  {
+   if (*time < (unsigned long)now.tv_sec)  {
       if (*time == 0) {
          time_diff = 1;
       } else {

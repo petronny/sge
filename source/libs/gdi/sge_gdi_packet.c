@@ -805,7 +805,7 @@ sge_gdi_packet_verify_version(sge_gdi_packet_class_t * packet, lList **alpp)
    DENTER(TOP_LAYER, "sge_gdi_packet_verify_version");
    sge_dstring_init(&ds, buffer, sizeof(buffer));
 
-   if (version != (int)GRM_GDI_VERSION) {
+   if (version != GRM_GDI_VERSION) {
       for (vp = &vdict[0]; vp->version; vp++) {
          if (version == vp->version) {
             client_version = vp->release;

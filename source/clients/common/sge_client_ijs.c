@@ -424,9 +424,11 @@ void* tty_to_commlib(void *t_conf)
          } else {
             DPRINTF(("tty_to_commlib: writing to commlib: %d bytes\n", nread));
             if (suspend_handler(g_comm_handle, g_hostname, g_is_rsh, g_suspend_remote, g_pid, &dbuf) == 1) {
-                if (comm_write_message(g_comm_handle, g_hostname, 
-                    COMM_CLIENT, 1, (unsigned char*)pbuf, 
-                    (unsigned long)nread, STDIN_DATA_MSG, &err_msg) != nread) {
+                if (comm_write_message(g_comm_handle, g_hostname,
+                                       COMM_CLIENT, 1, (unsigned char*)pbuf,
+                                       (unsigned long)nread, STDIN_DATA_MSG,
+                                       &err_msg)
+                    != (unsigned long)nread) {
                   DPRINTF(("tty_to_commlib: couldn't write all data\n"));
                 } else {
                   DPRINTF(("tty_to_commlib: data successfully written\n"));

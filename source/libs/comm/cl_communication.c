@@ -2590,7 +2590,8 @@ int cl_com_host_list_refresh(cl_raw_list_t* list_p) {
       elem = cl_host_list_get_next_elem(elem);
       elem_host = act_elem->host_spec;
 
-      if (elem_host->creation_time + ldata->entry_life_time < now.tv_sec ) {
+      if (elem_host->creation_time + ldata->entry_life_time
+          < (unsigned long)now.tv_sec ) {
          /* max entry life time reached, remove entry */
          if (elem_host->unresolved_name != NULL) {
             CL_LOG_STR(CL_LOG_WARNING,"entry life timeout for elem:", elem_host->unresolved_name);
@@ -2613,7 +2614,8 @@ int cl_com_host_list_refresh(cl_raw_list_t* list_p) {
          continue;
       }
 
-      if (elem_host->last_resolve_time + ldata->entry_update_time < now.tv_sec) {
+      if (elem_host->last_resolve_time + ldata->entry_update_time
+          < (unsigned long)now.tv_sec) {
          /* max update timeout is reached, resolving entry */
          if (elem_host->unresolved_name != NULL) {
             CL_LOG_STR(CL_LOG_WARNING,"update timeout for elem:", elem_host->unresolved_name);
@@ -2625,7 +2627,8 @@ int cl_com_host_list_refresh(cl_raw_list_t* list_p) {
       
       if (elem_host->resolve_error != CL_RETVAL_OK) {
          /* this is only for hosts with error state */
-         if (elem_host->last_resolve_time + ldata->entry_reresolve_time < now.tv_sec) {
+         if (elem_host->last_resolve_time + ldata->entry_reresolve_time
+             < (unsigned long)now.tv_sec) {
             if (elem_host->unresolved_name != NULL) {
                CL_LOG_STR(CL_LOG_WARNING,"reresolve timeout for elem:", elem_host->unresolved_name);
             } else {
@@ -2653,8 +2656,9 @@ int cl_com_host_list_refresh(cl_raw_list_t* list_p) {
             act_elem = elem;
             elem = cl_host_list_get_next_elem(elem);
             elem_host = act_elem->host_spec;
-            if (elem_host->last_resolve_time + ldata->entry_update_time < now.tv_sec ||
-                elem_host->resolve_error != CL_RETVAL_OK) {
+            if (elem_host->last_resolve_time + ldata->entry_update_time
+                < (unsigned long)now.tv_sec
+                || elem_host->resolve_error != CL_RETVAL_OK) {
                int resolve_error = CL_RETVAL_OK;
                cl_com_hostent_t* hostent = NULL;
 

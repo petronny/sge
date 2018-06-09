@@ -441,7 +441,7 @@ static void  sge_infotext_print_line(dstring* dash_buf, sge_infotext_options* op
          if (options->n == 1) {
             fprintf(output,"\n");
          }
-         for(i=0;i<(int)line_length;i++) {
+         for(i=0;i<line_length;i++) {
             fprintf(output,SGE_INFOTEXT_UNDERLINE);
          }
          if (options->n != 1) {

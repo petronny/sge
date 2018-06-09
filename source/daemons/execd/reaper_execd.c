@@ -620,7 +620,7 @@ static int clean_up_job(lListElem *jr, int failed, int shepherd_exit_status,
       int signo = (int)lGetDouble(du, UA_value);
 
       if (signo) {
-         u_long32 sge_signo;
+         int sge_signo;
 
          /* Job died through a signal */
          snprintf(error, sizeof(error), MSG_JOB_WXDIEDTHROUGHSIGNALYZ_SSI,

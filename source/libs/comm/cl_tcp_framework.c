@@ -801,7 +801,7 @@ int cl_com_tcp_read(cl_com_connection_t* connection, cl_byte_t* message, unsigne
    }
 
    *only_one_read = data_read;
-   if (data_read != size) {
+   if (data_read != (ssize_t)size) {
       struct timeval now;
       gettimeofday(&now,NULL);
       if ( now.tv_sec >= connection->read_buffer_timeout_time ) {

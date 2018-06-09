@@ -714,7 +714,7 @@ static void ptf_get_usage_from_data_collector(void)
       INCJOBPTR(jobs, 8);
 #endif
 
-      for (i = 0; i < jobcount; i++) {
+      for (i = 0; i < (int)jobcount; i++) {
          lList *usage_list;
          lListElem *usage;
          double cpu_usage_value;

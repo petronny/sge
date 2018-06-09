@@ -382,7 +382,7 @@ qinstance_modify_attribute(sge_gdi_ctx_class_t *ctx,
                if (old_value != new_value) {
                   int slots_reserved = qinstance_slots_reserved(this_elem);
                   DPRINTF(("reserved slots %d\n", slots_reserved));
-                  if (!initial_modify && new_value < slots_reserved) {
+                  if (!initial_modify && new_value < (unsigned)slots_reserved) {
                      answer_list_add_sprintf(answer_list, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR,
                                              MSG_QINSTANCE_SLOTSRESERVED_USS, slots_reserved,
                                              lGetString(this_elem, QU_qname), hostname);

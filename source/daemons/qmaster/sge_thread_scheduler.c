@@ -895,7 +895,7 @@ sge_scheduler_main(void *arg)
             if (sconf_is_new_config()) {
                /* set scheduler interval / event delivery interval */
                u_long32 interval = sconf_get_schedule_interval();
-               if (evc->ec_get_edtime(evc) != interval) {
+               if (evc->ec_get_edtime(evc) != (int)interval) {
                   evc->ec_set_edtime(evc, interval);
                }
 
