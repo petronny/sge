@@ -43,6 +43,7 @@
 #include "uti/sge_rmon.h" 
 #include "uti/sge_language.h"
 #include "uti/sge_dstring.h"
+#include "uti/sge_string.h"
 
 #include "gdi/version.h"
 
@@ -1114,13 +1115,13 @@ int main( int argc, char* argv[] ) {
                }
             }
          } else {
-            strcpy(input_buffer,_SGE_GETTEXT__(options.def));
+            sge_strlcpy(input_buffer,_SGE_GETTEXT__(options.def), sizeof input_buffer);
          }
          if (strcmp(input_buffer,"") == 0) {
             if (do_wait == 1) {
                break;
             }
-            strcpy(input_buffer,_SGE_GETTEXT__(options.def));
+            sge_strlcpy(input_buffer,_SGE_GETTEXT__(options.def), sizeof input_buffer);
          }
 
          if (strcmp(_SGE_GETTEXT__(options.yes),input_buffer) == 0) {

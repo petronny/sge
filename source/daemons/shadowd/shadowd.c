@@ -371,9 +371,10 @@ char shadow_err_file[SGE_PATH_MAX];
                          (latest_heartbeat == heartbeat)) {
                         char qmaster_name[256];
 
-                        strcpy(qmaster_name, SGE_PREFIX);
-                        strcat(qmaster_name, prognames[QMASTER]); 
-                        DPRINTF(("qmaster_name: "SFN"\n", qmaster_name)); 
+                        sge_strlcpy(qmaster_name, SGE_PREFIX, sizeof qmaster_name);
+                        sge_strlcat(qmaster_name, prognames[QMASTER],
+                                    sizeof qmaster_name);
+                        DPRINTF(("qmaster_name: "SFN"\n", qmaster_name));
 
                         if (sge_switch2start_user()) {
                            CRITICAL((SGE_EVENT, SFNMAX, MSG_SHADOWD_CANTSWITCH_USER));

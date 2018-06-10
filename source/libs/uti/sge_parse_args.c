@@ -45,17 +45,16 @@ int sge_quick_count_num_args (
 const char* args /* The argument string to count by whitespace tokens */
 ) {
    int num_args = 0;
-   char *resreq = (char *)malloc (strlen (args)+1);
+   char *resreq = sge_strdup(args);
    char *s;
    struct saved_vars_s *context = NULL;
    
    DENTER(TOP_LAYER, "sge_quick_count_num_args");
    
    /* This function may return a larger number than required since it does not
-    * parse quotes.  This is ok, however, since it's current usage is for
+    * parse quotes.  This is ok, however, since its current usage is for
     * mallocing arrays, and a little too big is fine.
     */
-   strcpy(resreq, args);
    for (s = sge_strtok_r(resreq, " \t", &context); s != NULL; s = sge_strtok_r(NULL, " \t", &context)) {
       num_args++;
    }

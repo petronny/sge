@@ -237,7 +237,7 @@ sge_del_configuration(sge_gdi_ctx_class_t *ctx,
       conf_obj = sge_get_configuration_for_host(tmp_name);
       if (conf_obj != NULL) {
          DPRINTF(("using hostname stored in configuration object\n"));
-         strcpy(unique_name, lGetHost(conf_obj, CONF_name));
+         sge_strlcpy(unique_name, lGetHost(conf_obj, CONF_name), sizeof unique_name);
          lFreeElem(&conf_obj);
       } else {
          ERROR((SGE_EVENT, MSG_SGETEXT_CANT_DEL_CONFIG2_S, tmp_name));
@@ -797,7 +797,7 @@ lListElem* sge_get_configuration_for_host(const char* aName)
    if (CL_RETVAL_OK != ret) {
       DPRINTF(("%s: error %s resolving host %s\n", SGE_FUNC,
               cl_get_error_text(ret), aName));
-      strcpy(unique_name, aName);
+      sge_strlcpy(unique_name, aName, sizeof unique_name);
    }
 
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);

@@ -2216,7 +2216,7 @@ char *reroot_path(lListElem* pjob, const char *path, lList **alpp) {
              * the -(c)wd path. */
             snprintf(tmp_str3, sizeof(tmp_str3), "%s%s", home,
                      (char *) tmp_str + strlen(tmp_str2));
-            strcpy(tmp_str, tmp_str3);
+            sge_strlcpy(tmp_str, tmp_str3, sizeof tmp_str);
          }
       }
    }

@@ -240,9 +240,9 @@ void sge_usage(u_long32 prog_number, FILE *fp) {
    fprintf(fp, "%s\n", feature_get_product_name(FS_SHORT_VERSION, &ds));
    
    if (!strcmp(prog_name, "execd"))
-      strcpy(namebuf, "sge_execd");
+      sge_strlcpy(namebuf, "sge_execd", sizeof namebuf);
    else if (!strcmp(prog_name, "qmaster"))
-      strcpy(namebuf, "sge_qmaster");
+      sge_strlcpy(namebuf, "sge_qmaster", sizeof namebuf);
    else
       sge_strlcpy(namebuf, prog_name, sizeof(namebuf));
          

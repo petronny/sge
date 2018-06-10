@@ -155,13 +155,14 @@ void job_related_adminmail(u_long32 progid, lListElem *jr, int is_array, const c
    if (!(q=lGetString(jr, JR_queue_name)))
       q = MSG_MAIL_UNKNOWN_NAME;
    if ((ep=lGetSubStr(jr, UA_name, "start_time", JR_usage)))
-      strcpy(sge_mail_start, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds));
-   else   
-      strcpy(sge_mail_start, MSG_MAIL_UNKNOWN_NAME);
+      sge_strlcpy(sge_mail_start, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds),
+                  sizeof sge_mail_start);
+   else
+      sge_strlcpy(sge_mail_start, MSG_MAIL_UNKNOWN_NAME, sizeof sge_mail_start);
    if ((ep=lGetSubStr(jr, UA_name, "end_time", JR_usage)))
-      strcpy(sge_mail_end, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds));
-   else   
-      strcpy(sge_mail_end, MSG_MAIL_UNKNOWN_NAME);
+      sge_strlcpy(sge_mail_end, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds), sizeof sge_mail_end);
+   else
+      sge_strlcpy(sge_mail_end, MSG_MAIL_UNKNOWN_NAME, sizeof sge_mail_end);
 
    jobid = lGetUlong(jr, JR_job_number);
    jataskid = lGetUlong(jr, JR_ja_task_number);

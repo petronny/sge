@@ -1390,18 +1390,16 @@ static bool write_manop(int spool, int target) {
 
    switch (target) {
    case SGE_UM_LIST:
-      lp = *object_type_get_master_list(SGE_TYPE_MANAGER);      
-      strcpy(filename, ".");
-      strcat(filename, MAN_FILE);
-      strcpy(real_filename, MAN_FILE);
+      lp = *object_type_get_master_list(SGE_TYPE_MANAGER);
+      sge_strlcpy(filename, "." MAN_FILE, sizeof filename);
+      sge_strlcpy(real_filename, MAN_FILE, sizeof real_filename);
       key = UM_name;
       break;
       
    case SGE_UO_LIST:
-      lp = *object_type_get_master_list(SGE_TYPE_OPERATOR);      
-      strcpy(filename, ".");
-      strcat(filename, OP_FILE);
-      strcpy(real_filename, OP_FILE);
+      lp = *object_type_get_master_list(SGE_TYPE_OPERATOR);
+      sge_strlcpy(filename, "." OP_FILE, sizeof filename);
+      sge_strlcpy(real_filename, OP_FILE, sizeof real_filename);
       key = UO_name;
       break;
 
@@ -1431,8 +1429,8 @@ static bool write_manop(int spool, int target) {
    if (rename(filename, real_filename) == -1) {
       DRETURN(false);
    } else {
-      strcpy(filename, real_filename);
-   }     
+      sge_strlcpy(filename, real_filename, sizeof filename);
+   }
 
    DRETURN(true);
 
@@ -1454,15 +1452,15 @@ static bool read_manop(int target) {
 
    switch (target) {
    case SGE_UM_LIST:
-      lpp = object_type_get_master_list(SGE_TYPE_MANAGER);      
-      strcpy(filename, MAN_FILE);
+      lpp = object_type_get_master_list(SGE_TYPE_MANAGER);
+      sge_strlcpy(filename, MAN_FILE, sizeof filename);
       key = UM_name;
       descr = UM_Type;
       break;
       
    case SGE_UO_LIST:
-      lpp = object_type_get_master_list(SGE_TYPE_OPERATOR);      
-      strcpy(filename, OP_FILE);
+      lpp = object_type_get_master_list(SGE_TYPE_OPERATOR);
+      sge_strlcpy(filename, OP_FILE, sizeof filename);
       key = UO_name;
       descr = UO_Type;
       break;

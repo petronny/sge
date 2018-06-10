@@ -474,7 +474,7 @@ void rmon_mtrace(const char *func, const char *file, int line, const char *threa
       return;
    }
 #endif      
-   strcpy(msgbuf, empty);
+   sge_strlcpy(msgbuf, empty, sizeof msgbuf);
    sprintf(&msgbuf[4], "%s:%s:%d\n", func, file, line);
    mwrite(msgbuf, thread_name);
 } /* rmon_mtrace() */
@@ -551,7 +551,7 @@ static void rmon_mprintf_va(int debug_class, const char* fmt, va_list args) {
    }
 #endif
    helper = rmon_get_helper();
-   strcpy(msgbuf, empty);
+   sge_strlcpy(msgbuf, empty, sizeof msgbuf);
    vsnprintf(&msgbuf[4], (RMON_BUF_SIZE) - 10 , fmt, args);
    if ((helper != NULL) && (helper->thread_name != NULL) && (strlen(helper->thread_name) > 0)) {
       mwrite(msgbuf, helper->thread_name);

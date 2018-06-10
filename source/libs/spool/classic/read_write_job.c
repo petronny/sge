@@ -41,6 +41,7 @@
 #include "uti/sge_spool.h"
 #include "uti/sge_profiling.h"
 #include "uti/sge_unistd.h"
+#include "uti/sge_string.h"
 
 #include "cull/cull_file.h"
 #include "cull/cull_list.h"
@@ -525,7 +526,7 @@ static int ja_task_write_to_disk(lListElem *ja_task, u_long32 job_id,
       /* create task spool directory if necessary */
       if ((flags & SPOOL_WITHIN_EXECD) || 
           strcmp(old_task_spool_dir, task_spool_dir)) {
-         strcpy(old_task_spool_dir, task_spool_dir);
+         sge_strlcpy(old_task_spool_dir, task_spool_dir, sizeof old_task_spool_dir);
          sge_mkdir(task_spool_dir, 0755, false, false);
       }
 
@@ -601,7 +602,7 @@ static int ja_task_write_to_disk(lListElem *ja_task, u_long32 job_id,
       /* create task spool directory if necessary */
       if ((flags & SPOOL_WITHIN_EXECD) ||
           strcmp(old_task_spool_dir, task_spool_dir)) {
-         strcpy(old_task_spool_dir, task_spool_dir);
+         sge_strlcpy(old_task_spool_dir, task_spool_dir, sizeof old_task_spool_dir);
          sge_mkdir(task_spool_dir, 0755, false, false);
       }
 

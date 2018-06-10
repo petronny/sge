@@ -764,7 +764,7 @@ sge_passwd_show(const char *username)
     * Get user name
     */
    if (username != NULL) {
-      strcpy(user, username);   /* RATS: ignore */
+      strlcpy(user, username, sizeof user);
    } else {
       uid_t uid = getuid();
 

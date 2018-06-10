@@ -990,7 +990,7 @@ bool sge_gdi2_get_mapping_name(sge_gdi_ctx_class_t *ctx, const char *requestedHo
   
    if (mapName != NULL) {
       if ((strlen(mapName) + 1) <= (unsigned)buflen) {
-         strcpy(buf,mapName);
+         sge_strlcpy(buf,mapName, buflen);
          DPRINTF(("Mapping name is: '%s'\n", buf));
    
          lFreeList(&permList);

@@ -358,7 +358,7 @@ static lList *qalter_parse_job_parameter(u_long32 me_who, lList *cmdline, lList 
             if (!strncmp(tmp_str2, tmp_str, strlen(tmp_str2))) {
                snprintf(tmp_str3, sizeof tmp_str3, "%s%s", sge_o_home,
                         tmp_str + strlen(tmp_str2));
-               strcpy(tmp_str, tmp_str3);
+               sge_strlcpy(tmp_str, tmp_str3, sizeof tmp_str);
             }
          }
          lSetString(job, JB_cwd, tmp_str);

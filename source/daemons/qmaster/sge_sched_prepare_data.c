@@ -452,17 +452,13 @@ sge_process_schedd_conf_event_before(sge_evc_class_t *evc, object_description *o
          int n = strlen(new_load_formula);
 
          if (n > 0) {
-            char *copy = NULL;
+            char *copy = strdup(new_load_formula);
 
-            copy = malloc(n + 1);
             if (copy != NULL) {
-               strcpy(copy, new_load_formula);
-
                sge_strip_blanks(copy);
                lSetString(new, SC_load_formula, copy);
+               sge_free(&copy);
             }
-
-            sge_free(&copy);
          }
       }
       lFreeElem(&old);

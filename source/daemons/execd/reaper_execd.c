@@ -1920,14 +1920,14 @@ static void reaper_sendmail(sge_gdi_ctx_class_t *ctx, lListElem *jep,
     */
 
    if ((ep=lGetSubStr(jr, UA_name, "start_time", JR_usage)))
-      strcpy(sge_mail_start, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds));
-   else   
-      strcpy(sge_mail_start, MSG_MAIL_UNKNOWN_NAME);
+      sge_strlcpy(sge_mail_start, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds), sizeof sge_mail_start);
+   else
+      sge_strlcpy(sge_mail_start, MSG_MAIL_UNKNOWN_NAME, sizeof sge_mail_start);
 
    if ((ep=lGetSubStr(jr, UA_name, "end_time", JR_usage)))
-      strcpy(sge_mail_end, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds));
-   else   
-      strcpy(sge_mail_end, MSG_MAIL_UNKNOWN_NAME);
+      sge_strlcpy(sge_mail_end, sge_ctime((time_t)lGetDouble(ep, UA_value), &ds), sizeof sge_mail_end);
+   else
+      sge_strlcpy(sge_mail_end, MSG_MAIL_UNKNOWN_NAME, sizeof sge_mail_end);
 
    if ((ep=lGetSubStr(jr, UA_name, "ru_utime", JR_usage)))
       ru_utime = lGetDouble(ep, UA_value); 
