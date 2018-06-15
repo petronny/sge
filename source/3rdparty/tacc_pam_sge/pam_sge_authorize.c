@@ -282,8 +282,9 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,int flags _UNUSED,int argc,
    host=strtok(hostname,".");
    
    /* build the active_dir string */
-   sprintf(my_active_jobs_directory,"%s/%s/active_jobs",execd_spool_dir,host);
-   
+   snprintf(my_active_jobs_directory, sizeof my_active_jobs_directory,
+            "%s/%s/active_jobs",execd_spool_dir,host);
+
    /* if the directory exists, scan the subdirectories as job names */
    dp =opendir(my_active_jobs_directory);
    if (dp !=NULL) {
@@ -309,7 +310,7 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,int flags _UNUSED,int argc,
                   {
                     struct dirent *d;
                     DIR *dd;
-                    if (!(dd = opendir(spool_path))) {
+                    if ((dd = opendir(spool_path))) {
                       int i=0;
                       while ((d=readdir(dd)))
                         i++;
@@ -322,7 +323,8 @@ PAM_EXTERN int pam_sm_acct_mgmt(pam_handle_t *pamh,int flags _UNUSED,int argc,
                   }
                 }
                 sge_get_file_path(spool_path, JOB_SPOOL_DIR, SPOOL_DEFAULT,my_flags, my_job_id, junk, NULL);
-                sprintf(host_file,"%s/%s/%s.%s",execd_spool_dir,host,spool_path,my_task_id);
+                snprintf(host_file, sizeof host_file,"%s/%s/%s.%s",
+                         execd_spool_dir,host,spool_path,my_task_id);
 
                 if (debug) {
                   pam_sge_log(LOG_DEBUG, "sge tools returned: %s ...",
