@@ -1714,7 +1714,6 @@ int read_defaults
    String dir_pre;
    SGE_STRUCT_STAT statb;
 
-   u_long32 myuid = ctx->get_uid(ctx);
    u_long32 prog_number = ctx->get_who(ctx);
    const char *username = ctx->get_username(ctx);
    const char *cell_root = ctx->get_cell_root(ctx);
@@ -1790,7 +1789,7 @@ int read_defaults
    /*
    ** stage two of script file parsing
    */ 
-   alp = cull_parse_job_parameter(myuid, username, cell_root, unqualified_hostname, qualified_hostname, cmdline, &job);
+   alp = cull_parse_job_parameter(username, cell_root, unqualified_hostname, qualified_hostname, cmdline, &job);
 
    lFreeList(&cmdline);
    qmonMessageBox(w, alp, 0);

@@ -104,7 +104,7 @@ const char *default_prefix = "#$";
 **   me
 ** DESCRIPTION
 */
-lList *cull_parse_job_parameter(u_long32 uid, const char *username, const char *cell_root, 
+lList *cull_parse_job_parameter(const char *username, const char *cell_root,
                                 const char *unqualified_hostname, const char *qualified_hostname, 
                                 lList *cmdline, lListElem **pjob) 
 {

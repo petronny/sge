@@ -46,6 +46,7 @@
 #include "sgeobj/sge_id.h"
 
 #include "parse_qsub.h"
+#include "parse_job_cull.h"
 #include "unparse_job_cull.h"
 #include "write_job_defaults.h"
 #include "symbols.h"
@@ -280,7 +281,8 @@ char **envp
       SGE_EXIT(status);
    }
 
-   alp = cull_parse_job_parameter(cmdline, &job);
+
+   alp = cull_parse_job_parameter(username, cell_root, unqualified_hostname, qualified_hostname, cmdline, &job);
    for_each(aep, alp) {
       answer_exit_if_not_recoverable(aep);
       status = answer_get_status(aep);
