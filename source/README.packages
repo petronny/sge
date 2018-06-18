@@ -3,10 +3,11 @@ Building SGE Debian or Red Hat packages
 
 Source packaging is available for building binary packages for Debian
 and derived distributions (like Ubuntu), and for Red Hat-derived
-distributions (RHEL, Fedora, CentOS, SL).  Building on SuSE and other
-RPM-based distributions may or may not work, but packages for some
-OpenSuSE are likely to be available in the Fedora COPR (see below);
-patches for the RPM spec file for particular distributions would be
+distributions (RHEL, Fedora, CentOS, SL).  The Java (and JNI) build is
+currently disabled for recent versions of SuSE due to them not having
+the required sun.com packages; at least JNI could probably be
+re-instated.  Other RPM-based distributions may or may not work, but
+probably can be made to work with small changes; patches would be
 welcome.
 
 The binary packages will install into /opt/sge, as traditional,
