@@ -2898,7 +2898,7 @@ object_verify_expression_syntax(const lListElem *elem, lList **answer_list)
 *     object_verify_name() - verifies object name
 *
 *  SYNOPSIS
-*     int object_verify_name(const lListElem *object, lList **alpp, int name, object_descr) 
+*     int object_verify_name(const lListElem *object, lList **alpp, int name)
 *
 *  FUNCTION
 *     These checks are done for the attribute JB_object_name of 'object':
@@ -2916,8 +2916,7 @@ object_verify_expression_syntax(const lListElem *elem, lList **answer_list)
 *  MT-NOTE: sge_resolve_host() is MT safe
 *
 ******************************************************************************/
-int object_verify_name(const lListElem *object, lList **answer_list, int name, 
-                           const char *object_descr)
+int object_verify_name(const lListElem *object, lList **answer_list, int name)
 {
    const char *object_name = lGetString(object, name);
    int ret = 0;

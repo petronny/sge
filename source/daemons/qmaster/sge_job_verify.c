@@ -232,7 +232,7 @@ sge_job_verify_adjust(sge_gdi_ctx_class_t *ctx, lListElem *jep, lList **alpp,
 
    /* verify the job name */
    if (ret == STATUS_OK) {
-      if (object_verify_name(jep, alpp, JB_job_name, SGE_OBJ_JOB)) {
+      if (object_verify_name(jep, alpp, JB_job_name)) {
          ret = STATUS_EUNKNOWN;
       }     
    }
