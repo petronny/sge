@@ -1216,7 +1216,7 @@ int sub_command
       DRETURN(ret);
    }    
 
-   if (jsv_is_modify_rejected(ctx, alpp, jep)) {
+   if (jsv_is_modify_rejected(alpp, jep)) {
       DRETURN(ret);
    }
 

@@ -2799,7 +2799,7 @@ jsv_cull_attr2switch_name(int cull_attr, lListElem *job)
 }
 
 bool
-jsv_is_modify_rejected(sge_gdi_ctx_class_t *context, lList **answer_list, lListElem *job) 
+jsv_is_modify_rejected(lList **answer_list, lListElem *job)
 {
    bool ret = false;
 
