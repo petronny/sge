@@ -76,7 +76,7 @@ register char	*dir, *component;
 	struct stat	st;
 	char	buf[ BUFSIZ ], **pp;
 
-	sprintf(buf, "%s%s%s", dir, *dir ? "/" : "", component);
+	snprintf(buf, sizeof buf, "%s%s%s", dir, *dir ? "/" : "", component);
 	for (pp=notdotdot; *pp; pp++)
 		if (strcmp(*pp, buf) == 0)
 			return (TRUE);
@@ -317,7 +317,7 @@ boolean	dot;
 	 */
 	if (!found)
 		for (pp = includedirs; *pp; pp++) {
-			sprintf(path, "%s/%s", *pp, include);
+			snprintf(path, sizeof path, "%s/%s", *pp, include);
 			remove_dotdot(path);
 			if (stat(path, &st) == 0) {
 				ip = newinclude(path, include);

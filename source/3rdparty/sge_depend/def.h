@@ -26,6 +26,8 @@ in this Software without prior written authorization from the X Consortium.
 
 */
 
+#define _XOPEN_SOURCE 500
+#define _XOPEN_SOURCE_EXTENDED
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
