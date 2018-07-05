@@ -524,7 +524,7 @@ static int login_conv(int num_msg, const struct pam_message **msgm,
 	    switch (msgm[count]->msg_style) {
 		case PAM_PROMPT_ECHO_OFF:
 		if (((struct app_pam_data *)appdata_ptr)->password != NULL) {
-			(reply+count)->resp = strdup(((struct app_pam_data *)
+			(reply+count)->resp = sge_strdup(((struct app_pam_data *)
 				appdata_ptr)->password);
                     if (reply[count].resp == NULL) {
                         /*
@@ -673,7 +673,7 @@ static int add_group(struct group *grp, gid_t **groups_res, char*** group_names_
       group_names = new_group_names;
    }
    groups[ngroups] = grp->gr_gid;
-   group_names[ngroups++] = strdup(grp->gr_name);
+   group_names[ngroups++] = sge_strdup(grp->gr_name);
    *ngroups_res = ngroups;
    *maxgroups_res = maxgroups;
    *groups_res = groups;
@@ -810,7 +810,7 @@ error:
 }
 
 #ifdef WINDOWS
-#define strdup _strdup		/* else VC 9 fails objects */
+#define sge_strdup _strdup		/* else VC 9 fails objects */
 #endif
 
 static auth_result_t do_windows_system_authentication(const char *username,
@@ -836,7 +836,7 @@ static auth_result_t do_windows_system_authentication(const char *username,
    /*
     * username can be in format "domain\username", split it up.
     */
-   userbuf = strdup(username);
+   userbuf = sge_strdup(username);
    user=userbuf;
    backslash = strchr(user, '\\');
    if(backslash != NULL) {

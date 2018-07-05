@@ -1377,7 +1377,7 @@ int cull_parse_path_list(lList **lpp, const char *path_str)
             path = *pstr+1;
          } else if ((path = strstr(*pstr, ":"))){ /* host:path */
             path[0] = '\0';
-            cell = strdup(*pstr);
+            cell = sge_strdup(*pstr);
             path[0] = ':';
             path += 1;
          } else { /* path */

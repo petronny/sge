@@ -585,7 +585,7 @@ struct hostent *sge_copy_hostent(struct hostent *orig)
       memset(copy, 0, sizeof(struct hostent));
 
       /* Easy stuff first */
-      copy->h_name = strdup(orig->h_name);
+      copy->h_name = sge_strdup(orig->h_name);
       copy->h_addrtype = orig->h_addrtype;
       copy->h_length = orig->h_length;
       

@@ -255,7 +255,7 @@ _spool_get_fields_to_spool(lList **answer_list, const lDescr *descr,
                DEXIT;
                return NULL;
             }
-            fields[j].name = strdup(name + strip);
+            fields[j].name = sge_strdup(name + strip);
          }
          
          if (mt_get_type(descr[i].mt) == lListT) {
@@ -461,7 +461,7 @@ bool spool_default_validate_func(lList **answer_list,
       case SGE_TYPE_CONFIG:
          {
             int cl_ret;
-            char *old_name = strdup(lGetHost(object, CONF_name));
+            char *old_name = sge_strdup(lGetHost(object, CONF_name));
 
             /* try hostname resolving */
             if (strcmp(old_name, SGE_GLOBAL_NAME) != 0) {

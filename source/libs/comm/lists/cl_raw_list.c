@@ -385,7 +385,7 @@ int cl_raw_list_lock(cl_raw_list_t* list_p) {             /* CR check */
          if (thread_config_p == NULL) {
             list_p->last_locker = strdup("unknown");
          } else {
-            list_p->last_locker = strdup(thread_config_p->thread_name);
+            list_p->last_locker = sge_strdup(thread_config_p->thread_name);
          }
          
          CL_LOG_STR(CL_LOG_INFO, "got lock:", list_p->list_name); 

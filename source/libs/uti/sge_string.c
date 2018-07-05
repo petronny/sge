@@ -1324,7 +1324,7 @@ stra_from_str(const char *source_str, const char *delim)
                context2 = NULL;
                token_2 = sge_strtok_r(token_1, " \t", &context2);
                while (token_2 != NULL) {
-                  ret[index] = strdup(token_2);
+                  ret[index] = sge_strdup(token_2);
                   token_2 = sge_strtok_r(NULL, " \t", &context2);
                   index++;
                }

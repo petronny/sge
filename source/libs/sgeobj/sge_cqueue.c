@@ -304,7 +304,7 @@ char* cqueue_get_name_from_qinstance(const char *queue_instance)
       cqueue = strncpy(cqueue, queue_instance, size);
       cqueue[size] = '\0';
    } else {
-      cqueue = strdup(queue_instance);
+      cqueue = sge_strdup(queue_instance);
    }
 
    return cqueue;

@@ -361,8 +361,8 @@ static bool sge_csp_path_setup(sge_csp_path_class_t *thiz, sge_env_state_class_t
    **   /var/lib/sgeCA/{port$COMMD_PORT|SGE_COMMD_SERVICE}/$SGE_CELL/userkeys/$USER/{cert.pem,key.pem}
    */
    if (is_daemon(sge_env, sge_prog)) {
-      user_dir = strdup(get_ca_root(thiz));
-      user_local_dir = strdup(get_ca_local_root(thiz));
+      user_dir = sge_strdup(get_ca_root(thiz));
+      user_local_dir = sge_strdup(get_ca_local_root(thiz));
    } else {
       struct passwd *pw;
       struct passwd pw_struct;
@@ -383,8 +383,8 @@ static bool sge_csp_path_setup(sge_csp_path_class_t *thiz, sge_env_state_class_t
       } else {         
          sge_dstring_sprintf(&bw, "%s/%s/%s/%s", pw->pw_dir, SGESecPath, SGE_COMMD_SERVICE, sge_cell);   
       }            
-      user_dir = strdup(sge_dstring_get_string(&bw));
-      user_local_dir = strdup(user_dir);
+      user_dir = sge_strdup(sge_dstring_get_string(&bw));
+      user_local_dir = sge_strdup(user_dir);
       sge_free(&buffer);
    }
 

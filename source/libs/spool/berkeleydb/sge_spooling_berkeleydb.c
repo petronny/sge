@@ -164,11 +164,11 @@ spool_berkeleydb_create_context(lList **answer_list, const char *args)
          path = strchr(dup, ':');
          if (path != NULL) {
             *path = '\0';
-            server = strdup(dup);
-            path = strdup(path + 1);
+            server = sge_strdup(dup);
+            path = sge_strdup(path + 1);
          } else {
             server = NULL;
-            path = strdup(dup);
+            path = sge_strdup(dup);
          }
          sge_free(&dup);
       }
@@ -832,7 +832,7 @@ spool_berkeleydb_default_read_func(lList **answer_list,
          case SGE_TYPE_JOBSCRIPT:
             {
                const char *exec_file; 
-               char *dup = strdup(key);
+               char *dup = sge_strdup(key);
                char *db_key = jobscript_parse_key(dup, &exec_file);
                char *str;
                str = spool_berkeleydb_read_string(answer_list, info, BDB_JOB_DB,
@@ -963,7 +963,7 @@ spool_berkeleydb_default_write_func(lList **answer_list,
                {
                   u_long32 job_id, ja_task_id;
                   char *pe_task_id;
-                  char *dup = strdup(key);
+                  char *dup = sge_strdup(key);
                   bool only_job; 
 
                   job_parse_key(dup, &job_id, &ja_task_id, &pe_task_id, &only_job);
@@ -987,7 +987,7 @@ spool_berkeleydb_default_write_func(lList **answer_list,
             case SGE_TYPE_JOBSCRIPT:
                {
                   const char *exec_file;  
-                  char *dup = strdup(key);
+                  char *dup = sge_strdup(key);
                   const char *db_key = jobscript_parse_key(dup, &exec_file);
                   const char *script = lGetString(object, JB_script_ptr);
                   /* switch script */
@@ -1120,7 +1120,7 @@ spool_berkeleydb_default_delete_func(lList **answer_list,
                {
                   u_long32 job_id, ja_task_id;
                   char *pe_task_id;
-                  char *dup = strdup(key);
+                  char *dup = sge_strdup(key);
                   bool only_job; 
 
                   job_parse_key(dup, &job_id, &ja_task_id, &pe_task_id, &only_job);
@@ -1149,7 +1149,7 @@ spool_berkeleydb_default_delete_func(lList **answer_list,
             case SGE_TYPE_JOBSCRIPT:
                {
                   const char *exec_file; 
-                  char *dup = strdup(key);
+                  char *dup = sge_strdup(key);
                   const char *db_key = jobscript_parse_key(dup, &exec_file);
                   ret = spool_berkeleydb_delete_object(answer_list, info, 
                                                     BDB_JOB_DB, 

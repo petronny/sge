@@ -97,7 +97,7 @@ sge_execvlp (const char *file, char *const argv[], char *const envp[])
    }
 
    /* Else try path components */
-   path = strdup (path);
+   path = sge_strdup (path);
    while ((component = strtok ((first ? path : NULL), ":"))) {
       int late_errno = errno;
 

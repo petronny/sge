@@ -444,7 +444,7 @@ qref_cq_rejected(const char *qref_pattern, const char *cqname,
    if ((s=strchr(qref_pattern, '@'))) {
       /* use qref part before '@' as wc_cqueue pattern */
       int boo;
-      char *wc_cqueue = strdup(qref_pattern);
+      char *wc_cqueue = sge_strdup(qref_pattern);
       wc_cqueue[ s - qref_pattern ] = '\0';
       /* reject the cluster queue expression support */
       boo = sge_eval_expression(TYPE_STR,wc_cqueue, cqname, NULL);

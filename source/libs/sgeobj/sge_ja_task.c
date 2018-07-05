@@ -319,7 +319,7 @@ int sge_parse_jobtasks(lList **ipp, lListElem **idp, const char *str_jobtask,
    int ret = 1;
 
    DENTER(TOP_LAYER, "sge_parse_jobtasks");
-   job_str = strdup(str_jobtask);
+   job_str = sge_strdup(str_jobtask);
 
    /* An empty job id string is a bad job id string! */
    if (strcmp (job_str, "") == 0) {

@@ -36,6 +36,7 @@
 #include "uti/sge_hostname.h"
 #include "uti/sge_edit.h"
 #include "uti/sge_prog.h"
+#include "uti/sge_string.h"
 
 #include "msg_common.h"
 #include "msg_clients_common.h"

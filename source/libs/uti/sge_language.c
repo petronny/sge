@@ -41,6 +41,7 @@
 #include "uti/sge_language.h"
 #include "uti/sge_prog.h"
 #include "uti/sge_htable.h"
+#include "uti/sge_string.h"
 
 #include "basis_types.h"
 
@@ -170,9 +171,9 @@ int sge_init_languagefunc(char *package, char *localeDir)
 
      /* try to get the package name */
      if (package != NULL) {
-        packName = strdup(package);
+        packName = sge_strdup(package);
      } else if (getenv(PACKAGE) != NULL) {
-        packName = strdup(getenv(PACKAGE));
+        packName = sge_strdup(getenv(PACKAGE));
         DPRINTF_(("try to get language package name from environment "SFQ"\n",PACKAGE));
      } else {
         DPRINTF_(("could not get environment variable "SFQ"\n", PACKAGE));
@@ -187,12 +188,12 @@ int sge_init_languagefunc(char *package, char *localeDir)
       
      /* try to get the localization directory */ 
      if (localeDir != NULL) {
-        locDir = strdup(localeDir);
+        locDir = sge_strdup(localeDir);
      } else if ( getenv(LOCALEDIR) != NULL ) {
         if (stop != 0) {
            DPRINTF_(("ignoring environment "SFQ"\n",LOCALEDIR ));
         } else {
-           locDir = strdup(getenv(LOCALEDIR)); /* only the first time */
+           locDir = sge_strdup(getenv(LOCALEDIR)); /* only the first time */
            stop++;
            DPRINTF_(("try to get language package directory path from environment "SFQ"\n",LOCALEDIR));
         }
@@ -210,7 +211,7 @@ int sge_init_languagefunc(char *package, char *localeDir)
         } 
         
         if ( root == NULL ) {
-            locDir = strdup("/usr/lib/locale");
+            locDir = sge_strdup("/usr/lib/locale");
         } else {
             locDir = malloc(sizeof(char)*(strlen(root)+strlen(SGE_DEFAULT_LOCALEDIR) + 100));
             /* RATS: ignore */
@@ -231,7 +232,7 @@ int sge_init_languagefunc(char *package, char *localeDir)
    
      if (language_var == NULL) {
         DPRINTF_(("environment LANGUAGE or LANG is not set; no language selected - using defaults\n"));
-        language_var = strdup("C");
+        language_var = sge_strdup("C");
      } 
      
      /* get correct language value */
@@ -245,18 +246,18 @@ int sge_init_languagefunc(char *package, char *localeDir)
            if (slash_pos != NULL) {
               char* tmp_lang = NULL;
               DPRINTF_(("cutting of language string after \"_\":\n"));
-              tmp_lang = strdup(help1);
+              tmp_lang = sge_strdup(help1);
               slash_pos = strstr(tmp_lang,"_");
               *slash_pos = 0;  /* cut off "_" */
-              language = strdup(tmp_lang);
+              language = sge_strdup(tmp_lang);
 
               sge_free(&tmp_lang);
            } else {
-              language = strdup(help1);
+              language = sge_strdup(help1);
            }
         } else {
-           DPRINTF_(("setlocale() returns NULL"));   
-           language = strdup(language_var);
+           DPRINTF_(("setlocale() returns NULL"));
+           language = sge_strdup(language_var);
         }
      }
 

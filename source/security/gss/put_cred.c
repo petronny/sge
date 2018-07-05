@@ -87,7 +87,7 @@ main(int argc, char **argv)
 
 
    if (ccname) {
-      ccbuf = strdup(ccname);
+      ccbuf = sge_strdup(ccname);
       ccname = ccbuf;
    }
 

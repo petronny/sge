@@ -1039,7 +1039,7 @@ spool_flatfile_open_file(lList **answer_list,
                                     filepath_in, strerror(errno));
          }
 
-         *filepath_out = strdup(filepath_in);
+         *filepath_out = sge_strdup(filepath_in);
          break;
       case SP_DEST_TMP:
          {
@@ -1061,20 +1061,20 @@ spool_flatfile_open_file(lList **answer_list,
                                        filepath_in, strerror(errno));
                DRETURN(fd);
             }
-            *filepath_out = strdup(buffer);
+            *filepath_out = sge_strdup(buffer);
          }   
          break;
       case SP_DEST_STDOUT:
          fd = 1;
 
          fflush(stdout);
-         *filepath_out = strdup("<stdout>");
+         *filepath_out = sge_strdup("<stdout>");
          break;
       case SP_DEST_STDERR:
          fd = 2;
 
          fflush(stderr);
-         *filepath_out = strdup("<stderr>");
+         *filepath_out = sge_strdup("<stderr>");
          break;
    }
 

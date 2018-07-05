@@ -46,6 +46,7 @@
 #include "uti/sge_rmon.h"
 #include "uti/sge_htable.h"
 #include "uti/sge_log.h"
+#include "uti/sge_string.h"
 
 #ifdef SGE_USE_PROFILING
 #include "uti/sge_profiling.h"
@@ -575,8 +576,8 @@ const void *dup_func_pointer(const void *key)
 
 const void *dup_func_string(const void *key)
 {
-   return strdup((const char *)key);
-}   
+   return sge_strdup((const char *)key);
+}
 
 
 /****** uti/htable/-Hash-Functions() ******************************************

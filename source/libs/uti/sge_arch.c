@@ -245,7 +245,7 @@ const char *sge_get_default_cell(void)
     * Check the env variables
     */
    if (sge_cell) {
-      s = strdup(sge_cell);
+      s = sge_strdup(sge_cell);
    } else {
       s = NULL;
    } 

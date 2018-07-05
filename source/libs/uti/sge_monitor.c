@@ -50,6 +50,7 @@
 #include "uti/sge_time.h"
 #include "uti/sge_log.h"
 #include "uti/msg_utilib.h"
+#include "uti/sge_string.h"
 #include "sgeobj/sge_conf.h"
 
 
@@ -502,8 +503,8 @@ u_long32 sge_monitor_status(char **info_message, u_long32 monitor_time)
       sge_dstring_append(&Info_Line, "\n");
    }
 
-   *info_message = strdup(sge_dstring_get_string(&Info_Line));
-  
+   *info_message = sge_strdup(sge_dstring_get_string(&Info_Line));
+
    sge_mutex_unlock("sge_monitor_status", SGE_FUNC, __LINE__, &global_mutex);
    DEXIT;
    return ret;

@@ -1985,8 +1985,8 @@ password_read_file(char **users[], char**encryped_pwds[], const char *filename)
                 ret = 2;
                 do_loop = false;
             } else {
-               (*users)[i] = strdup(uname);
-               (*encryped_pwds)[i] = strdup(pwd);
+               (*users)[i] = sge_strdup(uname);
+               (*encryped_pwds)[i] = sge_strdup(pwd);
                i++;
             }
          } else {

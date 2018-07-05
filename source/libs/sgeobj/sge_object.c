@@ -1522,7 +1522,7 @@ sge_object_type object_name_get_type(const char *name)
 
    DENTER(OBJECT_LAYER, "object_name_get_type");
 
-   type_name = strdup(name);
+   type_name = sge_strdup(name);
    colon = strchr(type_name, ':');
    if (colon != NULL) {
       *colon = '\0';

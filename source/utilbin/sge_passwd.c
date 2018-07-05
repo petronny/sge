@@ -697,14 +697,14 @@ password_add_or_replace_entry(char **users[], char **encryped_pwds[],
    while ((*users)[i] != NULL) {
       if (!strcmp((*users)[i], user)) {
          sge_free(&((*encryped_pwds)[i]));
-         (*encryped_pwds)[i] = strdup(encryped_pwd);
+         (*encryped_pwds)[i] = sge_strdup(encryped_pwd);
          done = true;
       }
       i++;
    }
    if (!done) {
-      (*users)[i] = strdup(user);
-      (*encryped_pwds)[i] = strdup(encryped_pwd); 
+      (*users)[i] = sge_strdup(user);
+      (*encryped_pwds)[i] = sge_strdup(encryped_pwd);
    }
    DEXIT;
 }

@@ -811,7 +811,7 @@ static int read_CF_value(lListElem *ep, int nm, const char *buf,
 {
    const char *name = lGetString(ep, CF_name);
    char *value = NULL;
-   char *buffer = strdup(buf);
+   char *buffer = sge_strdup(buf);
    struct saved_vars_s *context = NULL;
 
    DENTER(TOP_LAYER, "read_CF_value");

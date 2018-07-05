@@ -463,14 +463,14 @@ void wl_set_use_sgepasswd(bool use_it)
 char *wl_strip_hostname(char *user_name)
 {
    char *token;
-   char *ret   = strdup(user_name);
+   char *ret   = sge_strdup(user_name);
    char *lasts = NULL;
 
    token = strtok_r(user_name, "+", &lasts);
    if (token != NULL) {
       token = strtok_r(NULL, " ", &lasts);
       if (token != NULL) {
-         ret = strdup(token);
+         ret = sge_strdup(token);
       }
    }
    free(user_name);

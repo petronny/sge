@@ -1273,7 +1273,7 @@ spool_berkeleydb_delete_object(lList **answer_list, bdb_info info,
 
                   /* remember key of record to delete */
                   memset(&delete_dbt, 0, sizeof(delete_dbt));
-                  delete_dbt.data = strdup(cursor_dbt.data);
+                  delete_dbt.data = sge_strdup(cursor_dbt.data);
                   delete_dbt.size = cursor_dbt.size;
 
                   /* switch cursor to next position */

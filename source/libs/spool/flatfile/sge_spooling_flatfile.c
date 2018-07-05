@@ -905,7 +905,7 @@ spool_classic_default_read_func(lList **answer_list,
       case SGE_TYPE_JOBSCRIPT:
          {
             const char *exec_file = NULL;         
-            char *dup=strdup(key);
+            char *dup=sge_strdup(key);
             jobscript_parse_key(dup, &exec_file);
             if (exec_file != NULL ) {
                int len;
@@ -1100,7 +1100,7 @@ spool_classic_default_write_func(lList **answer_list,
          {
             u_long32 job_id, ja_task_id;
             char *pe_task_id;
-            char *dup = strdup(key);
+            char *dup = sge_strdup(key);
             bool only_job;
             sge_spool_flags_t flags = SPOOL_DEFAULT;
             lListElem *job;
@@ -1293,7 +1293,7 @@ spool_classic_default_delete_func(lList **answer_list,
          {
             u_long32 job_id, ja_task_id;
             char *pe_task_id;
-            char *dup = strdup(key);
+            char *dup = sge_strdup(key);
             bool only_job;
             
             job_parse_key(dup, &job_id, &ja_task_id, &pe_task_id, &only_job);
@@ -1310,7 +1310,7 @@ spool_classic_default_delete_func(lList **answer_list,
       case SGE_TYPE_JOBSCRIPT:
         {
             const char *exec_file;  
-            char *dup = strdup(key);
+            char *dup = sge_strdup(key);
             jobscript_parse_key(dup, &exec_file);
             ret = (unlink(exec_file) != 0) ? false: true;
             sge_free(&dup);

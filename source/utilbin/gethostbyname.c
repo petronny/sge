@@ -44,6 +44,7 @@
 #include "uti/sge_hostname.h"
 #include "uti/sge_language.h"
 #include "uti/sge_arch.h"
+#include "uti/sge_string.h"
 
 #include "gdi/version.h"
 
@@ -119,9 +120,9 @@ int main(int argc, char *argv[]) {
   if (retval != CL_RETVAL_OK) {
      char* err_text = cl_com_get_h_error_string(system_error);
      if (err_text == NULL) {
-        err_text = strdup(strerror(system_error));
+        err_text = sge_strdup(strerror(system_error));
         if (err_text == NULL) {
-           err_text = strdup("unexpected error");
+           err_text = sge_strdup("unexpected error");
         }
      }
      if (unresolved_name == NULL) {

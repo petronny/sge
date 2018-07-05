@@ -297,7 +297,7 @@ void set_conf_val(const char* name, const char* value)
       /* avoid overwriting by itself */
       if (pConfigEntry->value != value) {
          sge_free(&(pConfigEntry->value));
-         pConfigEntry->value = strdup(value);
+         pConfigEntry->value = sge_strdup(value);
       }
    } else {
       add_config_entry(name, value);

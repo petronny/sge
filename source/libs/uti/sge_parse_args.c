@@ -100,7 +100,7 @@ char** pargs /* The array to contain the parsed arguments */
 
       if (finished || isspace(*s)) {      /* found delimiter or line end */
          *d++ = 0;                       /* terminate token */
-         pargs[count++] = strdup(start);   /* assign argument */
+         pargs[count++] = sge_strdup(start);   /* assign argument */
          if (!finished) {
             while (isspace(*(++s)));      /* skip any number whitespace */
          }   

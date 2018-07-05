@@ -2560,7 +2560,7 @@ void mconf_get_h_descriptors(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_h_descriptors");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(h_descriptors);
+   *pret = sge_strdup(h_descriptors);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2570,7 +2570,7 @@ void mconf_get_s_descriptors(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_s_descriptors");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(s_descriptors);
+   *pret = sge_strdup(s_descriptors);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2580,7 +2580,7 @@ void mconf_get_h_maxproc(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_h_maxproc");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(h_maxproc);
+   *pret = sge_strdup(h_maxproc);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2590,7 +2590,7 @@ void mconf_get_s_maxproc(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_s_maxproc");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(s_maxproc);
+   *pret = sge_strdup(s_maxproc);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2600,7 +2600,7 @@ void mconf_get_h_memorylocked(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_h_memorylocked");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(h_memorylocked);
+   *pret = sge_strdup(h_memorylocked);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2610,7 +2610,7 @@ void mconf_get_s_memorylocked(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_s_memorylocked");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(s_memorylocked);
+   *pret = sge_strdup(s_memorylocked);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2620,7 +2620,7 @@ void mconf_get_h_locks(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_h_locks");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(h_locks);
+   *pret = sge_strdup(h_locks);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;
@@ -2630,7 +2630,7 @@ void mconf_get_s_locks(char **pret) {
    DENTER(BASIS_LAYER, "mconf_get_s_locks");
    SGE_LOCK(LOCK_MASTER_CONF, LOCK_READ);
 
-   *pret = strdup(s_locks);
+   *pret = sge_strdup(s_locks);
    
    SGE_UNLOCK(LOCK_MASTER_CONF, LOCK_READ);
    DRETURN_VOID;

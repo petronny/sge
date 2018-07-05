@@ -41,6 +41,7 @@
 #include "uti/sge_stdio.h"
 #include "uti/sge_language.h"
 #include "uti/sge_profiling.h"
+#include "uti/sge_string.h"
 
 #include "gdi/sge_gdi_ctx.h"
 #include "gdi/sge_gdi.h"
@@ -309,31 +310,31 @@ main(int argc, char **argv)
 	    }
 	    break;
          case 'f':
-            format.field_names = strdup(optarg);
+            format.field_names = sge_strdup(optarg);
             break;
 	 case 'o':
-	    ofile = strdup(optarg);
+	    ofile = sge_strdup(optarg);
 	    break;
 	 case 'd':
-	    format.delim = strdup(optarg);
+	    format.delim = sge_strdup(optarg);
 	    break;
          case 'h':
             header = 1;
             break;
 	 case 'm':
-	    output_mode = strdup(optarg);
+	    output_mode = sge_strdup(optarg);
 	    break;
 	 case 'n':
 	    format.name_format = true;
 	    break;
 	 case 'l':
-	    format.line_delim = strdup(optarg);
+	    format.line_delim = sge_strdup(optarg);
 	    break;
 	 case 'r':
-	    format.rec_delim = strdup(optarg);
+	    format.rec_delim = sge_strdup(optarg);
 	    break;
 	 case 's':
-	    format.str_format = strdup(optarg);
+	    format.str_format = sge_strdup(optarg);
 	    break;
 	 case 't':
 	    format.format_times = true;
