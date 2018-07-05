@@ -2702,7 +2702,7 @@ static void qmonSubmitEdit(Widget w, XtPointer cld, XtPointer cad)
    script_name = XmtInputFieldGetString(submit_script);
 
    if (script_name) {
-      file = strdup(script_name);
+      file = sge_strdup(script_name);
       status = qmonForkEditor(file);
       sge_free(&file);
    }
@@ -2967,7 +2967,7 @@ static void qmonSubmitAskForAR(Widget w, XtPointer cld, XtPointer cad)
         /*
         ** we get only references don't free, the strings
         */
-        strs[i] = strdup(name);
+        strs[i] = sge_strdup(name);
       }
     
       strcpy(buf, "");
@@ -3408,7 +3408,7 @@ static void qmonSubmitGetEnv(Widget w, XtPointer cld, XtPointer cad)
    XtVaGetValues(matrix, XmNrows, &max_rows, NULL);
 
    for(row=0;*env;env++, row++) {
-      temp = strdup(*env);
+      temp = sge_strdup(*env);
       variable = temp;
       p = strchr(temp, '=');
       *p='\0';

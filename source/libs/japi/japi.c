@@ -686,7 +686,7 @@ int japi_enable_job_wait(const char *username, const char *unqualified_hostname,
    JAPI_LOCK_SESSION();
    if (japi_session_key == JAPI_SINGLE_SESSION_KEY) {
       /* japi_init() was called with enable_wait set to false */
-      japi_session_key = strdup(sge_dstring_get_string(session_key_out));
+      japi_session_key = sge_strdup(sge_dstring_get_string(session_key_out));
    }
    else {
       /* japi_init() was called with enable_wait set to true */

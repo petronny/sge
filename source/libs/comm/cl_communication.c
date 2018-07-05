@@ -1732,17 +1732,17 @@ int cl_com_free_hostspec(cl_com_host_spec_t **hostspec) {
 char* cl_com_get_h_error_string(int h_error) {
 
    if (h_error == HOST_NOT_FOUND) {
-      return strdup("h_errno = HOST_NOT_FOUND");
+      return sge_strdup("h_errno = HOST_NOT_FOUND");
    } else if (h_error == TRY_AGAIN) {
-      return strdup("h_errno = TRY_AGAIN");
+      return sge_strdup("h_errno = TRY_AGAIN");
    } else if (h_error == NO_RECOVERY) {
-      return strdup("h_errno = NO_RECOVERY");
+      return sge_strdup("h_errno = NO_RECOVERY");
    } else if (NO_DATA == NO_ADDRESS && h_error == NO_DATA) {
-      return strdup("h_errno = NO_DATA or NO_ADDRESS");
+      return sge_strdup("h_errno = NO_DATA or NO_ADDRESS");
    } else if (h_error == NO_DATA) {
-      return strdup("h_errno = NO_DATA");
+      return sge_strdup("h_errno = NO_DATA");
    } else if (h_error == NO_ADDRESS) {
-      return strdup("h_errno = NO_ADDRESS");
+      return sge_strdup("h_errno = NO_ADDRESS");
    }
    return NULL;
 }
@@ -1932,7 +1932,7 @@ static int cl_com_dup_host(char** host_dest, const char* source, cl_host_resolve
             (*host_dest)[size] = '\0';
           } else {
             if (is_static_buffer == false) {
-               *host_dest = strdup(source);
+               *host_dest = sge_strdup(source);
             } else {
                *host_dest = strcpy(*host_dest, source);
             }

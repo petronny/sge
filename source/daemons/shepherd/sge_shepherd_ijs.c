@@ -70,6 +70,7 @@
 #include "uti/sge_unistd.h"
 #include "uti/sge_signal.h"
 #include "uti/sge_stdio.h"
+#include "uti/sge_string.h"
 
 #include "sge_ijs_comm.h"
 #include "sge_ijs_threads.h"
@@ -794,7 +795,7 @@ parent_loop(int job_pid, const char *childname, int timeout, ckpt_info_t *p_ckpt
                   p_ijs_fds->pipe_in, p_ijs_fds->pipe_out, p_ijs_fds->pipe_err,
                   p_ijs_fds->pipe_to_child);
 
-   g_hostname  = strdup(remote_host);
+   g_hostname  = sge_strdup(remote_host);
    g_p_ijs_fds = p_ijs_fds;
    g_job_pid   = job_pid;
 

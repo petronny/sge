@@ -476,8 +476,8 @@ sge_write_rusage(dstring *buffer,
       cqueue_name_split(lGetString(jr, JR_queue_name), &cqueue, &hname, NULL, 
          NULL);
 
-      qname = strdup(sge_dstring_get_string(&cqueue));
-      hostname = strdup(sge_dstring_get_string(&hname));
+      qname = sge_strdup(sge_dstring_get_string(&cqueue));
+      hostname = sge_strdup(sge_dstring_get_string(&hname));
 
       sge_dstring_free(&cqueue);
       sge_dstring_free(&hname);

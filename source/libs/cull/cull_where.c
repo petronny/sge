@@ -779,12 +779,12 @@ static lCondition *read_val(lDescr *dp, cull_parse_state *state, va_list *app)
          incompatibleType(MSG_CULL_WHERE_SHOULDBESTRINGT );
       if ( mt_get_type(cp->operand.cmp.mt) == lStringT ) {
          s = va_arg(*app, char *);
-         cp->operand.cmp.val.str = strdup((char *) s);
+         cp->operand.cmp.val.str = sge_strdup((char *) s);
          /* cp->operand.cmp.val.str = strdup(va_arg(*app, char *)); */
       } 
       if ( mt_get_type(cp->operand.cmp.mt) == lHostT ) {
          s = va_arg(*app, char *);
-         cp->operand.cmp.val.host = strdup((char *) s);
+         cp->operand.cmp.val.host = sge_strdup((char *) s);
       }
       break;
 
@@ -1545,10 +1545,10 @@ lCondition *lCopyWhere(const lCondition *cp)
          new->operand.cmp.val.ul64 = cp->operand.cmp.val.ul64;
          break;
       case lStringT:
-         new->operand.cmp.val.str = strdup(cp->operand.cmp.val.str);
+         new->operand.cmp.val.str = sge_strdup(cp->operand.cmp.val.str);
          break;
       case lHostT:
-         new->operand.cmp.val.host = strdup(cp->operand.cmp.val.host);
+         new->operand.cmp.val.host = sge_strdup(cp->operand.cmp.val.host);
          break;
       case lListT:
          break;

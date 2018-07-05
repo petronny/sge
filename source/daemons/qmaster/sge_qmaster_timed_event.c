@@ -40,6 +40,7 @@
 #include "uti/sge_profiling.h"
 #include "uti/sge_time.h"
 #include "uti/sge_mtutil.h"
+#include "uti/sge_string.h"
 
 #include "cull/cull.h"
 
@@ -363,7 +364,7 @@ te_event_t te_new_event(time_t aTime, te_type_t aType, te_mode_t aMode, u_long32
    ev->mode = aMode;
    ev->ulong_key_1 = aKey1;
    ev->ulong_key_2 = aKey2;
-   ev->str_key = (aStrKey != NULL) ? strdup(aStrKey) : NULL;
+   ev->str_key = (aStrKey != NULL) ? sge_strdup(aStrKey) : NULL;
    ev->seq_no = 0;
 
    DEXIT;
@@ -769,7 +770,7 @@ char* te_get_alphanumeric_key(te_event_t anEvent)
 
    SGE_ASSERT(NULL != anEvent);
 
-   res = (anEvent->str_key != NULL) ? strdup(anEvent->str_key) : NULL;
+   res = (anEvent->str_key != NULL) ? sge_strdup(anEvent->str_key) : NULL;
 
    DRETURN(res);
 }
@@ -973,7 +974,7 @@ te_event_t te_event_from_list_elem(lListElem* aListElem)
    ev->seq_no      = lGetUlong(aListElem, TE_seqno);
 
    str = lGetString(aListElem, TE_sval);
-   ev->str_key = ((str != NULL) ? strdup(str) : NULL);
+   ev->str_key = ((str != NULL) ? sge_strdup(str) : NULL);
 
    DEXIT;
    return ev;

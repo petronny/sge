@@ -6834,10 +6834,10 @@ static int qconf_modify_attribute(sge_gdi_ctx_class_t *ctx,
       dstring delim = DSTRING_INIT;
 
       /* attribute name to be [admr] for info_entry obj */
-      name = (const char *)strdup(**spp);
+      name = sge_strdup(**spp);
       *spp = sge_parser_get_next(ctx, *spp);
       /* attribute value to be [admr] for info_entry obj */
-      value = (const char *)strdup(**spp);
+      value = sge_strdup(**spp);
 
       if (!strcmp(info_entry->object_name, SGE_OBJ_RQS) && !strcmp(name, "limit")) {
          sge_dstring_append(&delim, " to ");

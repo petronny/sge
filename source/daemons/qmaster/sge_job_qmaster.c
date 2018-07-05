@@ -3846,7 +3846,7 @@ static int sge_delete_all_tasks_of_job(sge_gdi_ctx_class_t *ctx, lList **alpp, c
     * must be free'd!
     */
    if (lGetString(job, JB_session)) {
-      dupped_session = strdup(lGetString(job, JB_session));
+      dupped_session = sge_strdup(lGetString(job, JB_session));
    }
 
    /*

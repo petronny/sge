@@ -713,29 +713,29 @@ sge_run_jvm(sge_gdi_ctx_class_t *ctx, void *anArg, monitoring_t *monitor)
    /*
    ** adjust fixed_jvm_argc if an additional fixed argument line is added
    */
-   jvm_argv[0] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeRoot=%s", ctx->get_sge_root(ctx)));
-   jvm_argv[1] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeCell=%s", ctx->get_default_cell(ctx)));
-   jvm_argv[2] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.caTop=%s", ctx->get_ca_root(ctx)));
-   jvm_argv[3] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.serverKeystore=%s", keystore_path));
-   jvm_argv[4] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeQmasterSpoolDir=%s", ctx->get_qmaster_spool_dir(ctx)));
-   jvm_argv[5] = strdup(sge_dstring_sprintf(&ds, "-Djava.class.path=%s/lib/jgdi.jar:%s/lib/juti.jar", ctx->get_sge_root(ctx), ctx->get_sge_root(ctx)));
-   jvm_argv[6] = strdup(sge_dstring_sprintf(&ds, "-Djava.security.policy=%s/common/jmx/java.policy", ctx->get_cell_root(ctx)));
-   jvm_argv[7] = strdup("-Djava.security.manager=com.sun.grid.jgdi.management.JGDISecurityManager");
-   jvm_argv[8] = strdup(sge_dstring_sprintf(&ds, "-Djava.rmi.server.codebase=file://%s/lib/jgdi.jar file://%s/lib/juti.jar", ctx->get_sge_root(ctx), ctx->get_sge_root(ctx)));
-   jvm_argv[9] = strdup(sge_dstring_sprintf(&ds, "-Djava.library.path=%s/lib/%s", ctx->get_sge_root(ctx), sge_get_arch()));
-   jvm_argv[10] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.management.jmxremote.access.file=%s/common/jmx/jmxremote.access", ctx->get_cell_root(ctx)));
-   jvm_argv[11] = strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.management.jmxremote.password.file=%s/common/jmx/jmxremote.password", ctx->get_cell_root(ctx)));
-   jvm_argv[12] = strdup(sge_dstring_sprintf(&ds, "-Djava.security.auth.login.config=%s/common/jmx/jaas.config", ctx->get_cell_root(ctx)));
-   jvm_argv[13] = strdup(sge_dstring_sprintf(&ds, "-Djava.util.logging.config.file=%s/common/jmx/logging.properties", ctx->get_cell_root(ctx)));
+   jvm_argv[0] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeRoot=%s", ctx->get_sge_root(ctx)));
+   jvm_argv[1] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeCell=%s", ctx->get_default_cell(ctx)));
+   jvm_argv[2] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.caTop=%s", ctx->get_ca_root(ctx)));
+   jvm_argv[3] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.serverKeystore=%s", keystore_path));
+   jvm_argv[4] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.grid.jgdi.sgeQmasterSpoolDir=%s", ctx->get_qmaster_spool_dir(ctx)));
+   jvm_argv[5] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.class.path=%s/lib/jgdi.jar:%s/lib/juti.jar", ctx->get_sge_root(ctx), ctx->get_sge_root(ctx)));
+   jvm_argv[6] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.security.policy=%s/common/jmx/java.policy", ctx->get_cell_root(ctx)));
+   jvm_argv[7] = sge_strdup("-Djava.security.manager=com.sun.grid.jgdi.management.JGDISecurityManager");
+   jvm_argv[8] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.rmi.server.codebase=file://%s/lib/jgdi.jar file://%s/lib/juti.jar", ctx->get_sge_root(ctx), ctx->get_sge_root(ctx)));
+   jvm_argv[9] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.library.path=%s/lib/%s", ctx->get_sge_root(ctx), sge_get_arch()));
+   jvm_argv[10] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.management.jmxremote.access.file=%s/common/jmx/jmxremote.access", ctx->get_cell_root(ctx)));
+   jvm_argv[11] = sge_strdup(sge_dstring_sprintf(&ds, "-Dcom.sun.management.jmxremote.password.file=%s/common/jmx/jmxremote.password", ctx->get_cell_root(ctx)));
+   jvm_argv[12] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.security.auth.login.config=%s/common/jmx/jaas.config", ctx->get_cell_root(ctx)));
+   jvm_argv[13] = sge_strdup(sge_dstring_sprintf(&ds, "-Djava.util.logging.config.file=%s/common/jmx/logging.properties", ctx->get_cell_root(ctx)));
 /*    jvm_argv[13] = strdup("-Djava.util.logging.manager=com.sun.grid.jgdi.util.JGDILogManager"); */
-   jvm_argv[14] = strdup("-Djava.util.logging.manager=java.util.logging.LogManager");
-   jvm_argv[15] = strdup("-Xrs");
+   jvm_argv[14] = sge_strdup("-Djava.util.logging.manager=java.util.logging.LogManager");
+   jvm_argv[15] = sge_strdup("-Xrs");
 
    /*
    ** add additional_jvm_args
    */
    for (i = 0; i < additional_jvm_argc; i++) {
-      jvm_argv[fixed_jvm_argc + i] = strdup(additional_jvm_argv[i]);
+      jvm_argv[fixed_jvm_argc + i] = sge_strdup(additional_jvm_argv[i]);
       additional_jvm_argv[i] = NULL;
    }
    sge_free(&additional_jvm_argv);
@@ -744,7 +744,7 @@ sge_run_jvm(sge_gdi_ctx_class_t *ctx, void *anArg, monitoring_t *monitor)
    /*
    ** process arguments of main method
    */
-   main_argv[0] = strdup(sge_dstring_sprintf(&ds, "internal://%s@%s:"sge_u32, ctx->get_sge_root(ctx),
+   main_argv[0] = sge_strdup(sge_dstring_sprintf(&ds, "internal://%s@%s:"sge_u32, ctx->get_sge_root(ctx),
                          ctx->get_default_cell(ctx), ctx->get_sge_qmaster_port(ctx)));
 
    sge_dstring_free(&ds);

@@ -525,14 +525,14 @@ void son(const char *childname, char *script_file, int truncate_stderr_out, size
       use_login_shell = 1; 
 
       /* take shell from passwd */
-      shell_path = strdup(pw->pw_shell);
+      shell_path = sge_strdup(pw->pw_shell);
       shepherd_trace("using \"%s\" as shell of user \"%s\"", pw->pw_shell, target_user);
       
       /* unix_behaviour */
       shell_start_mode = "unix_behaviour";
 
       if (!strcmp(childname, "prolog") || !strcmp(childname, "epilog")) {
-         stdin_path = strdup("/dev/null");
+         stdin_path = sge_strdup("/dev/null");
          if (fs_stdin) {
             /* we need the jobs stdin_path here in prolog,
                because the file must be copied */
@@ -544,7 +544,7 @@ void son(const char *childname, char *script_file, int truncate_stderr_out, size
          }
       } else {
          /* childname is "pe_start" or "pe_stop" */
-         stdin_path = strdup("/dev/null");
+         stdin_path = sge_strdup("/dev/null");
          stdin_path_for_fs = build_path(SGE_STDIN);
 
          stdout_path  = build_path(SGE_PAR_STDOUT);
@@ -554,7 +554,7 @@ void son(const char *childname, char *script_file, int truncate_stderr_out, size
       }
    } else { /* the job itself */
       if (!is_rsh && g_new_interactive_job_support == true) {
-         shell_path = strdup(pw->pw_shell);
+         shell_path = sge_strdup(pw->pw_shell);
          errno = 0;
          if (sge_chdir(pw->pw_dir))
             shepherd_error(1, MSG_FILE_CHDIR_SS, strerror(errno));
@@ -564,7 +564,7 @@ void son(const char *childname, char *script_file, int truncate_stderr_out, size
       use_login_shell = atoi(get_conf_val("use_login_shell"));
 
       stdin_path = build_path(SGE_STDIN);
-      stdin_path_for_fs = strdup(stdin_path);
+      stdin_path_for_fs = sge_strdup(stdin_path);
       stdout_path = build_path(SGE_STDOUT);
       if (!merge_stderr) {
          stderr_path = build_path(SGE_STDERR);
@@ -1193,12 +1193,12 @@ static char **disassemble_proc_args(const char *script_file, char **preargs, int
 
    /* copy preargs */
    for (i = 0; i < n_preargs; i++)
-      args[i] = strdup(preargs[i]);
+      args[i] = sge_strdup(preargs[i]);
    args[i] = NULL;
 
    /* add procedure args */
    for (s = sge_strtok(script_file, PROC_ARG_DELIM); s; s = sge_strtok(NULL, PROC_ARG_DELIM)) {
-      args[i++] = strdup(s);
+      args[i++] = sge_strdup(s);
    }
    args[i] = NULL;
    return args;
@@ -1232,7 +1232,7 @@ static char **read_job_args(char **preargs, int extra_args)
   
    /* copy preargs */ 
    for (i = 0; i < n_preargs; i++) {
-      args[i] = strdup(preargs[i]);
+      args[i] = sge_strdup(preargs[i]);
    }
 
    args[i] = NULL;
@@ -1242,7 +1242,7 @@ static char **read_job_args(char **preargs, int extra_args)
       cp = get_conf_val(conf_val);
      
       if(cp != NULL) {
-         args[i + n_preargs] = strdup(cp);
+         args[i + n_preargs] = sge_strdup(cp);
       } else {
          args[i + n_preargs] = "";
       }
@@ -1325,7 +1325,7 @@ int use_starter_method /* If this flag is set the shell path contains the
          }
       }
       
-      pre_args[arg_id++] = strdup(sge_dstring_get_string(&arguments));
+      pre_args[arg_id++] = sge_strdup(sge_dstring_get_string(&arguments));
       pre_args[arg_id++] = NULL;
       sge_dstring_free(&arguments);
       args = pre_args;

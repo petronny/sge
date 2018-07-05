@@ -58,6 +58,7 @@
 #include "uti/sge_rmon.h"
 #include "uti/sge_io.h"
 #include "uti/sge_pty.h"
+#include "uti/sge_string.h"
 
 #include "sgeobj/sge_utility.h"
 
@@ -693,7 +694,7 @@ int run_ijs_server(COMM_HANDLE *handle, const char *remote_host,
       return 1;
    }
    g_comm_handle = handle;
-   g_hostname    = strdup(remote_host);
+   g_hostname    = sge_strdup(remote_host);
 
    cl_com_log_list = cl_com_get_log_list();
    if (cl_com_log_list == NULL) {

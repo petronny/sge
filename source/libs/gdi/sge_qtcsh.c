@@ -324,20 +324,20 @@ int close_stdin /* use of qrsh's -nostdin option */
 
    /* build argv for qrsh */
    i = 0;
-   newargv[i++] = strdup("qrsh");
+   newargv[i++] = sge_strdup("qrsh");
 
    if (close_stdin) 
-      newargv[i++] = strdup("-nostdin");
+      newargv[i++] = sge_strdup("-nostdin");
 
    if (mode_verbose) 
-      newargv[i++] = strdup("-verbose");
+      newargv[i++] = sge_strdup("-verbose");
 
    if (mode_immediate) {
-      newargv[i++] = strdup("-now");
-      newargv[i++] = strdup("y");
+      newargv[i++] = sge_strdup("-now");
+      newargv[i++] = sge_strdup("y");
    } else {
-      newargv[i++] = strdup("-now");
-      newargv[i++] = strdup("n");
+      newargv[i++] = sge_strdup("-now");
+      newargv[i++] = sge_strdup("n");
    }
 
    /* add optional qrsh arguments from qtask file */

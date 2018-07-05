@@ -41,6 +41,7 @@
 #include "uti/sge_uidgid.h"
 #include "uti/sge_io.h"
 #include "uti/sge_prog.h"
+#include "uti/sge_string.h"
 
 #include "sgeobj/sge_answer.h"
 #include "sgeobj/sge_job.h"
@@ -110,13 +111,13 @@ void opt_list_append_opts_from_default_files(u_long32 prog_number,
 
    /* the sge root defaults file */
    get_root_file_path(&req_file, cell_root, SGE_COMMON_DEF_REQ_FILE);
-   def_files[0] = strdup(sge_dstring_get_string(&req_file));
+   def_files[0] = sge_strdup(sge_dstring_get_string(&req_file));
 
    /*
     * the defaults file in the user's home directory
     */
    get_user_home_file_path(&req_file, SGE_HOME_DEF_REQ_FILE, user, answer_list);
-   def_files[1] = strdup(sge_dstring_get_string(&req_file));
+   def_files[1] = sge_strdup(sge_dstring_get_string(&req_file));
 
    /*
     * the defaults file in the current working directory
@@ -543,7 +544,7 @@ void opt_list_append_opts_from_script_path(u_long32 prog_number,
          
          strcat (scriptpath, scriptfile);
       } else if (scriptfile) {
-         scriptpath = strdup (scriptfile);
+         scriptpath = sge_strdup (scriptfile);
       }
    }
    

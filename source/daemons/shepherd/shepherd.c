@@ -1569,7 +1569,7 @@ dstring *err_msg)
    /* address now points to the configuration buffer, but we want to keep it
     * independently of the configuration buffer, so we copy it.
     */
-   address = strdup(address);
+   address = sge_strdup(address);
    separator = strchr(address, ':');
    if (separator == NULL) {
       sge_dstring_sprintf(err_msg, "illegal value for qrsh_control_port: "
@@ -3249,7 +3249,7 @@ cpusetting(void)
          goto cpuset_end;
       }
       if (binding) {
-         binding = strdup(binding);
+         binding = sge_strdup(binding);
          /* We got a space-separated binding string which needs to be
             comma-separated.  */
          replace_char(binding, strlen(binding), ' ', ',');

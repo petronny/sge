@@ -177,7 +177,7 @@ expand_path(const char *in_path, u_long32 job_id, u_long32 ja_task_id,
       ** handle ~, ~/, ~username and ~username/
       */
       if (s[0] == '~') {
-         char *tmp = strdup(s+1);
+         char *tmp = sge_strdup(s+1);
          t = strchr(s, '/');
          if (t)
             tmp[t-s-1] = '\0'; /* uname or null */

@@ -352,7 +352,7 @@ static int drmaa_parse_contact_string(const char *contact, char **session)
              drmaa_errno = DRMAA_ERRNO_INVALID_ARGUMENT;
          }
          else if(strcasecmp(token, "session") == 0) {
-            *session = strdup(str);
+            *session = sge_strdup(str);
          }
 #if 0 /* For future use... */
          else if (strcasecmp(token, "sge_root") == 0) {
@@ -2351,7 +2351,7 @@ static int drmaa_path2path_opt(const lList *attrs, lList **args, int is_bulk,
             path = (char *)new_path + 1;
          } else if ((path = strstr(new_path, ":"))){ /* host:path */
             path[0] = '\0';
-            cell = strdup(new_path);
+            cell = sge_strdup(new_path);
             path[0] = ':';
             path += 1;
          } else { /* path */
@@ -2509,7 +2509,7 @@ static int drmaa_path2sge_path(const lList *attrs, int is_bulk,
    
       /* rest of the path */
       sge_dstring_append(&ds, value);
-      *new_path = strdup(sge_dstring_get_string(&ds));
+      *new_path = sge_strdup(sge_dstring_get_string(&ds));
       sge_dstring_free(&ds);
    }
 
@@ -2803,19 +2803,19 @@ static int drmaa_job2sge_job(lListElem **jtp, const drmaa_job_template_t *drmaa_
        * -cat will be added as a normal switch to qsub et al, at which point
        * this long series of ifs becomes necessary. */
       if ((ep = lGetElemStr(opts_drmaa, SPA_switch, "-cat")) != NULL) {
-         job_cat = strdup(lGetString(ep, SPA_argval_lStringT));
+         job_cat = sge_strdup(lGetString(ep, SPA_argval_lStringT));
          lRemoveElem(opts_drmaa, &ep);
       } else if ((ep = lGetElemStr(opts_scriptfile, SPA_switch, "-cat")) != NULL) {
-         job_cat = strdup(lGetString(ep, SPA_argval_lStringT));
+         job_cat = sge_strdup(lGetString(ep, SPA_argval_lStringT));
          lRemoveElem(opts_scriptfile, &ep);
       } else if ((ep = lGetElemStr(opts_native, SPA_switch, "-cat")) != NULL) {
-         job_cat = strdup(lGetString(ep, SPA_argval_lStringT));
+         job_cat = sge_strdup(lGetString(ep, SPA_argval_lStringT));
          lRemoveElem(opts_native, &ep);
       } else if ((ep = lGetElemStr(opts_defaults, SPA_switch, "-cat")) != NULL) {
-         job_cat = strdup(lGetString(ep, SPA_argval_lStringT));
+         job_cat = sge_strdup(lGetString(ep, SPA_argval_lStringT));
          lRemoveElem(opts_defaults, &ep);
       } else if ((ep = lGetElemStr(opts_default, SPA_switch, "-cat")) != NULL) {
-         job_cat = strdup(lGetString(ep, SPA_argval_lStringT));
+         job_cat = sge_strdup(lGetString(ep, SPA_argval_lStringT));
          lRemoveElem(opts_default, &ep);
       } else {
          /* This theoretically can't happen. */
@@ -3611,7 +3611,7 @@ static char *drmaa_time2sge_time(const char *drmaa_time, dstring *diag)
    tz_sign = -1;
    tz_hours = -1;
    tz_minutes = -1;
-   start = strdup(drmaa_time);
+   start = sge_strdup(drmaa_time);
    p1 = start;
    p2 = strchr(p1, '/');
    
@@ -3866,7 +3866,7 @@ static char *drmaa_time2sge_time(const char *drmaa_time, dstring *diag)
 
    sge_free(&start);
 
-   DRETURN(strdup(sge_time));
+   DRETURN(sge_strdup(sge_time));
 }
 
 /****** DRMAA/drmaa_expand_wd_path()********************************************
@@ -3992,7 +3992,7 @@ static char *drmaa_get_home_directory(const char* username, lList **answer_list)
    }
 
    sge_free(&buffer);
-   DRETURN(strdup(pwd->pw_dir));
+   DRETURN(sge_strdup(pwd->pw_dir));
 }
 
 /****** DRMAA/drmaa_set_bulk_range()********************************************

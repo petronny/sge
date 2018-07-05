@@ -36,6 +36,7 @@
 
 #include "comm/cl_application_error_list.h"
 #include "comm/cl_commlib.h"
+#include "uti/sge_string.h"
 
 #ifdef __CL_FUNCTION__
 #undef __CL_FUNCTION__
@@ -184,7 +185,7 @@ int cl_application_error_list_push_error(cl_raw_list_t* list_p, cl_log_t cl_err_
       return CL_RETVAL_MALLOC;
    }
 
-   new_elem->cl_info  = strdup(cl_info);
+   new_elem->cl_info  = sge_strdup(cl_info);
    new_elem->cl_error = cl_error;
    gettimeofday(&(new_elem->cl_log_time),NULL);
    new_elem->cl_already_logged = false;

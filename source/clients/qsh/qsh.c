@@ -751,7 +751,7 @@ static int start_client_program(const char *client_name,
       sge_sl_list_t *sl_args;
       char          shellpath[SGE_PATH_MAX];
       char          **args;
-      char          *command = strdup(client_name); /* needn't be freed, as we exec */
+      char          *command = sge_strdup(client_name); /* needn't be freed, as we exec */
       int           ret;
 
       /* create an argument list */
@@ -995,7 +995,7 @@ get_client_name(sge_gdi_ctx_class_t *ctx, int is_rsh, int is_rlogin, int inherit
          if (strcasecmp(client_name, "builtin") == 0) {
             g_new_interactive_job_support = true;
          }
-         DRETURN(strdup(client_name));
+         DRETURN(sge_strdup(client_name));
       }
    }
  
@@ -1049,13 +1049,13 @@ get_client_name(sge_gdi_ctx_class_t *ctx, int is_rsh, int is_rlogin, int inherit
          sge_dstring_sprintf(&default_dstring, "%s/utilbin/%s/%s", 
                              sge_root, sge_get_arch(), 
                              session_type);
-         client_name = strdup(sge_dstring_get_string(&default_dstring));
+         client_name = sge_strdup(sge_dstring_get_string(&default_dstring));
       } else {
          /* try to find telnet in PATH */
-         client_name = strdup(session_type);
+         client_name = sge_strdup(session_type);
       }
    } else {
-      client_name = strdup(client_name);
+      client_name = sge_strdup(client_name);
    }
 
    if (strcasecmp(client_name, "builtin") == 0) {
@@ -1589,7 +1589,7 @@ int main(int argc, char **argv)
 
       if ((ep = lGetElemStr(opts_cmdline, SPA_switch, "script"))) {
          if (existing_job) {
-            host = strdup(lGetString(ep, SPA_argval_lStringT));
+            host = sge_strdup(lGetString(ep, SPA_argval_lStringT));
             lRemoveElem(opts_cmdline, &ep);
             ep = lGetElemStr(opts_cmdline, SPA_switch, "jobarg");
          }

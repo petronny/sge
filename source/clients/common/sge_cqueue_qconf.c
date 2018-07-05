@@ -904,7 +904,7 @@ static int write_QU_consumable_config_list(const lListElem *ep, int nm,
             char tmp[MAX_STRING_SIZE];
             
             snprintf(tmp, MAX_STRING_SIZE, "%f", lGetDouble(ep, CE_doubleval));
-            sge_dstring_append(buffer, strdup (tmp));
+            sge_dstring_append(buffer, sge_strdup (tmp));
          }
       }
    }

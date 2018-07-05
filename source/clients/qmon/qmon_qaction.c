@@ -2404,7 +2404,7 @@ const char *href
       char buf[BUFSIZ];
       const char *priority;
       sprintf(buf, "%d", data->priority);
-      priority = strdup(buf); 
+      priority = sge_strdup(buf);
       str_attr_list_add_set_del(lGetListRef(qep, CQ_priority), &alp, href, &priority, !data->priority_tw);
       sge_free(&priority);
    }

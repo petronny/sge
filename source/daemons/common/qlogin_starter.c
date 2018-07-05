@@ -53,6 +53,7 @@
 #include "uti/sge_uidgid.h"
 #include "uti/sge_prog.h"
 #include "uti/config_file.h"
+#include "uti/sge_string.h"
 #include "uti2/sge_execvlp.h"
 
 #include "err_trace.h"
@@ -376,7 +377,7 @@ const char *get_error_of_qrsh_starter(void)
 
             if (fgets(buffer, MAX_STRING_SIZE, errorfile) != NULL) {
                shepherd_trace("error string from qrsh_starter is %s", buffer);
-               ret = strdup(buffer);
+               ret = sge_strdup(buffer);
             }
             FCLOSE(errorfile);
             if (unlink(buffer) != 0) {

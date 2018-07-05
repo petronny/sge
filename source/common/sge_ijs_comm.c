@@ -901,7 +901,7 @@ int comm_wait_for_connection(COMM_HANDLE *handle,
       if (endpoint_list->elem_count > 0) {
          endpoint = cl_endpoint_list_get_first_elem(endpoint_list);
          sge_free(host);
-         *host = strdup(endpoint->endpoint->comp_host);
+         *host = sge_strdup(endpoint->endpoint->comp_host);
          DPRINTF(("A client from host %s has connected\n", *host));
       }
       cl_endpoint_list_cleanup(&endpoint_list);

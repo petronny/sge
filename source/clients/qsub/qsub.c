@@ -39,6 +39,7 @@
 #include "uti/sge_profiling.h"
 #include "uti/sge_prog.h"
 #include "uti/sge_mtutil.h"
+#include "uti/sge_string.h"
 
 #include "sgeobj/sge_all_listsL.h"
 #include "sgeobj/sge_answer.h"
@@ -332,7 +333,7 @@ main(int argc, char **argv)
          goto Error;
       }
 
-      jobid_string = strdup(sge_dstring_get_string(&jobid));
+      jobid_string = sge_strdup(sge_dstring_get_string(&jobid));
       DPRINTF(("job id is: %s\n", jobid_string));
 
       sge_dstring_free(&jobid);
@@ -523,7 +524,7 @@ static char *get_bulk_jobid_string(long job_id, int start, int end, int step)
    char *ret_str = NULL;
    
    sprintf(jobid_str, "%ld.%d-%d:%d", job_id, start, end, step);
-   ret_str = strdup(jobid_str);
+   ret_str = sge_strdup(jobid_str);
    sge_free(&jobid_str);
    
    return ret_str;

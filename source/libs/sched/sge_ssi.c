@@ -36,6 +36,7 @@
 
 #include "uti/sge_rmon.h"
 #include "uti/sge_log.h"
+#include "uti/sge_string.h"
 
 #include "cull/cull.h"
 
@@ -61,7 +62,7 @@ static bool parse_job_identifier(const char *id, u_long32 *job_id, u_long32 *ja_
 
    DENTER(TOP_LAYER, "parse_job_identifier");
 
-   copy = strdup(id);
+   copy = sge_strdup(id);
    *job_id = atoi(strtok(copy, "."));
    *ja_task_id = atoi(strtok(NULL, "."));
    sge_free(&copy);

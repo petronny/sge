@@ -692,13 +692,13 @@ int cl_com_setup_commlib(cl_thread_mode_t t_mode, cl_log_t debug_level, cl_log_f
    help = getenv("SGE_COMMLIB_DEBUG_RESOLVE");
    if (help != NULL) {
       if (cl_commlib_debug_resolvable_hosts == NULL) {
-         cl_commlib_debug_resolvable_hosts = strdup(help);
+         cl_commlib_debug_resolvable_hosts = sge_strdup(help);
       }
    }
    help = getenv("SGE_COMMLIB_DEBUG_NO_RESOLVE");
    if (help != NULL) {
       if (cl_commlib_debug_unresolvable_hosts == NULL) {
-         cl_commlib_debug_unresolvable_hosts = strdup(help);
+         cl_commlib_debug_unresolvable_hosts = sge_strdup(help);
       }
    }
 

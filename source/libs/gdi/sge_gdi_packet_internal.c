@@ -768,8 +768,8 @@ sge_gdi_packet_execute_internal(sge_gdi_ctx_class_t* ctx, lList **answer_list,
     * user and group is initialized
     */
    packet->id = gdi_state_get_next_request_id();
-   packet->commproc = strdup(prognames[QMASTER]);      
-   packet->host = strdup(ctx->get_master(ctx, false));
+   packet->commproc = sge_strdup(prognames[QMASTER]);
+   packet->host = sge_strdup(ctx->get_master(ctx, false));
    packet->is_intern_request = true;
 
    ret = sge_gdi_packet_parse_auth_info(packet, &(packet->first_task->answer_list));

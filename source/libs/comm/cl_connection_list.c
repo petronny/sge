@@ -43,6 +43,7 @@
 #include "comm/cl_message_list.h"
 #include "comm/cl_communication.h"
 #include "comm/lists/cl_util.h"
+#include "uti/sge_string.h"
 
 
 #ifdef __CL_FUNCTION__
@@ -121,7 +122,7 @@ char *cl_create_endpoint_string(cl_com_endpoint_t *endpoint)
       return NULL;
    }
    snprintf(help, 2048, "%lu%s%lu", (unsigned long)endpoint->addr.s_addr, endpoint->comp_name, endpoint->comp_id);
-   return strdup(help);
+   return sge_strdup(help);
 }
 
 #ifdef __CL_FUNCTION__

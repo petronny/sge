@@ -2221,6 +2221,6 @@ char *reroot_path(lListElem* pjob, const char *path, lList **alpp) {
       }
    }
 
-   DRETURN(strdup(tmp_str));
+   DRETURN(sge_strdup(tmp_str));
 }
 

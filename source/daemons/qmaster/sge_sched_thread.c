@@ -44,6 +44,7 @@
 #include "uti/sge_time.h"
 #include "uti/sge_thread_ctrl.h"
 #include "uti/sge_mtutil.h"
+#include "uti/sge_string.h"
 
 #include "sgeobj/sge_answer.h"
 #include "sgeobj/sge_conf.h"
@@ -804,7 +805,7 @@ static int dispatch_jobs(sge_evc_class_t *evc, scheduler_all_data_t *lists, orde
          switch (result) {
          case DISPATCH_OK: /* now assignment */
             {
-               char *owner = strdup(lGetString(orig_job, JB_owner));
+               char *owner = sge_strdup(lGetString(orig_job, JB_owner));
                /* here the job got an assignment that will cause it be started immediately */
 
                DPRINTF(("Found NOW assignment\n"));

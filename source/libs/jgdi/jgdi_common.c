@@ -2504,7 +2504,7 @@ jgdi_result_t get_string(JNIEnv *env, jclass bean_class, jobject obj, const char
          answer_list_add(alpp, "get_string: GetStringUTFChars failed. Out of memory.", STATUS_EMALLOC, ANSWER_QUALITY_ERROR);
          DRETURN(JGDI_ERROR);
       }
-      *retstr = strdup(name);
+      *retstr = sge_strdup(name);
       (*env)->ReleaseStringUTFChars(env, jstr, name);
    }
 

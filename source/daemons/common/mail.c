@@ -46,6 +46,7 @@
 #include "uti/sge_stdio.h"
 #include "uti/config_file.h"
 #include "uti/sge_uidgid.h"
+#include "uti/sge_string.h"
 
 #include "sgeobj/sge_conf.h"
 #include "sgeobj/sge_job.h"
@@ -206,7 +207,7 @@ static void sge_send_mail(u_long32 progid, const char *mailer_in,
 
       close(pipefds[1]);
 
-      mailer = strdup(mailer_in);
+      mailer = sge_strdup(mailer_in);
       /* switch user */
       {
         char *user = parse_script_params(&mailer);

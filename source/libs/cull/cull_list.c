@@ -379,13 +379,13 @@ lCopySwitchPack(const lListElem *sep, lListElem *dep, int src_idx, int dst_idx,
       if (!sep->cont[src_idx].str)
          dep->cont[dst_idx].str = NULL;
       else
-         dep->cont[dst_idx].str = strdup(sep->cont[src_idx].str);
+         dep->cont[dst_idx].str = sge_strdup(sep->cont[src_idx].str);
       break;
    case lHostT:
       if (!sep->cont[src_idx].host)
          dep->cont[dst_idx].host = NULL;
       else
-         dep->cont[dst_idx].host = strdup(sep->cont[src_idx].host);
+         dep->cont[dst_idx].host = sge_strdup(sep->cont[src_idx].host);
       break;
 
    case lDoubleT:

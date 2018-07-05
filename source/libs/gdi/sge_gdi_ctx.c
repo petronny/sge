@@ -634,15 +634,15 @@ sge_gdi_ctx_setup(sge_gdi_ctx_class_t *thiz, int prog_number, const char* compon
    }   
 
    if (component_name == NULL) {
-      es->component_name = strdup(prognames[prog_number]);
+      es->component_name = sge_strdup(prognames[prog_number]);
    } else {
-      es->component_name = strdup(component_name);
+      es->component_name = sge_strdup(component_name);
    }
 
    if (thread_name == NULL) {
-      es->thread_name = strdup(prognames[prog_number]);
+      es->thread_name = sge_strdup(prognames[prog_number]);
    } else {
-      es->thread_name = strdup(thread_name);
+      es->thread_name = sge_strdup(thread_name);
    }
    
    /* set uid and gid */
@@ -677,7 +677,7 @@ sge_gdi_ctx_setup(sge_gdi_ctx_class_t *thiz, int prog_number, const char* compon
       sge_free(&buffer);
    }
    
-   es->username = strdup(username);
+   es->username = sge_strdup(username);
 
 #if __INTERIX
    /* Strip Windows domain name from user name */
@@ -700,7 +700,7 @@ sge_gdi_ctx_setup(sge_gdi_ctx_class_t *thiz, int prog_number, const char* compon
    ** groupname
    */
    if (groupname != NULL) {
-      es->groupname = strdup(groupname);
+      es->groupname = sge_strdup(groupname);
    } else {   
       if (_sge_gid2group(es->gid, &(es->gid), &(es->groupname), MAX_NIS_RETRIES)) {
          eh->error(eh, STATUS_EUNKNOWN, ANSWER_QUALITY_ERROR, MSG_GDI_GETGRGIDXFAILEDERRORX_U, sge_u32c(es->gid));
@@ -1656,7 +1656,7 @@ static void set_private_key(sge_gdi_ctx_class_t *thiz, const char *pkey) {
    if (es->ssl_private_key != NULL) {
       sge_free(&(es->ssl_private_key));
    }
-   es->ssl_private_key = pkey ? strdup(pkey): NULL;
+   es->ssl_private_key = pkey ? sge_strdup(pkey): NULL;
 
    DRETURN_VOID;
 }
@@ -1679,7 +1679,7 @@ static void set_certificate(sge_gdi_ctx_class_t *thiz, const char *cert) {
    if (es->ssl_certificate != NULL) {
       sge_free(&(es->ssl_certificate));
    }
-   es->ssl_certificate = cert ? strdup(cert) : NULL;
+   es->ssl_certificate = cert ? sge_strdup(cert) : NULL;
 
    DRETURN_VOID;
 }
