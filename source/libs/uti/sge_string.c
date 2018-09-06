@@ -252,7 +252,7 @@ char *sge_strtok(const char *str, const char *delimitor)
          if (n > alloc_len) {
             /* need more memory */
             sge_free(&static_str);
-            static_str = malloc(n + 1);
+            static_str = sge_malloc(n + 1);
             alloc_len = n;
          }
       } else {
@@ -456,7 +456,7 @@ char *sge_strtok_r(const char *str, const char *delimitor,
       memset(*context, 0, sizeof(struct saved_vars_s));
       saved = *context;
 
-      saved->static_str = malloc(strlen(str) + 1);
+      saved->static_str = sge_malloc(strlen(str) + 1);
 
       strcpy(saved->static_str, str);
       saved_cp = saved->static_str;
