@@ -575,6 +575,7 @@ void schedd_mes_add_global(lList **monitor_alpp, bool monitor_next_run, u_long32
 
       sge_dstring_init(&msg_ds, msg, sizeof(msg));
       msg_str = sge_dstring_vsprintf(&msg_ds, fmt, args);
+      va_end(args);
 
       if (!monitor_alpp && sconf_get_schedd_job_info() != SCHEDD_JOB_INFO_FALSE) {
          lListElem *sme = sconf_get_sme();

@@ -96,6 +96,7 @@ static void qrsh_error(const char *fmt, ...)
    va_start(ap, fmt);
 
    if (fmt == NULL || *fmt == '\0') {
+      va_end(ap);
       return;
    }
 
