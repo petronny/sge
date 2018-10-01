@@ -94,8 +94,8 @@ typedef enum {
 #  define sge_X32CFormat "%x"
 #  define sge_x32c(x)  (unsigned int)(x)
 #else
-#  define sge_U32CFormat "%ld"
-#  define sge_U32CLetter "ld"
+#  define sge_U32CFormat "%lu"
+#  define sge_U32CLetter "lu"
 #  define sge_u32c(x)  (unsigned long)(x)
 
 #  define sge_X32CFormat "%lx"
