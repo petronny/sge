@@ -167,9 +167,12 @@ copy_linewise(const char *src, const char *dst)
   char buffer[MAX_STRING_SIZE];
   bool ok = true;
 
-  if (!(srcfp = fopen(src, "r")) ||
-      !(dstfp = fopen(dst, "w")))
+  if (!(srcfp = fopen(src, "r")))
      return false;
+  if (!(dstfp = fopen(dst, "w"))) {
+     fclose(srcfp);
+     return false;
+  }
   while (fgets(buffer, sizeof buffer, srcfp)) {
      size_t l = strlen(buffer);
      if (fwrite(buffer, 1, l, dstfp) != l) {
