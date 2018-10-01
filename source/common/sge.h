@@ -71,4 +71,8 @@
 
 #define _UNUSED __attribute__((unused))
 
+#define sge_str(s) _sge_str(s)
+#define _sge_str(s) #s
+
+
 #endif /* __SGE_H */
