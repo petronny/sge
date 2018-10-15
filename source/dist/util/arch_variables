@@ -80,8 +80,7 @@ case $ARCH in
    ;;
  lx*|ulx*)
    AWK=/usr/bin/awk
-   # fixme:  Is -e actually necessary?
-   ECHO="printf %b\\n"
+   ECHO='printf %b\\n'
    # /bin/echo no longer used, butleave this just in case anything
    # else depends on it.
    unset POSIXLY_CORRECT        # so we can rely on echo -e
